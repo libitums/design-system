@@ -1,0 +1,91 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "elevation": {
+    "$description": "UI 요소 간의 상대적 깊이와 계층. 쌓임 순서(z), 표면 색(surface), 그림자(shadow) 세 가지로 표현합니다. seed-design의 elevation 체계를 libitum 토큰에 맞춰 옮긴 것입니다. https://seed-design.io/foundations/elevation",
+
+    "z": {
+      "$type": "number",
+      "$description": "쌓임 순서. 같은 층에 있는 요소끼리는 z를 올리지 말고 surface나 그림자로 구분합니다.",
+      "basement": {
+        "$value": 0,
+        "$description": "스크롤되는 콘텐츠 뒤의 가장 깊은 배경."
+      },
+      "default": {
+        "$value": 1,
+        "$description": "기본 페이지 레이아웃. 카드, 리스트, 입력 필드."
+      },
+      "sticky": {
+        "$value": 10,
+        "$description": "화면에 고정되는 바. Bottom Navigator, Top Navigation."
+      },
+      "floating": {
+        "$value": 20,
+        "$description": "레이아웃 위에 떠 있는 액션."
+      },
+      "sheet": {
+        "$value": 100,
+        "$description": "화면을 덮는 독립 레이어. Bottom Sheet, Menu Sheet."
+      },
+      "dialog": {
+        "$value": 200,
+        "$description": "즉각적인 판단을 요구하는 모달. Alert Dialog."
+      },
+      "toast": {
+        "$value": 300,
+        "$description": "일시적 피드백. 다이얼로그 위에서도 보여야 하므로 가장 높습니다."
+      }
+    },
+
+    "surface": {
+      "$type": "color",
+      "$description": "층을 색으로 구분합니다. 아래로 갈수록 어둡고, 위로 올라올수록 밝습니다.",
+      "basement": {
+        "$value": "{color.background.secondary}",
+        "$description": "가장 아래 배경. #F3F0F3"
+      },
+      "default": {
+        "$value": "{color.background.primary}",
+        "$description": "기본 콘텐츠 표면. #FDFAFE"
+      },
+      "floating": {
+        "$value": "{color.background.elevated}",
+        "$description": "떠 있는 표면. 시트, 다이얼로그, 고정 바. #FFFFFF"
+      }
+    },
+
+    "shadow": {
+      "$type": "shadow",
+      "$description": "표면을 띄우는 부드러운 그림자. Shadow Button의 하드 섀도우(`4px 4px 0`)와는 목적이 다릅니다 — 이쪽은 깊이 표현, 저쪽은 촉각적 장식입니다. 섞어 쓰지 마세요.",
+      "s1": {
+        "$value": {
+          "color": "#14111514",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "4px",
+          "spread": "0px"
+        },
+        "$description": "가장 얕음. 카드, 고정 바."
+      },
+      "s2": {
+        "$value": {
+          "color": "#1411151a",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "10px",
+          "spread": "0px"
+        },
+        "$description": "중간. 시트, 팝오버."
+      },
+      "s3": {
+        "$value": {
+          "color": "#1411151f",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "16px",
+          "spread": "0px"
+        },
+        "$description": "가장 깊음. 다이얼로그, 토스트."
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "layout": {
+    "$description": "화면 단위의 여백과 안전 영역. 값은 spacing 스케일을 참조하며, 4px 리듬을 벗어나지 않습니다.",
+
+    "screen": {
+      "$type": "dimension",
+      "$description": "화면 최상위 컨테이너의 여백. safe area 안쪽에 적용합니다.",
+      "padding-x": {
+        "$value": "{spacing.16}",
+        "$description": "좌우 여백. 모든 화면의 기본 거터입니다."
+      },
+      "padding-top": {
+        "$value": "{spacing.12}",
+        "$description": "상단 여백. safe-area.top 아래에 더해집니다."
+      },
+      "padding-bottom": {
+        "$value": "{spacing.24}",
+        "$description": "하단 여백. safe-area.bottom 위에 더해집니다. Bottom Navigator의 내부 패딩과 같은 값이라 바가 있든 없든 리듬이 유지됩니다."
+      }
+    },
+
+    "gap": {
+      "$type": "dimension",
+      "$description": "세로 흐름의 간격 3단계. 관계가 멀수록 넓어집니다.",
+      "inline": {
+        "$value": "{spacing.8}",
+        "$description": "한 덩어리 안의 요소 사이. 아이콘과 텍스트, 라벨과 값."
+      },
+      "block": {
+        "$value": "{spacing.16}",
+        "$description": "같은 섹션 안의 블록 사이. 카드, 리스트 항목."
+      },
+      "section": {
+        "$value": "{spacing.32}",
+        "$description": "섹션 사이. 화면 안에서 주제가 바뀌는 지점."
+      }
+    },
+
+    "bottom-nav": {
+      "$type": "dimension",
+      "$description": "Bottom Navigator가 차지하는 공간. 콘텐츠가 바 뒤로 가려지지 않도록 스크롤 영역 하단에 확보합니다.",
+      "height": {
+        "$value": "88px",
+        "$description": "패딩 24 × 2 + 셀 높이 40. safe-area.bottom은 포함하지 않습니다."
+      }
+    },
+
+    "safe-area": {
+      "$type": "dimension",
+      "$description": "노치·홈 인디케이터 등 시스템 UI가 차지하는 영역. $value는 인셋이 없는 환경의 폴백이고, 플랫폼별 실제 표현식은 $extensions에 있습니다.",
+      "top": {
+        "$value": "0px",
+        "$extensions": {
+          "com.libitum.platform": {
+            "web": "env(safe-area-inset-top)",
+            "ios": "safeAreaInsets.top",
+            "android": "WindowInsets.systemBars.top"
+          }
+        }
+      },
+      "bottom": {
+        "$value": "0px",
+        "$extensions": {
+          "com.libitum.platform": {
+            "web": "env(safe-area-inset-bottom)",
+            "ios": "safeAreaInsets.bottom",
+            "android": "WindowInsets.systemBars.bottom"
+          }
+        }
+      },
+      "left": {
+        "$value": "0px",
+        "$extensions": {
+          "com.libitum.platform": {
+            "web": "env(safe-area-inset-left)",
+            "ios": "safeAreaInsets.left",
+            "android": "WindowInsets.systemBars.left"
+          }
+        }
+      },
+      "right": {
+        "$value": "0px",
+        "$extensions": {
+          "com.libitum.platform": {
+            "web": "env(safe-area-inset-right)",
+            "ios": "safeAreaInsets.right",
+            "android": "WindowInsets.systemBars.right"
+          }
+        }
+      }
+    }
+  }
+}

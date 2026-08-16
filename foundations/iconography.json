@@ -1,0 +1,86 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "icon": {
+    "$description": "Iconography foundation. Reference metadata for the SVG icon set in assets/icons, plus the size scale used to render it.",
+
+    "$extensions": {
+      "com.libitum.iconography": {
+        "source": {
+          "path": "assets/icons",
+          "format": "svg",
+          "count": 815,
+          "variants": ["no-padding", "padding"],
+          "layout": "assets/icons/{variant}/{category}/{name}.svg"
+        },
+
+        "intrinsic": {
+          "$description": "Attributes shared by all 1630 SVG files (815 icons x 2 variants). Verified across the full set.",
+          "width": 24,
+          "height": 24,
+          "fill": "currentColor",
+          "stroke": "none",
+          "hardcodedColors": false,
+          "style": "solid",
+          "elements": ["path", "rect", "ellipse"]
+        },
+
+        "variants": {
+          "padding": {
+            "$description": "Fixed 10x10 canvas. Every icon shares the same viewBox, so optical size and alignment stay consistent across the set. Use this as the default.",
+            "viewBox": "0 0 10 10",
+            "uniform": true,
+            "usage": "Default. Buttons, nav bars, lists, inline text - anywhere icons sit in a grid or next to each other."
+          },
+          "no-padding": {
+            "$description": "viewBox is trimmed to each icon's own bounding box (470 distinct viewBoxes). The glyph fills the frame edge to edge, so rendered size varies per icon.",
+            "viewBox": "per-icon",
+            "uniform": false,
+            "usage": "Only when the icon must fill its container exactly - hero art, spot illustration, custom-cropped composition. Do not mix with the padding variant in the same row."
+          }
+        },
+
+        "categories": [
+          { "id": "1-game", "count": 74 },
+          { "id": "2-items", "count": 54 },
+          { "id": "3-gear", "count": 67 },
+          { "id": "4-nature", "count": 68 },
+          { "id": "5-food", "count": 38 },
+          { "id": "6-buildings", "count": 53 },
+          { "id": "7-vehicles", "count": 57 },
+          { "id": "8-ui", "count": 100 },
+          { "id": "9-media", "count": 89 },
+          { "id": "10-editing", "count": 59 },
+          { "id": "11-symbols", "count": 93 },
+          { "id": "12-misc", "count": 63 }
+        ],
+
+        "naming": {
+          "convention": "kebab-case",
+          "uniqueAcrossCategories": true,
+          "variantSuffix": "-02, -03 mark alternate cuts of the same concept (arrow-down, arrow-down-02, arrow-down-03)",
+          "exceptions": [
+            "11-symbols/A-to-Z.svg",
+            "2-items/Diamond-02.svg",
+            "2-items/Dumbbell-02.svg",
+            "2-items/Dumbbell.svg"
+          ]
+        },
+
+        "coloring": {
+          "$description": "Icons carry fill=\"currentColor\", so they inherit the CSS color of their parent. Set color with a color token rather than overriding fill.",
+          "mechanism": "currentColor"
+        }
+      }
+    },
+
+    "size": {
+      "$type": "dimension",
+      "$description": "Rendered icon sizes. Aligned to the 4px spacing rhythm.",
+      "xs": { "$value": "{spacing.16}" },
+      "sm": { "$value": "{spacing.20}" },
+      "md": { "$value": "{spacing.24}", "$description": "Default. Matches the intrinsic 24px width/height of the source SVGs." },
+      "lg": { "$value": "{spacing.32}" },
+      "xl": { "$value": "{spacing.40}" }
+    }
+  }
+}

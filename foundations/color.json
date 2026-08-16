@@ -1,0 +1,57 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "color": {
+    "gray": {
+      "$type": "color",
+      "950": { "$value": "#141115" },
+      "900": { "$value": "#1B1B1B" },
+      "800": { "$value": "#211E21" },
+      "700": { "$value": "#575357" },
+      "600": { "$value": "#848184" },
+      "500": { "$value": "#9B979B" },
+      "400": { "$value": "#B7B4B8" },
+      "300": { "$value": "#D9D4D8" },
+      "200": { "$value": "#EEECEF" },
+      "100": { "$value": "#F3F0F3" },
+      "50": { "$value": "#FDFAFE" }
+    },
+    "white": { "$type": "color", "$value": "#FFFFFF" },
+
+    "brand": {
+      "$type": "color",
+      "primary": { "$value": "#F46B18" },
+      "primary-pressed": { "$value": "#B94208" },
+      "secondary": { "$value": "#FF8D28" },
+      "reward-border": { "$value": "#C94B09" },
+      "reward-disabled-surface": { "$value": "#FFF0E6" },
+      "reward-disabled-text": { "$value": "#D89A70" }
+    },
+
+    "feedback": {
+      "$type": "color",
+      "correct": { "$value": "#35A66F" },
+      "correct-surface": { "$value": "#EDFFF3" },
+      "correct-text": { "$value": "#206541" },
+      "incorrect": { "$value": "#DF4D54" },
+      "incorrect-surface": { "$value": "#FFF0F1" },
+      "incorrect-text": { "$value": "#A62E34" },
+      "warning": { "$value": "#FFC500" },
+      "warning-surface": { "$value": "#FFF4D6" },
+      "warning-text": { "$value": "#9A6800" }
+    },
+
+    "background": {
+      "$type": "color",
+      "primary": { "$value": "{color.gray.50}" },
+      "secondary": { "$value": "{color.gray.100}" },
+      "elevated": { "$value": "{color.white}" }
+    },
+
+    "border": {
+      "$type": "color",
+      "default": { "$value": "{color.gray.600}" },
+      "strong": { "$value": "{color.gray.950}" },
+      "disabled": { "$value": "{color.gray.400}" }
+    }
+  }
+}

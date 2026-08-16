@@ -1,0 +1,14 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "radius": {
+    "$type": "dimension",
+    "sm": { "$value": "6px" },
+    "md": { "$value": "12px" },
+    "lg": { "$value": "16px" },
+    "xl": { "$value": "24px" },
+    "full": {
+      "$value": "9999px",
+      "$description": "알약·원형. 요소 높이의 절반 이상이면 완전한 곡선이 되므로 큰 상수를 씁니다."
+    }
+  }
+}
