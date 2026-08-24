@@ -27,7 +27,7 @@
 |---|---|---|---|
 | Completed | `brand.primary` #F46B18 | 없음 | `white` #FFFFFF |
 | Current | `white` #FFFFFF | `brand.primary` #F46B18 | `brand.primary` #F46B18 |
-| Upcoming | `white` #FFFFFF | `gray.300` #D9D4D8 | `gray.600` #848184 |
+| Upcoming | `white` #FFFFFF | `gray.300` #EEEFF1 | `gray.600` #B0B3BA |
 
 ### 연결선
 
@@ -36,7 +36,7 @@
 | 왼쪽 단계 | 연결선 |
 |---|---|
 | Completed | `brand.primary` #F46B18 |
-| Current 또는 Upcoming | `gray.300` #D9D4D8 |
+| Current 또는 Upcoming | `gray.300` #EEEFF1 |
 
 완료한 구간까지 브랜드 컬러가 이어지고, 현재 단계 이후로는 회색으로 남습니다.
 

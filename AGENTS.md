@@ -17,7 +17,7 @@ Codex는 `.codex/skills/`, Claude Code는 `.claude/skills/`를 읽습니다. 두
 
 ```
 foundations/     토큰과 원칙 — 모든 값의 출처
-├── color.json            32색 (gray 12, brand 6, feedback 9, background 3, border 3)
+├── color.json            33색 (gray scale 12: gray 11 + white, brand 6, feedback 9, background 3, border 3)
 ├── typography.json       19 스타일 (accent / display / heading / body / caption / label / button / dialogue)
 ├── spacing.json          4px 리듬 스케일 (4~48)
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
@@ -112,7 +112,7 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 지키는 것:
 
 - **한국어로 쓴다.** 토큰명·상태명·컴포넌트명은 영문 그대로 둔다.
-- **색은 토큰명과 hex를 함께** 적는다 — `` `gray.700` #575357 ``
+- **색은 토큰명과 hex를 함께** 적는다 — `` `gray.700` #868B94 ``
 - **해결 내역·변경 이력을 문서에 넣지 않는다.** 문서는 현재 스펙만 담는다.
 - **외부 링크(Figma 등)를 넣지 않는다.** 저장소 안에서 완결되어야 한다.
 

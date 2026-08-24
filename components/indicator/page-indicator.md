@@ -12,7 +12,7 @@
 
 | 상태 | 크기 | 배경 | 모서리 |
 |---|---|---|---|
-| Inactive | 8 × 8 (원) | `gray.400` #B7B4B8 | `radius.full` |
+| Inactive | 8 × 8 (원) | `gray.400` #DCDEE3 | `radius.full` |
 | Active | **28 × 8** (알약) | `brand.primary` #F46B18 | `radius.full` |
 
 - 활성 항목만 가로로 늘어나 알약이 됩니다. **높이는 두 상태가 8px로 같습니다.**

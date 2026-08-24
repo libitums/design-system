@@ -14,7 +14,7 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 
 | 파일 | 내용 |
 |---|---|
-| `color.json` | 32색 — gray 12, brand 6, feedback 9, background 3, border 3 |
+| `color.json` | 33색 — gray scale 12 (gray 11 + white), brand 6, feedback 9, background 3, border 3 |
 | `typography.json` | 19 스타일 — accent / display / heading / body / caption / label / button / dialogue |
 | `spacing.json` | 4px 리듬 스케일 (4~48) |
 | `layout.json` | 화면 여백 · 간격 3단계 · safe area |

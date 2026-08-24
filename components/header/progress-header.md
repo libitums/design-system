@@ -21,7 +21,7 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | #F3F0F3 | `background.secondary` |
+| 배경 | #FAF7F4 | `background.secondary` |
 | 패딩 | 16px | `spacing.16` |
 | 모서리 | **네 모서리 모두 12px** | `radius.md` |
 | 좌우 여백 | 16px | `layout.screen.padding-x` |
@@ -36,8 +36,8 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 | 위치 | 요소 | 스펙 |
 |---|---|---|
-| 좌 | 나가기 버튼 | 24 × 24. 아이콘 `8-ui/cross`, `gray.700` #575357 |
-| 중앙 | 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #141115 |
+| 좌 | 나가기 버튼 | 24 × 24. 아이콘 `8-ui/cross`, `gray.700` #868B94 |
+| 중앙 | 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #1A1C20 |
 
 - **타이틀은 행 전체를 기준으로 가운데 정렬**합니다. 나가기 버튼과의 사이를 나눠 갖는 게 아니라, 버튼과 무관하게 행의 중앙에 옵니다.
 - 타이틀은 진행 단위를 나타냅니다 — `Chapter 4 / 12`.
@@ -52,7 +52,7 @@ Container (background.secondary, 패딩 16, 모서리 12)
 | 항목 | 값 | 토큰 |
 |---|---|---|
 | 높이 | 8px | `spacing.8` |
-| 트랙 배경 | #D9D4D8 | `gray.300` |
+| 트랙 배경 | #EEEFF1 | `gray.300` |
 | 채움 배경 | #F46B18 | `brand.primary` |
 | 모서리 | 트랙·채움 모두 알약 | `radius.full` |
 | 너비 | 가로 꽉 채움 | — |
@@ -67,7 +67,7 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 | 위치 | 내용 | 스펙 |
 |---|---|---|
-| 좌 | 현재 활동명 (`Listening`) | `typography.label.s` (10px / lh 14 / 자간 0.8) · `gray.700` #575357 |
+| 좌 | 현재 활동명 (`Listening`) | `typography.label.s` (10px / lh 14 / 자간 0.8) · `gray.700` #868B94 |
 | 우 | 진행률 (`33%`) | 동일 |
 
 ---
@@ -80,8 +80,8 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 | 상태 | 아이콘 |
 |---|---|
-| Default | `gray.700` #575357 |
-| Pressed | `gray.950` #141115 |
+| Default | `gray.700` #868B94 |
+| Pressed | `gray.950` #1A1C20 |
 
 Disabled는 정의하지 않습니다. **학습 중 이탈 경로는 언제나 열려 있어야 합니다.**
 

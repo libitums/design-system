@@ -22,7 +22,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | `gray.950` 45% — `rgba(20, 17, 21, .45)` | — |
+| 배경 | `gray.950` 45% — `rgba(26, 28, 32, .45)` | — |
 | 범위 | 화면 전체 | — |
 | 쌓임 순서 | `elevation.z.dialog` | — |
 
@@ -34,10 +34,10 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | #FFFFFF | `elevation.surface.floating` |
+| 배경 | #FFF3EA | `elevation.surface.floating` |
 | 모서리 | 16px | `radius.lg` |
 | 패딩 | 20px | `spacing.20` |
-| 그림자 | `0 4px 16px rgba(20, 17, 21, .12)` | `elevation.shadow.s3` |
+| 그림자 | `0 4px 16px rgba(26, 28, 32, .12)` | `elevation.shadow.s3` |
 | 좌우 여백 | 32px | `spacing.32` |
 | 최대 너비 | 320px | — |
 | 정렬 | 화면 가로·세로 가운데 | — |
@@ -51,7 +51,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 스펙 |
 |---|---|
-| 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #141115 |
+| 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #1A1C20 |
 
 - **무엇이 일어나는지 한 줄로** 말합니다 — `학습을 그만둘까요?`
 - 타이틀은 필수입니다. 생략할 수 없습니다.
@@ -65,7 +65,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 스펙 |
 |---|---|
-| 본문 | `typography.body.m` (14px / lh 20) · `gray.600` #848184 |
+| 본문 | `typography.body.m` (14px / lh 20) · `gray.600` #B0B3BA |
 
 - **결과를 알려줍니다** — 무엇을 잃는지, 되돌릴 수 있는지.
 - 두세 줄을 넘기지 마세요. 넘어가면 Dialog가 아니라 화면으로 만들 일입니다.
