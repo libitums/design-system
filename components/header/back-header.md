@@ -44,7 +44,7 @@ Container (패딩 16 / 12, 하단 모서리 12)
 |---|---|
 | 뒤로가기 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/arrow-left-03`, `gray.700` #575357 |
 | 타이틀 | `typography.label.l` (14px / lh 20) · `gray.950` #141115 |
-| 서브타이틀 | `typography.body.s` (12px / lh 16) · `gray.600` #848184 |
+| 서브타이틀 | `typography.body.s` (12px / lh 18) · `gray.600` #848184 |
 
 - 타이틀과 서브타이틀 사이 간격은 4px (`spacing.4`).
 - 타이틀은 **어디에 있는지**(`Episode 04`), 서브타이틀은 **무엇을 하는지**(`Listening "저기요"`)를 나타냅니다.
