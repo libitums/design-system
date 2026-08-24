@@ -9,6 +9,7 @@
     "weight": {
       "$type": "fontWeight",
       "medium": { "$value": 500 },
+      "semiBold": { "$value": 600 },
       "bold": { "$value": 700 },
       "extraBold": { "$value": 800 }
     }
@@ -176,12 +177,41 @@
     },
 
     "button": {
-      "$value": {
-        "fontFamily": "{font.family.default}",
-        "fontWeight": "{font.weight.medium}",
-        "fontSize": "14px",
-        "lineHeight": "20px",
-        "letterSpacing": "0px"
+      "s": {
+        "$value": {
+          "fontFamily": "{font.family.default}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "12px",
+          "lineHeight": "16px",
+          "letterSpacing": "0.12px"
+        }
+      },
+      "m": {
+        "$value": {
+          "fontFamily": "{font.family.default}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "14px",
+          "lineHeight": "20px",
+          "letterSpacing": "0px"
+        }
+      },
+      "l": {
+        "$value": {
+          "fontFamily": "{font.family.default}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "14px",
+          "lineHeight": "20px",
+          "letterSpacing": "0px"
+        }
+      },
+      "xl": {
+        "$value": {
+          "fontFamily": "{font.family.default}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "letterSpacing": "0px"
+        }
       }
     },
 
