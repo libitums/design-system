@@ -29,7 +29,8 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 └── international-design.md   로케일 표기 · 번역 길이 대응
 
 components/      컴포넌트 스펙
-├── action-buttons.md     Solid / Shadow / Choice
+├── button.md             Solid / Brand / Outline / Subtle / Text
+├── round-button.md       아이콘 전용 Solid / Brand
 ├── bottom-navigator.md
 ├── bottom-sheet.md
 ├── dialog.md
@@ -83,12 +84,10 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 
 어학 서비스라 **UI 언어**와 **학습 대상 언어**가 한 화면에 공존한다. 학습 콘텐츠(예문, 지문, 보기)는 번역 대상이 아니며 대상 언어의 `lang` 속성이 필요하다. `foundations/international-design.md` 참고.
 
-### 5. 그림자 두 종류를 구분한다
+### 5. 그림자는 표면의 깊이에만 쓴다
 
-- **하드 섀도우** `4px 4px 0` (blur 0) — Shadow Button 전용. 촉각적 장식.
-- **부드러운 그림자** `elevation.shadow.s1~s3` — 표면의 깊이 표현.
-
-목적이 다르므로 섞어 쓰지 않는다.
+- **부드러운 그림자** `elevation.shadow.s1~s3`로 표면의 깊이를 표현한다.
+- Button과 Round Button에는 그림자를 쓰지 않는다.
 
 ### 6. 접근성은 선택이 아니다
 

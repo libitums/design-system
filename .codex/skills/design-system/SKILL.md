@@ -33,7 +33,8 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 
 | 컴포넌트 | 문서 |
 |---|---|
-| 버튼 (Solid / Shadow / Choice) | `components/action-buttons.md` |
+| 버튼 (Solid / Brand / Outline / Subtle / Text) | `components/button.md` |
+| 라운드 버튼 (Solid / Brand) | `components/round-button.md` |
 | 하단 탭 바 | `components/bottom-navigator.md` |
 | 바텀 시트 | `components/bottom-sheet.md` |
 | 다이얼로그 | `components/dialog.md` |
@@ -45,10 +46,10 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 
 ## 자주 틀리는 것
 
-- **그림자가 두 종류입니다.** 하드 섀도우 `4px 4px 0`(blur 0)는 Shadow Button 전용 장식이고, `elevation.shadow.s1~s3`는 표면의 깊이입니다. 섞지 마세요.
-- **테두리는 2px, 높이 안쪽**(`border-box`)에 그립니다. 계열과 무관하게 사이즈 스케일의 높이가 유지됩니다.
-- **Loading은 Default 색을 그대로 두고** 스피너만 더합니다. 스피너 색은 라벨 색의 35%이고, 라벨은 지우지 않습니다.
-- **Disabled 라벨은 전 계열 `gray.400`** 입니다.
+- **Button과 Round Button에는 그림자를 쓰지 않습니다.** 표면 깊이가 필요한 다른 컴포넌트만 `elevation.shadow.s1~s3`를 씁니다.
+- **Outline 테두리 1px는 실제 크기에 포함됩니다.** Hug 너비와 높이는 `components/button.md`의 산식으로 계산합니다.
+- **Loading은 변형별 색을 따릅니다.** Button은 라벨을 유지하고, Round Button은 아이콘을 Spinner로 교체합니다.
+- **Disabled 색은 변형별로 다릅니다.** 공통값으로 치환하지 말고 각 상태 표를 확인합니다.
 - **모서리가 배치를 뜻합니다.** 사방 12px = 여백 안쪽에 뜨는 카드, 하단만 12px = 화면 상단 밀착, 상단만 12px = 화면 하단 밀착, 상단만 16px = 바텀 시트.
 
 ## 지켜야 할 것
