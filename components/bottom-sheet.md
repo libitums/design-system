@@ -21,7 +21,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | `gray.950` 45% — `rgba(20, 17, 21, .45)` | — |
+| 배경 | `gray.950` 45% — `rgba(26, 28, 32, .45)` | — |
 | 범위 | 화면 전체 | — |
 | 쌓임 순서 | `elevation.z.sheet` | — |
 
@@ -33,12 +33,12 @@ Scrim을 누르면 시트를 닫습니다.
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | #FFFFFF | `background.elevated` |
+| 배경 | #FFF3EA | `background.elevated` |
 | 모서리 | **상단 두 모서리만 16px** (하단 0) | `radius.lg` |
 | 가로 패딩 | 16px | `spacing.16` |
 | 상단 패딩 | 12px | `spacing.12` |
 | 하단 패딩 | 20px | `spacing.20` |
-| 그림자 | `0 -10px 14px rgba(20, 17, 21, .2)` — 위쪽으로 | — |
+| 그림자 | `0 -10px 14px rgba(26, 28, 32, .2)` — 위쪽으로 | — |
 | 정렬 | 화면 하단에 밀착 | — |
 
 - 높이는 내용에 따라 결정됩니다. 화면 높이를 넘지 않게 하고, 넘으면 내부를 스크롤합니다.
@@ -50,7 +50,7 @@ Scrim을 누르면 시트를 닫습니다.
 | 항목 | 값 | 토큰 |
 |---|---|---|
 | 크기 | 40 × 6 | — |
-| 배경 | `gray.300` #D9D4D8 | — |
+| 배경 | `gray.300` #EEEFF1 | — |
 | 모서리 | 알약 | `radius.full` |
 | 정렬 | 가로 가운데 | — |
 
@@ -65,7 +65,7 @@ Scrim을 누르면 시트를 닫습니다.
 | 위치 | 요소 | 스펙 |
 |---|---|---|
 | 좌 · 위 | 오버라인 | `typography.label.m` (12px / lh 16) · `brand.primary` #F46B18 |
-| 좌 · 아래 | 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #141115 |
+| 좌 · 아래 | 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #1A1C20 |
 | 우 | 닫기 버튼 | 아래 표 참고 |
 
 - 오버라인과 타이틀 사이 간격 4px (`spacing.4`).
@@ -78,14 +78,14 @@ Scrim을 누르면 시트를 닫습니다.
 | 항목 | 값 | 토큰 |
 |---|---|---|
 | 크기 | 40 × 40 | — |
-| 배경 | `gray.100` #F3F0F3 | — |
+| 배경 | `gray.100` #F7F8F9 | — |
 | 모서리 | 12px | `radius.md` |
-| 아이콘 | 18 × 18. `8-ui/cross`, `gray.700` #575357 | — |
+| 아이콘 | 18 × 18. `8-ui/cross`, `gray.700` #868B94 | — |
 
 | 상태 | 배경 | 아이콘 |
 |---|---|---|
-| Default | `gray.100` #F3F0F3 | `gray.700` #575357 |
-| Pressed | `gray.300` #D9D4D8 | `gray.950` #141115 |
+| Default | `gray.100` #F7F8F9 | `gray.700` #868B94 |
+| Pressed | `gray.300` #EEEFF1 | `gray.950` #1A1C20 |
 
 Pressed 규칙은 [Action Buttons](./action-buttons.md)의 `subtle`과 같습니다.
 
@@ -97,7 +97,7 @@ Pressed 규칙은 [Action Buttons](./action-buttons.md)의 `subtle`과 같습니
 
 | 항목 | 스펙 |
 |---|---|
-| 본문 | `typography.body.m` (14px / lh 20) · `gray.600` #848184 |
+| 본문 | `typography.body.m` (14px / lh 20) · `gray.600` #B0B3BA |
 
 타이틀을 보충하는 설명입니다. 없어도 되면 생략하고, 두세 줄을 넘기지 마세요 — `foundations/writing-tone.md`의 *Focus on One Purpose* 참고.
 

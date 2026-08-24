@@ -22,7 +22,7 @@
 세 가지 상태 규칙이 모든 계열에 동일하게 적용됩니다.
 
 - **Pressed = 배경 한 단계 어둡게** (+ Shadow 계열은 섀도우 제거)
-- **Disabled 라벨 = `gray.400` #B7B4B8** (전 계열 공통)
+- **Disabled 라벨 = `gray.400` #DCDEE3** (전 계열 공통)
 - **Loading = Default과 같은 색 유지 + 스피너.** 스피너 색은 **라벨 색의 35% 불투명도**, 두께 2px, 크기 S·M 12px / L·XL 16px. 라벨은 지우지 않습니다.
 
 ### 사이즈 스케일
@@ -55,28 +55,28 @@
 
 | 상태 | 배경 | 라벨 |
 |---|---|---|
-| Default | `gray.800` #211E21 | `gray.50` #FDFAFE |
-| Pressed | `gray.950` #141115 | `gray.50` #FDFAFE |
-| Disabled | `gray.50` #FDFAFE | `gray.400` #B7B4B8 |
-| Loading | `gray.800` #211E21 | `gray.50` #FDFAFE · 스피너 `gray.50` 35% |
+| Default | `gray.800` #555D6D | `gray.50` #F9F9FA |
+| Pressed | `gray.950` #1A1C20 | `gray.50` #F9F9FA |
+| Disabled | `gray.50` #F9F9FA | `gray.400` #DCDEE3 |
+| Loading | `gray.800` #555D6D | `gray.50` #F9F9FA · 스피너 `gray.50` 35% |
 
 **outline**
 
 | 상태 | 배경 | 테두리 | 라벨 |
 |---|---|---|---|
-| Default | `white` #FFFFFF | `border.default` #848184 | `gray.700` #575357 |
-| Pressed | `gray.100` #F3F0F3 | `border.default` #848184 | `gray.800` #211E21 |
-| Disabled | `gray.50` #FDFAFE | `border.disabled` #B7B4B8 | `gray.400` #B7B4B8 |
-| Loading | `white` #FFFFFF | `border.default` #848184 | `gray.700` #575357 · 스피너 `gray.700` 35% |
+| Default | `white` #FFFFFF | `border.default` #848184 | `gray.700` #868B94 |
+| Pressed | `gray.100` #F7F8F9 | `border.default` #848184 | `gray.800` #555D6D |
+| Disabled | `gray.50` #F9F9FA | `border.disabled` #B7B4B8 | `gray.400` #DCDEE3 |
+| Loading | `white` #FFFFFF | `border.default` #848184 | `gray.700` #868B94 · 스피너 `gray.700` 35% |
 
 **subtle** — 테두리 없음
 
 | 상태 | 배경 | 라벨 |
 |---|---|---|
-| Default | `gray.100` #F3F0F3 | `gray.700` #575357 |
-| Pressed | `gray.300` #D9D4D8 | `gray.900` #1B1B1B |
-| Disabled | `gray.50` #FDFAFE | `gray.400` #B7B4B8 |
-| Loading | `gray.100` #F3F0F3 | `gray.700` #575357 · 스피너 `gray.700` 35% |
+| Default | `gray.100` #F7F8F9 | `gray.700` #868B94 |
+| Pressed | `gray.300` #EEEFF1 | `gray.900` #2A3038 |
+| Disabled | `gray.50` #F9F9FA | `gray.400` #DCDEE3 |
+| Loading | `gray.100` #F7F8F9 | `gray.700` #868B94 · 스피너 `gray.700` 35% |
 
 **text** — 배경·테두리 없음. 가로 패딩은 스케일의 절반, 세로 패딩은 동일
 
@@ -84,7 +84,7 @@
 |---|---|
 | Default | `brand.primary` #F46B18 |
 | Pressed | `brand.primary-pressed` #B94208 |
-| Disabled | `gray.400` #B7B4B8 |
+| Disabled | `gray.400` #DCDEE3 |
 | Loading | `brand.primary` #F46B18 · 스피너 `brand.primary` 35% |
 
 ---
@@ -109,19 +109,19 @@
 
 | 상태 | 배경 | 테두리 | 라벨 | 섀도우 |
 |---|---|---|---|---|
-| Default | `gray.800` #211E21 | `border.strong` #141115 | `white` | `4px 4px 0` `gray.800` #211E21 |
-| Pressed | `gray.950` #141115 | `border.strong` #141115 | `white` | 없음 |
-| Disabled | `gray.100` #F3F0F3 | `border.disabled` #B7B4B8 | `gray.400` #B7B4B8 | 없음 |
-| Loading | `gray.800` #211E21 | `border.strong` #141115 | `white` · 스피너 `white` 35% | 없음 |
+| Default | `gray.800` #555D6D | `border.strong` #141115 | `white` | `4px 4px 0` `gray.800` #555D6D |
+| Pressed | `gray.950` #1A1C20 | `border.strong` #141115 | `white` | 없음 |
+| Disabled | `gray.100` #F7F8F9 | `border.disabled` #B7B4B8 | `gray.400` #DCDEE3 | 없음 |
+| Loading | `gray.800` #555D6D | `border.strong` #141115 | `white` · 스피너 `white` 35% | 없음 |
 
 **secondary**
 
 | 상태 | 배경 | 테두리 | 라벨 | 섀도우 |
 |---|---|---|---|---|
-| Default | `white` #FFFFFF | `border.default` #848184 | `gray.700` #575357 | `4px 4px 0` `gray.400` #B7B4B8 |
-| Pressed | `gray.300` #D9D4D8 | `gray.700` #575357 | `gray.900` #1B1B1B | 없음 |
-| Disabled | `gray.100` #F3F0F3 | `border.disabled` #B7B4B8 | `gray.400` #B7B4B8 | 없음 |
-| Loading | `white` #FFFFFF | `border.default` #848184 | `gray.700` #575357 · 스피너 `gray.700` 35% | 없음 |
+| Default | `white` #FFFFFF | `border.default` #848184 | `gray.700` #868B94 | `4px 4px 0` `gray.400` #DCDEE3 |
+| Pressed | `gray.300` #EEEFF1 | `gray.700` #868B94 | `gray.900` #2A3038 | 없음 |
+| Disabled | `gray.100` #F7F8F9 | `border.disabled` #B7B4B8 | `gray.400` #DCDEE3 | 없음 |
+| Loading | `white` #FFFFFF | `border.default` #848184 | `gray.700` #868B94 · 스피너 `gray.700` 35% | 없음 |
 
 **tertiary**
 
@@ -136,9 +136,9 @@
 
 | 상태 | 배경 | 테두리 | 아이콘 | 섀도우 |
 |---|---|---|---|---|
-| Default | `feedback.warning` #FFC500 | `border.strong` #141115 | `gray.950` #141115 | `4px 4px 0` `border.strong` #141115 |
+| Default | `feedback.warning` #FFC500 | `border.strong` #141115 | `gray.950` #1A1C20 | `4px 4px 0` `border.strong` #141115 |
 | Pressed | `feedback.warning-text` #9A6800 | `border.strong` #141115 | `white` | 없음 |
-| Disabled | `gray.50` #FDFAFE | `border.disabled` #B7B4B8 | `gray.400` #B7B4B8 | 없음 |
+| Disabled | `gray.50` #F9F9FA | `border.disabled` #B7B4B8 | `gray.400` #DCDEE3 | 없음 |
 | Loading | `feedback.warning` #FFC500 | `border.strong` #141115 | 스피너 `gray.950` 35% | 없음 |
 
 ---
@@ -161,11 +161,11 @@
 
 | 상태 | 배경 | 테두리 | 배지 | 배지 기호 | 라벨 |
 |---|---|---|---|---|---|
-| Default | `white` #FFFFFF | `border.strong` #141115 | 투명 + 테두리 #141115 | `gray.950` #141115 | `gray.950` #141115 |
-| Pressed | `gray.300` #D9D4D8 | `border.strong` #141115 | 투명 + 테두리 #141115 | `gray.950` #141115 | `gray.950` #141115 |
-| Selected | `gray.100` #F3F0F3 | `border.strong` #141115 | 채움 #141115 | `white` | `gray.950` #141115 |
-| Loading | `gray.100` #F3F0F3 | `border.strong` #141115 | 채움 #141115 | 스피너 `white` 35% | `gray.950` #141115 |
-| Disabled | `gray.100` #F3F0F3 | `border.disabled` #B7B4B8 | 투명 + 테두리 #B7B4B8 | `gray.400` #B7B4B8 | `gray.400` #B7B4B8 |
+| Default | `white` #FFFFFF | `border.strong` #141115 | 투명 + 테두리 #141115 | `gray.950` #1A1C20 | `gray.950` #1A1C20 |
+| Pressed | `gray.300` #EEEFF1 | `border.strong` #141115 | 투명 + 테두리 #141115 | `gray.950` #1A1C20 | `gray.950` #1A1C20 |
+| Selected | `gray.100` #F7F8F9 | `border.strong` #141115 | 채움 #141115 | `white` | `gray.950` #1A1C20 |
+| Loading | `gray.100` #F7F8F9 | `border.strong` #141115 | 채움 #141115 | 스피너 `white` 35% | `gray.950` #1A1C20 |
+| Disabled | `gray.100` #F7F8F9 | `border.disabled` #B7B4B8 | 투명 + 테두리 #B7B4B8 | `gray.400` #DCDEE3 | `gray.400` #DCDEE3 |
 | Correct | `feedback.correct-surface` #EDFFF3 | `feedback.correct` #35A66F | 채움 #35A66F | `white` (✓) | `feedback.correct-text` #206541 |
 | Incorrect | `feedback.incorrect-surface` #FFF0F1 | `feedback.incorrect` #DF4D54 | 채움 #DF4D54 | `white` (×) | `feedback.incorrect-text` #A62E34 |
 

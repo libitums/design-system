@@ -22,7 +22,7 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | #FFFFFF | `background.elevated` |
+| 배경 | #FFF3EA | `background.elevated` |
 | 가로 패딩 | 16px | `spacing.16` |
 | 세로 패딩 | 12px | `spacing.12` |
 | 모서리 | **하단 두 모서리만 12px** (상단 0) | `radius.md` |
@@ -30,7 +30,7 @@ Container (패딩 16 / 12, 하단 모서리 12)
 | 너비 | 화면 가로 꽉 채움 | — |
 | 쌓임 순서 | 고정 바 | `elevation.z.sticky` |
 
-화면 최상단에 밀착합니다. 흰 배경이라 아래 콘텐츠가 스크롤되며 헤더를 통과하지 않고, 하단 모서리의 곡선이 콘텐츠와의 경계를 만듭니다. 하단에 밀착하며 상단 모서리만 둥근 [Bottom Navigator](../bottom-navigator.md)와 대칭이고, 네 모서리가 모두 둥근 [Progress Header](./progress-header.md)와는 다릅니다.
+화면 최상단에 밀착합니다. Elevated 배경이라 아래 콘텐츠가 스크롤되며 헤더를 통과하지 않고, 하단 모서리의 곡선이 콘텐츠와의 경계를 만듭니다. 하단에 밀착하며 상단 모서리만 둥근 [Bottom Navigator](../bottom-navigator.md)와 대칭이고, 네 모서리가 모두 둥근 [Progress Header](./progress-header.md)와는 다릅니다.
 
 콘텐츠가 헤더 아래로 스크롤될 때 경계를 더 분명히 하려면 `elevation.shadow.s1`을 더합니다. 기본은 그림자 없음입니다.
 
@@ -42,9 +42,9 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 요소 | 스펙 |
 |---|---|
-| 뒤로가기 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/arrow-left-03`, `gray.700` #575357 |
-| 타이틀 | `typography.label.l` (14px / lh 20) · `gray.950` #141115 |
-| 서브타이틀 | `typography.body.s` (12px / lh 18) · `gray.600` #848184 |
+| 뒤로가기 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/arrow-left-03`, `gray.700` #868B94 |
+| 타이틀 | `typography.label.l` (14px / lh 20) · `gray.950` #1A1C20 |
+| 서브타이틀 | `typography.body.s` (12px / lh 18) · `gray.600` #B0B3BA |
 
 - 타이틀과 서브타이틀 사이 간격은 4px (`spacing.4`).
 - 타이틀은 **어디에 있는지**(`Episode 04`), 서브타이틀은 **무엇을 하는지**(`Listening "저기요"`)를 나타냅니다.
@@ -56,7 +56,7 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 요소 | 스펙 |
 |---|---|
-| 정보 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/info-02`, `gray.700` #575357 |
+| 정보 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/info-02`, `gray.700` #868B94 |
 
 이 화면에서 무엇을 하는지 설명이 필요할 때만 둡니다. 쓰지 않으면 자리를 비우고, 타이틀은 그대로 좌측 정렬을 유지합니다.
 
@@ -68,8 +68,8 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 상태 | 아이콘 |
 |---|---|
-| Default | `gray.700` #575357 |
-| Pressed | `gray.950` #141115 |
+| Default | `gray.700` #868B94 |
+| Pressed | `gray.950` #1A1C20 |
 
 - 뒤로가기는 아이콘과 제목 묶음을 함께 누른 상태로 처리합니다. Pressed에서 **타이틀·서브타이틀 색은 바뀌지 않습니다** — 아이콘만 반응합니다.
 - 뒤로가기에 Disabled는 없습니다. 돌아갈 길은 언제나 열려 있어야 합니다.

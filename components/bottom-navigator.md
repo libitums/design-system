@@ -21,12 +21,12 @@ Bar (흰 배경, 상단 모서리 둥글게, 위쪽 그림자)
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | #FFFFFF | `background.elevated` |
+| 배경 | #FFF3EA | `background.elevated` |
 | 모서리 | 상단만 12px (하단 0) | `radius.md` |
 | 패딩 | 24px | `spacing.24` |
 | 셀 간격 | 32px | `spacing.32` |
 | 정렬 | 가로 중앙 | — |
-| 그림자 | `0 -4px 4px rgba(20, 17, 21, .08)` | `gray.950` 8% |
+| 그림자 | `0 -4px 4px rgba(26, 28, 32, .08)` | `gray.950` 8% |
 
 화면 가로를 꽉 채우고 하단에 고정합니다.
 
@@ -46,11 +46,11 @@ Bar (흰 배경, 상단 모서리 둥글게, 위쪽 그림자)
 
 | 상태 | 배경 | 아이콘 | 가로 / 세로 패딩 | 모서리 |
 |---|---|---|---|---|
-| Default | 없음 | `gray.500` #9B979B | 10 / 10 | — |
-| Pressed | 없음 | `gray.700` #575357 | 10 / 10 | — |
+| Default | 없음 | `gray.500` #D1D3D8 | 10 / 10 | — |
+| Pressed | 없음 | `gray.700` #868B94 | 10 / 10 | — |
 | Active | `brand.primary` #F46B18 | `white` #FFFFFF | 20 / 10 | `radius.full` |
 | Active Pressed | `brand.primary-pressed` #B94208 | `white` #FFFFFF | 20 / 10 | `radius.full` |
-| Disabled | 없음 | `gray.400` #B7B4B8 | 10 / 10 | — |
+| Disabled | 없음 | `gray.400` #DCDEE3 | 10 / 10 | — |
 
 - 한 번에 **하나의 셀만 Active**입니다.
 - Active는 현재 위치를 나타내는 상태이고, Pressed는 누르는 순간의 피드백입니다. 이미 Active인 셀을 누르면 Active Pressed가 됩니다.
