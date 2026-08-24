@@ -41,15 +41,15 @@
       "$description": "층을 색으로 구분합니다. 아래로 갈수록 어둡고, 위로 올라올수록 밝습니다.",
       "basement": {
         "$value": "{color.background.secondary}",
-        "$description": "가장 아래 배경. #F3F0F3"
+        "$description": "가장 아래 배경. #FAF7F4"
       },
       "default": {
         "$value": "{color.background.primary}",
-        "$description": "기본 콘텐츠 표면. #FDFAFE"
+        "$description": "기본 콘텐츠 표면. #FFFDFC"
       },
       "floating": {
         "$value": "{color.background.elevated}",
-        "$description": "떠 있는 표면. 시트, 다이얼로그, 고정 바. #FFFFFF"
+        "$description": "떠 있는 표면. 시트, 다이얼로그, 고정 바. #FFF3EA"
       }
     },
 
@@ -58,7 +58,7 @@
       "$description": "표면을 띄우는 부드러운 그림자. Shadow Button의 하드 섀도우(`4px 4px 0`)와는 목적이 다릅니다 — 이쪽은 깊이 표현, 저쪽은 촉각적 장식입니다. 섞어 쓰지 마세요.",
       "s1": {
         "$value": {
-          "color": "#14111514",
+          "color": "#1A1C2014",
           "offsetX": "0px",
           "offsetY": "1px",
           "blur": "4px",
@@ -68,7 +68,7 @@
       },
       "s2": {
         "$value": {
-          "color": "#1411151a",
+          "color": "#1A1C201A",
           "offsetX": "0px",
           "offsetY": "2px",
           "blur": "10px",
@@ -78,7 +78,7 @@
       },
       "s3": {
         "$value": {
-          "color": "#1411151f",
+          "color": "#1A1C201F",
           "offsetX": "0px",
           "offsetY": "4px",
           "blur": "16px",
