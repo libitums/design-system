@@ -47,10 +47,10 @@ Bar (흰 배경, 상단 모서리 둥글게, 위쪽 그림자)
 | 상태 | 배경 | 아이콘 | 가로 / 세로 패딩 | 모서리 |
 |---|---|---|---|---|
 | Default | 없음 | `gray.500` #D1D3D8 | 10 / 10 | — |
-| Pressed | 없음 | `gray.700` #868B94 | 10 / 10 | — |
-| Active | `brand.primary` #F46B18 | `white` #FFFFFF | 20 / 10 | `radius.full` |
-| Active Pressed | `brand.primary-pressed` #B94208 | `white` #FFFFFF | 20 / 10 | `radius.full` |
-| Disabled | 없음 | `gray.400` #DCDEE3 | 10 / 10 | — |
+| Pressed | 없음 | `fg.neutral-subtle` #868B94 | 10 / 10 | — |
+| Active | `brand.primary` #F46B18 | `fg.neutral-inverted` #FFFFFF | 20 / 10 | `radius.full` |
+| Active Pressed | `brand.primary-pressed` #B94208 | `fg.neutral-inverted` #FFFFFF | 20 / 10 | `radius.full` |
+| Disabled | 없음 | `fg.disabled` #DCDEE3 | 10 / 10 | — |
 
 - 한 번에 **하나의 셀만 Active**입니다.
 - Active는 현재 위치를 나타내는 상태이고, Pressed는 누르는 순간의 피드백입니다. 이미 Active인 셀을 누르면 Active Pressed가 됩니다.
@@ -65,7 +65,7 @@ Bar (흰 배경, 상단 모서리 둥글게, 위쪽 그림자)
 | 종류 | 크기 | 배경 | 내용 |
 |---|---|---|---|
 | Dot | 8 × 8 | `feedback.incorrect` #DF4D54 | 없음 |
-| Count | 높이 16px, 최소 너비 16px, 가로 패딩 4px | `feedback.incorrect` #DF4D54 | `white` + `typography.label.s` |
+| Count | 높이 16px, 최소 너비 16px, 가로 패딩 4px | `feedback.incorrect` #DF4D54 | `fg.neutral-inverted` #FFFFFF + `typography.label.s` |
 
 - 둘 다 모서리는 `radius.full`입니다.
 - 개수를 정확히 보여줄 필요가 없으면 Dot을 씁니다.

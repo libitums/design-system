@@ -25,9 +25,9 @@
 
 | 상태 | 배경 | 테두리 | 숫자 |
 |---|---|---|---|
-| Completed | `brand.primary` #F46B18 | 없음 | `white` #FFFFFF |
-| Current | `white` #FFFFFF | `brand.primary` #F46B18 | `brand.primary` #F46B18 |
-| Upcoming | `white` #FFFFFF | `gray.300` #EEEFF1 | `gray.600` #B0B3BA |
+| Completed | `brand.primary` #F46B18 | 없음 | `fg.neutral-inverted` #FFFFFF |
+| Current | `white` #FFFFFF | `brand.primary` #F46B18 | `fg.brand` #F46B18 |
+| Upcoming | `white` #FFFFFF | `gray.300` #EEEFF1 | `fg.neutral-subtlest` #B0B3BA |
 
 ### 연결선
 

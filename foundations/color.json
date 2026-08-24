@@ -17,6 +17,38 @@
     },
     "white": { "$type": "color", "$value": "#FFFFFF" },
 
+    "fg": {
+      "$type": "color",
+      "neutral": {
+        "$description": "제목과 핵심 정보에 사용하는 기본 전경색",
+        "$value": "{color.gray.950}"
+      },
+      "neutral-muted": {
+        "$description": "기본보다 낮고 subtle보다 높은 강조의 전경색",
+        "$value": "{color.gray.800}"
+      },
+      "neutral-subtle": {
+        "$description": "아이콘, 라벨, 캡션에 사용하는 보조 전경색",
+        "$value": "{color.gray.700}"
+      },
+      "neutral-subtlest": {
+        "$description": "설명과 부가 정보에 사용하는 가장 낮은 강조의 전경색",
+        "$value": "{color.gray.600}"
+      },
+      "neutral-inverted": {
+        "$description": "강한 색상의 표면 위에 사용하는 반전 전경색",
+        "$value": "{color.white}"
+      },
+      "disabled": {
+        "$description": "공통 비활성 텍스트와 아이콘에 사용하는 전경색",
+        "$value": "{color.gray.400}"
+      },
+      "brand": {
+        "$description": "브랜드 강조 텍스트와 아이콘에 사용하는 전경색",
+        "$value": "{color.brand.primary}"
+      }
+    },
+
     "brand": {
       "$type": "color",
       "primary": { "$value": "#F46B18" },

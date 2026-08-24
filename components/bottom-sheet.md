@@ -64,8 +64,8 @@ Scrim을 누르면 시트를 닫습니다.
 
 | 위치 | 요소 | 스펙 |
 |---|---|---|
-| 좌 · 위 | 오버라인 | `typography.label.m` (12px / lh 16) · `brand.primary` #F46B18 |
-| 좌 · 아래 | 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #1A1C20 |
+| 좌 · 위 | 오버라인 | `typography.label.m` (12px / lh 16) · `fg.brand` #F46B18 |
+| 좌 · 아래 | 타이틀 | `typography.heading.s` (18px / lh 24) · `fg.neutral` #1A1C20 |
 | 우 | 닫기 버튼 | 아래 표 참고 |
 
 - 오버라인과 타이틀 사이 간격 4px (`spacing.4`).
@@ -80,12 +80,12 @@ Scrim을 누르면 시트를 닫습니다.
 | 크기 | 40 × 40 | — |
 | 배경 | `gray.100` #F7F8F9 | — |
 | 모서리 | 12px | `radius.md` |
-| 아이콘 | 18 × 18. `8-ui/cross`, `gray.700` #868B94 | — |
+| 아이콘 | 18 × 18. `8-ui/cross`, `fg.neutral-subtle` #868B94 | — |
 
 | 상태 | 배경 | 아이콘 |
 |---|---|---|
-| Default | `gray.100` #F7F8F9 | `gray.700` #868B94 |
-| Pressed | `gray.300` #EEEFF1 | `gray.950` #1A1C20 |
+| Default | `gray.100` #F7F8F9 | `fg.neutral-subtle` #868B94 |
+| Pressed | `gray.300` #EEEFF1 | `fg.neutral` #1A1C20 |
 
 Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 
@@ -97,7 +97,7 @@ Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 
 | 항목 | 스펙 |
 |---|---|
-| 본문 | `typography.body.m` (14px / lh 20) · `gray.600` #B0B3BA |
+| 본문 | `typography.body.m` (14px / lh 20) · `fg.neutral-subtlest` #B0B3BA |
 
 타이틀을 보충하는 설명입니다. 없어도 되면 생략하고, 두세 줄을 넘기지 마세요 — `foundations/writing-tone.md`의 *Focus on One Purpose* 참고.
 

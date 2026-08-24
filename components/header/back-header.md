@@ -42,9 +42,9 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 요소 | 스펙 |
 |---|---|
-| 뒤로가기 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/arrow-left-03`, `gray.700` #868B94 |
-| 타이틀 | `typography.label.l` (14px / lh 20) · `gray.950` #1A1C20 |
-| 서브타이틀 | `typography.body.s` (12px / lh 18) · `gray.600` #B0B3BA |
+| 뒤로가기 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/arrow-left-03`, `fg.neutral-subtle` #868B94 |
+| 타이틀 | `typography.label.l` (14px / lh 20) · `fg.neutral` #1A1C20 |
+| 서브타이틀 | `typography.body.s` (12px / lh 18) · `fg.neutral-subtlest` #B0B3BA |
 
 - 타이틀과 서브타이틀 사이 간격은 4px (`spacing.4`).
 - 타이틀은 **어디에 있는지**(`Episode 04`), 서브타이틀은 **무엇을 하는지**(`Listening "저기요"`)를 나타냅니다.
@@ -56,7 +56,7 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 요소 | 스펙 |
 |---|---|
-| 정보 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/info-02`, `gray.700` #868B94 |
+| 정보 아이콘 | 24 × 24 (`icon.size.md`). `8-ui/info-02`, `fg.neutral-subtle` #868B94 |
 
 이 화면에서 무엇을 하는지 설명이 필요할 때만 둡니다. 쓰지 않으면 자리를 비우고, 타이틀은 그대로 좌측 정렬을 유지합니다.
 
@@ -68,8 +68,8 @@ Container (패딩 16 / 12, 하단 모서리 12)
 
 | 상태 | 아이콘 |
 |---|---|
-| Default | `gray.700` #868B94 |
-| Pressed | `gray.950` #1A1C20 |
+| Default | `fg.neutral-subtle` #868B94 |
+| Pressed | `fg.neutral` #1A1C20 |
 
 - 뒤로가기는 아이콘과 제목 묶음을 함께 누른 상태로 처리합니다. Pressed에서 **타이틀·서브타이틀 색은 바뀌지 않습니다** — 아이콘만 반응합니다.
 - 뒤로가기에 Disabled는 없습니다. 돌아갈 길은 언제나 열려 있어야 합니다.
