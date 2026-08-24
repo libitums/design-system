@@ -51,7 +51,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 스펙 |
 |---|---|
-| 타이틀 | `typography.heading.s` (18px / lh 24) · `gray.950` #1A1C20 |
+| 타이틀 | `typography.heading.s` (18px / lh 24) · `fg.neutral` #1A1C20 |
 
 - **무엇이 일어나는지 한 줄로** 말합니다 — `학습을 그만둘까요?`
 - 타이틀은 필수입니다. 생략할 수 없습니다.
@@ -65,7 +65,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 스펙 |
 |---|---|
-| 본문 | `typography.body.m` (14px / lh 20) · `gray.600` #B0B3BA |
+| 본문 | `typography.body.m` (14px / lh 20) · `fg.neutral-subtlest` #B0B3BA |
 
 - **결과를 알려줍니다** — 무엇을 잃는지, 되돌릴 수 있는지.
 - 두세 줄을 넘기지 마세요. 넘어가면 Dialog가 아니라 화면으로 만들 일입니다.
