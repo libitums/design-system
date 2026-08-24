@@ -18,7 +18,7 @@ Codex는 `.codex/skills/`, Claude Code는 `.claude/skills/`를 읽습니다. 두
 ```
 foundations/     토큰과 원칙 — 모든 값의 출처
 ├── color.json            32색 (gray 12, brand 6, feedback 9, background 3, border 3)
-├── typography.json       12 스타일 (display / heading / body / caption / label)
+├── typography.json       19 스타일 (accent / display / heading / body / caption / label / button / dialogue)
 ├── spacing.json          4px 리듬 스케일 (4~48)
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
 ├── radius.json           sm 6 / md 12 / lg 16 / xl 24 / full
@@ -123,5 +123,5 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 작업 중 필요해지면 만들지 말고 먼저 보고할 것.
 
 - **dark mode** — `color.json`은 라이트 모드 단일 값이다.
-- **폰트 폴백** — `font.family.default`는 `Futura` 단일 값이다. 웹에서는 폴백 스택이 필요하다.
+- **폰트 폴백** — `font.family.default`의 `Pretendard Variable`과 `font.family.accent`의 `Futura`는 모두 단일 값이다. 웹에서는 폴백 스택이 필요하다.
 - **지원 로케일 확정** — `international-design.md`의 로케일 표는 참고용 기준값이다.

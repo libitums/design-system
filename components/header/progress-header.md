@@ -67,7 +67,7 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 | 위치 | 내용 | 스펙 |
 |---|---|---|
-| 좌 | 현재 활동명 (`Listening`) | `typography.label.s` (10px / lh 14 / 자간 1.2) · `gray.700` #575357 |
+| 좌 | 현재 활동명 (`Listening`) | `typography.label.s` (10px / lh 14 / 자간 0.8) · `gray.700` #575357 |
 | 우 | 진행률 (`33%`) | 동일 |
 
 ---

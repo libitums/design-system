@@ -16,7 +16,7 @@
 |---|---|---|
 | 모서리 | 12px | `radius.md` |
 | 테두리 | **2px**, 높이 안쪽 (`border-box`) | — |
-| 라벨 폰트 | Futura Bold | `font.family.default` / `font.weight.bold` |
+| 라벨 폰트 | Pretendard Variable Bold | `font.family.default` / `font.weight.bold` |
 | 아이콘·스피너 ↔ 라벨 간격 | 6px | — |
 
 세 가지 상태 규칙이 모든 계열에 동일하게 적용됩니다.
