@@ -55,7 +55,7 @@
 
     "shadow": {
       "$type": "shadow",
-      "$description": "표면을 띄우는 부드러운 그림자. Shadow Button의 하드 섀도우(`4px 4px 0`)와는 목적이 다릅니다 — 이쪽은 깊이 표현, 저쪽은 촉각적 장식입니다. 섞어 쓰지 마세요.",
+      "$description": "표면을 띄우는 부드러운 그림자. 표면의 깊이 표현에만 쓰며 Button과 Round Button에는 사용하지 않습니다.",
       "s1": {
         "$value": {
           "color": "#1A1C2014",
