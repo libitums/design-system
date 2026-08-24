@@ -87,7 +87,7 @@ Scrim을 누르면 시트를 닫습니다.
 | Default | `gray.100` #F7F8F9 | `gray.700` #868B94 |
 | Pressed | `gray.300` #EEEFF1 | `gray.950` #1A1C20 |
 
-Pressed 규칙은 [Action Buttons](./action-buttons.md)의 `subtle`과 같습니다.
+Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 
 ---
 
@@ -107,7 +107,7 @@ Pressed 규칙은 [Action Buttons](./action-buttons.md)의 `subtle`과 같습니
 
 위 여백 20px (`spacing.20`).
 
-[Action Buttons](./action-buttons.md)를 **M 사이즈(40px), 가로 꽉 채움**으로 씁니다. 기본은 Solid `solid`입니다.
+[Button](./button.md)을 **M 사이즈(36px), Fill**로 씁니다. 기본은 Neutral입니다.
 
 - 버튼은 **하나만** 둡니다. 두 개 이상 필요하면 세로로 쌓고 간격 8px(`spacing.8`), 강조가 높은 것을 위에 둡니다.
 - 취소는 버튼으로 만들지 말고 닫기 버튼과 Scrim 탭에 맡깁니다.

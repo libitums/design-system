@@ -18,7 +18,7 @@ Codex는 `.codex/skills/`, Claude Code는 `.claude/skills/`를 읽습니다. 두
 ```
 foundations/     토큰과 원칙 — 모든 값의 출처
 ├── color.json            33색 (gray scale 12: gray 11 + white, brand 6, feedback 9, background 3, border 3)
-├── typography.json       19 스타일 (accent / display / heading / body / caption / label / button / dialogue)
+├── typography.json       22 스타일 (accent / display / heading / body / caption / label / button / dialogue)
 ├── spacing.json          4px 리듬 스케일 (4~48)
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
 ├── radius.json           sm 6 / md 12 / lg 16 / xl 24 / full
@@ -29,7 +29,8 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 └── international-design.md   로케일 표기 · 번역 길이 대응
 
 components/      컴포넌트 스펙
-├── action-buttons.md     Solid / Shadow / Choice
+├── button.md             Neutral / Brand / Outline / Subtle / Text
+├── round-button.md       아이콘 전용 Neutral / Brand
 ├── bottom-navigator.md
 ├── bottom-sheet.md
 ├── dialog.md
@@ -83,12 +84,10 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 
 어학 서비스라 **UI 언어**와 **학습 대상 언어**가 한 화면에 공존한다. 학습 콘텐츠(예문, 지문, 보기)는 번역 대상이 아니며 대상 언어의 `lang` 속성이 필요하다. `foundations/international-design.md` 참고.
 
-### 5. 그림자 두 종류를 구분한다
+### 5. 그림자는 표면의 깊이에만 쓴다
 
-- **하드 섀도우** `4px 4px 0` (blur 0) — Shadow Button 전용. 촉각적 장식.
-- **부드러운 그림자** `elevation.shadow.s1~s3` — 표면의 깊이 표현.
-
-목적이 다르므로 섞어 쓰지 않는다.
+- **부드러운 그림자** `elevation.shadow.s1~s3`로 표면의 깊이를 표현한다.
+- Button과 Round Button에는 그림자를 쓰지 않는다.
 
 ### 6. 접근성은 선택이 아니다
 

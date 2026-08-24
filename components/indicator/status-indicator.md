@@ -33,7 +33,7 @@
 | Needs retry | `feedback.incorrect-surface` #FFF0F1 | `feedback.incorrect` #DF4D54 | `feedback.incorrect-text` #A62E34 |
 | Locked | `gray.200` #F3F4F5 | `gray.500` #D1D3D8 | `gray.700` #868B94 |
 
-[Choice Button](../action-buttons.md#choice-button)의 Correct·Incorrect와 같은 3층 구조입니다. 같은 의미에는 같은 토큰 조합을 씁니다.
+피드백 상태는 같은 의미의 `surface` / `base` / `text` 토큰 조합을 일관되게 씁니다.
 
 ### 의미
 
