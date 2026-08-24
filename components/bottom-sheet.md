@@ -107,7 +107,7 @@ Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 
 위 여백 20px (`spacing.20`).
 
-[Button](./button.md)을 **M 사이즈(36px), Fill**로 씁니다. 기본은 Solid입니다.
+[Button](./button.md)을 **M 사이즈(36px), Fill**로 씁니다. 기본은 Neutral입니다.
 
 - 버튼은 **하나만** 둡니다. 두 개 이상 필요하면 세로로 쌓고 간격 8px(`spacing.8`), 강조가 높은 것을 위에 둡니다.
 - 취소는 버튼으로 만들지 말고 닫기 버튼과 Scrim 탭에 맡깁니다.

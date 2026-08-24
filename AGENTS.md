@@ -29,8 +29,8 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 └── international-design.md   로케일 표기 · 번역 길이 대응
 
 components/      컴포넌트 스펙
-├── button.md             Solid / Brand / Outline / Subtle / Text
-├── round-button.md       아이콘 전용 Solid / Brand
+├── button.md             Neutral / Brand / Outline / Subtle / Text
+├── round-button.md       아이콘 전용 Neutral / Brand
 ├── bottom-navigator.md
 ├── bottom-sheet.md
 ├── dialog.md

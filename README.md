@@ -31,8 +31,8 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 
 | 파일 | 내용 |
 |---|---|
-| `button.md` | Solid / Brand / Outline / Subtle / Text 5종 |
-| `round-button.md` | 아이콘 전용 Solid / Brand 원형 버튼 |
+| `button.md` | Neutral / Brand / Outline / Subtle / Text 5종 |
+| `round-button.md` | 아이콘 전용 Neutral / Brand 원형 버튼 |
 | `bottom-navigator.md` | 하단 탭 바 |
 | `bottom-sheet.md` | 바텀 시트 |
 | `dialog.md` | 다이얼로그 |
