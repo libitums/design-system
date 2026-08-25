@@ -76,17 +76,32 @@ npm test
 npm run build
 ```
 
-`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계만 검증·준비하며, 실제 토큰·아이콘 변환은 후속 작업에서 추가합니다.
+`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰과 typography CSS를 생성합니다. 아이콘 변환은 후속 작업에서 추가합니다.
 
 `npm run validate`는 source 경계와 모든 `foundations/*.json`의 token 구조·alias 참조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 `token.path`를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
 
-`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`에 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
+`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
 ```css
 @import "@libitum/design-tokens/css/variables.css";
+@import "@libitum/design-tokens/css/typography.css";
 ```
 
-Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. Typography는 별도 CSS 산출물에서, icon metadata는 `@libitum/icons`에서 제공합니다.
+Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. Icon metadata는 `@libitum/icons`에서 제공합니다.
+
+Typography는 22개 스타일마다 `font-family`, `font-weight`, `font-size`, `line-height`, `letter-spacing`을 독립된 CSS 변수로 제공합니다. 예를 들어 `typography.body.l`은 다음처럼 소비합니다.
+
+```css
+.body-large {
+  font-family: var(--libitum-typography-body-l-font-family);
+  font-weight: var(--libitum-typography-body-l-font-weight);
+  font-size: var(--libitum-typography-body-l-font-size);
+  line-height: var(--libitum-typography-body-l-line-height);
+  letter-spacing: var(--libitum-typography-body-l-letter-spacing);
+}
+```
+
+Font family fallback stack과 weight 원시 변수도 함께 출력합니다. 폰트 파일과 `@font-face`는 이 산출물에 포함하지 않으며, 플랫폼별 제공 방식은 `foundations/font-delivery.md`를 따릅니다.
 
 ---
 
@@ -117,4 +132,4 @@ Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니�
 - **다크 모드** — `color.json`은 라이트 모드 단일 값입니다.
 - **Futura Webfont·App 라이선스** — 정확한 제품과 플랫폼별 라이선스가 확정되기 전에는 파일을 Web이나 앱에 배포하지 않습니다.
 - **컴포넌트** — Toast, Card, Text Field.
-- **토큰 산출물 생성** — 토큰 → CSS 변수 / TS 상수 변환 로직.
+- **TypeScript 토큰 산출물** — 토큰 → TS 상수 변환 로직.
