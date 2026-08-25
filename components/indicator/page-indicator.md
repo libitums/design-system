@@ -12,8 +12,8 @@
 
 | 상태 | 크기 | 배경 | 모서리 |
 |---|---|---|---|
-| Inactive | 8 × 8 (원) | `gray.400` #DCDEE3 | `radius.full` |
-| Active | **28 × 8** (알약) | `brand.primary` #F46B18 | `radius.full` |
+| Inactive | 8 × 8 (원) | `fg.neutral-subtle` #868B94 | `radius.full` |
+| Active | **28 × 8** (알약) | `brand.strong` #B94208 | `radius.full` |
 
 - 활성 항목만 가로로 늘어나 알약이 됩니다. **높이는 두 상태가 8px로 같습니다.**
 - 한 번에 **하나만 Active**입니다.
@@ -31,4 +31,4 @@
 - **끝이 정해진 시퀀스에만 씁니다.** 무한 스크롤이나 개수를 미리 알 수 없는 목록에는 쓰지 않습니다.
 - **점 자체를 누를 수 있게 만들지 마세요.** 8px 점은 상태 표시에만 쓰고, 인디케이터는 현재 위치를 보여주는 역할만 합니다. 대상 콘텐츠의 swipe를 사용할 수 없는 입력에는 48 × 48 이전·다음 control이나 플랫폼 accessibility action을 함께 제공합니다.
 - **접근성 이름을 붙이세요.** `Scene 1 of 4`처럼 **현재 위치와 전체 개수**를 함께 읽어줘야 합니다. 점 하나하나를 개별 요소로 노출하지 말고, 줄 전체를 하나의 상태로 알립니다 — [Accessibility](../../foundations/accessibility.md) 참고.
-- **콘텐츠 위에 얹을 때는 대비를 확인하세요.** `gray.400` 비활성 점은 밝은 이미지 위에서 잘 보이지 않습니다.
+- **이미지·gradient 위에 직접 얹지 마세요.** Indicator는 `background.elevated`처럼 대비를 검증한 단색 영역에 놓습니다. 직접 overlay가 불가피하면 모든 인접 픽셀에서 Active·Inactive 대비를 다시 확인합니다.

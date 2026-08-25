@@ -46,8 +46,8 @@ Bar (흰 배경, 상단 모서리 둥글게, 위쪽 그림자)
 
 | 상태 | 배경 | 아이콘 | 가로 / 세로 패딩 | 모서리 |
 |---|---|---|---|---|
-| Default | 없음 | `gray.500` #D1D3D8 | 10 / 10 | — |
-| Pressed | 없음 | `fg.neutral-subtle` #868B94 | 10 / 10 | — |
+| Default | 없음 | `fg.neutral-subtle` #868B94 | 10 / 10 | — |
+| Pressed | 없음 | `fg.neutral-muted` #555D6D | 10 / 10 | — |
 | Active | `brand.primary` #F46B18 | `fg.neutral-inverted` #FFFFFF | 20 / 10 | `radius.full` |
 | Active Pressed | `brand.primary-pressed` #B94208 | `fg.neutral-inverted` #FFFFFF | 20 / 10 | `radius.full` |
 | Disabled | 없음 | `fg.disabled` #DCDEE3 | 10 / 10 | — |
@@ -79,7 +79,7 @@ Disabled Cell은 focus 순서에서 제외하고 ring을 표시하지 않습니�
 | 종류 | 크기 | 배경 | 내용 |
 |---|---|---|---|
 | Dot | 8 × 8 | `feedback.incorrect` #DF4D54 | 없음 |
-| Count | 높이 16px, 최소 너비 16px, 가로 패딩 4px | `feedback.incorrect` #DF4D54 | `fg.neutral-inverted` #FFFFFF + `typography.label.s` |
+| Count | 높이 16px, 최소 너비 16px, 가로 패딩 4px | `feedback.incorrect-strong-surface` #A62E34 | `fg.neutral-inverted` #FFFFFF + `typography.label.s` |
 
 - 둘 다 모서리는 `radius.full`입니다.
 - 개수를 정확히 보여줄 필요가 없으면 Dot을 씁니다.

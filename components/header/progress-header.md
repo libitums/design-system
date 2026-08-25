@@ -53,7 +53,7 @@ Container (background.secondary, 패딩 16, 모서리 12)
 |---|---|---|
 | 높이 | 8px | `spacing.8` |
 | 트랙 배경 | #EEEFF1 | `gray.300` |
-| 채움 배경 | #F46B18 | `brand.primary` |
+| 채움 배경 | #B94208 | `brand.strong` |
 | 모서리 | 트랙·채움 모두 알약 | `radius.full` |
 | 너비 | 가로 꽉 채움 | — |
 
@@ -67,7 +67,7 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 | 위치 | 내용 | 스펙 |
 |---|---|---|
-| 좌 | 현재 활동명 (`Listening`) | `typography.label.s` (10px / lh 14 / 자간 0.8) · `fg.neutral-subtle` #868B94 |
+| 좌 | 현재 활동명 (`Listening`) | `typography.label.s` (10px / lh 14 / 자간 0.8) · `fg.neutral-muted` #555D6D |
 | 우 | 진행률 (`33%`) | 동일 |
 
 ---

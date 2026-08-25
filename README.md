@@ -14,7 +14,7 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 
 | 파일 | 내용 |
 |---|---|
-| `color.json` | 33색 — gray scale 12 (gray 11 + white), brand 6, feedback 9, background 3, border 3 |
+| `color.json` | 35색 — gray scale 12 (gray 11 + white), brand 7, feedback 10, background 3, border 3 |
 | `typography.json` | 22 스타일 — accent / display / heading / body / caption / label / button / dialogue |
 | `font-delivery.md` | Web·iOS·Android·ReactLynx 폰트 제공 · 라이선스 · fallback 정책 |
 | `accessibility.md` | hit area · 대비 · 키보드 · focus · accessible semantics 기준 |
@@ -78,7 +78,6 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 ## 아직 없는 것
 
 - **다크 모드** — `color.json`은 라이트 모드 단일 값입니다.
-- **텍스트 의미 토큰** — `text.primary` 같은 층이 없어 컴포넌트가 `gray.*`를 직접 참조합니다.
 - **Futura Webfont·App 라이선스** — 정확한 제품과 플랫폼별 라이선스가 확정되기 전에는 파일을 Web이나 앱에 배포하지 않습니다.
 - **컴포넌트** — Toast, Card, Text Field.
 - **빌드 파이프라인** — 토큰 → CSS 변수 / TS 상수.

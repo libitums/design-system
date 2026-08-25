@@ -65,7 +65,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 | 항목 | 스펙 |
 |---|---|
-| 본문 | `typography.body.m` (14px / lh 20) · `fg.neutral-subtlest` #B0B3BA |
+| 본문 | `typography.body.m` (14px / lh 20) · `fg.neutral-muted` #555D6D |
 
 - **결과를 알려줍니다** — 무엇을 잃는지, 되돌릴 수 있는지.
 - 두세 줄을 넘기지 마세요. 넘어가면 Dialog가 아니라 화면으로 만들 일입니다.

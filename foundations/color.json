@@ -24,15 +24,15 @@
         "$value": "{color.gray.950}"
       },
       "neutral-muted": {
-        "$description": "기본보다 낮고 subtle보다 높은 강조의 전경색",
+        "$description": "밝은 표면의 보조 텍스트와 캡션에 사용하는 읽기 가능한 전경색",
         "$value": "{color.gray.800}"
       },
       "neutral-subtle": {
-        "$description": "아이콘, 라벨, 캡션에 사용하는 보조 전경색",
+        "$description": "밝은 표면의 의미 있는 아이콘과 UI 그래픽에 사용하는 보조 전경색",
         "$value": "{color.gray.700}"
       },
       "neutral-subtlest": {
-        "$description": "설명과 부가 정보에 사용하는 가장 낮은 강조의 전경색",
+        "$description": "장식 요소와 Disabled처럼 수치 대비 예외가 적용되는 가장 낮은 강조의 전경색",
         "$value": "{color.gray.600}"
       },
       "neutral-inverted": {
@@ -44,8 +44,8 @@
         "$value": "{color.gray.400}"
       },
       "brand": {
-        "$description": "브랜드 강조 텍스트와 아이콘에 사용하는 전경색",
-        "$value": "{color.brand.primary}"
+        "$description": "밝은 표면의 브랜드 강조 텍스트와 아이콘에 사용하는 전경색",
+        "$value": "{color.brand.strong}"
       }
     },
 
@@ -53,6 +53,10 @@
       "$type": "color",
       "primary": { "$value": "#F46B18" },
       "primary-pressed": { "$value": "#B94208" },
+      "strong": {
+        "$description": "밝은 표면의 텍스트와 의미 있는 그래픽에 사용하는 고대비 브랜드색",
+        "$value": "{color.brand.primary-pressed}"
+      },
       "secondary": { "$value": "#FF8D28" },
       "reward-border": { "$value": "#C94B09" },
       "reward-disabled-surface": { "$value": "#FFF0E6" },
@@ -67,9 +71,13 @@
       "incorrect": { "$value": "#DF4D54" },
       "incorrect-surface": { "$value": "#FFF0F1" },
       "incorrect-text": { "$value": "#A62E34" },
+      "incorrect-strong-surface": {
+        "$description": "작은 반전 텍스트를 올리는 고대비 오류·알림 표면색",
+        "$value": "{color.feedback.incorrect-text}"
+      },
       "warning": { "$value": "#FFC500" },
       "warning-surface": { "$value": "#FFF4D6" },
-      "warning-text": { "$value": "#9A6800" }
+      "warning-text": { "$value": "{color.gray.900}" }
     },
 
     "background": {

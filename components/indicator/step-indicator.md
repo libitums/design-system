@@ -25,9 +25,9 @@
 
 | 상태 | 배경 | 테두리 | 숫자 |
 |---|---|---|---|
-| Completed | `brand.primary` #F46B18 | 없음 | `fg.neutral-inverted` #FFFFFF |
-| Current | `white` #FFFFFF | `brand.primary` #F46B18 | `fg.brand` #F46B18 |
-| Upcoming | `white` #FFFFFF | `gray.300` #EEEFF1 | `fg.neutral-subtlest` #B0B3BA |
+| Completed | `brand.strong` #B94208 | 없음 | `fg.neutral-inverted` #FFFFFF |
+| Current | `white` #FFFFFF | `brand.strong` #B94208 | `fg.brand` #B94208 |
+| Upcoming | `white` #FFFFFF | `fg.neutral-subtle` #868B94 | `fg.neutral-muted` #555D6D |
 
 ### 연결선
 
@@ -35,8 +35,8 @@
 
 | 왼쪽 단계 | 연결선 |
 |---|---|
-| Completed | `brand.primary` #F46B18 |
-| Current 또는 Upcoming | `gray.300` #EEEFF1 |
+| Completed | `brand.strong` #B94208 |
+| Current 또는 Upcoming | `fg.neutral-subtle` #868B94 |
 
 완료한 구간까지 브랜드 컬러가 이어지고, 현재 단계 이후로는 회색으로 남습니다.
 
