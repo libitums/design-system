@@ -82,4 +82,5 @@ Container (패딩 16 / 12, 하단 모서리 12)
 - **서브타이틀은 생략할 수 있습니다.** 타이틀만으로 충분하면 한 줄로 두고, 이때도 헤더 높이는 64px을 유지합니다.
 - **제목이 길면 한 줄로 자르고 말줄임(`…`)** 합니다. 두 줄로 늘리면 헤더 높이가 변해 아래 콘텐츠가 밀립니다.
 - **번역 시 제목이 크게 늘어납니다.** 짧은 문구일수록 팽창률이 높습니다 — `foundations/international-design.md` 참고.
+- **뒤로가기 control은 전체 48 × 48 hit area와 접근성 이름을 제공합니다.** 아이콘과 제목을 별도 focus node로 나누지 않습니다 — [Accessibility](../../foundations/accessibility.md) 참고.
 - **제목 문구는 `foundations/writing-tone.md`를 따릅니다.** 수는 아라비아 숫자로 쓰고(`Episode 04`), 제목에는 마침표를 붙이지 않습니다.

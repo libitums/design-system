@@ -20,6 +20,7 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 ├── color.json            33색 (gray scale 12: gray 11 + white, brand 6, feedback 9, background 3, border 3)
 ├── typography.json       22 스타일 (accent / display / heading / body / caption / label / button / dialogue)
 ├── font-delivery.md      Web·앱 폰트 제공 · Futura 라이선스 · fallback 정책
+├── accessibility.md      hit area · 대비 · 키보드 · focus · accessible semantics
 ├── spacing.json          Progressive primitive scale (0~96) · 컴팩트 내부 간격 2 / 6
 ├── stroke.json           선 두께 thin 1 / regular 1.5 / strong 2
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
@@ -50,6 +51,7 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 |---|---|
 | 컴포넌트 구현 | 해당 `components/**/*.md` → 거기 참조된 `foundations/*.json` |
 | Web·앱 폰트 제공·fallback | `foundations/font-delivery.md` → `foundations/typography.json` |
+| 접근성 동작·검증 | `foundations/accessibility.md` → 관련 컴포넌트 문서 |
 | 사용자에게 보이는 한국어 문구 작성 | `foundations/writing-tone.md` (**필수**) |
 | 날짜·숫자·통화 표기, 다국어 레이아웃 | `foundations/international-design.md` |
 | 아이콘 선택·배치 | `foundations/iconography.json` |
@@ -94,6 +96,8 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 
 ### 6. 접근성은 선택이 아니다
 
+- 공통 기준은 `foundations/accessibility.md`를 따른다.
+- custom interactive element의 hit area는 최소 48 × 48이며 `spacing.48`을 사용한다.
 - 아이콘만 있는 버튼에는 접근성 이름을 붙인다.
 - 상태를 **색만으로** 나타내지 않는다. 점·아이콘·라벨을 함께 둔다.
 - 인디케이터는 개별 요소가 아니라 줄 전체를 하나의 상태로 알린다.

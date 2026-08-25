@@ -49,7 +49,7 @@
     },
     "48": {
       "$value": "48px",
-      "$description": "서로 독립적인 화면 영역 사이의 간격입니다."
+      "$description": "서로 독립적인 화면 영역 사이의 간격과 interactive element의 최소 hit area에 사용합니다."
     },
     "64": {
       "$value": "64px",

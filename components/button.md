@@ -126,6 +126,7 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 ## 사용 가이드
 
 - **한 화면의 최상위 버튼은 Neutral 또는 Brand 중 하나만** 둡니다.
+- **모든 사이즈의 hit area는 최소 48 × 48입니다.** S·M·L의 시각 높이는 유지하고 부모 control이나 투명 padding으로 `spacing.48`을 확보합니다 — [Accessibility](../foundations/accessibility.md) 참고.
 - **버튼 너비는 라벨을 실제 폰트로 측정해 계산합니다.** 텍스트를 바꾸면서 이전 고정 너비를 유지하지 않습니다.
 - **Fill 버튼에서도 좌우 padding을 보장합니다.** 번역으로 라벨이 길어지면 줄바꿈하지 말고 상위 레이아웃을 조정합니다.
 - **Loading 중에도 라벨을 유지합니다.** 무엇을 기다리는지 알 수 있어야 합니다.
