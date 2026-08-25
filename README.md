@@ -80,6 +80,14 @@ npm run build
 
 `npm run validate`는 source 경계와 모든 `foundations/*.json`의 token 구조·alias 참조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 `token.path`를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
 
+`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`에 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
+
+```css
+@import "@libitum/design-tokens/css/variables.css";
+```
+
+Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. Typography는 별도 CSS 산출물에서, icon metadata는 `@libitum/icons`에서 제공합니다.
+
 ---
 
 ## 쓰는 법
