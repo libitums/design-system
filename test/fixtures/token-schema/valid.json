@@ -1,0 +1,14 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "color": {
+    "$type": "color",
+    "brand": {
+      "$root": {
+        "$value": "#F46B18"
+      },
+      "pressed": {
+        "$value": "#B94208"
+      }
+    }
+  }
+}

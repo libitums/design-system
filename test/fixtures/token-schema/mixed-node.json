@@ -1,0 +1,11 @@
+{
+  "color": {
+    "$type": "color",
+    "brand": {
+      "$value": "#F46B18",
+      "pressed": {
+        "$value": "#B94208"
+      }
+    }
+  }
+}
