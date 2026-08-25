@@ -2,15 +2,66 @@
   "$schema": "https://tr.designtokens.org/format/",
   "spacing": {
     "$type": "dimension",
-    "$description": "4px rhythm based scale",
-    "4": { "$value": "4px" },
-    "8": { "$value": "8px" },
-    "12": { "$value": "12px" },
-    "16": { "$value": "16px" },
-    "20": { "$value": "20px" },
-    "24": { "$value": "24px" },
-    "32": { "$value": "32px" },
-    "40": { "$value": "40px" },
-    "48": { "$value": "48px" }
+    "$description": "컴포넌트 내부부터 화면 단위 여백까지 사용하는 progressive primitive scale. 2px와 6px은 컴팩트 내부 조정에만 쓰고, 8px 이상은 4px 리듬을 따릅니다.",
+    "0": {
+      "$value": "0px",
+      "$description": "간격을 제거하거나 상태별 간격을 초기화합니다."
+    },
+    "2": {
+      "$value": "2px",
+      "$description": "시각 보정이 필요한 컴팩트 컴포넌트 내부에만 사용합니다."
+    },
+    "4": {
+      "$value": "4px",
+      "$description": "밀접한 텍스트와 보조 요소 사이의 최소 기본 간격입니다."
+    },
+    "6": {
+      "$value": "6px",
+      "$description": "Spinner와 Label처럼 4px보다 넓고 8px보다 좁아야 하는 컴팩트 내부 간격입니다."
+    },
+    "8": {
+      "$value": "8px",
+      "$description": "한 덩어리 안의 아이콘, 라벨, 값 사이에 사용하는 기본 간격입니다."
+    },
+    "12": {
+      "$value": "12px",
+      "$description": "작은 컴포넌트의 padding과 내부 블록 간격입니다."
+    },
+    "16": {
+      "$value": "16px",
+      "$description": "기본 컴포넌트 padding과 화면 좌우 거터입니다."
+    },
+    "20": {
+      "$value": "20px",
+      "$description": "컴포넌트 안에서 구분되는 영역 사이의 간격입니다."
+    },
+    "24": {
+      "$value": "24px",
+      "$description": "큰 컴포넌트 padding과 화면 상하 여백입니다."
+    },
+    "32": {
+      "$value": "32px",
+      "$description": "화면 안에서 주제가 바뀌는 섹션 사이의 기본 간격입니다."
+    },
+    "40": {
+      "$value": "40px",
+      "$description": "큰 콘텐츠 블록 사이의 간격입니다."
+    },
+    "48": {
+      "$value": "48px",
+      "$description": "서로 독립적인 화면 영역 사이의 간격입니다."
+    },
+    "64": {
+      "$value": "64px",
+      "$description": "화면 단위의 큰 수직 여백입니다."
+    },
+    "80": {
+      "$value": "80px",
+      "$description": "핵심 콘텐츠를 분리하는 확장 화면 여백입니다."
+    },
+    "96": {
+      "$value": "96px",
+      "$description": "가장 큰 화면 단위 여백입니다."
+    }
   }
 }

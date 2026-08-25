@@ -29,9 +29,11 @@ Button
 | 라벨 폰트 | Pretendard Variable SemiBold 600 | `typography.button.*` |
 | 아이콘 위치 | 라벨 앞 또는 뒤 1개 | — |
 | 아이콘 ↔ 라벨 간격 | 8px | `spacing.8` |
-| Spinner ↔ 라벨 간격 | 6px | 현재 대응 토큰 없음 |
+| Spinner ↔ 라벨 간격 | 6px | `spacing.6` |
 | Outline 테두리 | 1px, 레이아웃 크기에 포함 | 현재 대응 토큰 없음 |
 | 그림자 | 없음 | — |
+
+`spacing.6`은 Spinner와 Label처럼 컴팩트한 요소 사이에만 사용합니다. 일반적인 아이콘과 라벨 사이에는 기본 inline 간격인 `spacing.8`을 사용합니다.
 
 ### 사이즈
 
@@ -39,7 +41,7 @@ Button
 
 | 사이즈 | 기본 높이 | Outline 높이 | 가로 / 세로 padding | 모서리 | 라벨 토큰 |
 |---|---:|---:|---|---|---|
-| S | 28px | 30px | 12px / 6px | 12px `radius.md` | `typography.button.s` |
+| S | 28px | 30px | 12px / 6px (`spacing.12` / `spacing.6`) | 12px `radius.md` | `typography.button.s` |
 | M | 36px | 38px | 16px / 8px | 12px `radius.md` | `typography.button.m` |
 | L | 44px | 46px | 20px / 12px | 16px `radius.lg` | `typography.button.l` |
 | XL | 56px | 58px | 24px / 16px | 16px `radius.lg` | `typography.button.xl` |
@@ -59,7 +61,7 @@ Button
 기본 너비 = 라벨 실측 너비 + (가로 padding × 2)
 아이콘 포함 = 기본 너비 + 아이콘 실측 너비 + spacing.8
 Outline = 위 계산값 + (1px × 2)
-Loading = 기본 너비 + Spinner 12px + 6px
+Loading = 기본 너비 + Spinner 12px + spacing.6
 ```
 
 Pretendard Variable을 기준으로 검증한 예시입니다.
