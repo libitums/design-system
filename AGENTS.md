@@ -19,6 +19,7 @@ Codex는 `.codex/skills/`, Claude Code는 `.claude/skills/`를 읽습니다. 두
 foundations/     토큰과 원칙 — 모든 값의 출처
 ├── color.json            33색 (gray scale 12: gray 11 + white, brand 6, feedback 9, background 3, border 3)
 ├── typography.json       22 스타일 (accent / display / heading / body / caption / label / button / dialogue)
+├── font-delivery.md      Web·앱 폰트 제공 · Futura 라이선스 · fallback 정책
 ├── spacing.json          Progressive primitive scale (0~96) · 컴팩트 내부 간격 2 / 6
 ├── stroke.json           선 두께 thin 1 / regular 1.5 / strong 2
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
@@ -48,6 +49,7 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 | 하려는 일 | 먼저 읽을 파일 |
 |---|---|
 | 컴포넌트 구현 | 해당 `components/**/*.md` → 거기 참조된 `foundations/*.json` |
+| Web·앱 폰트 제공·fallback | `foundations/font-delivery.md` → `foundations/typography.json` |
 | 사용자에게 보이는 한국어 문구 작성 | `foundations/writing-tone.md` (**필수**) |
 | 날짜·숫자·통화 표기, 다국어 레이아웃 | `foundations/international-design.md` |
 | 아이콘 선택·배치 | `foundations/iconography.json` |
@@ -123,5 +125,5 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 작업 중 필요해지면 만들지 말고 먼저 보고할 것.
 
 - **dark mode** — `color.json`은 라이트 모드 단일 값이다.
-- **폰트 폴백** — `font.family.default`의 `Pretendard Variable`과 `font.family.accent`의 `Futura`는 모두 단일 값이다. 웹에서는 폴백 스택이 필요하다.
+- **Futura Webfont·App 라이선스** — 정확한 foundry·제품·weight·플랫폼별 사용 범위가 확인되기 전에는 파일, `@font-face`, native registration, preload를 추가할 수 없다. `foundations/font-delivery.md`를 따른다.
 - **지원 로케일 확정** — `international-design.md`의 로케일 표는 참고용 기준값이다.

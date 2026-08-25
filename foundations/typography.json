@@ -3,8 +3,47 @@
   "font": {
     "family": {
       "$type": "fontFamily",
-      "default": { "$value": "Pretendard Variable" },
-      "accent": { "$value": "Futura" }
+      "default": {
+        "$description": "Web은 Pretendard Variable부터 CSS fallback 순서로 사용하고, 앱 adapter는 등록된 Pretendard Variable 또는 플랫폼 기본 UI 폰트로 연결하는 Default family",
+        "$value": [
+          "Pretendard Variable",
+          "Pretendard",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "system-ui",
+          "Roboto",
+          "Helvetica Neue",
+          "Segoe UI",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          "Malgun Gothic",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "sans-serif"
+        ]
+      },
+      "accent": {
+        "$description": "Web은 설치된 Futura를 우선하고, 앱은 App 라이선스로 등록된 Futura만 사용하며, 그 외에는 Default로 이어지는 Accent family",
+        "$value": [
+          "Futura",
+          "Pretendard Variable",
+          "Pretendard",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "system-ui",
+          "Roboto",
+          "Helvetica Neue",
+          "Segoe UI",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          "Malgun Gothic",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "sans-serif"
+        ]
+      }
     },
     "weight": {
       "$type": "fontWeight",
