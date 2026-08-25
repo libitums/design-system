@@ -4,12 +4,14 @@ import { writeCssVariables } from "../src/css-token-generator.mjs";
 import { prepareOutputLayout } from "../src/pipeline-layout.mjs";
 import { validateFoundationTokenAliases } from "../src/token-alias-validator.mjs";
 import { validateFoundationTokenFiles } from "../src/token-schema-validator.mjs";
+import { writeTypographyCss } from "../src/typography-css-generator.mjs";
 
 const rootDirectory = fileURLToPath(new URL("..", import.meta.url));
 await validateFoundationTokenFiles(rootDirectory);
 await validateFoundationTokenAliases(rootDirectory);
 const outputPaths = await prepareOutputLayout(rootDirectory);
 const cssResult = await writeCssVariables(rootDirectory);
+const typographyResult = await writeTypographyCss(rootDirectory);
 
 console.log("Prepared generated package directories:");
 for (const outputPath of outputPaths) {
@@ -17,4 +19,7 @@ for (const outputPath of outputPaths) {
 }
 console.log(
   `Generated ${cssResult.variables.length} CSS variables: ${relative(rootDirectory, cssResult.outputFile)}`,
+);
+console.log(
+  `Generated ${typographyResult.variables.length} typography CSS variables for ${typographyResult.styles.length} styles: ${relative(rootDirectory, typographyResult.outputFile)}`,
 );
