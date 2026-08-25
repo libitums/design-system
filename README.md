@@ -76,11 +76,11 @@ npm test
 npm run build
 ```
 
-`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰과 typography CSS를 생성합니다. 아이콘 변환은 후속 작업에서 추가합니다.
+`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일을 생성합니다. 아이콘 에셋 변환은 후속 작업에서 추가합니다.
 
 `npm run validate`는 source 경계와 모든 `foundations/*.json`의 token 구조·alias 참조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 `token.path`를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
 
-`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
+`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. Foundation token 139개는 `dist/design-tokens/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
 ```css
 @import "@libitum/design-tokens/css/variables.css";
@@ -102,6 +102,25 @@ Typography는 22개 스타일마다 `font-family`, `font-weight`, `font-size`, `
 ```
 
 Font family fallback stack과 weight 원시 변수도 함께 출력합니다. 폰트 파일과 `@font-face`는 이 산출물에 포함하지 않으며, 플랫폼별 제공 방식은 `foundations/font-delivery.md`를 따릅니다.
+
+TypeScript에서는 최상위 token group을 named export로 가져오거나 전체 `tokens` 객체를 사용할 수 있습니다. Alias는 ESM 산출물에서 최종 값으로 해석되며, 생성된 선언 파일은 모든 값을 literal·readonly 타입으로 제공합니다.
+
+```ts
+import { color, spacing, tokens, typography } from "@libitum/design-tokens";
+
+const brand = color.brand.primary;
+const screenPadding = spacing[16];
+const heading = typography.heading.s;
+const allColors = tokens.color;
+```
+
+Package exports는 다음 경로를 제공합니다.
+
+| 경로 | 산출물 |
+|---|---|
+| `@libitum/design-tokens` | ESM 상수와 TypeScript 선언 |
+| `@libitum/design-tokens/css/variables.css` | 기본 token CSS 변수 |
+| `@libitum/design-tokens/css/typography.css` | Typography CSS 변수 |
 
 ---
 
@@ -132,4 +151,3 @@ Font family fallback stack과 weight 원시 변수도 함께 출력합니다. �
 - **다크 모드** — `color.json`은 라이트 모드 단일 값입니다.
 - **Futura Webfont·App 라이선스** — 정확한 제품과 플랫폼별 라이선스가 확정되기 전에는 파일을 Web이나 앱에 배포하지 않습니다.
 - **컴포넌트** — Toast, Card, Text Field.
-- **TypeScript 토큰 산출물** — 토큰 → TS 상수 변환 로직.
