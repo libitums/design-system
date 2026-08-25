@@ -1,0 +1,11 @@
+{
+  "typography": {
+    "$type": "typography",
+    "heading": {
+      "$value": {
+        "fontFamily": "{font.family.missing}",
+        "fontWeight": 700
+      }
+    }
+  }
+}

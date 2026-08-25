@@ -78,7 +78,7 @@ npm run build
 
 `dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계만 검증·준비하며, 실제 토큰·아이콘 변환은 후속 작업에서 추가합니다.
 
-`npm run validate`는 source 경계와 모든 `foundations/*.json`의 token 구조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. 오류는 파일과 `token.path`를 함께 출력합니다. Alias 참조와 type별 value 형식은 별도 검증 단계에서 다룹니다.
+`npm run validate`는 source 경계와 모든 `foundations/*.json`의 token 구조·alias 참조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 `token.path`를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
 
 ---
 

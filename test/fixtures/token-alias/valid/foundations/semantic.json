@@ -1,0 +1,14 @@
+{
+  "layout": {
+    "$type": "dimension",
+    "card": {
+      "$value": {
+        "padding": "{spacing.4}",
+        "gaps": ["{spacing.4}"]
+      }
+    },
+    "inline": {
+      "$value": "{spacing.4}"
+    }
+  }
+}
