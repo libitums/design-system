@@ -1,6 +1,6 @@
 # libitum Design System — Agent Guide
 
-이 저장소는 libitum(어학 학습 서비스)의 디자인 시스템입니다. **코드가 아니라 스펙 저장소**입니다. 토큰(JSON)과 컴포넌트·지침 문서(Markdown), 아이콘 에셋(SVG)으로 이루어져 있습니다.
+이 저장소는 libitum(어학 학습 서비스)의 디자인 시스템입니다. **실행 UI 코드가 아니라 원본 스펙과 배포 파이프라인 저장소**입니다. 토큰(JSON), 컴포넌트·지침 문서(Markdown), 아이콘 에셋(SVG), 검증·생성 도구로 이루어져 있습니다.
 
 이 문서는 에이전트가 이 저장소를 읽고 작업할 때의 규칙입니다. 항상 로드되는 기본 규칙이며, 작업 종류에 맞는 스킬이 따로 있습니다.
 
@@ -41,6 +41,10 @@ components/      컴포넌트 스펙
 └── indicator/            page · status · step
 
 assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
+src/             원본 검증·package 생성 로직
+scripts/         build·validate CLI 진입점
+test/            파이프라인 자동 테스트
+dist/            재생성 가능한 package 산출물 (Git 제외)
 ```
 
 ---
