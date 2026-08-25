@@ -123,6 +123,23 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 | Disabled | `gray.300` #EEEFF1 | — |
 | Loading | `brand.secondary` #FF8D28 | `brand.secondary` #FF8D28 |
 
+### Focused
+
+Focused는 위 상태의 색·크기·Spinner를 유지한 채 focusable hit area 바깥에 ring을 더합니다.
+
+| 항목 | 값 | 토큰 |
+|---|---|---|
+| Inner ring | 2px solid, `white` #FFFFFF | `stroke.width.strong`, `color.white` |
+| Outer ring | 2px solid, `border.strong` #141115 | `stroke.width.strong`, `color.border.strong` |
+| Ring 사이 간격 | 0px | `spacing.0` |
+| 전체 외곽 범위 | 4px | `spacing.4` |
+| 형태 | focusable hit area의 바깥 윤곽을 따름 | 버튼과 같은 radius |
+
+- Default·Pressed·Loading은 Focused와 결합할 수 있습니다.
+- Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
+- Text도 라벨 글자만 두르지 않고 최소 48 × 48 focusable hit area를 두릅니다.
+- Web은 `:focus-visible`에 적용합니다 — [Accessibility](../foundations/accessibility.md) 참고.
+
 ## 사용 가이드
 
 - **한 화면의 최상위 버튼은 Neutral 또는 Brand 중 하나만** 둡니다.

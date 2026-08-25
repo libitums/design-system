@@ -89,6 +89,10 @@ Scrim을 누르면 시트를 닫습니다.
 
 Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 
+### Focused
+
+닫기 버튼은 Default·Pressed 표현을 유지하고 48 × 48 focusable hit area 바깥에 `white` #FFFFFF 2px inner ring과 `border.strong` #141115 2px outer ring을 표시합니다. 각 두께는 `stroke.width.strong`, ring 사이 간격은 `spacing.0`, 전체 외곽 범위는 `spacing.4`, 형태는 `radius.md`를 따릅니다 — [Accessibility](../foundations/accessibility.md) 참고.
+
 ---
 
 ## Description
@@ -108,6 +112,8 @@ Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 위 여백 20px (`spacing.20`).
 
 [Button](./button.md)을 **M 사이즈(36px), Fill**로 씁니다. 기본은 Neutral입니다.
+
+Action의 Focused는 [Button](./button.md)의 공통 Focused 스펙을 그대로 사용합니다. Disabled Action에는 ring을 표시하지 않습니다.
 
 - 버튼은 **하나만** 둡니다. 두 개 이상 필요하면 세로로 쌓고 간격 8px(`spacing.8`), 강조가 높은 것을 위에 둡니다.
 - 취소는 버튼으로 만들지 말고 닫기 버튼과 Scrim 탭에 맡깁니다.

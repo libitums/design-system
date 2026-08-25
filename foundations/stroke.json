@@ -14,7 +14,7 @@
       },
       "strong": {
         "$value": "2px",
-        "$description": "Indicator 테두리와 연결선처럼 상태 구조를 강조하는 두께입니다."
+        "$description": "Indicator 테두리·연결선과 Focus indicator처럼 상태 구조를 강조하는 두께입니다."
       }
     }
   }
