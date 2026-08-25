@@ -45,18 +45,18 @@ Round Button
 | 상태 | 버튼 크기 | 배경 | 아이콘·Spinner |
 |---|---|---|---|
 | Default | 100% | `gray.100` #F7F8F9 | 아이콘 `fg.neutral-subtle` #868B94 |
-| Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `fg.neutral-subtle` #868B94, 85% opacity |
+| Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `fg.neutral-subtle` #868B94 |
 | Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `gray.500` #D1D3D8, 35% opacity |
-| Loading | 100% | `gray.100` #F7F8F9 | Spinner `gray.500` #D1D3D8 |
+| Loading | 100% | `gray.100` #F7F8F9 | Spinner `fg.neutral-subtle` #868B94 |
 
 ### Brand
 
 | 상태 | 버튼 크기 | 배경 | 아이콘·Spinner |
 |---|---|---|---|
-| Default | 100% | `gray.100` #F7F8F9 | 아이콘 `brand.secondary` #FF8D28 |
-| Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `brand.secondary` #FF8D28, 85% opacity |
+| Default | 100% | `gray.100` #F7F8F9 | 아이콘 `fg.brand` #B94208 |
+| Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `fg.brand` #B94208 |
 | Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `brand.reward-disabled-surface` #FFF0E6, 35% opacity |
-| Loading | 100% | `gray.100` #F7F8F9 | Spinner `brand.reward-disabled-surface` #FFF0E6 |
+| Loading | 100% | `gray.100` #F7F8F9 | Spinner `fg.brand` #B94208 |
 
 ### Spinner
 

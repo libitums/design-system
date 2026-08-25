@@ -58,6 +58,9 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 - 이미지·gradient 위 요소는 가능한 모든 배경에서 확인하거나 대비를 보장하는 별도 surface를 둡니다.
 - Disabled control은 수치 대비의 예외일 수 있지만, programmatic disabled state를 제공하고 사용할 수 없는 이유를 가까운 문구로 설명합니다.
 - 기준을 충족하는 조합이 현재 토큰에 없으면 opacity나 임의 hex로 보정하지 않고 필요한 semantic color token을 먼저 보고합니다.
+- 밝은 표면의 일반 텍스트는 `fg.neutral-muted` 이상을 사용합니다. `fg.neutral-subtle`은 의미 있는 아이콘·UI 그래픽에, `fg.neutral-subtlest`는 장식·Disabled처럼 수치 대비 예외가 적용되는 표현에만 사용합니다.
+- 밝은 표면의 브랜드 텍스트·아이콘은 `fg.brand`, 강한 브랜드 표면·그래픽은 `brand.strong`을 사용합니다.
+- Loading·Pressed처럼 정보를 전달하는 상태에 opacity를 적용한 경우 합성 결과가 기준을 충족해야 합니다. 미달하면 opacity를 제거하고 통과하는 semantic token을 사용합니다.
 
 ---
 

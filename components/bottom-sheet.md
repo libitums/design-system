@@ -64,7 +64,7 @@ Scrim을 누르면 시트를 닫습니다.
 
 | 위치 | 요소 | 스펙 |
 |---|---|---|
-| 좌 · 위 | 오버라인 | `typography.label.m` (12px / lh 16) · `fg.brand` #F46B18 |
+| 좌 · 위 | 오버라인 | `typography.label.m` (12px / lh 16) · `fg.brand` #B94208 |
 | 좌 · 아래 | 타이틀 | `typography.heading.s` (18px / lh 24) · `fg.neutral` #1A1C20 |
 | 우 | 닫기 버튼 | 아래 표 참고 |
 
@@ -101,7 +101,7 @@ Pressed 규칙은 [Button](./button.md)의 Subtle과 같습니다.
 
 | 항목 | 스펙 |
 |---|---|
-| 본문 | `typography.body.m` (14px / lh 20) · `fg.neutral-subtlest` #B0B3BA |
+| 본문 | `typography.body.m` (14px / lh 20) · `fg.neutral-muted` #555D6D |
 
 타이틀을 보충하는 설명입니다. 없어도 되면 생략하고, 두세 줄을 넘기지 마세요 — `foundations/writing-tone.md`의 *Focus on One Purpose* 참고.
 

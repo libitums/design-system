@@ -85,43 +85,43 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 | Default | `gray.800` #555D6D | `gray.50` #F9F9FA | — |
 | Pressed | `gray.800` #555D6D | `gray.50` #F9F9FA | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
-| Loading | `gray.800` #555D6D | `gray.50` #F9F9FA | `gray.50` #F9F9FA, 35% opacity |
+| Loading | `gray.800` #555D6D | `gray.50` #F9F9FA | `gray.50` #F9F9FA |
 
 ### Brand
 
 | 상태 | 배경 | 라벨 | Spinner |
 |---|---|---|---|
-| Default | `brand.primary` #F46B18 | `gray.50` #F9F9FA | — |
-| Pressed | `brand.primary` #F46B18 | `gray.50` #F9F9FA | — |
+| Default | `brand.primary` #F46B18 | `fg.neutral` #1A1C20 | — |
+| Pressed | `brand.primary` #F46B18 | `fg.neutral` #1A1C20 | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
-| Loading | `brand.primary` #F46B18 | `gray.50` #F9F9FA | `gray.50` #F9F9FA, 35% opacity |
+| Loading | `brand.primary` #F46B18 | `fg.neutral` #1A1C20 | `fg.neutral` #1A1C20 |
 
 ### Outline
 
 | 상태 | 배경 | 테두리 | 라벨 | Spinner |
 |---|---|---|---|---|
-| Default | `white` #FFFFFF | `border.default` #848184 | `fg.neutral-subtle` #868B94 | — |
+| Default | `white` #FFFFFF | `border.default` #848184 | `fg.neutral-muted` #555D6D | — |
 | Pressed | `gray.100` #F7F8F9 | `border.default` #848184 | `fg.neutral-muted` #555D6D | — |
 | Disabled | `gray.50` #F9F9FA | `border.disabled` #B7B4B8 | `fg.disabled` #DCDEE3 | — |
-| Loading | `white` #FFFFFF | `border.default` #848184 | `fg.neutral-subtle` #868B94 | `border.disabled` #B7B4B8 |
+| Loading | `white` #FFFFFF | `border.default` #848184 | `fg.neutral-muted` #555D6D | `border.default` #848184 |
 
 ### Subtle
 
 | 상태 | 배경 | 라벨 | Spinner |
 |---|---|---|---|
-| Default | `gray.100` #F7F8F9 | `fg.neutral-subtle` #868B94 | — |
+| Default | `gray.100` #F7F8F9 | `fg.neutral-muted` #555D6D | — |
 | Pressed | `gray.300` #EEEFF1 | `gray.900` #2A3038 | — |
 | Disabled | `gray.50` #F9F9FA | `gray.300` #EEEFF1 | — |
-| Loading | `gray.100` #F7F8F9 | `fg.neutral-subtle` #868B94 | `fg.neutral-subtle` #868B94 |
+| Loading | `gray.100` #F7F8F9 | `fg.neutral-muted` #555D6D | `fg.neutral-muted` #555D6D |
 
 ### Text
 
 | 상태 | 라벨 | Spinner |
 |---|---|---|
-| Default | `fg.brand` #F46B18 | — |
-| Pressed | `brand.primary-pressed` #B94208 | — |
+| Default | `fg.brand` #B94208 | — |
+| Pressed | `fg.neutral` #1A1C20 | — |
 | Disabled | `gray.300` #EEEFF1 | — |
-| Loading | `brand.secondary` #FF8D28 | `brand.secondary` #FF8D28 |
+| Loading | `fg.brand` #B94208 | `fg.brand` #B94208 |
 
 ### Focused
 
