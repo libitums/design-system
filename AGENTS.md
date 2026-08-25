@@ -60,7 +60,7 @@ dist/            재생성 가능한 package 산출물 (Git 제외)
 | 날짜·숫자·통화 표기, 다국어 레이아웃 | `foundations/international-design.md` |
 | 아이콘 선택·배치 | `foundations/iconography.json` |
 | 새 컴포넌트 스펙 작성 | 기존 `components/**/*.md` 두어 개를 읽고 형식을 맞출 것 |
-| foundation JSON 수정 | `npm run validate`와 `npm test`로 token 구조를 검증할 것 |
+| foundation JSON 수정 | `npm run validate`와 `npm test`로 token 구조·alias를 검증할 것 |
 
 ---
 
