@@ -25,7 +25,7 @@ yarn-error.log*
 pnpm-debug.log*
 .pnpm-store/
 
-# Build output
+# Generated package output — source에서 재생성하며 직접 수정하거나 커밋하지 않음
 dist/
 build/
 .cache/

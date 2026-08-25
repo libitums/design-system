@@ -1,11 +1,15 @@
 # libitum Design System
 
-어학 학습 서비스 libitum의 디자인 시스템입니다. 코드 라이브러리가 아니라 **스펙 저장소**입니다 — 디자인 토큰(JSON), 컴포넌트·지침 문서(Markdown), 아이콘 에셋(SVG)으로 이루어져 있습니다.
+어학 학습 서비스 libitum의 디자인 시스템입니다. 실행 UI 컴포넌트 라이브러리가 아니라 **원본 스펙과 배포 파이프라인 저장소**입니다 — 디자인 토큰(JSON), 컴포넌트·지침 문서(Markdown), 아이콘 에셋(SVG)과 이를 검증·변환하는 도구로 이루어져 있습니다.
 
 ```
 foundations/   토큰과 원칙 — 모든 값의 출처
 components/    컴포넌트 스펙
 assets/icons/  아이콘 SVG 815개 × 2 변형
+src/           검증·생성 로직
+scripts/       build·validate CLI 진입점
+test/          파이프라인 테스트
+dist/          재생성 가능한 package 산출물 (Git 제외)
 ```
 
 ---
@@ -51,6 +55,29 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 
 모든 아이콘은 `fill="currentColor"`라 부모의 `color`를 상속합니다.
 
+## Package pipeline
+
+최초 공식 소비 package는 `@libitum/design-tokens`와 `@libitum/icons`입니다. 이 저장소 루트의 `package.json`은 두 package를 생성하기 위한 private tooling package이며 npm에 직접 배포하지 않습니다.
+
+| 경로 | 책임 |
+|---|---|
+| `foundations/`, `components/`, `assets/` | 사람이 수정하는 원본 source of truth |
+| `src/` | 원본을 검증하고 package 산출물로 변환하는 로직 |
+| `scripts/` | 로컬·CI에서 호출하는 CLI 진입점 |
+| `test/` | 생성·검증 파이프라인의 자동 테스트 |
+| `dist/design-tokens/` | `@libitum/design-tokens` 배포 산출물 |
+| `dist/icons/` | `@libitum/icons` 배포 산출물 |
+
+Node.js 24 LTS와 npm 11을 사용합니다.
+
+```sh
+npm run validate
+npm test
+npm run build
+```
+
+`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 진입점은 source와 output 경계만 검증·준비하며, 실제 토큰·아이콘 변환은 후속 작업에서 추가합니다.
+
 ---
 
 ## 쓰는 법
@@ -80,4 +107,4 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 - **다크 모드** — `color.json`은 라이트 모드 단일 값입니다.
 - **Futura Webfont·App 라이선스** — 정확한 제품과 플랫폼별 라이선스가 확정되기 전에는 파일을 Web이나 앱에 배포하지 않습니다.
 - **컴포넌트** — Toast, Card, Text Field.
-- **빌드 파이프라인** — 토큰 → CSS 변수 / TS 상수.
+- **토큰 산출물 생성** — 토큰 → CSS 변수 / TS 상수 변환 로직.
