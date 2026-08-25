@@ -13,6 +13,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 |---|---|
 | 색 | `foundations/color.json` |
 | 폰트·크기·자간 | `foundations/typography.json` |
+| 웹폰트 제공·fallback | `foundations/web-font.md` |
 | 간격 (0~96 progressive scale) | `foundations/spacing.json` |
 | 선 두께 (thin / regular / strong) | `foundations/stroke.json` |
 | 화면 여백 · safe area | `foundations/layout.json` |
@@ -51,6 +52,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 - **Outline 테두리 `stroke.width.thin` 1px는 실제 크기에 포함됩니다.** Hug 너비와 높이는 `components/button.md`의 산식으로 계산합니다.
 - **Loading은 변형별 색을 따릅니다.** Button은 라벨을 유지하고, Round Button은 아이콘을 Spinner로 교체합니다.
 - **Disabled 색은 변형별로 다릅니다.** 공통값으로 치환하지 말고 각 상태 표를 확인합니다.
+- **Futura 파일은 라이선스 확인 전까지 배포하지 않습니다.** `font.family.accent`는 Futura가 없으면 Pretendard 기반 Default stack으로 fallback합니다.
 - **2px와 6px 간격은 컴팩트 컴포넌트 내부에만 씁니다.** 일반적인 컴포넌트와 레이아웃은 8px 이상의 4px 리듬을 따릅니다.
 - **모서리가 배치를 뜻합니다.** 사방 12px = 여백 안쪽에 뜨는 카드, 하단만 12px = 화면 상단 밀착, 상단만 12px = 화면 하단 밀착, 상단만 16px = 바텀 시트.
 
