@@ -17,7 +17,7 @@ Button
 |---|---|---|
 | Neutral | 일반 화면의 주 액션 | 중립색 고강조 표면 |
 | Brand | 브랜드가 중요한 주 액션 | 브랜드색 고강조 표면 |
-| Outline | 보조 액션 | 흰 배경과 1px 테두리 |
+| Outline | 보조 액션 | 흰 배경과 1px (`stroke.width.thin`) 테두리 |
 | Subtle | 낮은 강조의 보조 액션 | 연한 중립색 표면 |
 | Text | 건너뛰기·취소 등 최소 강조 액션 | 배경과 테두리 없음 |
 
@@ -30,14 +30,14 @@ Button
 | 아이콘 위치 | 라벨 앞 또는 뒤 1개 | — |
 | 아이콘 ↔ 라벨 간격 | 8px | `spacing.8` |
 | Spinner ↔ 라벨 간격 | 6px | `spacing.6` |
-| Outline 테두리 | 1px, 레이아웃 크기에 포함 | 현재 대응 토큰 없음 |
+| Outline 테두리 | 1px, 레이아웃 크기에 포함 | `stroke.width.thin` |
 | 그림자 | 없음 | — |
 
 `spacing.6`은 Spinner와 Label처럼 컴팩트한 요소 사이에만 사용합니다. 일반적인 아이콘과 라벨 사이에는 기본 inline 간격인 `spacing.8`을 사용합니다.
 
 ### 사이즈
 
-표의 높이는 라벨 line-height와 세로 padding으로 계산한 **실제 프레임 높이**입니다. Outline은 테두리 1px가 양쪽에 더해집니다.
+표의 높이는 라벨 line-height와 세로 padding으로 계산한 **실제 프레임 높이**입니다. Outline은 `stroke.width.thin` 1px가 양쪽에 더해집니다.
 
 | 사이즈 | 기본 높이 | Outline 높이 | 가로 / 세로 padding | 모서리 | 라벨 토큰 |
 |---|---:|---:|---|---|---|
@@ -60,7 +60,7 @@ Button
 ```text
 기본 너비 = 라벨 실측 너비 + (가로 padding × 2)
 아이콘 포함 = 기본 너비 + 아이콘 실측 너비 + spacing.8
-Outline = 위 계산값 + (1px × 2)
+Outline = 위 계산값 + (stroke.width.thin × 2)
 Loading = 기본 너비 + Spinner 12px + spacing.6
 ```
 
