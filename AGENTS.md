@@ -20,6 +20,7 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 ├── color.json            33색 (gray scale 12: gray 11 + white, brand 6, feedback 9, background 3, border 3)
 ├── typography.json       22 스타일 (accent / display / heading / body / caption / label / button / dialogue)
 ├── spacing.json          Progressive primitive scale (0~96) · 컴팩트 내부 간격 2 / 6
+├── stroke.json           선 두께 thin 1 / regular 1.5 / strong 2
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
 ├── radius.json           sm 6 / md 12 / lg 16 / xl 24 / full
 ├── elevation.json        쌓임 순서 · 표면 색 · 그림자 s1~s3
@@ -58,7 +59,7 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 
 ### 1. 값을 지어내지 않는다
 
-색·간격·폰트·모서리는 **반드시 `foundations/`의 토큰을 쓴다.** 필요한 값이 토큰에 없으면 임의로 만들지 말고, 없다는 사실을 보고한다.
+색·간격·선 두께·폰트·모서리는 **반드시 `foundations/`의 토큰을 쓴다.** 필요한 값이 토큰에 없으면 임의로 만들지 말고, 없다는 사실을 보고한다.
 
 ```
 ❌ padding: 15px            ❌ color: #F5F5F5

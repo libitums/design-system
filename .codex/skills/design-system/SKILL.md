@@ -1,19 +1,20 @@
 ---
 name: design-system
-description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 UI를 구현하거나 새 스펙을 작성할 때 사용합니다 — 버튼, 헤더, 바텀 시트, 바텀 네비게이터, 인디케이터, 색·타이포·간격·모서리·그림자·모션 토큰. Use when implementing UI from this design system, picking tokens, or authoring a new component spec.
+description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 UI를 구현하거나 새 스펙을 작성할 때 사용합니다 — 버튼, 헤더, 바텀 시트, 바텀 네비게이터, 인디케이터, 색·타이포·간격·선 두께·모서리·그림자·모션 토큰. Use when implementing UI from this design system, picking tokens, or authoring a new component spec.
 ---
 
 # libitum Design System
 
 ## 값의 출처
 
-**색·타이포·간격·모서리·그림자·모션 값을 직접 쓰지 마세요.** 모두 `foundations/`에 토큰으로 있습니다.
+**색·타이포·간격·선 두께·모서리·그림자·모션 값을 직접 쓰지 마세요.** 모두 `foundations/`에 토큰으로 있습니다.
 
 | 필요한 것 | 파일 |
 |---|---|
 | 색 | `foundations/color.json` |
 | 폰트·크기·자간 | `foundations/typography.json` |
 | 간격 (0~96 progressive scale) | `foundations/spacing.json` |
+| 선 두께 (thin / regular / strong) | `foundations/stroke.json` |
 | 화면 여백 · safe area | `foundations/layout.json` |
 | 모서리 | `foundations/radius.json` |
 | 쌓임 순서 · 표면 · 그림자 | `foundations/elevation.json` |
@@ -47,7 +48,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 ## 자주 틀리는 것
 
 - **Button과 Round Button에는 그림자를 쓰지 않습니다.** 표면 깊이가 필요한 다른 컴포넌트만 `elevation.shadow.s1~s3`를 씁니다.
-- **Outline 테두리 1px는 실제 크기에 포함됩니다.** Hug 너비와 높이는 `components/button.md`의 산식으로 계산합니다.
+- **Outline 테두리 `stroke.width.thin` 1px는 실제 크기에 포함됩니다.** Hug 너비와 높이는 `components/button.md`의 산식으로 계산합니다.
 - **Loading은 변형별 색을 따릅니다.** Button은 라벨을 유지하고, Round Button은 아이콘을 Spinner로 교체합니다.
 - **Disabled 색은 변형별로 다릅니다.** 공통값으로 치환하지 말고 각 상태 표를 확인합니다.
 - **2px와 6px 간격은 컴팩트 컴포넌트 내부에만 씁니다.** 일반적인 컴포넌트와 레이아웃은 8px 이상의 4px 리듬을 따릅니다.

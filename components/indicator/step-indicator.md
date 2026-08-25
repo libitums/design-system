@@ -14,9 +14,9 @@
 |---|---|---|
 | 원 크기 | 32 × 32 | `spacing.32` |
 | 원 모서리 | 원형 | `radius.full` |
-| 테두리 | 2px | — |
+| 테두리 | 2px | `stroke.width.strong` |
 | 숫자 | 12px / lh 16 | `typography.label.m` |
-| 연결선 두께 | 2px | — |
+| 연결선 두께 | 2px | `stroke.width.strong` |
 | 연결선 정렬 | 원의 세로 중앙 | — |
 
 ---
