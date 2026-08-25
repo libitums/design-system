@@ -93,6 +93,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 
 - **가로로 나란히 놓지 마세요.** 번역 시 라벨이 늘어나면 두 버튼의 폭이 어긋나고 잘립니다 — `foundations/international-design.md` 참고.
 - **위험한 쪽을 기본값으로 두지 마세요.** 실수로 눌러도 손실이 없는 쪽이 위에 옵니다.
+- Action의 Focused는 [Button](./button.md)의 공통 두 색 ring을 사용합니다. Dialog가 열리면 목적에 맞는 안전한 Action이나 Container로 focus를 옮기며, Disabled Action은 focus 순서에서 제외합니다.
 
 ---
 

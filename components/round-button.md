@@ -66,6 +66,20 @@ Round Button
 | 선 두께 | 1.5px | `stroke.width.regular` |
 | 배치 | 아이콘을 대체하고 중앙 정렬 | — |
 
+### Focused
+
+Focused는 Default·Pressed·Loading 위에 결합되며, focusable hit area 바깥에 공통 ring을 더합니다.
+
+| 항목 | 값 | 토큰 |
+|---|---|---|
+| Inner ring | 2px solid, `white` #FFFFFF | `stroke.width.strong`, `color.white` |
+| Outer ring | 2px solid, `border.strong` #141115 | `stroke.width.strong`, `color.border.strong` |
+| Ring 사이 간격 | 0px | `spacing.0` |
+| 전체 외곽 범위 | 4px | `spacing.4` |
+| 형태 | 원형 focusable hit area의 바깥 윤곽을 따름 | `radius.full` |
+
+S·M·L은 48 × 48 focusable hit area를, XL은 56 × 56 버튼 프레임을 ring으로 두릅니다. Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다 — [Accessibility](../foundations/accessibility.md) 참고.
+
 ## 사용 가이드
 
 - **아이콘만으로 행동이 분명할 때만** 씁니다. 설명이 필요하면 [Button](./button.md)의 라벨을 사용합니다.

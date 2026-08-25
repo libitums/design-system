@@ -85,6 +85,10 @@ Container (background.secondary, 패딩 16, 모서리 12)
 
 Disabled는 정의하지 않습니다. **학습 중 이탈 경로는 언제나 열려 있어야 합니다.**
 
+#### Focused
+
+나가기 버튼은 Default·Pressed 표현을 유지하고 48 × 48 focusable hit area 바깥에 `white` #FFFFFF 2px inner ring과 `border.strong` #141115 2px outer ring을 표시합니다. 각 두께는 `stroke.width.strong`, ring 사이 간격은 `spacing.0`, 전체 외곽 범위는 `spacing.4`, 형태는 `radius.md`를 따릅니다 — [Accessibility](../../foundations/accessibility.md) 참고.
+
 ### 진행 바
 
 | 상황 | 처리 |

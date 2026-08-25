@@ -56,6 +56,20 @@ Bar (흰 배경, 상단 모서리 둥글게, 위쪽 그림자)
 - Active는 현재 위치를 나타내는 상태이고, Pressed는 누르는 순간의 피드백입니다. 이미 Active인 셀을 누르면 Active Pressed가 됩니다.
 - Pressed에서 셀 너비가 변하지 않도록 배경이 아니라 아이콘 색만 바뀝니다.
 
+### Focused
+
+Focused는 Default·Pressed·Active·Active Pressed의 표현을 유지하고 각 Cell의 최소 48 × 48 focusable hit area 바깥에 공통 ring을 더합니다.
+
+| 항목 | 값 | 토큰 |
+|---|---|---|
+| Inner ring | 2px solid, `white` #FFFFFF | `stroke.width.strong`, `color.white` |
+| Outer ring | 2px solid, `border.strong` #141115 | `stroke.width.strong`, `color.border.strong` |
+| Ring 사이 간격 | 0px | `spacing.0` |
+| 전체 외곽 범위 | 4px | `spacing.4` |
+| 형태 | Cell focusable hit area의 바깥 윤곽을 따르는 알약 | `radius.full` |
+
+Disabled Cell은 focus 순서에서 제외하고 ring을 표시하지 않습니다. Web은 `:focus-visible`에 적용합니다 — [Accessibility](../foundations/accessibility.md) 참고.
+
 ---
 
 ## Badge

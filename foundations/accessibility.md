@@ -76,11 +76,33 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 - Pointer로 실행할 수 있는 모든 기능은 keyboard interface나 플랫폼 대응 입력으로 실행할 수 있어야 합니다.
 - focus 순서는 화면의 읽기 순서와 일치해야 합니다. 임의의 양수 `tabindex`나 수동 순서로 시각 순서와 다르게 만들지 않습니다.
 - focus를 받은 interactive element에는 항상 보이는 indicator가 있어야 합니다.
-- 컴포넌트별 Focused 시각 스펙이 정의되기 전에는 브라우저·플랫폼 기본 focus indicator를 제거하지 않습니다.
+- custom focus indicator를 적용할 수 없거나 forced colors처럼 시스템 표시가 우선하는 환경에서는 브라우저·플랫폼 기본 indicator를 제거하지 않습니다.
 - focus indicator는 sticky header, sheet, dialog 같은 다른 surface에 완전히 가려지지 않아야 합니다.
 - 일반 화면에서 focus를 가두지 않습니다. Modal Dialog와 modal Bottom Sheet 안에서는 focus를 내부에 유지하고, 닫으면 열기 전 요소로 되돌립니다.
 - Drag, swipe, long press가 유일한 조작 방법이면 안 됩니다. 같은 결과를 내는 단순한 control이나 accessibility action을 함께 제공합니다.
 - Loading 중 focus를 불필요하게 잃지 않습니다. element가 유지된다면 이름을 보존하고 busy state를 알립니다.
+
+### Focus indicator
+
+Focused는 Default·Pressed·Loading의 색과 크기를 대체하지 않고, focusable hit area의 바깥 윤곽에 다음 두 겹의 ring을 더하는 결합 상태입니다.
+
+| 층 | 값 | 토큰 |
+|---|---|---|
+| Inner ring | 2px solid, `white` #FFFFFF | `stroke.width.strong`, `color.white` |
+| Outer ring | 2px solid, `border.strong` #141115 | `stroke.width.strong`, `color.border.strong` |
+| Ring 사이 간격 | 0px | `spacing.0` |
+| 전체 외곽 범위 | 4px | `spacing.4` |
+| 형태 | focusable hit area의 바깥 윤곽과 같은 형태 | 해당 컴포넌트의 radius |
+
+- 두 ring 색의 대비는 18.74:1입니다. 단색 배경에서는 두 색 중 하나가 인접 배경과 3:1 이상이 되도록 두 band를 각각 2px 두께로 유지합니다.
+- ring은 레이아웃 크기와 hit area를 바꾸지 않습니다. 잘리거나 이웃 control에 가려지지 않도록 주변 공간과 clipping을 확인합니다.
+- Web은 keyboard focus에 `:focus-visible`을 사용합니다. pointer 입력만으로 이동한 focus에는 custom ring을 강제하지 않습니다.
+- iOS·Android의 keyboard·D-pad focus는 이 시각 스펙을 사용하되, 플랫폼이 더 강한 system indicator를 제공하면 이를 유지합니다.
+- ReactLynx는 host별 keyboard focus 표시 지원을 확인합니다. screen reader의 accessibility focus와 keyboard focus를 같은 상태로 간주하지 않습니다.
+- Default·Pressed·Loading은 Focused와 결합할 수 있습니다. Disabled는 focus 순서에서 제외하며 ring을 표시하지 않습니다.
+- 이미지·gradient 위에서는 두 색 기법만으로 통과를 가정하지 않고 실제 인접 픽셀과 대비를 확인합니다.
+
+Web의 두 색 ring은 [W3C C40](https://www.w3.org/WAI/WCAG22/Techniques/css/C40), `:focus-visible` 적용은 [W3C C45](https://www.w3.org/WAI/WCAG22/Techniques/css/C45)를 참고합니다.
 
 ---
 
@@ -115,10 +137,10 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 
 | 플랫폼 | 적용 원칙 |
 |---|---|
-| Web | semantic HTML을 우선하고 부족한 name·state에만 ARIA를 사용합니다. |
-| iOS | UIKit·SwiftUI의 native control과 accessibility API로 label·trait·value를 연결합니다. |
-| Android | View·Compose semantics로 content description, role, state, value를 연결합니다. |
-| ReactLynx | `accessibility-element`, `accessibility-label`과 지원되는 trait·order API를 사용하고, 상태 변화는 `accessibilityAnnounce`로 전달합니다. |
+| Web | semantic HTML을 우선하고 부족한 name·state에만 ARIA를 사용합니다. keyboard focus에는 `:focus-visible` ring을 적용합니다. |
+| iOS | UIKit·SwiftUI의 native control과 accessibility API로 label·trait·value를 연결하고, keyboard focus indicator를 검증합니다. |
+| Android | View·Compose semantics로 content description, role, state, value를 연결하고, keyboard·D-pad focus indicator를 검증합니다. |
+| ReactLynx | `accessibility-element`, `accessibility-label`과 지원되는 trait·order API를 사용하고, 상태 변화는 `accessibilityAnnounce`로 전달합니다. keyboard focus 표시는 iOS·Android host에서 각각 검증합니다. |
 
 ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 플랫폼의 결과로 다른 플랫폼을 대신하지 않습니다.
 
@@ -140,7 +162,7 @@ ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 �
 - hit area overlay로 모든 custom control의 48 × 48과 비중첩 확인
 - 모든 텍스트·control 경계·상태·의미 있는 아이콘의 contrast 계산
 - Pointer 없이 keyboard만으로 전체 흐름 완료
-- focus 순서, visible focus, modal 진입·복귀 확인
+- focus 순서, `:focus-visible`, 두 색 ring, Disabled 제외, modal 진입·복귀 확인
 - iOS VoiceOver와 Android TalkBack에서 name·role·state·value 확인
 - ReactLynx를 iOS·Android에서 각각 확인
 - Web 200% 확대와 앱 최대 접근성 글자 크기에서 잘림·겹침 확인

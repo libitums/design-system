@@ -74,6 +74,10 @@ Container (패딩 16 / 12, 하단 모서리 12)
 - 뒤로가기는 아이콘과 제목 묶음을 함께 누른 상태로 처리합니다. Pressed에서 **타이틀·서브타이틀 색은 바뀌지 않습니다** — 아이콘만 반응합니다.
 - 뒤로가기에 Disabled는 없습니다. 돌아갈 길은 언제나 열려 있어야 합니다.
 
+### Focused
+
+뒤로가기 control과 정보 control은 각각 자신의 최소 48 × 48 focusable hit area 바깥에 `white` #FFFFFF 2px inner ring과 `border.strong` #141115 2px outer ring을 표시합니다. 각 두께는 `stroke.width.strong`, ring 사이 간격은 `spacing.0`, 전체 외곽 범위는 `spacing.4`, 형태는 `radius.md`를 따릅니다. 뒤로가기 control은 아이콘과 제목 묶음 전체를 하나의 focus node로 유지합니다 — [Accessibility](../../foundations/accessibility.md) 참고.
+
 ---
 
 ## 사용 가이드
