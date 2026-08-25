@@ -14,6 +14,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 색 | `foundations/color.json` |
 | 폰트·크기·자간 | `foundations/typography.json` |
 | Web·앱 폰트 제공·fallback | `foundations/font-delivery.md` |
+| hit area·대비·키보드·semantics | `foundations/accessibility.md` |
 | 간격 (0~96 progressive scale) | `foundations/spacing.json` |
 | 선 두께 (thin / regular / strong) | `foundations/stroke.json` |
 | 화면 여백 · safe area | `foundations/layout.json` |
@@ -60,7 +61,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 
 - **이 저장소의 문서가 기준입니다.** 원본 디자인 파일과 값이 다르면 문서를 따르고, 문서에 없는 값을 외부에서 가져오지 않습니다.
 - **사용자에게 보이는 문구는 `writing-tone` 스킬**을 먼저 읽고 씁니다.
-- **접근성:** 아이콘만 있는 버튼에 접근성 이름을 붙이고, 상태를 색만으로 나타내지 않으며, 인디케이터는 줄 전체를 하나의 상태로 알립니다.
+- **접근성:** `foundations/accessibility.md`를 따릅니다. custom control은 `spacing.48`의 최소 hit area를 확보하고, 아이콘만 있는 버튼에 접근성 이름을 붙이며, 상태를 색만으로 나타내지 않습니다.
 
 ## 새 스펙을 쓸 때
 
