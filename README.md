@@ -77,7 +77,7 @@ npm run build
 npm run check:generated
 ```
 
-`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일을 생성합니다. 아이콘 에셋 변환은 후속 작업에서 추가합니다.
+`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일, 개별 아이콘 package를 생성합니다.
 
 `npm run validate`는 source 경계, 모든 `foundations/*.json`의 token 구조·alias 참조, `components/**/*.md`의 token 참조, 저장소 Markdown 링크, SVG 아이콘 규칙을 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 token path 또는 Markdown 줄·열 위치를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
 
@@ -121,6 +121,17 @@ const heading = typography.heading.s;
 const allColors = tokens.color;
 ```
 
+아이콘은 padding 변형을 기본 경로로 제공하고, 프레임을 꽉 채워야 할 때만 `no-padding` 경로를 사용합니다. 개별 import는 해당 SVG 하나만 정적 에셋으로 가져오며 결과 타입은 `string`입니다. 원본 파일명은 lowercase kebab-case로 정규화되므로 `A-to-Z.svg`는 `a-to-z`로 가져옵니다.
+
+```ts
+import heart from "@libitum/icons/heart";
+import heartNoPadding from "@libitum/icons/no-padding/heart";
+
+const iconSources = { heart, heartNoPadding };
+```
+
+`@libitum/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 이 package에 포함하지 않으며 FE 모노레포의 `@libitum/ui-lynx`에서 담당합니다.
+
 Package exports는 다음 경로를 제공합니다.
 
 | 경로 | 산출물 |
@@ -128,6 +139,9 @@ Package exports는 다음 경로를 제공합니다.
 | `@libitum/design-tokens` | ESM 상수와 TypeScript 선언 |
 | `@libitum/design-tokens/css/variables.css` | 기본 token CSS 변수 |
 | `@libitum/design-tokens/css/typography.css` | Typography CSS 변수 |
+| `@libitum/icons/{name}` | 기본 padding SVG 정적 에셋 |
+| `@libitum/icons/no-padding/{name}` | no-padding SVG 정적 에셋 |
+| `@libitum/icons/manifest.json` | 아이콘 이름·category·variant 경로 metadata |
 
 `npm run check:generated`는 새 임시 workspace에서 연속으로 두 번 build한 뒤 생성 파일의 상대 경로와 SHA-256을 비교합니다. 또한 실제 저장소 build 전후의 Git 상태가 달라지면 실패합니다. 따라서 생성 순서나 내용이 실행마다 달라지거나 build가 새 미커밋 변경을 만들면 non-zero로 종료되며, PR 자동 검증 workflow에서 그대로 호출할 수 있습니다.
 

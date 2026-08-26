@@ -18,3 +18,6 @@ console.log(
 console.log(
   `Generated ${result.typeScript.tokenCount} TypeScript tokens across ${result.typeScript.exportNames.length} exports: ${relative(rootDirectory, result.typeScript.outputFiles.module)}`,
 );
+console.log(
+  `Generated ${result.icons.icons.length} individual icon exports (${result.icons.svgFileCount} SVG files): ${relative(rootDirectory, result.icons.outputDirectory)}`,
+);
