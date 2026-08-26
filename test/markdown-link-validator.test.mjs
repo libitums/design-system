@@ -19,7 +19,9 @@ async function createWorkspace(t, files) {
 
   const defaults = {
     "AGENTS.md": "# Agent Guide\n",
+    "CHANGELOG.md": "# Changelog\n",
     "README.md": "# Readme\n",
+    "RELEASING.md": "# Release policy\n",
   };
 
   for (const [path, contents] of Object.entries({ ...defaults, ...files })) {
@@ -36,10 +38,32 @@ async function createWorkspace(t, files) {
 test("현재 저장소의 내부 링크·anchor와 허용된 외부 링크를 검증한다", async () => {
   const result = await validateMarkdownLinks(repositoryRoot);
 
-  assert.equal(result.fileCount, 16);
+  assert.equal(result.fileCount >= 18, true);
   assert.equal(result.internalLinkCount > 30, true);
   assert.equal(result.externalLinkCount > 0, true);
   assert.equal(result.linkCount, result.internalLinkCount + result.externalLinkCount);
+});
+
+test("root release policy와 changelog의 링크도 검증한다", async (t) => {
+  const rootDirectory = await createWorkspace(t, {
+    "CHANGELOG.md": "[없는 변경 기록](./missing-changelog.md)\n",
+    "RELEASING.md": "[없는 배포 정책](./missing-release-policy.md)\n",
+  });
+
+  await assert.rejects(
+    () => validateMarkdownLinks(rootDirectory),
+    (error) => {
+      assert.equal(error instanceof MarkdownLinkValidationError, true);
+      assert.deepEqual(
+        error.errors.map(({ code, file }) => ({ code, file })),
+        [
+          { code: "missing-path", file: "CHANGELOG.md" },
+          { code: "missing-path", file: "RELEASING.md" },
+        ],
+      );
+      return true;
+    },
+  );
 });
 
 test("GitHub heading slug와 중복 heading anchor를 검증한다", async (t) => {

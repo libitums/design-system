@@ -10,6 +10,8 @@ src/           검증·생성 로직
 scripts/       build·validate CLI 진입점
 test/          파이프라인 테스트
 dist/          재생성 가능한 package 산출물 (Git 제외)
+RELEASING.md   SemVer·deprecation·release 정책
+CHANGELOG.md   두 package의 주요 변경 기록
 ```
 
 ---
@@ -58,6 +60,8 @@ dist/          재생성 가능한 package 산출물 (Git 제외)
 ## Package pipeline
 
 최초 공식 소비 package는 `@libitum/design-tokens`와 `@libitum/icons`입니다. 이 저장소 루트의 `package.json`은 두 package를 생성하기 위한 private tooling package이며 npm에 직접 배포하지 않습니다.
+
+두 package는 하나의 version을 공유합니다. 변경 수준과 deprecation·release 절차는 [release policy](./RELEASING.md), release별 주요 변경은 [changelog](./CHANGELOG.md)에서 확인합니다.
 
 | 경로 | 책임 |
 |---|---|

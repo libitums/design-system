@@ -4,6 +4,8 @@ import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 const markdownRoots = Object.freeze([
   "README.md",
   "AGENTS.md",
+  "CHANGELOG.md",
+  "RELEASING.md",
   "foundations",
   "components",
 ]);
