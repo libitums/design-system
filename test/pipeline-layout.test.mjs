@@ -47,6 +47,7 @@ test("private tooling package와 지원 runtime을 고정한다", async () => {
   assert.equal(packageJson.engines.npm, ">=11 <12");
   assert.deepEqual(packageJson.scripts, {
     build: "node scripts/build.mjs",
+    "check:generated": "node scripts/check-generated.mjs",
     validate: "node scripts/validate.mjs",
     test: "node --test",
   });

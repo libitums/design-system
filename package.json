@@ -11,6 +11,7 @@
   "packageManager": "npm@11.16.0",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "check:generated": "node scripts/check-generated.mjs",
     "validate": "node scripts/validate.mjs",
     "test": "node --test"
   }

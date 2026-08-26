@@ -74,6 +74,7 @@ Node.js 24 LTS와 npm 11을 사용합니다.
 npm run validate
 npm test
 npm run build
+npm run check:generated
 ```
 
 `dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일을 생성합니다. 아이콘 에셋 변환은 후속 작업에서 추가합니다.
@@ -121,6 +122,8 @@ Package exports는 다음 경로를 제공합니다.
 | `@libitum/design-tokens` | ESM 상수와 TypeScript 선언 |
 | `@libitum/design-tokens/css/variables.css` | 기본 token CSS 변수 |
 | `@libitum/design-tokens/css/typography.css` | Typography CSS 변수 |
+
+`npm run check:generated`는 새 임시 workspace에서 연속으로 두 번 build한 뒤 생성 파일의 상대 경로와 SHA-256을 비교합니다. 또한 실제 저장소 build 전후의 Git 상태가 달라지면 실패합니다. 따라서 생성 순서나 내용이 실행마다 달라지거나 build가 새 미커밋 변경을 만들면 non-zero로 종료되며, PR 자동 검증 workflow에서 그대로 호출할 수 있습니다.
 
 ---
 
