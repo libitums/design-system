@@ -1,4 +1,5 @@
 import { writeCssVariables } from "./css-token-generator.mjs";
+import { writeIconPackage } from "./icon-package-generator.mjs";
 import { prepareOutputLayout } from "./pipeline-layout.mjs";
 import { validateFoundationTokenAliases } from "./token-alias-validator.mjs";
 import { validateFoundationTokenFiles } from "./token-schema-validator.mjs";
@@ -12,10 +13,12 @@ export async function buildPackages(rootDirectory = process.cwd()) {
   const css = await writeCssVariables(rootDirectory);
   const typography = await writeTypographyCss(rootDirectory);
   const typeScript = await writeTypeScriptTokens(rootDirectory);
+  const icons = await writeIconPackage(rootDirectory);
 
   return {
     aliasValidation,
     css,
+    icons,
     outputPaths,
     schemaValidation,
     typography,
