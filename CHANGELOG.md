@@ -11,3 +11,7 @@
 - 두 package의 lockstep SemVer, deprecation과 changelog 운영 정책을 정의했습니다. (LIB-128)
 - GitHub Packages stable·canary 배포 workflow와 중복 version 차단·결과 기록을 추가했습니다. (LIB-129)
 - Frontend package 인증·설치·token·icon 사용과 upgrade 가이드를 추가했습니다. (LIB-130)
+
+### Fixed
+
+- npm publish가 상대 package 경로를 GitHub repository shorthand로 잘못 해석하던 오류를 수정했습니다. (LIB-179)

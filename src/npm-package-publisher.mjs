@@ -1,4 +1,5 @@
 import { execFile } from "node:child_process";
+import { resolve } from "node:path";
 import { promisify } from "node:util";
 
 import { npmRegistry, publishedPackages } from "./package-publish-config.mjs";
@@ -51,6 +52,7 @@ export async function publishPackages({
   npmTag,
   packages = publishedPackages,
   registry = npmRegistry,
+  rootDirectory = process.cwd(),
   version,
   execute = executeNpm,
 }) {
@@ -73,7 +75,7 @@ export async function publishPackages({
 
     await execute([
       "publish",
-      package_.directory,
+      resolve(rootDirectory, package_.directory),
       `--tag=${npmTag}`,
       `--registry=${registry}`,
       "--access=restricted",
