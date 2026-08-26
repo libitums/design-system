@@ -55,16 +55,21 @@ async function collectIconEntries(rootDirectory) {
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
     .sort(compareStrings);
+  const filesByCategory = await Promise.all(
+    categories.map(async (category) => {
+      const categoryDirectory = join(paddingDirectory, category);
+      const fileNames = (await readdir(categoryDirectory, { withFileTypes: true }))
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".svg"))
+        .map((entry) => entry.name)
+        .sort(compareStrings);
+
+      return { category, fileNames };
+    }),
+  );
   const icons = [];
   const exportNames = new Map();
 
-  for (const category of categories) {
-    const categoryDirectory = join(paddingDirectory, category);
-    const fileNames = (await readdir(categoryDirectory, { withFileTypes: true }))
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".svg"))
-      .map((entry) => entry.name)
-      .sort(compareStrings);
-
+  for (const { category, fileNames } of filesByCategory) {
     for (const fileName of fileNames) {
       const sourceName = basename(fileName, ".svg");
       const exportName = toIconExportName(sourceName);
