@@ -12,7 +12,7 @@ import { validateSvgIcons } from "./svg-icon-validator.mjs";
 import { packagePublishMetadata } from "./package-publish-config.mjs";
 
 const copyChunkSize = 64;
-const packageName = "@libitum/icons";
+const packageName = "@libitums/icons";
 
 export const iconPackageOutputPaths = Object.freeze({
   declaration: "dist/icons/svg.d.ts",

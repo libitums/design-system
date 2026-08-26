@@ -21,7 +21,7 @@ test("수동 stable·canary 배포 workflow의 권한과 보호 조건을 고정
   assert.match(workflow, /^        if: inputs\.channel == 'stable'$/m);
   assert.match(workflow, /test "\$GITHUB_SHA" = "\$\(git rev-parse FETCH_HEAD\)"/);
   assert.match(workflow, /^          registry-url: https:\/\/npm\.pkg\.github\.com$/m);
-  assert.match(workflow, /^          scope: '@libitum'$/m);
+  assert.match(workflow, /^          scope: '@libitums'$/m);
   assert.match(workflow, /^          NODE_AUTH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}$/m);
   assert.match(workflow, /^        run: node scripts\/prepare-publish\.mjs$/m);
   assert.match(workflow, /^        run: node scripts\/publish-packages\.mjs$/m);

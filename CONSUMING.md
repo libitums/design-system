@@ -1,13 +1,13 @@
 # Frontend package consumption
 
-프론트엔드 프로젝트에서 `@libitum/design-tokens`와 `@libitum/icons`를 설치하고 사용하는 기준입니다. 두 package는 같은 version으로 함께 release하며, 이 저장소의 문서와 token을 source of truth로 사용합니다.
+프론트엔드 프로젝트에서 `@libitums/design-tokens`와 `@libitums/icons`를 설치하고 사용하는 기준입니다. 두 package는 같은 version으로 함께 release하며, 이 저장소의 문서와 token을 source of truth로 사용합니다.
 
 ## Registry와 접근 권한
 
-두 package는 private GitHub Packages의 `@libitum` scope로 배포됩니다. 소비 저장소의 `.npmrc`에는 registry와 환경 변수 참조만 커밋합니다.
+두 package는 private GitHub Packages의 `@libitums` scope로 배포됩니다. 소비 저장소의 `.npmrc`에는 registry와 환경 변수 참조만 커밋합니다.
 
 ```ini
-@libitum:registry=https://npm.pkg.github.com
+@libitums:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
@@ -29,7 +29,7 @@ steps:
       node-version-file: .node-version
       cache: npm
       registry-url: https://npm.pkg.github.com
-      scope: '@libitum'
+      scope: '@libitums'
   - run: npm ci
     env:
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,8 +46,8 @@ steps:
 ```sh
 DESIGN_SYSTEM_VERSION=0.1.0
 npm install --save-exact \
-  "@libitum/design-tokens@${DESIGN_SYSTEM_VERSION}" \
-  "@libitum/icons@${DESIGN_SYSTEM_VERSION}"
+  "@libitums/design-tokens@${DESIGN_SYSTEM_VERSION}" \
+  "@libitums/icons@${DESIGN_SYSTEM_VERSION}"
 ```
 
 `package.json`에는 두 dependency가 같은 exact version으로 기록되어야 합니다.
@@ -55,8 +55,8 @@ npm install --save-exact \
 ```json
 {
   "dependencies": {
-    "@libitum/design-tokens": "0.1.0",
-    "@libitum/icons": "0.1.0"
+    "@libitums/design-tokens": "0.1.0",
+    "@libitums/icons": "0.1.0"
   }
 }
 ```
@@ -68,8 +68,8 @@ Canary는 `Publish packages` workflow의 Job Summary에 기록된 두 package의
 Web에서는 app의 global style 진입점에서 기본 token과 typography CSS를 한 번 불러옵니다.
 
 ```css
-@import "@libitum/design-tokens/css/variables.css";
-@import "@libitum/design-tokens/css/typography.css";
+@import "@libitums/design-tokens/css/variables.css";
+@import "@libitums/design-tokens/css/typography.css";
 ```
 
 Token path는 `--libitum-{token-path}` 형식의 CSS custom property로 제공됩니다. 컴포넌트 style에는 hex, px, shadow 값을 직접 쓰지 않고 목적에 맞는 semantic token을 연결합니다.
@@ -103,7 +103,7 @@ import {
   radius,
   spacing,
   typography,
-} from "@libitum/design-tokens";
+} from "@libitums/design-tokens";
 
 export const lessonCardTokens = {
   backgroundColor: color.background.primary,
@@ -121,28 +121,28 @@ Web은 CSS token을 우선하고, TypeScript token은 JavaScript 계산이나 pl
 아이콘은 필요한 이름의 subpath만 import합니다. 기본 경로는 고정 canvas의 padding variant이고, `no-padding`은 glyph가 frame을 끝까지 채워야 할 때만 사용합니다.
 
 ```ts
-import heartIcon from "@libitum/icons/heart";
-import heartArtwork from "@libitum/icons/no-padding/heart";
+import heartIcon from "@libitums/icons/heart";
+import heartArtwork from "@libitums/icons/no-padding/heart";
 
 export const iconSources = { heartIcon, heartArtwork };
 ```
 
 | Variant | 사용 | 사용하지 않는 경우 |
 |---|---|---|
-| `@libitum/icons/{name}` | Button, navigation, list, inline text처럼 grid에서 정렬하는 일반 UI | 없음 — 기본 선택 |
-| `@libitum/icons/no-padding/{name}` | Hero art, spot illustration, custom crop처럼 frame을 정확히 채우는 구성 | 같은 행의 일반 UI 아이콘, padding variant와 혼합 |
+| `@libitums/icons/{name}` | Button, navigation, list, inline text처럼 grid에서 정렬하는 일반 UI | 없음 — 기본 선택 |
+| `@libitums/icons/no-padding/{name}` | Hero art, spot illustration, custom crop처럼 frame을 정확히 채우는 구성 | 같은 행의 일반 UI 아이콘, padding variant와 혼합 |
 
 - Import 결과는 SVG 정적 asset을 가리키는 `string`이며 framework wrapper는 포함하지 않습니다.
 - 기본 렌더 크기는 `icon.size.md`이고, 다른 크기도 `icon.size.*` token만 사용합니다.
 - SVG의 `fill="currentColor"`를 직접 고치지 않고 platform renderer나 control의 color를 semantic color token에 연결합니다.
 - 아이콘만 있는 control에는 행동 목적을 나타내는 accessible name을 붙입니다. 장식용 아이콘은 접근성 tree에서 숨깁니다.
-- 전체 목록과 variant 경로는 `@libitum/icons/manifest.json`에서 탐색할 수 있습니다.
+- 전체 목록과 variant 경로는 `@libitums/icons/manifest.json`에서 탐색할 수 있습니다.
 
 원본 이름·variant·크기 기준은 [Iconography](./foundations/iconography.json)를 따릅니다.
 
 ## Font
 
-`@libitum/design-tokens`에는 font binary와 `@font-face`가 포함되지 않습니다. Web은 Pretendard WOFF2를 frontend static root에서 self-host하고, iOS·Android 앱은 `PretendardVariable.ttf`를 앱 package에 포함해 첫 화면 전에 등록합니다. ReactLynx는 native host에 포함된 같은 TTF를 사용합니다.
+`@libitums/design-tokens`에는 font binary와 `@font-face`가 포함되지 않습니다. Web은 Pretendard WOFF2를 frontend static root에서 self-host하고, iOS·Android 앱은 `PretendardVariable.ttf`를 앱 package에 포함해 첫 화면 전에 등록합니다. ReactLynx는 native host에 포함된 같은 TTF를 사용합니다.
 
 Futura는 Webfont·App 라이선스와 파일 출처가 확정되기 전까지 새 파일이나 registration을 추가하지 않습니다. 전체 플랫폼 제공·fallback·라이선스 기준은 [Font Delivery](./foundations/font-delivery.md)를 따릅니다.
 
@@ -181,8 +181,8 @@ Futura는 Webfont·App 라이선스와 파일 출처가 확정되기 전까지 �
    ```sh
    DESIGN_SYSTEM_VERSION=0.2.0
    npm install --save-exact \
-     "@libitum/design-tokens@${DESIGN_SYSTEM_VERSION}" \
-     "@libitum/icons@${DESIGN_SYSTEM_VERSION}"
+     "@libitums/design-tokens@${DESIGN_SYSTEM_VERSION}" \
+     "@libitums/icons@${DESIGN_SYSTEM_VERSION}"
    ```
 
 4. `package.json`과 lockfile을 함께 commit하고 두 package version이 같은지 확인합니다.

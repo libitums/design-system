@@ -1,13 +1,13 @@
 # Release policy
 
-`@libitum/design-tokens`와 `@libitum/icons`의 버전 판정, deprecation, changelog 작성과 release 준비 기준입니다.
+`@libitums/design-tokens`와 `@libitums/icons`의 버전 판정, deprecation, changelog 작성과 release 준비 기준입니다.
 
 ## 적용 범위
 
 이 정책은 이 저장소에서 생성하는 두 npm package에 적용합니다.
 
-- `@libitum/design-tokens`
-- `@libitum/icons`
+- `@libitums/design-tokens`
+- `@libitums/icons`
 
 두 package는 **하나의 버전을 공유하고 항상 함께 release**합니다. 한 package만 변경되어도 두 package의 버전을 같이 올립니다. 버전의 source of truth는 루트 `package.json`이며, build가 생성하는 각 package manifest는 이 값을 그대로 사용합니다.
 

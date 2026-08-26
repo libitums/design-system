@@ -8,12 +8,12 @@ export const packageRepository = Object.freeze({
 export const publishedPackages = Object.freeze([
   Object.freeze({
     directory: "dist/design-tokens",
-    name: "@libitum/design-tokens",
+    name: "@libitums/design-tokens",
     pageSlug: "design-tokens",
   }),
   Object.freeze({
     directory: "dist/icons",
-    name: "@libitum/icons",
+    name: "@libitums/icons",
     pageSlug: "icons",
   }),
 ]);

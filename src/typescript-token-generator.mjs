@@ -307,7 +307,7 @@ function generateDeclarations(tokenTree, exportNames) {
 function generatePackageManifest(version) {
   return `${JSON.stringify(
     {
-      name: "@libitum/design-tokens",
+      name: "@libitums/design-tokens",
       version,
       description: "libitum design tokens for TypeScript and CSS",
       type: "module",

@@ -12,12 +12,12 @@ import {
 const packages = [
   {
     directory: "/tmp/design-tokens",
-    name: "@libitum/design-tokens",
+    name: "@libitums/design-tokens",
     pageSlug: "design-tokens",
   },
   {
     directory: "/tmp/icons",
-    name: "@libitum/icons",
+    name: "@libitums/icons",
     pageSlug: "icons",
   },
 ];
@@ -28,7 +28,7 @@ function notFound() {
 
 test("registry의 404만 미배포 version으로 판정한다", async () => {
   assert.equal(
-    await packageVersionExists("@libitum/icons", "1.2.3", {
+    await packageVersionExists("@libitums/icons", "1.2.3", {
       execute: async () => {
         throw notFound();
       },
@@ -38,7 +38,7 @@ test("registry의 404만 미배포 version으로 판정한다", async () => {
 
   await assert.rejects(
     () =>
-      packageVersionExists("@libitum/icons", "1.2.3", {
+      packageVersionExists("@libitums/icons", "1.2.3", {
         execute: async () => {
           throw Object.assign(new Error("forbidden"), { stderr: "npm error E403" });
         },
@@ -52,7 +52,7 @@ test("조회가 모두 끝난 뒤 없는 package만 publish한다", async () => 
   const execute = async (arguments_) => {
     calls.push(arguments_);
     if (arguments_[0] === "view") {
-      if (arguments_[1].startsWith("@libitum/icons@")) {
+      if (arguments_[1].startsWith("@libitums/icons@")) {
         return { stdout: '"1.2.3"\n' };
       }
       throw notFound();
@@ -70,8 +70,8 @@ test("조회가 모두 끝난 뒤 없는 package만 publish한다", async () => 
   assert.deepEqual(
     results.map(({ name, status }) => ({ name, status })),
     [
-      { name: "@libitum/design-tokens", status: "published" },
-      { name: "@libitum/icons", status: "already-published" },
+      { name: "@libitums/design-tokens", status: "published" },
+      { name: "@libitums/icons", status: "already-published" },
     ],
   );
   assert.equal(calls.filter(([command]) => command === "view").length, 2);
@@ -110,7 +110,7 @@ test("상대 package directory를 절대 local 경로로 배포한다", async ()
     packages: [
       {
         directory: "dist/design-tokens",
-        name: "@libitum/design-tokens",
+        name: "@libitums/design-tokens",
         pageSlug: "design-tokens",
       },
     ],

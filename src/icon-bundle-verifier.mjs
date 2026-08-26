@@ -91,7 +91,7 @@ async function buildFixture(
   const installedIconPackage = join(
     rootDirectory,
     "node_modules",
-    "@libitum",
+    "@libitums",
     "icons",
   );
   await mkdir(sourceDirectory, { recursive: true });
@@ -177,7 +177,7 @@ export class IconBundleVerificationError extends Error {
 export function evaluateIconBundleMeasurement(measurement) {
   const { baseline, budgets, delta, singleIcon } = measurement;
   const errors = [];
-  const expectedModuleSuffix = `/@libitum/icons/${iconBundlePolicy.representativeIcon}.svg`;
+  const expectedModuleSuffix = `/@libitums/icons/${iconBundlePolicy.representativeIcon}.svg`;
 
   if (baseline.svgModules.length !== 0) {
     errors.push(
@@ -260,7 +260,7 @@ export async function measureIconBundle(rootDirectory = process.cwd()) {
     const singleIcon = await buildFixture(
       temporaryRoot,
       "single-icon",
-      `import icon from "@libitum/icons/${iconBundlePolicy.representativeIcon}";\nglobalThis.__libitumIcon = icon;\n`,
+      `import icon from "@libitums/icons/${iconBundlePolicy.representativeIcon}";\nglobalThis.__libitumIcon = icon;\n`,
       iconPackage.outputDirectory,
       assetPayloads,
     );

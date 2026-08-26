@@ -33,8 +33,8 @@ async function createWorkspace(t, version = "1.2.3") {
   );
 
   for (const [directory, name] of [
-    ["design-tokens", "@libitum/design-tokens"],
-    ["icons", "@libitum/icons"],
+    ["design-tokens", "@libitums/design-tokens"],
+    ["icons", "@libitums/icons"],
   ]) {
     const outputDirectory = join(rootDirectory, "dist", directory);
     await mkdir(outputDirectory, { recursive: true });

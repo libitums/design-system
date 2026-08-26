@@ -60,7 +60,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 
 ## Package pipeline
 
-최초 공식 소비 package는 `@libitum/design-tokens`와 `@libitum/icons`입니다. 이 저장소 루트의 `package.json`은 두 package를 생성하기 위한 private tooling package이며 npm에 직접 배포하지 않습니다.
+최초 공식 소비 package는 `@libitums/design-tokens`와 `@libitums/icons`입니다. 이 저장소 루트의 `package.json`은 두 package를 생성하기 위한 private tooling package이며 npm에 직접 배포하지 않습니다.
 
 두 package는 하나의 version을 공유합니다. 변경 수준과 deprecation·release 절차는 [release policy](./RELEASING.md), release별 주요 변경은 [changelog](./CHANGELOG.md)에서 확인합니다.
 
@@ -72,8 +72,8 @@ Frontend project의 registry 인증, 설치, CSS·TypeScript·icon 사용과 upg
 | `src/` | 원본을 검증하고 package 산출물로 변환하는 로직 |
 | `scripts/` | 로컬·CI에서 호출하는 CLI 진입점 |
 | `test/` | 생성·검증 파이프라인의 자동 테스트 |
-| `dist/design-tokens/` | `@libitum/design-tokens` 배포 산출물 |
-| `dist/icons/` | `@libitum/icons` 배포 산출물 |
+| `dist/design-tokens/` | `@libitums/design-tokens` 배포 산출물 |
+| `dist/icons/` | `@libitums/icons` 배포 산출물 |
 
 Node.js 24 LTS와 npm 11을 사용합니다.
 
@@ -102,11 +102,11 @@ SVG 아이콘은 `padding`과 `no-padding`의 `category/name.svg` 2단계 상대
 `npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. Foundation token 139개는 `dist/design-tokens/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
 ```css
-@import "@libitum/design-tokens/css/variables.css";
-@import "@libitum/design-tokens/css/typography.css";
+@import "@libitums/design-tokens/css/variables.css";
+@import "@libitums/design-tokens/css/typography.css";
 ```
 
-Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. Icon metadata는 `@libitum/icons`에서 제공합니다.
+Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. Icon metadata는 `@libitums/icons`에서 제공합니다.
 
 Typography는 22개 스타일마다 `font-family`, `font-weight`, `font-size`, `line-height`, `letter-spacing`을 독립된 CSS 변수로 제공합니다. 예를 들어 `typography.body.l`은 다음처럼 소비합니다.
 
@@ -125,7 +125,7 @@ Font family fallback stack과 weight 원시 변수도 함께 출력합니다. �
 TypeScript에서는 최상위 token group을 named export로 가져오거나 전체 `tokens` 객체를 사용할 수 있습니다. Alias는 ESM 산출물에서 최종 값으로 해석되며, 생성된 선언 파일은 모든 값을 literal·readonly 타입으로 제공합니다.
 
 ```ts
-import { color, spacing, tokens, typography } from "@libitum/design-tokens";
+import { color, spacing, tokens, typography } from "@libitums/design-tokens";
 
 const brand = color.brand.primary;
 const screenPadding = spacing[16];
@@ -136,13 +136,13 @@ const allColors = tokens.color;
 아이콘은 padding 변형을 기본 경로로 제공하고, 프레임을 꽉 채워야 할 때만 `no-padding` 경로를 사용합니다. 개별 import는 해당 SVG 하나만 정적 에셋으로 가져오며 결과 타입은 `string`입니다. 원본 파일명은 lowercase kebab-case로 정규화되므로 `A-to-Z.svg`는 `a-to-z`로 가져옵니다.
 
 ```ts
-import heart from "@libitum/icons/heart";
-import heartNoPadding from "@libitum/icons/no-padding/heart";
+import heart from "@libitums/icons/heart";
+import heartNoPadding from "@libitums/icons/no-padding/heart";
 
 const iconSources = { heart, heartNoPadding };
 ```
 
-`@libitum/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 이 package에 포함하지 않으며 FE 모노레포의 `@libitum/ui-lynx`에서 담당합니다.
+`@libitums/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 이 package에 포함하지 않으며 FE 모노레포의 `@libitums/ui-lynx`에서 담당합니다.
 
 아이콘 bundle 검증은 고정된 `@lynx-js/rspeedy` 0.16.5 production build로 빈 entry와 `heart` 단일 import를 비교합니다. Rspeedy 기본값에 따라 2KiB 미만 SVG는 data URI로 인라인되므로, 별도 SVG 파일 개수만 세지 않고 Rspack module graph와 raw·gzip bundle 증가량을 함께 검사합니다.
 
@@ -156,12 +156,12 @@ Package exports는 다음 경로를 제공합니다.
 
 | 경로 | 산출물 |
 |---|---|
-| `@libitum/design-tokens` | ESM 상수와 TypeScript 선언 |
-| `@libitum/design-tokens/css/variables.css` | 기본 token CSS 변수 |
-| `@libitum/design-tokens/css/typography.css` | Typography CSS 변수 |
-| `@libitum/icons/{name}` | 기본 padding SVG 정적 에셋 |
-| `@libitum/icons/no-padding/{name}` | no-padding SVG 정적 에셋 |
-| `@libitum/icons/manifest.json` | 아이콘 이름·category·variant 경로 metadata |
+| `@libitums/design-tokens` | ESM 상수와 TypeScript 선언 |
+| `@libitums/design-tokens/css/variables.css` | 기본 token CSS 변수 |
+| `@libitums/design-tokens/css/typography.css` | Typography CSS 변수 |
+| `@libitums/icons/{name}` | 기본 padding SVG 정적 에셋 |
+| `@libitums/icons/no-padding/{name}` | no-padding SVG 정적 에셋 |
+| `@libitums/icons/manifest.json` | 아이콘 이름·category·variant 경로 metadata |
 
 `npm run check:generated`는 새 임시 workspace에서 연속으로 두 번 build한 뒤 생성 파일의 상대 경로와 SHA-256을 비교합니다. 또한 실제 저장소 build 전후의 Git 상태가 달라지면 실패합니다. 따라서 생성 순서나 내용이 실행마다 달라지거나 build가 새 미커밋 변경을 만들면 non-zero로 종료되며, PR 자동 검증 workflow에서 그대로 호출할 수 있습니다.
 

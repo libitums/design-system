@@ -17,17 +17,17 @@ test("소비 가이드가 실제 package export와 인증 설정을 사용한다
   const tokenManifest = JSON.parse(tokenResult.packageManifest);
   const iconManifest = JSON.parse(iconResult.packageManifest);
 
-  assert.match(guide, /@libitum:registry=https:\/\/npm\.pkg\.github\.com/);
+  assert.match(guide, /@libitums:registry=https:\/\/npm\.pkg\.github\.com/);
   assert.match(guide, /_authToken=\$\{NODE_AUTH_TOKEN\}/);
   assert.match(guide, /--save-exact/);
 
   for (const path of [
-    "@libitum/design-tokens",
-    "@libitum/design-tokens/css/variables.css",
-    "@libitum/design-tokens/css/typography.css",
-    "@libitum/icons/heart",
-    "@libitum/icons/no-padding/heart",
-    "@libitum/icons/manifest.json",
+    "@libitums/design-tokens",
+    "@libitums/design-tokens/css/variables.css",
+    "@libitums/design-tokens/css/typography.css",
+    "@libitums/icons/heart",
+    "@libitums/icons/no-padding/heart",
+    "@libitums/icons/manifest.json",
   ]) {
     assert.equal(guide.includes(path), true, `Missing guide path: ${path}`);
   }
