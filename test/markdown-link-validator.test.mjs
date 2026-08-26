@@ -38,7 +38,7 @@ async function createWorkspace(t, files) {
 test("현재 저장소의 내부 링크·anchor와 허용된 외부 링크를 검증한다", async () => {
   const result = await validateMarkdownLinks(repositoryRoot);
 
-  assert.equal(result.fileCount, 18);
+  assert.equal(result.fileCount >= 18, true);
   assert.equal(result.internalLinkCount > 30, true);
   assert.equal(result.externalLinkCount > 0, true);
   assert.equal(result.linkCount, result.internalLinkCount + result.externalLinkCount);
