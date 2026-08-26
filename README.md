@@ -79,7 +79,9 @@ npm run check:generated
 
 `dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일을 생성합니다. 아이콘 에셋 변환은 후속 작업에서 추가합니다.
 
-`npm run validate`는 source 경계와 모든 `foundations/*.json`의 token 구조·alias 참조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 `token.path`를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
+`npm run validate`는 source 경계, 모든 `foundations/*.json`의 token 구조·alias 참조, `components/**/*.md`의 token 참조를 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 token path 또는 Markdown 줄·열 위치를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
+
+Component 문서의 `spacing.16`, `typography.body.m` 같은 참조는 실제 foundation token이어야 합니다. `fg.*`, `brand.*` 등 color 하위 경로는 `color.*` 축약으로 해석하고, 마지막 segment의 `*`는 실제 하위 token이 있을 때만 허용합니다. Extension metadata는 foundation JSON에 해당 경로가 실제 존재해야 합니다. 아직 token이 없는 값은 `현재 대응 토큰 없음`으로 명시하며 검증 결과에서 오류가 아닌 예외로 따로 집계합니다.
 
 `npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. Foundation token 139개는 `dist/design-tokens/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
