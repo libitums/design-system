@@ -114,7 +114,7 @@ export const lessonCardTokens = {
 } as const;
 ```
 
-Web은 CSS token을 우선하고, TypeScript token은 JavaScript 계산이나 platform adapter처럼 CSS를 직접 사용할 수 없는 곳에 사용합니다. Native adapter는 `font.family.*`의 CSS 전용 이름을 그대로 전달하지 않고 등록된 platform font로 연결합니다.
+Web은 CSS token을 우선하고, TypeScript token은 JavaScript 계산이나 platform adapter처럼 CSS를 직접 사용할 수 없는 곳에 사용합니다. Native adapter는 `font.family.*` 배열의 Web용 font-family stack을 그대로 전달하지 않고 등록된 platform font로 연결합니다.
 
 ## Icon
 

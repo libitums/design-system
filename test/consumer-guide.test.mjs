@@ -67,5 +67,7 @@ test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한�
   assert.match(guide, /같은 exact version/);
   assert.match(guide, /package\.json.*lockfile/);
   assert.match(guide, /Font Delivery/);
+  assert.match(guide, /font\.family\.\*.*Web용 font-family stack/);
+  assert.doesNotMatch(guide, /CSS 전용 이름/);
   assert.match(guide, /accessible name/);
 });
