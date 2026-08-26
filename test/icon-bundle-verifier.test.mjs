@@ -30,7 +30,7 @@ function validMeasurement() {
       files: [{ path: "static/js/main.js", rawBytes: 492, gzipBytes: 402 }],
       gzipBytes: 402,
       rawBytes: 492,
-      svgModules: ["asset|/fixture/node_modules/@libitum/icons/heart.svg"],
+      svgModules: ["asset|/fixture/node_modules/@libitums/icons/heart.svg"],
     },
     sourceBytes: 310,
   };
@@ -66,7 +66,7 @@ test("미사용 아이콘 포함과 budget 초과를 구분해 실패 처리한�
   const measurement = validMeasurement();
   measurement.singleIcon.containsUnusedPayload = true;
   measurement.singleIcon.svgModules.push(
-    "asset|/fixture/node_modules/@libitum/icons/arrow-down.svg",
+    "asset|/fixture/node_modules/@libitums/icons/arrow-down.svg",
   );
   measurement.delta = { rawBytes: 545, gzipBytes: 439 };
 

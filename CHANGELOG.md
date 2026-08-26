@@ -1,6 +1,6 @@
 # Changelog
 
-이 저장소에서 생성하는 `@libitum/design-tokens`와 `@libitum/icons`의 주요 변경을 기록합니다.
+이 저장소에서 생성하는 `@libitums/design-tokens`와 `@libitums/icons`의 주요 변경을 기록합니다.
 
 형식은 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)를 따르며, version은 [Semantic Versioning](https://semver.org/)과 [release policy](./RELEASING.md)를 기준으로 판정합니다.
 
@@ -11,6 +11,10 @@
 - 두 package의 lockstep SemVer, deprecation과 changelog 운영 정책을 정의했습니다. (LIB-128)
 - GitHub Packages stable·canary 배포 workflow와 중복 version 차단·결과 기록을 추가했습니다. (LIB-129)
 - Frontend package 인증·설치·token·icon 사용과 upgrade 가이드를 추가했습니다. (LIB-130)
+
+### Changed
+
+- BREAKING: GitHub Packages scope를 실제 조직 owner와 일치하는 `@libitums`로 변경했습니다. 아직 배포된 기존 package version은 없습니다. (LIB-180)
 
 ### Fixed
 

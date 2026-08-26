@@ -79,7 +79,7 @@ test("literal readonly 선언과 package exports를 생성한다", async () => {
   assert.match(result.declarations, /export declare const tokens:/);
   assert.doesNotMatch(result.declarations, /\bany\b|\bunknown\b/);
 
-  assert.equal(packageManifest.name, "@libitum/design-tokens");
+  assert.equal(packageManifest.name, "@libitums/design-tokens");
   assert.deepEqual(packageManifest.repository, {
     type: "git",
     url: "https://github.com/libitums/design-system.git",
@@ -109,7 +109,7 @@ test("생성 package를 대표 import 문법으로 소비한다", async (t) => {
   const packageDirectory = join(
     rootDirectory,
     "node_modules",
-    "@libitum",
+    "@libitums",
     "design-tokens",
   );
   await cp(join(rootDirectory, "dist", "design-tokens"), packageDirectory, {
@@ -120,7 +120,7 @@ test("생성 package를 대표 import 문법으로 소비한다", async (t) => {
   await writeFile(
     consumerFile,
     [
-      'import { color, spacing, tokens, typography } from "@libitum/design-tokens";',
+      'import { color, spacing, tokens, typography } from "@libitums/design-tokens";',
       "export const values = {",
       "  brand: color.brand.primary,",
       "  gap: spacing[16],",

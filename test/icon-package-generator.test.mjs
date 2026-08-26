@@ -79,7 +79,7 @@ test("현재 815개 아이콘을 충돌 없는 개별 export로 생성한다", a
   assert.equal(result.icons.length, 815);
   assert.equal(new Set(result.icons.map((icon) => icon.exportName)).size, 815);
   assert.equal(manifest.icons.length, 815);
-  assert.equal(packageManifest.name, "@libitum/icons");
+  assert.equal(packageManifest.name, "@libitums/icons");
   assert.equal(packageManifest.version, "0.0.0");
   assert.equal(packageManifest.sideEffects, false);
   assert.deepEqual(packageManifest.repository, {
@@ -139,14 +139,14 @@ test("padding 기본 경로와 no-padding 별도 경로를 실제 package에서 
   const packageDirectory = join(
     rootDirectory,
     "node_modules",
-    "@libitum",
+    "@libitums",
     "icons",
   );
   await cp(result.outputDirectory, packageDirectory, { recursive: true });
 
   const require = createRequire(join(rootDirectory, "consumer.cjs"));
-  const paddingPath = require.resolve("@libitum/icons/heart");
-  const noPaddingPath = require.resolve("@libitum/icons/no-padding/heart");
+  const paddingPath = require.resolve("@libitums/icons/heart");
+  const noPaddingPath = require.resolve("@libitums/icons/no-padding/heart");
 
   assert.equal(
     paddingPath,
