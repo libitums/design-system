@@ -103,6 +103,27 @@ test("존재하지 않는 경로와 anchor를 파일·줄·열로 구분한다",
   );
 });
 
+test("링크 텍스트나 label과 destination이 같아도 실제 destination 열을 출력한다", async (t) => {
+  const rootDirectory = await createWorkspace(t, {
+    "README.md": ["[path](path)", "[path]: path", ""].join("\n"),
+  });
+
+  await assert.rejects(
+    () => validateMarkdownLinks(rootDirectory),
+    (error) => {
+      assert.equal(error instanceof MarkdownLinkValidationError, true);
+      assert.deepEqual(
+        error.errors.map(({ code, column, line }) => ({ code, column, line })),
+        [
+          { code: "missing-path", column: 8, line: 1 },
+          { code: "missing-path", column: 9, line: 2 },
+        ],
+      );
+      return true;
+    },
+  );
+});
+
 test("component 외부 링크와 비HTTPS 링크를 정책 위반으로 구분한다", async (t) => {
   const rootDirectory = await createWorkspace(t, {
     "components/example.md":

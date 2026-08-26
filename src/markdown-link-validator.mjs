@@ -74,8 +74,13 @@ function extractMarkdownLinks(contents) {
 
     for (const match of line.matchAll(inlineLinkPattern)) {
       const rawDestination = match[1];
+      const destinationBoundary = match[0].indexOf("](") + 2;
+      const destinationIndex = match[0].indexOf(
+        rawDestination,
+        destinationBoundary,
+      );
       links.push({
-        column: match.index + match[0].indexOf(rawDestination) + 1,
+        column: match.index + destinationIndex + 1,
         line: lineIndex + 1,
         target: unwrapDestination(rawDestination),
       });
@@ -83,10 +88,12 @@ function extractMarkdownLinks(contents) {
 
     const definition = referenceDefinitionPattern.exec(line);
     if (definition !== null) {
+      const rawDestination = definition[1];
+      const destinationBoundary = line.indexOf("]:") + 2;
       links.push({
-        column: line.indexOf(definition[1]) + 1,
+        column: line.indexOf(rawDestination, destinationBoundary) + 1,
         line: lineIndex + 1,
-        target: unwrapDestination(definition[1]),
+        target: unwrapDestination(rawDestination),
       });
     }
   });
@@ -246,7 +253,10 @@ async function validateInternalLink(context) {
   const { anchorCache, file, filePath, link, rootDirectory } = context;
   const target = splitInternalTarget(link.target);
 
-  if (target.path === undefined || target.fragment === undefined && link.target.includes("#")) {
+  if (
+    target.path === undefined ||
+    (target.fragment === undefined && link.target.includes("#"))
+  ) {
     return createError(
       "missing-path",
       link,
