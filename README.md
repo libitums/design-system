@@ -84,6 +84,8 @@ npm run check:icon-bundle
 
 Pull Request와 `main` push에서는 GitHub Actions가 위 검증을 자동 실행합니다. `Validate source`, `Test`, `Build`, `Check generated output`, `Check icon bundle`을 독립된 job으로 표시하고, 한 job이 실패해도 나머지 검증을 계속 실행합니다. CI는 `.node-version`의 Node.js 24, npm 11.16.0과 `package-lock.json` 기반 npm cache를 사용합니다.
 
+검증된 package는 GitHub Actions의 `Publish packages` workflow에서 GitHub Packages로 배포합니다. `stable`은 현재 `main` HEAD만 `latest`로 배포하고, `canary`는 선택한 ref를 고유한 prerelease version과 별도 dist-tag로 배포합니다. 인증·중복 version·결과 기록 기준은 [release policy](./RELEASING.md)를 따릅니다.
+
 `dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일, 개별 아이콘 package를 생성합니다.
 
 `npm run validate`는 source 경계, 모든 `foundations/*.json`의 token 구조·alias 참조, `components/**/*.md`의 token 참조, 저장소 Markdown 링크, SVG 아이콘 규칙을 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 token path 또는 Markdown 줄·열 위치를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.

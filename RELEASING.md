@@ -97,12 +97,30 @@ Git commit 목록을 그대로 changelog로 사용하지 않습니다. 각 항�
 3. Build 후 두 생성 package manifest가 같은 버전인지 확인합니다.
 4. `Unreleased` 항목을 `## [x.y.z] - YYYY-MM-DD` 아래로 이동하고 빈 `Unreleased` section을 다시 만듭니다.
 5. Release PR에서 validate, test, build, 생성물 결정성과 icon bundle 검증을 모두 통과시킵니다.
-6. Release PR이 `main`에 병합된 commit만 publish 대상으로 사용합니다.
-7. Publish 성공 후 `vX.Y.Z` Git tag와 같은 버전의 GitHub Release를 남깁니다.
+6. Release PR이 `main`에 병합된 뒤 `Publish packages` workflow를 `stable` channel로 실행합니다.
+7. Workflow는 실행 시점의 `main` HEAD와 version·changelog·package manifest를 다시 검증합니다.
+8. 두 package를 `latest` dist-tag로 publish한 뒤 `vX.Y.Z` Git tag와 같은 버전의 GitHub Release를 남깁니다.
 
 이미 배포한 version의 내용을 덮어쓰지 않습니다. 수정이 필요하면 반드시 새 version을 release합니다. 실제 registry 인증, stable·canary trigger와 중복 publish 차단은 npm 배포 workflow에서 구현합니다.
 
-Canary는 SemVer prerelease 형식을 사용하고 stable `latest`와 분리합니다. Canary에서 검증한 변경 내용은 정식 release 전까지 `Unreleased`에 유지하며 별도의 released section으로 옮기지 않습니다.
+### 배포 channel
+
+GitHub Actions의 `Publish packages` workflow는 수동 실행하며 `canary`와 `stable` 중 하나를 선택합니다. 동시에 두 배포가 실행되지 않도록 직렬화하고, 모든 source·test·build·생성물·icon bundle 검증을 다시 통과한 산출물만 GitHub Packages에 올립니다.
+
+- `stable`: 현재 `main` HEAD에서만 실행합니다. 루트의 stable SemVer와 날짜가 확정된 changelog section을 요구하고 `latest` dist-tag로 배포합니다. 개발용 `0.0.0`은 stable로 배포할 수 없습니다.
+- `canary`: 선택한 branch나 commit에서 실행할 수 있습니다. 루트 version에 `-canary.<run number>.<short sha>`를 붙이고 `canary` dist-tag로 배포합니다. 생성된 `dist` manifest만 이 prerelease version으로 바꾸며 source version은 수정하지 않습니다.
+
+Workflow는 먼저 registry에서 두 package의 같은 version을 모두 조회합니다. 이미 존재하는 package에는 `npm publish`를 다시 실행하지 않고, 한 package만 성공한 부분 실패도 같은 workflow를 재실행해 나머지를 복구할 수 있습니다. 인증·권한 오류는 미배포 상태로 간주하지 않고 즉시 실패합니다.
+
+배포 결과는 Actions Job Summary에 channel, dist-tag, version, 두 GitHub Packages URL과 package별 `published` 또는 `already-published` 상태로 남깁니다.
+
+Canary에서 검증한 변경 내용은 정식 release 전까지 `Unreleased`에 유지하며 별도의 released section으로 옮기지 않습니다.
+
+### Registry와 권한
+
+두 package manifest의 `repository`와 `publishConfig`가 이 저장소와 `https://npm.pkg.github.com`을 가리킵니다. Workflow는 별도 장기 token을 저장하지 않고 해당 실행의 `GITHUB_TOKEN`과 `packages: write` 권한으로 private package를 배포합니다.
+
+첫 배포 후 각 package의 GitHub Packages 설정에서 실제 consumer repository에 Actions read access를 부여합니다. 개발자가 로컬에서 설치할 때는 `read:packages` 권한이 있는 개인 token을 사용하며, token 값은 저장소에 커밋하지 않습니다. 구체적인 소비 설정은 프론트엔드 소비 가이드에서 관리합니다.
 
 ## 참고
 

@@ -80,6 +80,14 @@ test("literal readonly 선언과 package exports를 생성한다", async () => {
   assert.doesNotMatch(result.declarations, /\bany\b|\bunknown\b/);
 
   assert.equal(packageManifest.name, "@libitum/design-tokens");
+  assert.deepEqual(packageManifest.repository, {
+    type: "git",
+    url: "https://github.com/libitums/design-system.git",
+  });
+  assert.deepEqual(packageManifest.publishConfig, {
+    access: "restricted",
+    registry: "https://npm.pkg.github.com",
+  });
   assert.deepEqual(packageManifest.exports["."], {
     types: "./index.d.ts",
     import: "./index.js",
