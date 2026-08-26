@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { resolve } from "node:path";
 import test from "node:test";
 
 import {
@@ -89,6 +90,38 @@ test("조회가 모두 끝난 뒤 없는 package만 publish한다", async () => 
         "--access=restricted",
       ],
     ],
+  );
+});
+
+test("상대 package directory를 절대 local 경로로 배포한다", async () => {
+  const calls = [];
+  const execute = async (arguments_) => {
+    calls.push(arguments_);
+    if (arguments_[0] === "view") {
+      throw notFound();
+    }
+    return { stdout: "" };
+  };
+  const rootDirectory = "/workspace/design-system";
+
+  await publishPackages({
+    execute,
+    npmTag: "canary",
+    packages: [
+      {
+        directory: "dist/design-tokens",
+        name: "@libitum/design-tokens",
+        pageSlug: "design-tokens",
+      },
+    ],
+    rootDirectory,
+    version: "0.0.0-canary.1.0123456",
+  });
+
+  const publishCall = calls.find(([command]) => command === "publish");
+  assert.equal(
+    publishCall[1],
+    resolve(rootDirectory, "dist/design-tokens"),
   );
 });
 
