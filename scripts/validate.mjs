@@ -17,6 +17,10 @@ import {
   TokenSchemaValidationError,
   validateFoundationTokenFiles,
 } from "../src/token-schema-validator.mjs";
+import {
+  SvgIconValidationError,
+  validateSvgIcons,
+} from "../src/svg-icon-validator.mjs";
 
 const rootDirectory = fileURLToPath(new URL("..", import.meta.url));
 
@@ -27,6 +31,7 @@ try {
   const markdownTokenResult =
     await validateMarkdownTokenReferences(rootDirectory);
   const markdownLinkResult = await validateMarkdownLinks(rootDirectory);
+  const svgIconResult = await validateSvgIcons(rootDirectory);
 
   console.log("Validated source directories:");
   for (const sourcePath of sourcePaths) {
@@ -44,12 +49,16 @@ try {
   console.log(
     `Validated ${markdownLinkResult.linkCount} Markdown links across ${markdownLinkResult.fileCount} files (${markdownLinkResult.internalLinkCount} internal, ${markdownLinkResult.externalLinkCount} allowed external).`,
   );
+  console.log(
+    `Validated ${svgIconResult.fileCount} SVG icon files across ${svgIconResult.categoryCount} categories (${svgIconResult.pairCount} padding/no-padding pairs).`,
+  );
 } catch (error) {
   if (
     error instanceof TokenSchemaValidationError ||
     error instanceof TokenAliasValidationError ||
     error instanceof MarkdownTokenReferenceValidationError ||
-    error instanceof MarkdownLinkValidationError
+    error instanceof MarkdownLinkValidationError ||
+    error instanceof SvgIconValidationError
   ) {
     console.error(error.message);
     process.exitCode = 1;
