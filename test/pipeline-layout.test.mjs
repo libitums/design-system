@@ -55,6 +55,40 @@ test("private tooling package와 지원 runtime을 고정한다", async () => {
   assert.equal(nodeVersion.trim(), "24");
 });
 
+test("PR과 main에서 검증 종류별 CI job을 실행한다", async () => {
+  const workflow = (
+    await readFile(
+      join(repositoryRoot, ".github", "workflows", "validate.yml"),
+      "utf8",
+    )
+  ).replaceAll("\r\n", "\n");
+
+  assert.match(workflow, /^on:\n  pull_request:\n  push:\n    branches:\n      - main$/m);
+  assert.match(workflow, /^permissions:\n  contents: read$/m);
+  assert.match(workflow, /^  group: validate-.*github\.workflow.*github\.ref.*$/m);
+  assert.match(workflow, /^  cancel-in-progress: true$/m);
+  assert.match(workflow, /^    name: \$\{\{ matrix\.name \}\}$/m);
+  assert.match(workflow, /^    runs-on: ubuntu-24\.04$/m);
+  assert.match(workflow, /^      fail-fast: false$/m);
+  assert.match(workflow, /^        uses: actions\/checkout@v6$/m);
+  assert.match(workflow, /^        uses: actions\/setup-node@v6$/m);
+  assert.match(workflow, /^          node-version-file: \.node-version$/m);
+  assert.match(workflow, /^          cache: npm$/m);
+  assert.match(workflow, /^          cache-dependency-path: package-lock\.json$/m);
+  assert.match(workflow, /^        run: npm install --global npm@11\.16\.0$/m);
+  assert.match(workflow, /^        run: npm ci$/m);
+
+  for (const command of [
+    "npm run validate",
+    "npm test",
+    "npm run build",
+    "npm run check:generated",
+    "npm run check:icon-bundle",
+  ]) {
+    assert.match(workflow, new RegExp(`^            command: ${command}$`, "m"));
+  }
+});
+
 test("필수 source 디렉터리를 검증한다", async (t) => {
   const rootDirectory = await createWorkspace(t);
   const sourcePaths = await validateSourceLayout(rootDirectory);
