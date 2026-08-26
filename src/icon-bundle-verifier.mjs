@@ -50,12 +50,32 @@ async function listFiles(directory) {
 function collectSvgModules(stats) {
   const statsItems = Array.isArray(stats.stats) ? stats.stats : [stats];
   return statsItems
-    .flatMap((item) =>
-      [...item.compilation.modules]
+    .flatMap((item) => {
+      const modules = item.compilation?.modules;
+      if (modules === undefined) {
+        throw new Error("Rspack compilation modules are unavailable");
+      }
+
+      return [...modules]
         .map((module) => module.identifier().replaceAll("\\", "/"))
-        .filter((identifier) => identifier.includes(".svg")),
-    )
+        .filter((identifier) => identifier.includes(".svg"));
+    })
     .sort(compareStrings);
+}
+
+export function assertSuccessfulBuildStats(stats, name) {
+  if (stats === undefined) {
+    throw new Error(`Rspeedy did not return build stats for ${name}`);
+  }
+  if (stats.hasErrors()) {
+    throw new Error(
+      `Rspeedy build failed for ${name}:\n${stats.toString({
+        all: false,
+        colors: false,
+        errors: true,
+      })}`,
+    );
+  }
 }
 
 async function buildFixture(
@@ -102,9 +122,8 @@ async function buildFixture(
 
   const build = await rspeedy.build();
   try {
-    if (build.stats === undefined) {
-      throw new Error(`Rspeedy did not return build stats for ${name}`);
-    }
+    const stats = build?.stats;
+    assertSuccessfulBuildStats(stats, name);
 
     const files = [];
     let outputText = "";
@@ -126,10 +145,10 @@ async function buildFixture(
       files,
       gzipBytes: files.reduce((sum, file) => sum + file.gzipBytes, 0),
       rawBytes: files.reduce((sum, file) => sum + file.rawBytes, 0),
-      svgModules: collectSvgModules(build.stats),
+      svgModules: collectSvgModules(stats),
     };
   } finally {
-    await build.close();
+    await build?.close?.();
   }
 }
 

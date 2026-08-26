@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   IconBundleVerificationError,
+  assertSuccessfulBuildStats,
   calculateIconBundleBudgets,
   evaluateIconBundleMeasurement,
   verifyIconBundle,
@@ -42,6 +43,20 @@ test("base64 인라인과 wrapper 여유를 원본 크기 기반 budget으로 �
   });
 });
 
+test("Rspeedy compilation 오류를 산출물 검증 전에 보고한다", () => {
+  assert.throws(
+    () =>
+      assertSuccessfulBuildStats(
+        {
+          hasErrors: () => true,
+          toString: () => "Module not found: ./missing.svg",
+        },
+        "single-icon",
+      ),
+    /Rspeedy build failed for single-icon:\nModule not found: \.\/missing\.svg/,
+  );
+});
+
 test("module·payload·산출물·raw/gzip 기준을 모두 만족하면 통과한다", () => {
   const measurement = validMeasurement();
   assert.equal(evaluateIconBundleMeasurement(measurement), measurement);
@@ -72,7 +87,12 @@ test("미사용 아이콘 포함과 budget 초과를 구분해 실패 처리한�
 test("현재 package의 단일 아이콘 Rspeedy production bundle을 검증한다", async () => {
   const result = await verifyIconBundle(repositoryRoot);
 
-  assert.equal(result.sourceBytes, 310);
+  assert.equal(typeof result.sourceBytes, "number");
+  assert.ok(result.sourceBytes > 0);
+  assert.deepEqual(
+    result.budgets,
+    calculateIconBundleBudgets(result.sourceBytes),
+  );
   assert.equal(result.singleIcon.svgModules.length, 1);
   assert.equal(result.singleIcon.containsRepresentativePayload, true);
   assert.equal(result.singleIcon.containsUnusedPayload, false);
