@@ -6,6 +6,10 @@ import {
   validateMarkdownTokenReferences,
 } from "../src/markdown-token-reference-validator.mjs";
 import {
+  MarkdownLinkValidationError,
+  validateMarkdownLinks,
+} from "../src/markdown-link-validator.mjs";
+import {
   TokenAliasValidationError,
   validateFoundationTokenAliases,
 } from "../src/token-alias-validator.mjs";
@@ -22,6 +26,7 @@ try {
   const aliasResult = await validateFoundationTokenAliases(rootDirectory);
   const markdownTokenResult =
     await validateMarkdownTokenReferences(rootDirectory);
+  const markdownLinkResult = await validateMarkdownLinks(rootDirectory);
 
   console.log("Validated source directories:");
   for (const sourcePath of sourcePaths) {
@@ -36,11 +41,15 @@ try {
   console.log(
     `Validated ${markdownTokenResult.referenceCount} Markdown token references across ${markdownTokenResult.fileCount} component files (${markdownTokenResult.exceptionCount} explicit exceptions).`,
   );
+  console.log(
+    `Validated ${markdownLinkResult.linkCount} Markdown links across ${markdownLinkResult.fileCount} files (${markdownLinkResult.internalLinkCount} internal, ${markdownLinkResult.externalLinkCount} allowed external).`,
+  );
 } catch (error) {
   if (
     error instanceof TokenSchemaValidationError ||
     error instanceof TokenAliasValidationError ||
-    error instanceof MarkdownTokenReferenceValidationError
+    error instanceof MarkdownTokenReferenceValidationError ||
+    error instanceof MarkdownLinkValidationError
   ) {
     console.error(error.message);
     process.exitCode = 1;
