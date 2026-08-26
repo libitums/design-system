@@ -75,6 +75,7 @@ npm run validate
 npm test
 npm run build
 npm run check:generated
+npm run check:icon-bundle
 ```
 
 `dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일, 개별 아이콘 package를 생성합니다.
@@ -131,6 +132,14 @@ const iconSources = { heart, heartNoPadding };
 ```
 
 `@libitum/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 이 package에 포함하지 않으며 FE 모노레포의 `@libitum/ui-lynx`에서 담당합니다.
+
+아이콘 bundle 검증은 고정된 `@lynx-js/rspeedy` 0.16.5 production build로 빈 entry와 `heart` 단일 import를 비교합니다. Rspeedy 기본값에 따라 2KiB 미만 SVG는 data URI로 인라인되므로, 별도 SVG 파일 개수만 세지 않고 Rspack module graph와 raw·gzip bundle 증가량을 함께 검사합니다.
+
+```sh
+npm run check:icon-bundle
+```
+
+통과 기준은 `heart.svg` module만 포함되고 `arrow-down.svg`의 module과 payload가 제외되는 것입니다. 산출물은 `static/js/main.js` 하나여야 합니다. Raw 증가는 원본 SVG의 base64 크기 + 128B 이하, gzip 증가는 원본 크기 + 128B 이하로 제한합니다. 현재 310B `heart.svg` 기준 budget은 raw 544B / gzip 438B이며, 측정값은 raw 442B / gzip 332B입니다.
 
 Package exports는 다음 경로를 제공합니다.
 
