@@ -9,3 +9,4 @@
 ### Added
 
 - 두 package의 lockstep SemVer, deprecation과 changelog 운영 정책을 정의했습니다. (LIB-128)
+- GitHub Packages stable·canary 배포 workflow와 중복 version 차단·결과 기록을 추가했습니다. (LIB-129)

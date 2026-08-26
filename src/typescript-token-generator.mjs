@@ -1,6 +1,8 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+import { packagePublishMetadata } from "./package-publish-config.mjs";
+
 export const typeScriptTokenOutputPaths = Object.freeze({
   declarations: "dist/design-tokens/index.d.ts",
   module: "dist/design-tokens/index.js",
@@ -307,8 +309,10 @@ function generatePackageManifest(version) {
     {
       name: "@libitum/design-tokens",
       version,
+      description: "libitum design tokens for TypeScript and CSS",
       type: "module",
       sideEffects: false,
+      ...packagePublishMetadata(),
       files: ["index.js", "index.d.ts", "css"],
       exports: {
         ".": {

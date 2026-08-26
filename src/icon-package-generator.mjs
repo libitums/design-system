@@ -9,6 +9,7 @@ import {
 import { basename, extname, join, resolve } from "node:path";
 
 import { validateSvgIcons } from "./svg-icon-validator.mjs";
+import { packagePublishMetadata } from "./package-publish-config.mjs";
 
 const copyChunkSize = 64;
 const packageName = "@libitum/icons";
@@ -143,8 +144,10 @@ function generatePackageManifest(version, icons) {
     {
       name: packageName,
       version,
+      description: "libitum SVG icon assets with padding and no-padding variants",
       type: "module",
       sideEffects: false,
+      ...packagePublishMetadata(),
       files: ["*.svg", "no-padding", "manifest.json", "svg.d.ts"],
       exports,
     },

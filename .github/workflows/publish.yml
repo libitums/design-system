@@ -1,0 +1,106 @@
+name: Publish packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Publish channel
+        required: true
+        default: canary
+        type: choice
+        options:
+          - canary
+          - stable
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: publish-packages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish ${{ inputs.channel }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+
+    steps:
+      - name: Checkout selected ref
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Require current main commit for stable
+        if: inputs.channel == 'stable'
+        run: |
+          git fetch --no-tags origin "${{ github.event.repository.default_branch }}"
+          test "$GITHUB_SHA" = "$(git rev-parse FETCH_HEAD)"
+
+      - name: Set up Node.js and GitHub Packages
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: package-lock.json
+          registry-url: https://npm.pkg.github.com
+          scope: '@libitum'
+
+      - name: Set up npm
+        run: npm install --global npm@11.16.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate source
+        run: npm run validate
+
+      - name: Test
+        run: npm test
+
+      - name: Build packages
+        run: npm run build
+
+      - name: Check generated output
+        run: npm run check:generated
+
+      - name: Check icon bundle
+        run: npm run check:icon-bundle
+
+      - name: Prepare publish metadata
+        id: metadata
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          PUBLISH_CHANNEL: ${{ inputs.channel }}
+        run: node scripts/prepare-publish.mjs
+
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TAG: ${{ steps.metadata.outputs.npm_tag }}
+          PUBLISH_CHANNEL: ${{ steps.metadata.outputs.channel }}
+          PUBLISH_VERSION: ${{ steps.metadata.outputs.version }}
+        run: node scripts/publish-packages.mjs
+
+  release:
+    name: Create stable release
+    if: inputs.channel == 'stable'
+    needs: publish
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Create stable tag and GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: v${{ needs.publish.outputs.version }}
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "$RELEASE_TAG release already exists"
+          else
+            gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "$RELEASE_TAG" --generate-notes
+          fi

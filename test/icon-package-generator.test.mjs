@@ -82,6 +82,14 @@ test("현재 815개 아이콘을 충돌 없는 개별 export로 생성한다", a
   assert.equal(packageManifest.name, "@libitum/icons");
   assert.equal(packageManifest.version, "0.0.0");
   assert.equal(packageManifest.sideEffects, false);
+  assert.deepEqual(packageManifest.repository, {
+    type: "git",
+    url: "https://github.com/libitums/design-system.git",
+  });
+  assert.deepEqual(packageManifest.publishConfig, {
+    access: "restricted",
+    registry: "https://npm.pkg.github.com",
+  });
   assert.deepEqual(packageManifest.files, [
     "*.svg",
     "no-padding",
