@@ -56,10 +56,12 @@ test("private tooling package와 지원 runtime을 고정한다", async () => {
 });
 
 test("PR과 main에서 검증 종류별 CI job을 실행한다", async () => {
-  const workflow = await readFile(
-    join(repositoryRoot, ".github", "workflows", "validate.yml"),
-    "utf8",
-  );
+  const workflow = (
+    await readFile(
+      join(repositoryRoot, ".github", "workflows", "validate.yml"),
+      "utf8",
+    )
+  ).replaceAll("\r\n", "\n");
 
   assert.match(workflow, /^on:\n  pull_request:\n  push:\n    branches:\n      - main$/m);
   assert.match(workflow, /^permissions:\n  contents: read$/m);
