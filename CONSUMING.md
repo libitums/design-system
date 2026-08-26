@@ -153,10 +153,10 @@ Futura는 Webfont·App 라이선스와 파일 출처가 확정되기 전까지 �
 ```text
 ❌ color: #1A1C20
 ❌ padding: 16px
-❌ spacing.16을 icon size나 다른 의미의 값으로 전용
+❌ spacing[16]을 icon size나 다른 의미의 값으로 전용
 
 ✅ color.fg.neutral
-✅ spacing.16
+✅ spacing[16]
 ✅ icon.size.md
 ```
 

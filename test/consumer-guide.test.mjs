@@ -61,6 +61,8 @@ test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한�
   assert.match(guide, /## 하드코딩과 token 요청/);
   assert.match(guide, /\[FE\]\[Design-system\]/);
   assert.match(guide, /raw 값이나 의미가 다른 token/);
+  assert.match(guide, /spacing\[16\]/);
+  assert.doesNotMatch(guide, /spacing\.16/);
   assert.match(guide, /## Version upgrade/);
   assert.match(guide, /같은 exact version/);
   assert.match(guide, /package\.json.*lockfile/);
