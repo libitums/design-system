@@ -48,6 +48,7 @@ test("private tooling package와 지원 runtime을 고정한다", async () => {
   assert.deepEqual(packageJson.scripts, {
     build: "node scripts/build.mjs",
     "check:generated": "node scripts/check-generated.mjs",
+    "check:icon-bundle": "node scripts/check-icon-bundle.mjs",
     validate: "node scripts/validate.mjs",
     test: "node --test",
   });
