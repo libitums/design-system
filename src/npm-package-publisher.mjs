@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { resolve } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 import { promisify } from "node:util";
 
 import { npmRegistry, publishedPackages } from "./package-publish-config.mjs";
@@ -75,7 +75,9 @@ export async function publishPackages({
 
     await execute([
       "publish",
-      resolve(rootDirectory, package_.directory),
+      isAbsolute(package_.directory)
+        ? package_.directory
+        : resolve(rootDirectory, package_.directory),
       `--tag=${npmTag}`,
       `--registry=${registry}`,
       "--access=restricted",
