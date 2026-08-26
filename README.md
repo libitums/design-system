@@ -85,7 +85,7 @@ Component 문서의 `spacing.16`, `typography.body.m` 같은 참조는 실제 fo
 
 Markdown 링크는 상대 경로의 대소문자와 대상 heading anchor까지 검사합니다. Component 스펙은 저장소 안에서 완결되어야 하므로 외부 링크를 허용하지 않습니다. Root와 foundation 문서는 출처·표준을 위한 HTTPS 링크만 허용하며 HTTP와 그 밖의 외부 scheme은 정책 위반으로 구분합니다. 외부 페이지의 네트워크 접근 가능 여부는 검사하지 않습니다.
 
-SVG 아이콘은 `padding`과 `no-padding`의 `category/name.svg` 상대 경로가 한 쌍이어야 합니다. `padding`의 viewBox는 `0 0 10 10`으로 고정하고, 모든 SVG의 root와 별도 fill 선언은 `currentColor`만 허용합니다. 파일명은 변형 안에서 대소문자를 무시하고 고유해야 하며, 잘못된 XML과 지원하지 않는 child element는 파싱 오류로 처리합니다.
+SVG 아이콘은 `padding`과 `no-padding`의 `category/name.svg` 2단계 상대 경로가 한 쌍이어야 합니다. `padding`의 viewBox는 `0 0 10 10`으로 고정하고, 모든 SVG의 root와 별도 fill 선언은 `currentColor`만 허용합니다. CSS 키워드인 `currentColor` 비교는 ASCII 대소문자를 구분하지 않습니다. 파일명은 변형 안에서 대소문자를 무시하고 고유해야 하며, 잘못된 XML, XML 주석·DOCTYPE, 지원하지 않는 child element는 파싱 오류로 처리합니다.
 
 `npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. Foundation token 139개는 `dist/design-tokens/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 

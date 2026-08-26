@@ -3,6 +3,7 @@ import { basename, join, relative, resolve, sep } from "node:path";
 
 const iconVariants = Object.freeze(["padding", "no-padding"]);
 const supportedElements = new Set(["path", "rect", "ellipse"]);
+const validationChunkSize = 64;
 
 function portablePath(path) {
   return path.split(sep).join("/");
@@ -184,7 +185,10 @@ function validateViewBox(document, variant, file, errors) {
 
   if (
     variant === "padding" &&
-    !viewBox.every((value, index) => value === [0, 0, 10, 10][index])
+    (viewBox[0] !== 0 ||
+      viewBox[1] !== 0 ||
+      viewBox[2] !== 10 ||
+      viewBox[3] !== 10)
   ) {
     errors.push(
       createError(
@@ -194,6 +198,10 @@ function validateViewBox(document, variant, file, errors) {
       ),
     );
   }
+}
+
+function isCurrentColor(value) {
+  return value?.toLowerCase() === "currentcolor";
 }
 
 function styleFill(style) {
@@ -216,7 +224,7 @@ function styleFill(style) {
 
 function validateFill(document, file, errors) {
   const rootFill = document.rootAttributes.get("fill");
-  if (rootFill !== "currentColor") {
+  if (!isCurrentColor(rootFill)) {
     errors.push(
       createError(
         "fill",
@@ -227,7 +235,7 @@ function validateFill(document, file, errors) {
   }
 
   const rootStyleFill = styleFill(document.rootAttributes.get("style"));
-  if (rootStyleFill !== undefined && rootStyleFill !== "currentColor") {
+  if (rootStyleFill !== undefined && !isCurrentColor(rootStyleFill)) {
     errors.push(
       createError(
         "fill",
@@ -244,7 +252,7 @@ function validateFill(document, file, errors) {
       ["fill", fill],
       ["style fill", inlineFill],
     ]) {
-      if (value !== undefined && value !== "currentColor") {
+      if (value !== undefined && !isCurrentColor(value)) {
         errors.push(
           createError(
             "fill",
@@ -416,14 +424,36 @@ export async function validateSvgIcons(rootDirectory = process.cwd()) {
 
   errors.push(...compareVariantPairs(relativeFilesByVariant));
 
-  const validations = [];
+  const validationInputs = [];
   for (const variant of iconVariants) {
+    const variantDirectory = join(iconsDirectory, variant);
     for (const filePath of filesByVariant.get(variant)) {
       const file = portablePath(relative(rootDirectory, filePath));
-      validations.push(validateSvgFile(filePath, file, variant));
+      const relativePath = portablePath(relative(variantDirectory, filePath));
+      if (relativePath.split("/").length !== 2) {
+        errors.push(
+          createError(
+            "invalid-path",
+            file,
+            `icon must be placed at category/name.svg, received: ${relativePath}`,
+          ),
+        );
+        continue;
+      }
+      validationInputs.push({ file, filePath, variant });
     }
   }
-  errors.push(...(await Promise.all(validations)).flat());
+  for (
+    let index = 0;
+    index < validationInputs.length;
+    index += validationChunkSize
+  ) {
+    const chunk = validationInputs.slice(index, index + validationChunkSize);
+    const validations = chunk.map(({ file, filePath, variant }) =>
+      validateSvgFile(filePath, file, variant),
+    );
+    errors.push(...(await Promise.all(validations)).flat());
+  }
   errors.sort(
     (left, right) =>
       left.file.localeCompare(right.file) ||
