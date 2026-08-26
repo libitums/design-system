@@ -5,6 +5,7 @@ const markdownRoots = Object.freeze([
   "README.md",
   "AGENTS.md",
   "CHANGELOG.md",
+  "CONSUMING.md",
   "RELEASING.md",
   "foundations",
   "components",

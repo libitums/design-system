@@ -20,6 +20,7 @@ async function createWorkspace(t, files) {
   const defaults = {
     "AGENTS.md": "# Agent Guide\n",
     "CHANGELOG.md": "# Changelog\n",
+    "CONSUMING.md": "# Package consumption\n",
     "README.md": "# Readme\n",
     "RELEASING.md": "# Release policy\n",
   };
@@ -44,9 +45,10 @@ test("현재 저장소의 내부 링크·anchor와 허용된 외부 링크를 �
   assert.equal(result.linkCount, result.internalLinkCount + result.externalLinkCount);
 });
 
-test("root release policy와 changelog의 링크도 검증한다", async (t) => {
+test("root release·소비 문서와 changelog의 링크도 검증한다", async (t) => {
   const rootDirectory = await createWorkspace(t, {
     "CHANGELOG.md": "[없는 변경 기록](./missing-changelog.md)\n",
+    "CONSUMING.md": "[없는 소비 가이드](./missing-consumer-guide.md)\n",
     "RELEASING.md": "[없는 배포 정책](./missing-release-policy.md)\n",
   });
 
@@ -58,6 +60,7 @@ test("root release policy와 changelog의 링크도 검증한다", async (t) => 
         error.errors.map(({ code, file }) => ({ code, file })),
         [
           { code: "missing-path", file: "CHANGELOG.md" },
+          { code: "missing-path", file: "CONSUMING.md" },
           { code: "missing-path", file: "RELEASING.md" },
         ],
       );
