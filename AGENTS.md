@@ -41,11 +41,15 @@ components/      컴포넌트 스펙
 └── indicator/            page · status · step
 
 assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
-src/             원본 검증·package 생성 로직
+src/             원본 검증·package 생성 로직 (tooling 계층)
 scripts/         build·validate CLI 진입점
 test/            파이프라인 자동 테스트
+packages/        배포 가능한 플랫폼별 package 경계
+examples/        design-system 소유 private 소비 fixture·Host
 dist/            재생성 가능한 package 산출물 (Git 제외)
 ```
+
+경로별 책임과 의존 방향은 [workspace 구조](./README.md#workspace-구조)를 따릅니다.
 
 ---
 
@@ -108,6 +112,16 @@ dist/            재생성 가능한 package 산출물 (Git 제외)
 - 아이콘만 있는 버튼에는 접근성 이름을 붙인다.
 - 상태를 **색만으로** 나타내지 않는다. 점·아이콘·라벨을 함께 둔다.
 - 인디케이터는 개별 요소가 아니라 줄 전체를 하나의 상태로 알린다.
+
+### 7. 저장소 경계를 지킨다
+
+플랫폼별 구현과 검증은 **이 저장소가 소유한다.** 소비 저장소에 wrapper, adapter, alias, loader, plugin이나 우회 코드를 두지 않는다. 소비 저장소가 할 일은 완성된 package를 설치하고 공개된 설정을 연결하는 것까지다.
+
+- 의존은 `foundations`·`components`·`assets` → `src` → `packages` → `examples` 한 방향으로만 흐른다. 역방향 의존을 만들지 않는다.
+- 다른 package는 `exports`에 선언된 공개 경로로만 참조한다. 비공개 경로나 생성 산출물의 내부 파일을 직접 가리키지 않는다.
+- `examples/*`는 `private: true`이며 배포하지 않는다.
+- 배포 대상은 workspace 전체가 아니라 `src/package-publish-config.mjs`의 명시적 allowlist다.
+- 검증에서 package 문제를 발견하면 fixture에 우회 코드를 넣지 말고 별도 이슈로 분리한다.
 
 ---
 
