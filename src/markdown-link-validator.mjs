@@ -9,6 +9,8 @@ const markdownRoots = Object.freeze([
   "RELEASING.md",
   "foundations",
   "components",
+  "packages",
+  "examples",
 ]);
 
 const inlineLinkPattern = /!?\[[^\]]*\]\((<[^>]+>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\)/g;

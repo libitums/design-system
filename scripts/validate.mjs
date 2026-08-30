@@ -21,11 +21,16 @@ import {
   SvgIconValidationError,
   validateSvgIcons,
 } from "../src/svg-icon-validator.mjs";
+import {
+  WorkspaceLayoutValidationError,
+  validateWorkspaceLayout,
+} from "../src/workspace-layout.mjs";
 
 const rootDirectory = fileURLToPath(new URL("..", import.meta.url));
 
 try {
   const sourcePaths = await validateSourceLayout(rootDirectory);
+  const workspaceResult = await validateWorkspaceLayout(rootDirectory);
   const tokenResult = await validateFoundationTokenFiles(rootDirectory);
   const aliasResult = await validateFoundationTokenAliases(rootDirectory);
   const markdownTokenResult =
@@ -37,6 +42,9 @@ try {
   for (const sourcePath of sourcePaths) {
     console.log(`- ${relative(rootDirectory, sourcePath)}`);
   }
+  console.log(
+    `Validated ${workspaceResult.directoryCount} workspace directories (${workspaceResult.packageCount} packages, ${workspaceResult.exampleCount} examples, ${workspaceResult.publishedPackageCount} published).`,
+  );
   console.log(
     `Validated ${tokenResult.fileCount} foundation token files (${tokenResult.tokenCount} tokens).`,
   );
@@ -58,7 +66,8 @@ try {
     error instanceof TokenAliasValidationError ||
     error instanceof MarkdownTokenReferenceValidationError ||
     error instanceof MarkdownLinkValidationError ||
-    error instanceof SvgIconValidationError
+    error instanceof SvgIconValidationError ||
+    error instanceof WorkspaceLayoutValidationError
   ) {
     console.error(error.message);
     process.exitCode = 1;

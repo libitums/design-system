@@ -32,6 +32,8 @@ async function createWorkspace(t, files) {
   }
   await mkdir(join(rootDirectory, "foundations"), { recursive: true });
   await mkdir(join(rootDirectory, "components"), { recursive: true });
+  await mkdir(join(rootDirectory, "packages"), { recursive: true });
+  await mkdir(join(rootDirectory, "examples"), { recursive: true });
 
   return rootDirectory;
 }
