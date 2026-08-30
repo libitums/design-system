@@ -15,6 +15,7 @@ import {
   layerOrder,
   listWorkspacePackages,
   subpathFromSpecifier,
+  validatePublishAllowlist,
   validateWorkspaceDependencies,
   validateWorkspaceLayout,
   workspaceDirectories,
@@ -126,6 +127,12 @@ test("package 간 비공개 경로 import를 거부한다", () => {
   assert.equal(isExportedSubpath("./manifest.json", manifest.exports), true);
   assert.equal(isExportedSubpath("./no-padding/", manifest.exports), false);
   assert.equal(isExportedSubpath("./src/internal.mjs", manifest.exports), false);
+
+  assert.equal(isExportedSubpath(".", undefined), true);
+  assert.equal(isExportedSubpath("./heart", undefined), false);
+  assert.equal(isExportedSubpath(".", "./index.js"), true);
+  assert.equal(isExportedSubpath(".", null), false);
+  assert.equal(isExportedSubpath(".", 0), false);
 
   assert.throws(
     () => assertPublicPackageSpecifier("@libitums/icons/src/internal.mjs", manifest),
@@ -295,6 +302,64 @@ test("배포는 workspace 전체가 아닌 명시적 allowlist를 사용한다",
     assert.doesNotMatch(source, /--workspace=/);
   }
   assert.match(publishWorkflow, /run: node scripts\/publish-packages\.mjs/);
+});
+
+test("배포 allowlist가 알 수 없는 경로와 배포 불가 계층을 거부한다", () => {
+  assert.deepEqual(validatePublishAllowlist(), []);
+  assert.deepEqual(
+    validatePublishAllowlist([{ directory: "dist/design-tokens" }]),
+    [],
+  );
+  assert.deepEqual(validatePublishAllowlist([{ directory: "packages/icons" }]), []);
+  assert.deepEqual(validatePublishAllowlist([]), [
+    "Publish allowlist must name at least one package",
+  ]);
+  assert.deepEqual(
+    validatePublishAllowlist([{ directory: "dists/design-tokens" }]),
+    [
+      "Publish allowlist must not include an unrecognized directory: dists/design-tokens",
+    ],
+  );
+  assert.deepEqual(
+    validatePublishAllowlist([{ directory: "examples/lynx-fixture" }]),
+    [
+      "Publish allowlist must not include examples/lynx-fixture from the examples layer",
+    ],
+  );
+});
+
+test("루트 workspaces가 배열이 아니면 실패한다", async (t) => {
+  const rootDirectory = await createWorkspace(t);
+  await writeJson(join(rootDirectory, "package.json"), {
+    name: "@libitums/design-system",
+    private: true,
+    workspaces: { packages: ["packages/*", "examples/*"] },
+  });
+
+  await assert.rejects(
+    () => validateWorkspaceLayout(rootDirectory),
+    (error) => {
+      assert.deepEqual(error.errors, [
+        'Root package.json must declare workspaces packages/*, examples/*; received {"packages":["packages/*","examples/*"]}',
+      ]);
+      return true;
+    },
+  );
+});
+
+test("package.json이 객체가 아닌 디렉터리는 workspace member로 세지 않는다", async (t) => {
+  const rootDirectory = await createWorkspace(t);
+  await mkdir(join(rootDirectory, "examples/not-a-package"), { recursive: true });
+  await writeFile(
+    join(rootDirectory, "examples/not-a-package/package.json"),
+    "null\n",
+    "utf8",
+  );
+
+  const result = await validateWorkspaceLayout(rootDirectory);
+
+  assert.equal(result.exampleCount, 0);
+  assert.deepEqual(await listWorkspacePackages(rootDirectory), []);
 });
 
 test("저장소 문서가 workspace 계약과 소유 경계를 기록한다", async () => {

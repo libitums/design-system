@@ -12,6 +12,8 @@ export const outputPackages = Object.freeze([
   "icons",
 ]);
 
+export const generatedOutputRoot = "dist";
+
 export async function validateSourceLayout(rootDirectory = process.cwd()) {
   for (const directory of sourceDirectories) {
     const sourcePath = resolve(rootDirectory, directory);
@@ -29,7 +31,7 @@ export async function prepareOutputLayout(rootDirectory = process.cwd()) {
   await validateSourceLayout(rootDirectory);
 
   const outputPaths = outputPackages.map((packageName) =>
-    resolve(rootDirectory, "dist", packageName),
+    resolve(rootDirectory, generatedOutputRoot, packageName),
   );
 
   await Promise.all(

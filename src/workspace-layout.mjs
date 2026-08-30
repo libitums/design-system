@@ -2,6 +2,7 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { publishedPackages } from "./package-publish-config.mjs";
+import { generatedOutputRoot } from "./pipeline-layout.mjs";
 
 export const workspaceGlobs = Object.freeze(["packages/*", "examples/*"]);
 
@@ -125,6 +126,9 @@ export function isExportedSubpath(subpath, exportsField) {
   if (typeof exportsField === "string") {
     return subpath === ".";
   }
+  if (exportsField === null || typeof exportsField !== "object") {
+    return false;
+  }
 
   for (const pattern of Object.keys(exportsField)) {
     if (pattern === subpath) {
@@ -203,11 +207,16 @@ async function listWorkspaceMembers(rootDirectory, directory) {
     const manifest = await readJsonFile(
       resolve(rootDirectory, memberPath, "package.json"),
     );
-    if (manifest === undefined) {
+    if (manifest === null || typeof manifest !== "object") {
       continue;
     }
 
-    members.push({ layer: directory.layer, manifest, path: memberPath });
+    members.push({
+      directory,
+      layer: directory.layer,
+      manifest,
+      path: memberPath,
+    });
   }
 
   return members;
@@ -256,7 +265,7 @@ function validateWorkspaceMembers(members) {
   const errors = [];
 
   for (const member of members) {
-    const directory = workspaceDirectory(member.path.split("/")[0]);
+    const { directory } = member;
 
     if (!directory.publishable && member.manifest.private !== true) {
       errors.push(`${member.path} must set "private": true`);
@@ -269,16 +278,27 @@ function validateWorkspaceMembers(members) {
   return errors;
 }
 
-function validatePublishAllowlist() {
+export function validatePublishAllowlist(packages = publishedPackages) {
   const errors = [];
 
-  if (publishedPackages.length === 0) {
+  if (packages.length === 0) {
     errors.push("Publish allowlist must name at least one package");
   }
 
-  for (const definition of publishedPackages) {
-    const directory = workspaceDirectory(definition.directory.split("/")[0]);
-    if (directory !== undefined && !directory.publishable) {
+  for (const definition of packages) {
+    const root = definition.directory.split("/")[0];
+    const directory = workspaceDirectory(root);
+
+    if (directory === undefined) {
+      // `dist`는 LIB-185에서 `packages/`로 옮기기 전까지 유지하는 생성 산출물 경로다.
+      if (root !== generatedOutputRoot) {
+        errors.push(
+          `Publish allowlist must not include an unrecognized directory: ${definition.directory}`,
+        );
+      }
+      continue;
+    }
+    if (!directory.publishable) {
       errors.push(
         `Publish allowlist must not include ${definition.directory} from the ${directory.layer} layer`,
       );
@@ -292,21 +312,25 @@ async function validateRootManifest(rootDirectory) {
   const errors = [];
   const manifest = await readJsonFile(resolve(rootDirectory, "package.json"));
 
-  if (manifest === undefined) {
-    errors.push("Root package.json is missing");
+  if (manifest === null || typeof manifest !== "object") {
+    errors.push("Root package.json is missing or is not an object");
     return errors;
   }
   if (manifest.private !== true) {
     errors.push('Root package.json must set "private": true');
   }
 
-  const declared = manifest.workspaces ?? [];
+  const declared = manifest.workspaces;
   if (
+    !Array.isArray(declared) ||
     declared.length !== workspaceGlobs.length ||
     declared.some((glob, index) => glob !== workspaceGlobs[index])
   ) {
+    const received = Array.isArray(declared)
+      ? declared.join(", ")
+      : JSON.stringify(declared);
     errors.push(
-      `Root package.json must declare workspaces ${workspaceGlobs.join(", ")}; received ${declared.join(", ") || "(none)"}`,
+      `Root package.json must declare workspaces ${workspaceGlobs.join(", ")}; received ${received || "(none)"}`,
     );
   }
 
