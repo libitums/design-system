@@ -109,3 +109,22 @@ test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한�
   assert.doesNotMatch(guide, /CSS 전용 이름/);
   assert.match(guide, /accessible name/);
 });
+
+test("배포 package의 CSS export에서 icon.size 변수를 읽을 수 있다", async () => {
+  const manifests = await readPackageManifests();
+  const tokens = manifests["@libitums/design-tokens"];
+  const specifier = "@libitums/design-tokens/css/variables.css";
+  const subpath = subpathFromSpecifier(specifier, tokens.name);
+
+  assert.equal(isExportedSubpath(subpath, tokens.exports), true);
+
+  const target = tokens.exports[subpath];
+  const css = await readFile(
+    join(repositoryRoot, "packages", "design-tokens", target.replace("./", "")),
+    "utf8",
+  );
+
+  for (const step of ["xs", "sm", "md", "lg", "xl"]) {
+    assert.match(css, new RegExp(`--libitum-icon-size-${step}:`));
+  }
+});

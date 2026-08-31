@@ -30,11 +30,11 @@ test("token path를 --libitum-* kebab-case 이름으로 변환한다", () => {
   );
 });
 
-test("기본 foundation에서 CSS 변수 106개를 생성한다", async () => {
+test("기본 foundation에서 CSS 변수 111개를 생성한다", async () => {
   const result = await generateCssVariables(repositoryRoot);
   const variables = variablesByPath(result);
 
-  assert.equal(result.variables.length, 106);
+  assert.equal(result.variables.length, 111);
   assert.equal(variables.get("color.brand.primary").value, "#F46B18");
   assert.equal(
     variables.get("color.fg.brand").value,
@@ -56,7 +56,6 @@ test("기본 foundation에서 CSS 변수 106개를 생성한다", async () => {
     "cubic-bezier(0, 0, 0.15, 1)",
   );
   assert.equal(variables.has("typography.heading.s"), false);
-  assert.equal(variables.has("icon.size.md"), false);
 
   const names = new Set(result.variables.map((variable) => variable.name));
   for (const match of result.css.matchAll(/var\((--libitum-[^)]+)\)/g)) {
@@ -105,4 +104,33 @@ test("정해진 package import 경로에 CSS 파일을 생성한다", async (t) 
 
   assert.equal(result.outputFile, join(temporaryRoot, cssOutputPath));
   assert.equal(output, result.css);
+});
+
+test("icon.size 전체 단계를 spacing alias로 export한다", async () => {
+  const result = await generateCssVariables(repositoryRoot);
+  const variables = variablesByPath(result);
+
+  assert.deepEqual(
+    ["xs", "sm", "md", "lg", "xl"].map((step) => {
+      const variable = variables.get(`icon.size.${step}`);
+      return [variable.name, variable.value];
+    }),
+    [
+      ["--libitum-icon-size-xs", "var(--libitum-spacing-16)"],
+      ["--libitum-icon-size-sm", "var(--libitum-spacing-20)"],
+      ["--libitum-icon-size-md", "var(--libitum-spacing-24)"],
+      ["--libitum-icon-size-lg", "var(--libitum-spacing-32)"],
+      ["--libitum-icon-size-xl", "var(--libitum-spacing-40)"],
+    ],
+  );
+
+  for (const step of ["xs", "sm", "md", "lg", "xl"]) {
+    assert.match(
+      result.css,
+      new RegExp(`^  --libitum-icon-size-${step}: var\\(--libitum-spacing-\\d+\\);$`, "m"),
+    );
+  }
+
+  assert.equal(variables.has("icon.source"), false);
+  assert.equal(variables.has("icon.intrinsic.width"), false);
 });
