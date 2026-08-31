@@ -15,7 +15,7 @@ design-system이 소유하는 ReactLynx 소비 fixture입니다. 배포 package�
 | `@libitums/icons/lynx/no-padding/{name}` | no-padding variant의 SVG XML이 인라인된다 |
 | `@libitums/icons/lynx` | `withIconColor`가 token 색을 XML에 넣는다 |
 
-`currentColor` 상속 여부가 host에서 확정되지 않았으므로 상속 경로와 `withIconColor` 경로를 함께 렌더합니다. 판정은 [LIB-187](https://linear.app/libitum/issue/LIB-187)에서 iOS Simulator Host로 수행합니다.
+`currentColor` 상속 여부가 host에서 확정되지 않았으므로 상속 경로와 `withIconColor` 경로를 함께 렌더합니다. 어느 쪽이 맞는지는 iOS Lynx host에서만 판정되며 아직 확정하지 않았습니다.
 
 ## 실행
 
@@ -34,7 +34,7 @@ Dev server는 Lynx host용 번들과 브라우저 미리보기용 번들을 함�
 ➜  ∟ Preview  http://localhost:3000/__web_preview?casename=main.web.bundle
 ```
 
-**Preview URL을 브라우저에서 열면 같은 화면을 눈으로 확인할 수 있습니다.** Rspeedy가 Lynx Web Platform shell을 얹어 `<lynx-view>` 안에서 렌더링합니다. 다만 이건 web 런타임 기준이므로 iOS Lynx host의 렌더링을 대신하지 않습니다. Host 판정은 [LIB-187](https://linear.app/libitum/issue/LIB-187)에서 합니다.
+**Preview URL을 브라우저에서 열면 같은 화면을 눈으로 확인할 수 있습니다.** Rspeedy가 Lynx Web Platform shell을 얹어 `<lynx-view>` 안에서 렌더링합니다. 다만 이건 web 런타임 기준이므로 iOS Lynx host의 렌더링을 대신하지 않습니다.
 
 Production build와 산출물 검증은 루트 명령 하나로 끝납니다.
 

@@ -8,7 +8,7 @@ import "@libitums/design-tokens/css/typography.css";
 import "./App.css";
 
 // currentColor 상속 여부가 host에서 확정되지 않아 두 경로를 함께 렌더합니다.
-// 판정은 LIB-187에서 iOS Host로 수행합니다.
+// 어느 쪽이 맞는지는 iOS Lynx host에서만 판정됩니다.
 const brandHeart = withIconColor(heart, color.fg.brand);
 
 export function App() {
