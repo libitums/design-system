@@ -31,6 +31,7 @@ test("수동 stable·canary 배포 workflow의 권한과 보호 조건을 고정
     "npm run build",
     "npm run check:generated",
     "npm run check:icon-bundle",
+    "npm run check:example-consumer",
   ]) {
     assert.match(workflow, new RegExp(`^        run: ${command}$`, "m"));
   }

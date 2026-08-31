@@ -70,6 +70,9 @@ jobs:
       - name: Check icon bundle
         run: npm run check:icon-bundle
 
+      - name: Check example consumer
+        run: npm run check:example-consumer
+
       - name: Prepare publish metadata
         id: metadata
         env:
