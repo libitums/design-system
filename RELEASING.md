@@ -96,7 +96,7 @@ Git commit 목록을 그대로 changelog로 사용하지 않습니다. 각 항�
 2. 루트 `package.json`, `package-lock.json`과 `packages/*/package.json`의 버전을 같은 값으로 올립니다.
 3. Build 후 두 생성 package manifest가 같은 버전인지 확인합니다.
 4. `Unreleased` 항목을 `## [x.y.z] - YYYY-MM-DD` 아래로 이동하고 빈 `Unreleased` section을 다시 만듭니다.
-5. Release PR에서 validate, test, build, 생성물 결정성과 icon bundle 검증을 모두 통과시킵니다.
+5. Release PR에서 validate, test, build, 생성물 결정성, icon bundle과 소비 fixture 검증을 모두 통과시킵니다.
 6. Release PR이 `main`에 병합된 뒤 `Publish packages` workflow를 `stable` channel로 실행합니다.
 7. Workflow는 실행 시점의 `main` HEAD와 version·changelog·package manifest를 다시 검증합니다.
 8. 두 package를 `latest` dist-tag로 publish한 뒤 `vX.Y.Z` Git tag와 같은 버전의 GitHub Release를 남깁니다.
@@ -105,7 +105,7 @@ Git commit 목록을 그대로 changelog로 사용하지 않습니다. 각 항�
 
 ### 배포 channel
 
-GitHub Actions의 `Publish packages` workflow는 수동 실행하며 `canary`와 `stable` 중 하나를 선택합니다. 동시에 두 배포가 실행되지 않도록 직렬화하고, 모든 source·test·build·생성물·icon bundle 검증을 다시 통과한 산출물만 GitHub Packages에 올립니다.
+GitHub Actions의 `Publish packages` workflow는 수동 실행하며 `canary`와 `stable` 중 하나를 선택합니다. 동시에 두 배포가 실행되지 않도록 직렬화하고, PR에서 실행하는 검증과 같은 집합(source·test·build·생성물·icon bundle·소비 fixture)을 다시 통과한 산출물만 GitHub Packages에 올립니다.
 
 - `stable`: 현재 `main` HEAD에서만 실행합니다. 루트의 stable SemVer와 날짜가 확정된 changelog section을 요구하고 `latest` dist-tag로 배포합니다. 개발용 `0.0.0`은 stable로 배포할 수 없습니다.
 - `canary`: 선택한 branch나 commit에서 실행할 수 있습니다. 루트 version에 `-canary.<run number>.<short sha>`를 붙이고 `canary` dist-tag로 배포합니다. 배포 직전에 `packages/*/package.json`의 version만 이 prerelease version으로 바꾸며 루트 version은 수정하지 않습니다.
