@@ -6,6 +6,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-31
+
 ### Added
 
 - 두 package의 lockstep SemVer, deprecation과 changelog 운영 정책을 정의했습니다. (LIB-128)
