@@ -28,8 +28,10 @@ pnpm-debug.log*
 # Generated package output — source에서 재생성하며 직접 수정하거나 커밋하지 않음
 # package manifest는 추적하고 생성 산출물만 제외한다
 packages/*/dist/
+examples/*/dist/
 build/
 .cache/
+.rspeedy/
 
 # Environment
 .env

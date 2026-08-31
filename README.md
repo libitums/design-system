@@ -109,9 +109,10 @@ npm test
 npm run build
 npm run check:generated
 npm run check:icon-bundle
+npm run check:example-consumer
 ```
 
-Pull Request와 `main` push에서는 GitHub Actions가 위 검증을 자동 실행합니다. `Validate source`, `Test`, `Build`, `Check generated output`, `Check icon bundle`을 독립된 job으로 표시하고, 한 job이 실패해도 나머지 검증을 계속 실행합니다. CI는 `.node-version`의 Node.js 24, npm 11.16.0과 `package-lock.json` 기반 npm cache를 사용합니다.
+Pull Request와 `main` push에서는 GitHub Actions가 위 검증을 자동 실행합니다. `Validate source`, `Test`, `Build`, `Check generated output`, `Check icon bundle`, `Check example consumer`를 독립된 job으로 표시하고, 한 job이 실패해도 나머지 검증을 계속 실행합니다. CI는 `.node-version`의 Node.js 24, npm 11.16.0과 `package-lock.json` 기반 npm cache를 사용합니다.
 
 검증된 package는 GitHub Actions의 `Publish packages` workflow에서 GitHub Packages로 배포합니다. `stable`은 현재 `main` HEAD만 `latest`로 배포하고, `canary`는 선택한 ref를 고유한 prerelease version과 별도 dist-tag로 배포합니다. 인증·중복 version·결과 기록 기준은 [release policy](./RELEASING.md)를 따릅니다.
 
@@ -179,6 +180,16 @@ npm run check:icon-bundle
 Lynx export도 같은 명령에서 검증합니다. `@libitums/icons/lynx/heart`를 import한 build는 해당 아이콘의 SVG XML을 인라인하고, 사용하지 않은 아이콘의 XML과 SVG asset module을 포함하지 않아야 합니다.
 
 통과 기준은 `heart.svg` module만 포함되고 `arrow-down.svg`의 module과 payload가 제외되는 것입니다. 산출물은 `static/js/main.js` 하나여야 합니다. Raw 증가는 원본 SVG의 base64 크기 + 128B 이하, gzip 증가는 원본 크기 + 128B 이하로 제한합니다. 현재 310B `heart.svg` 기준 budget은 raw 544B / gzip 438B이며, 측정값은 raw 442B / gzip 332B입니다.
+
+Bundle 검증이 합성 entry를 쓰는 것과 달리, [`examples/lynx-consumer`](./examples/lynx-consumer/README.md)는 실제 ReactLynx 화면에서 같은 package를 소비합니다.
+
+```sh
+npm run check:example-consumer
+```
+
+이 명령은 fixture가 공개 `exports` 경로만 import하는지 확인하고, fixture의 `lynx.config.js`로 production build를 돌려 `main.lynx.bundle`과 `main.web.bundle` 각각에 두 아이콘 variant의 SVG XML과 token 값이 실제로 들어갔는지 확인합니다. 비공개 경로를 쓰거나 값이 한쪽 번들에서라도 사라지면 실패합니다.
+
+`npm run dev --workspace @libitums/example-lynx-consumer`는 Lynx host용 번들과 함께 브라우저 미리보기를 제공합니다. Rspeedy가 Lynx Web Platform shell을 얹으므로 `http://localhost:3000/__web_preview?casename=main.web.bundle`에서 같은 화면을 눈으로 확인할 수 있습니다. Web 런타임 기준이므로 iOS Lynx host의 렌더링을 대신하지는 않습니다.
 
 Package exports는 다음 경로를 제공합니다.
 

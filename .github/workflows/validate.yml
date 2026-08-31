@@ -31,6 +31,8 @@ jobs:
             command: npm run check:generated
           - name: Check icon bundle
             command: npm run check:icon-bundle
+          - name: Check example consumer
+            command: npm run check:example-consumer
 
     steps:
       - name: Checkout

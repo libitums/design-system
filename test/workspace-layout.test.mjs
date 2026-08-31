@@ -153,11 +153,11 @@ test("저장소가 workspace 계약을 만족한다", async () => {
   assert.equal(result.directoryCount, workspaceDirectories.length);
   assert.equal(result.publishedPackageCount, publishedPackages.length);
   assert.equal(result.packageCount, publishedPackages.length);
-  assert.equal(result.exampleCount, 0);
-  assert.deepEqual(
-    members.map((member) => member.path),
-    publishedPackages.map((definition) => definition.directory),
-  );
+  assert.equal(result.exampleCount, 1);
+  assert.deepEqual(members.map((member) => member.path), [
+    ...publishedPackages.map((definition) => definition.directory),
+    "examples/lynx-consumer",
+  ]);
 });
 
 test("배포 대상 package manifest가 추적되고 루트 version과 일치한다", async () => {

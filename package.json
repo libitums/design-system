@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
+    "check:example-consumer": "node scripts/check-example-consumer.mjs",
     "check:generated": "node scripts/check-generated.mjs",
     "check:icon-bundle": "node scripts/check-icon-bundle.mjs",
     "validate": "node scripts/validate.mjs",

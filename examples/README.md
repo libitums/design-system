@@ -2,6 +2,12 @@
 
 design-system이 소유하는 private 소비 fixture와 Host입니다. 루트 workspace의 `examples/*`가 이 디렉터리를 가리킵니다.
 
+## 구성원
+
+| 경로 | 내용 |
+|---|---|
+| [`lynx-consumer`](./lynx-consumer/README.md) | ReactLynx 소비 fixture. 토큰·아이콘·Lynx export 연결을 production build로 확인합니다 |
+
 ## 책임
 
 - 배포된 package를 실제 소비자와 같은 방식으로 설치·import해 동작을 확인합니다.

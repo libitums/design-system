@@ -1,0 +1,57 @@
+/* 모든 시각 값은 @libitums/design-tokens의 CSS 변수만 사용합니다. */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--libitum-spacing-16);
+  padding: var(--libitum-spacing-24);
+  background: var(--libitum-color-background-primary);
+}
+
+.screen__title {
+  color: var(--libitum-color-fg-neutral);
+  font-family: var(--libitum-typography-heading-s-font-family);
+  font-weight: var(--libitum-typography-heading-s-font-weight);
+  font-size: var(--libitum-typography-heading-s-font-size);
+  line-height: var(--libitum-typography-heading-s-line-height);
+  letter-spacing: var(--libitum-typography-heading-s-letter-spacing);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--libitum-spacing-12);
+  padding: var(--libitum-spacing-12);
+  border-radius: var(--libitum-radius-md);
+  background: var(--libitum-color-background-secondary);
+}
+
+.row__label {
+  color: var(--libitum-color-fg-neutral-muted);
+  font-family: var(--libitum-typography-body-m-font-family);
+  font-weight: var(--libitum-typography-body-m-font-weight);
+  font-size: var(--libitum-typography-body-m-font-size);
+  line-height: var(--libitum-typography-body-m-line-height);
+  letter-spacing: var(--libitum-typography-body-m-letter-spacing);
+}
+
+/* 아이콘 크기는 icon.size.* 변수만 사용하고 spacing 변수나 raw px로 대체하지 않습니다. */
+.icon--md {
+  width: var(--libitum-icon-size-md);
+  height: var(--libitum-icon-size-md);
+}
+
+.icon--lg {
+  width: var(--libitum-icon-size-lg);
+  height: var(--libitum-icon-size-lg);
+}
+
+.screen__note {
+  color: var(--libitum-color-fg-neutral-subtle);
+  font-family: var(--libitum-typography-caption-font-family);
+  font-weight: var(--libitum-typography-caption-font-weight);
+  font-size: var(--libitum-typography-caption-font-size);
+  line-height: var(--libitum-typography-caption-line-height);
+  letter-spacing: var(--libitum-typography-caption-letter-spacing);
+}
