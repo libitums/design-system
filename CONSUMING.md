@@ -15,18 +15,55 @@
 
 ## Registry와 접근 권한
 
-두 package는 private GitHub Packages의 `@libitums` scope로 배포됩니다. 소비 저장소의 `.npmrc`에는 registry와 환경 변수 참조만 커밋합니다.
+두 package는 private GitHub Packages의 `@libitums` scope로 배포됩니다. **registry 연결은 저장소에 커밋하고, 인증은 저장소 밖 신뢰 위치에 둡니다.** pnpm이 요구하는 형태이며 npm에서도 그대로 동작하므로 package manager와 무관하게 이 분리를 사용합니다.
+
+### 저장소에 커밋하는 것
+
+소비 저장소의 `.npmrc`에는 scope와 registry 연결만 둡니다.
 
 ```ini
 @libitums:registry=https://npm.pkg.github.com
+```
+
+`_authToken`을 비롯한 인증 항목은 값이든 `${NODE_AUTH_TOKEN}` 참조든 이 파일에 넣지 않습니다. Token 값은 `.npmrc`, `.env`, source code, 문서 예시 어디에도 커밋하지 않습니다.
+
+### pnpm이 project 인증 설정을 무시하는 형태
+
+pnpm은 v10.34.2·v11.5.3부터 **저장소가 통제하는 `.npmrc`에서 환경 변수를 치환하지 않습니다.** 악의적인 저장소가 CI token을 공격자 registry로 흘리는 것을 막기 위한 조치입니다. 적용 대상은 registry·proxy URL, `//`로 시작하는 URL scope key, 그리고 `_authToken`·`_auth`·`_password`·`username`·`tokenHelper`·`cert`·`key`입니다.
+
+project `.npmrc`에 아래 줄을 두면 치환되지 않고 경고와 함께 통째로 무시됩니다.
+
+```ini
 //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
-Token 값은 `.npmrc`, `.env`, source code에 커밋하지 않습니다.
+```
+ WARN  Ignored project-level auth setting
+```
 
-- 로컬 개발은 GitHub Packages `read:packages` 권한이 있는 개인 token을 `NODE_AUTH_TOKEN`으로 제공합니다.
-- GitHub Actions는 장기 개인 token 대신 해당 workflow의 `GITHUB_TOKEN`과 `packages: read`를 사용합니다.
-- 첫 package 배포 후 package 설정에서 소비 저장소에 Actions read access가 부여되어 있어야 합니다.
+인증 없이 요청이 나가므로 private package에 대해 `401`이 됩니다. Token이 정상인데 실패하는 형태라 재발급으로는 해결되지 않습니다. npm은 같은 줄을 치환하므로 npm으로만 확인하면 이 실패를 만나지 못합니다.
+
+pnpm이 신뢰하는 위치는 사용자 인증 파일(`~/.npmrc`, `<pnpm config>/auth.ini`)과 환경 설정입니다. 인증은 이 중 한 곳에 둡니다.
+
+### 로컬
+
+GitHub Packages `read:packages` 권한이 있는 개인 token을 사용자 수준 설정에 기록합니다. 저장소 파일은 건드리지 않습니다.
+
+```sh
+pnpm config set "//npm.pkg.github.com/:_authToken" "$GITHUB_PACKAGES_TOKEN"
+```
+
+npm을 쓰면 같은 key를 같은 위치에 기록합니다.
+
+```sh
+npm config set "//npm.pkg.github.com/:_authToken" "$GITHUB_PACKAGES_TOKEN"
+```
+
+`~/.npmrc`를 직접 편집한다면 `${NODE_AUTH_TOKEN}` 참조를 그대로 써도 됩니다. 사용자 수준 파일은 신뢰 위치라 치환이 동작합니다.
+
+### CI
+
+GitHub Actions는 장기 개인 token 대신 workflow의 `GITHUB_TOKEN`과 `packages: read`를 사용합니다. `actions/setup-node`의 `registry-url`이 **사용자 수준** `.npmrc`를 작성하므로 `NODE_AUTH_TOKEN` 경로는 pnpm에서도 그대로 동작합니다. 저장소 `.npmrc`에 인증을 넣을 이유가 없습니다.
 
 ```yaml
 permissions:
@@ -35,18 +72,32 @@ permissions:
 
 steps:
   - uses: actions/checkout@v6
+  - uses: pnpm/action-setup@v4
   - uses: actions/setup-node@v6
     with:
       node-version-file: .node-version
-      cache: npm
+      cache: pnpm
       registry-url: https://npm.pkg.github.com
       scope: '@libitums'
-  - run: npm ci
+  - run: pnpm install --frozen-lockfile
     env:
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-`401`, `403`, `404`가 발생하면 package 이름을 바꾸거나 public registry로 우회하지 않습니다. Token scope, package의 소비 저장소 접근 권한과 `.npmrc` scope를 순서대로 확인합니다.
+npm을 쓰면 `pnpm/action-setup` 단계 없이 `cache: npm`과 `npm ci`로 바꾸고 나머지는 같습니다.
+
+첫 package 배포 후 package 설정에서 소비 저장소에 Actions read access가 부여되어 있어야 합니다.
+
+저장소 `.npmrc`를 신뢰 대상으로 지정하는 `npmrcAuthFile`(`PNPM_CONFIG_NPMRC_AUTH_FILE`)은 사용하지 않습니다. 위 두 경로로 이미 해결되고, 신뢰 범위를 넓히면 이 변경이 막으려던 문제가 그대로 돌아옵니다.
+
+### 실패 확인 순서
+
+`401`, `403`, `404`가 발생하면 package 이름을 바꾸거나 public registry로 우회하지 않습니다.
+
+1. project `.npmrc`에 `_authToken`이 남아 있지 않은지, 인증이 신뢰 위치에 있는지
+2. Token scope에 `read:packages`가 있는지
+3. Package 설정에 소비 저장소 접근 권한이 있는지
+4. `.npmrc`의 scope 표기가 `@libitums`인지
 
 ## 설치
 
@@ -269,7 +320,8 @@ Published version은 덮어쓰지 않습니다. 문제가 있으면 이전 exact
 
 ## 소비 체크리스트
 
-- [ ] `.npmrc`에는 registry와 `${NODE_AUTH_TOKEN}` 참조만 있음
+- [ ] 저장소 `.npmrc`에는 registry 연결만 있고 인증 항목이 없음
+- [ ] 인증이 사용자 수준 설정이나 CI의 `NODE_AUTH_TOKEN` 경로에 있음
 - [ ] 두 package가 같은 exact version임
 - [ ] CSS 또는 TypeScript token을 사용하고 raw 시각 값이 없음
 - [ ] Icon variant와 accessible name이 목적에 맞음

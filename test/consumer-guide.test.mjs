@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
-import { cp, mkdtemp, readFile, rm } from "node:fs/promises";
+import { cp, mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -47,7 +47,6 @@ test("소비 가이드가 실제 package export와 인증 설정을 사용한다
   ]);
 
   assert.match(guide, /@libitums:registry=https:\/\/npm\.pkg\.github\.com/);
-  assert.match(guide, /_authToken=\$\{NODE_AUTH_TOKEN\}/);
   assert.match(guide, /--save-exact/);
 
   for (const specifier of guideSpecifiers) {
@@ -113,6 +112,46 @@ test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한�
   assert.match(guide, /accessible name/);
 });
 
+test("소비 가이드가 registry 연결과 인증 위치를 분리해 안내한다", async () => {
+  const guide = await readFile(
+    new URL("../CONSUMING.md", import.meta.url),
+    "utf8",
+  );
+  const section = guide.slice(
+    guide.indexOf("## Registry와 접근 권한"),
+    guide.indexOf("## 설치"),
+  );
+
+  assert.notEqual(section, "", "Registry 섹션을 찾지 못했습니다");
+
+  const committedNpmrc = section.match(/```ini\n([\s\S]*?)```/);
+  assert.notEqual(committedNpmrc, null, "커밋 대상 .npmrc 예시가 없습니다");
+  assert.equal(
+    committedNpmrc[1].trim(),
+    "@libitums:registry=https://npm.pkg.github.com",
+    "저장소에 커밋하는 .npmrc 예시에 인증 항목이 들어 있습니다",
+  );
+
+  assert.match(section, /v10\.34\.2/);
+  assert.match(section, /v11\.5\.3/);
+  assert.match(section, /Ignored project-level auth setting/);
+  assert.match(section, /`401`/);
+
+  assert.match(
+    section,
+    /pnpm config set "\/\/npm\.pkg\.github\.com\/:_authToken"/,
+  );
+  assert.match(section, /~\/\.npmrc/);
+
+  assert.match(section, /actions\/setup-node/);
+  assert.match(section, /packages: read/);
+  assert.match(section, /NODE_AUTH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+
+  const checklist = guide.slice(guide.indexOf("## 소비 체크리스트"));
+  assert.match(checklist, /저장소 `\.npmrc`에는 registry 연결만 있고/);
+  assert.match(checklist, /인증이 사용자 수준 설정이나 CI의 `NODE_AUTH_TOKEN`/);
+});
+
 test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.size 변수를 담는다", async (t) => {
   const rootDirectory = await mkdtemp(join(tmpdir(), "libitum-icon-size-"));
   t.after(() => rm(rootDirectory, { recursive: true, force: true }));
@@ -146,5 +185,46 @@ test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.
   const css = await readFile(exportedPath, "utf8");
   for (const step of ["xs", "sm", "md", "lg", "xl"]) {
     assert.match(css, new RegExp(`--libitum-icon-size-${step}: var\\(`));
+  }
+});
+
+test("저장소 문서에 실제 인증 token 값이 없다", async () => {
+  const secretPatterns = [
+    /gh[pousr]_[A-Za-z0-9]{16,}/,
+    /github_pat_[A-Za-z0-9_]{20,}/,
+    /npm_[A-Za-z0-9]{30,}/,
+  ];
+  const skippedDirectories = new Set([
+    ".git",
+    "node_modules",
+    "dist",
+    "coverage",
+  ]);
+  const entries = await readdir(repositoryRoot, {
+    recursive: true,
+    withFileTypes: true,
+  });
+  const documents = entries.filter(
+    (entry) =>
+      entry.isFile() &&
+      entry.name.endsWith(".md") &&
+      !relative(repositoryRoot, entry.parentPath)
+        .split(sep)
+        .some((segment) => skippedDirectories.has(segment)),
+  );
+
+  assert.equal(documents.length > 0, true, "검사할 Markdown 문서가 없습니다");
+
+  for (const document of documents) {
+    const path = join(document.parentPath, document.name);
+    const contents = await readFile(path, "utf8");
+    for (const pattern of secretPatterns) {
+      // 실패 메시지에 문서 본문을 싣지 않도록 boolean으로 비교합니다.
+      assert.equal(
+        pattern.test(contents),
+        false,
+        `${relative(repositoryRoot, path)}에 ${pattern} 형태의 token 값이 있습니다`,
+      );
+    }
   }
 });

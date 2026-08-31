@@ -17,6 +17,7 @@
 ### Changed
 
 - BREAKING: GitHub Packages scope를 실제 조직 owner와 일치하는 `@libitums`로 변경했습니다. 아직 배포된 기존 package version은 없습니다. (LIB-180)
+- 소비 가이드의 인증 설정을 registry 연결(저장소 `.npmrc`)과 인증(사용자 수준 설정·CI `NODE_AUTH_TOKEN`)으로 분리했습니다. pnpm v10.34.2·v11.5.3부터 저장소 `.npmrc`의 인증 환경 변수 치환이 무시되어 `401`이 발생합니다. (LIB-181)
 
 ### Fixed
 
