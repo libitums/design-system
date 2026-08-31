@@ -47,7 +47,6 @@ test("소비 가이드가 실제 package export와 인증 설정을 사용한다
   ]);
 
   assert.match(guide, /@libitums:registry=https:\/\/npm\.pkg\.github\.com/);
-  assert.match(guide, /_authToken=\$\{NODE_AUTH_TOKEN\}/);
   assert.match(guide, /--save-exact/);
 
   for (const specifier of guideSpecifiers) {
@@ -111,6 +110,46 @@ test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한�
   assert.match(guide, /font\.family\.\*.*Web용 font-family stack/);
   assert.doesNotMatch(guide, /CSS 전용 이름/);
   assert.match(guide, /accessible name/);
+});
+
+test("소비 가이드가 registry 연결과 인증 위치를 분리해 안내한다", async () => {
+  const guide = await readFile(
+    new URL("../CONSUMING.md", import.meta.url),
+    "utf8",
+  );
+  const section = guide.slice(
+    guide.indexOf("## Registry와 접근 권한"),
+    guide.indexOf("## 설치"),
+  );
+
+  assert.notEqual(section, "", "Registry 섹션을 찾지 못했습니다");
+
+  const committedNpmrc = section.match(/```ini\n([\s\S]*?)```/);
+  assert.notEqual(committedNpmrc, null, "커밋 대상 .npmrc 예시가 없습니다");
+  assert.equal(
+    committedNpmrc[1].trim(),
+    "@libitums:registry=https://npm.pkg.github.com",
+    "저장소에 커밋하는 .npmrc 예시에 인증 항목이 들어 있습니다",
+  );
+
+  assert.match(section, /v10\.34\.2/);
+  assert.match(section, /v11\.5\.3/);
+  assert.match(section, /Ignored project-level auth setting/);
+  assert.match(section, /`401`/);
+
+  assert.match(
+    section,
+    /pnpm config set "\/\/npm\.pkg\.github\.com\/:_authToken"/,
+  );
+  assert.match(section, /~\/\.npmrc/);
+
+  assert.match(section, /actions\/setup-node/);
+  assert.match(section, /packages: read/);
+  assert.match(section, /NODE_AUTH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+
+  const checklist = guide.slice(guide.indexOf("## 소비 체크리스트"));
+  assert.match(checklist, /저장소 `\.npmrc`에는 registry 연결만 있고/);
+  assert.match(checklist, /인증이 사용자 수준 설정이나 CI의 `NODE_AUTH_TOKEN`/);
 });
 
 test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.size 변수를 담는다", async (t) => {
