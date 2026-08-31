@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { cp, mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, sep } from "node:path";
+import { join, relative, sep } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -208,8 +208,7 @@ test("저장소 문서에 실제 인증 token 값이 없다", async () => {
     (entry) =>
       entry.isFile() &&
       entry.name.endsWith(".md") &&
-      !entry.parentPath
-        .slice(repositoryRoot.length)
+      !relative(repositoryRoot, entry.parentPath)
         .split(sep)
         .some((segment) => skippedDirectories.has(segment)),
   );
@@ -224,7 +223,7 @@ test("저장소 문서에 실제 인증 token 값이 없다", async () => {
       assert.equal(
         pattern.test(contents),
         false,
-        `${path.slice(repositoryRoot.length)}에 ${pattern} 형태의 token 값이 있습니다`,
+        `${relative(repositoryRoot, path)}에 ${pattern} 형태의 token 값이 있습니다`,
       );
     }
   }
