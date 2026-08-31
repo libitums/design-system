@@ -134,7 +134,7 @@ test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.
     rootDirectory,
     "packages",
     "design-tokens",
-    tokens.exports[subpath].replace("./", ""),
+    tokens.exports[subpath],
   );
 
   assert.equal(
