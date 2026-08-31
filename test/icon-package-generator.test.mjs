@@ -34,6 +34,11 @@ async function createWorkspace(t, icons) {
     `${JSON.stringify({ version: "1.2.3" })}\n`,
     "utf8",
   );
+  await mkdir(join(rootDirectory, "packages", "icons"), { recursive: true });
+  await cp(
+    join(repositoryRoot, "packages", "icons", "package.json"),
+    join(rootDirectory, "packages", "icons", "package.json"),
+  );
 
   for (const [path, contents] of Object.entries(icons)) {
     const [category, fileName] = path.split("/");
@@ -73,30 +78,11 @@ test("아이콘 파일명을 안전한 lowercase kebab-case export 이름으로 
 
 test("현재 815개 아이콘을 충돌 없는 개별 export로 생성한다", async () => {
   const result = await generateIconPackage(repositoryRoot);
-  const packageManifest = JSON.parse(result.packageManifest);
   const manifest = JSON.parse(result.manifest);
 
   assert.equal(result.icons.length, 815);
   assert.equal(new Set(result.icons.map((icon) => icon.exportName)).size, 815);
   assert.equal(manifest.icons.length, 815);
-  assert.equal(packageManifest.name, "@libitums/icons");
-  assert.equal(packageManifest.version, "0.0.0");
-  assert.equal(packageManifest.sideEffects, false);
-  assert.deepEqual(packageManifest.repository, {
-    type: "git",
-    url: "https://github.com/libitums/design-system.git",
-  });
-  assert.deepEqual(packageManifest.publishConfig, {
-    access: "restricted",
-    registry: "https://npm.pkg.github.com",
-  });
-  assert.deepEqual(packageManifest.files, [
-    "*.svg",
-    "no-padding",
-    "manifest.json",
-    "svg.d.ts",
-  ]);
-  assert.equal(Object.keys(packageManifest.exports).length, 1632);
   assert.deepEqual(
     result.icons
       .filter((icon) => /[A-Z]/.test(icon.sourceName))
@@ -108,14 +94,6 @@ test("현재 815개 아이콘을 충돌 없는 개별 export로 생성한다", a
       { exportName: "dumbbell-02", sourceName: "Dumbbell-02" },
     ],
   );
-  assert.deepEqual(packageManifest.exports["./heart"], {
-    types: "./svg.d.ts",
-    default: "./heart.svg",
-  });
-  assert.deepEqual(packageManifest.exports["./no-padding/heart"], {
-    types: "./svg.d.ts",
-    default: "./no-padding/heart.svg",
-  });
   assert.deepEqual(
     manifest.icons.find((icon) => icon.name === "heart"),
     {
@@ -142,7 +120,7 @@ test("padding 기본 경로와 no-padding 별도 경로를 실제 package에서 
     "@libitums",
     "icons",
   );
-  await cp(result.outputDirectory, packageDirectory, { recursive: true });
+  await cp(result.packageDirectory, packageDirectory, { recursive: true });
 
   const require = createRequire(join(rootDirectory, "consumer.cjs"));
   const paddingPath = require.resolve("@libitums/icons/heart");
@@ -150,11 +128,11 @@ test("padding 기본 경로와 no-padding 별도 경로를 실제 package에서 
 
   assert.equal(
     paddingPath,
-    await realpath(join(packageDirectory, "heart.svg")),
+    await realpath(join(packageDirectory, "dist", "heart.svg")),
   );
   assert.equal(
     noPaddingPath,
-    await realpath(join(packageDirectory, "no-padding", "heart.svg")),
+    await realpath(join(packageDirectory, "dist", "no-padding", "heart.svg")),
   );
   assert.match(await readFile(paddingPath, "utf8"), /viewBox="0 0 10 10"/);
   assert.match(await readFile(noPaddingPath, "utf8"), /viewBox="1 1 8 8"/);

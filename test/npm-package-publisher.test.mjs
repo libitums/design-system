@@ -109,7 +109,7 @@ test("상대 package directory를 절대 local 경로로 배포한다", async ()
     npmTag: "canary",
     packages: [
       {
-        directory: "dist/design-tokens",
+        directory: "packages/design-tokens",
         name: "@libitums/design-tokens",
         pageSlug: "design-tokens",
       },
@@ -121,7 +121,7 @@ test("상대 package directory를 절대 local 경로로 배포한다", async ()
   const publishCall = calls.find(([command]) => command === "publish");
   assert.equal(
     publishCall[1],
-    resolve(rootDirectory, "dist/design-tokens"),
+    resolve(rootDirectory, "packages/design-tokens"),
   );
 });
 

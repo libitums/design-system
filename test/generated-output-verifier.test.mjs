@@ -23,17 +23,17 @@ test("연속 build의 파일 목록과 byte hash가 동일하다", async () => {
 
   assert.equal(result.fileCount, 1638);
   assert.deepEqual(result.files.slice(0, 5), [
-    "design-tokens/css/typography.css",
-    "design-tokens/css/variables.css",
-    "design-tokens/index.d.ts",
-    "design-tokens/index.js",
+    "design-tokens/dist/css/typography.css",
+    "design-tokens/dist/css/variables.css",
+    "design-tokens/dist/index.d.ts",
+    "design-tokens/dist/index.js",
     "design-tokens/package.json",
   ]);
-  assert.equal(result.files.includes("icons/heart.svg"), true);
-  assert.equal(result.files.includes("icons/no-padding/heart.svg"), true);
-  assert.equal(result.files.includes("icons/manifest.json"), true);
+  assert.equal(result.files.includes("icons/dist/heart.svg"), true);
+  assert.equal(result.files.includes("icons/dist/no-padding/heart.svg"), true);
+  assert.equal(result.files.includes("icons/dist/manifest.json"), true);
   assert.equal(result.files.includes("icons/package.json"), true);
-  assert.equal(result.files.includes("icons/svg.d.ts"), true);
+  assert.equal(result.files.includes("icons/dist/svg.d.ts"), true);
 });
 
 test("파일 누락과 내용 변경을 결정성 오류로 보고한다", () => {

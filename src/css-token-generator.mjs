@@ -11,7 +11,8 @@ export const cssTokenFiles = Object.freeze([
   "stroke.json",
 ]);
 
-export const cssOutputPath = "dist/design-tokens/css/variables.css";
+export const cssOutputPath =
+  "packages/design-tokens/dist/css/variables.css";
 
 const hasOwn = (object, property) =>
   Object.prototype.hasOwnProperty.call(object, property);
@@ -217,7 +218,7 @@ export async function writeCssVariables(rootDirectory = process.cwd()) {
   const result = await generateCssVariables(rootDirectory);
   const outputFile = resolve(rootDirectory, cssOutputPath);
 
-  await mkdir(join(rootDirectory, "dist", "design-tokens", "css"), {
+  await mkdir(join(rootDirectory, "packages", "design-tokens", "dist", "css"), {
     recursive: true,
   });
   await writeFile(outputFile, result.css, "utf8");

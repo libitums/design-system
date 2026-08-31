@@ -177,7 +177,7 @@ export class IconBundleVerificationError extends Error {
 export function evaluateIconBundleMeasurement(measurement) {
   const { baseline, budgets, delta, singleIcon } = measurement;
   const errors = [];
-  const expectedModuleSuffix = `/@libitums/icons/${iconBundlePolicy.representativeIcon}.svg`;
+  const expectedModuleSuffix = `/@libitums/icons/dist/${iconBundlePolicy.representativeIcon}.svg`;
 
   if (baseline.svgModules.length !== 0) {
     errors.push(
@@ -254,14 +254,14 @@ export async function measureIconBundle(rootDirectory = process.cwd()) {
       temporaryRoot,
       "baseline",
       'globalThis.__libitumIcon = "";\n',
-      iconPackage.outputDirectory,
+      iconPackage.packageDirectory,
       assetPayloads,
     );
     const singleIcon = await buildFixture(
       temporaryRoot,
       "single-icon",
       `import icon from "@libitums/icons/${iconBundlePolicy.representativeIcon}";\nglobalThis.__libitumIcon = icon;\n`,
-      iconPackage.outputDirectory,
+      iconPackage.packageDirectory,
       assetPayloads,
     );
     const sourceBytes = representativeSource.length;

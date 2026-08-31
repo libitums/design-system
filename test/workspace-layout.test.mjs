@@ -148,10 +148,40 @@ test("package 간 비공개 경로 import를 거부한다", () => {
 
 test("저장소가 workspace 계약을 만족한다", async () => {
   const result = await validateWorkspaceLayout(repositoryRoot);
+  const members = await listWorkspacePackages(repositoryRoot);
 
   assert.equal(result.directoryCount, workspaceDirectories.length);
   assert.equal(result.publishedPackageCount, publishedPackages.length);
-  assert.equal(await listWorkspacePackages(repositoryRoot).then((m) => m.length), 0);
+  assert.equal(result.packageCount, publishedPackages.length);
+  assert.equal(result.exampleCount, 0);
+  assert.deepEqual(
+    members.map((member) => member.path),
+    publishedPackages.map((definition) => definition.directory),
+  );
+});
+
+test("배포 대상 package manifest가 추적되고 루트 version과 일치한다", async () => {
+  const rootPackage = JSON.parse(
+    await readFile(join(repositoryRoot, "package.json"), "utf8"),
+  );
+
+  for (const definition of publishedPackages) {
+    const manifest = JSON.parse(
+      await readFile(
+        join(repositoryRoot, definition.directory, "package.json"),
+        "utf8",
+      ),
+    );
+
+    assert.equal(manifest.name, definition.name);
+    assert.equal(
+      manifest.version,
+      rootPackage.version,
+      `${definition.name} version must match the root package version`,
+    );
+    assert.notEqual(manifest.private, true);
+    assert.deepEqual(manifest.files, ["dist"]);
+  }
 });
 
 test("루트 package.json과 lockfile이 workspace를 선언한다", async () => {
@@ -306,11 +336,13 @@ test("배포는 workspace 전체가 아닌 명시적 allowlist를 사용한다",
 
 test("배포 allowlist가 알 수 없는 경로와 배포 불가 계층을 거부한다", () => {
   assert.deepEqual(validatePublishAllowlist(), []);
+  assert.deepEqual(validatePublishAllowlist([{ directory: "packages/icons" }]), []);
   assert.deepEqual(
     validatePublishAllowlist([{ directory: "dist/design-tokens" }]),
-    [],
+    [
+      "Publish allowlist must not include an unrecognized directory: dist/design-tokens",
+    ],
   );
-  assert.deepEqual(validatePublishAllowlist([{ directory: "packages/icons" }]), []);
   assert.deepEqual(validatePublishAllowlist([]), [
     "Publish allowlist must name at least one package",
   ]);

@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import { access, mkdir, mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import {
-  generatedOutputRoot,
+  generatedOutputDirectory,
   outputPackages,
+  packagesRoot,
   prepareOutputLayout,
   sourceDirectories,
   validateSourceLayout,
@@ -31,7 +32,8 @@ async function createWorkspace(t) {
 test("source와 output package 경계를 고정한다", () => {
   assert.deepEqual(sourceDirectories, ["foundations", "components", "assets"]);
   assert.deepEqual(outputPackages, ["design-tokens", "icons"]);
-  assert.equal(generatedOutputRoot, "dist");
+  assert.equal(packagesRoot, "packages");
+  assert.equal(generatedOutputDirectory, "dist");
 });
 
 test("private tooling package와 지원 runtime을 고정한다", async () => {
@@ -105,10 +107,19 @@ test("필수 source 디렉터리가 없으면 실패한다", async (t) => {
   await assert.rejects(() => validateSourceLayout(rootDirectory));
 });
 
-test("두 배포 package의 dist 디렉터리를 준비한다", async (t) => {
+test("두 배포 package의 dist 디렉터리를 packages 아래에 준비한다", async (t) => {
   const rootDirectory = await createWorkspace(t);
   const outputPaths = await prepareOutputLayout(rootDirectory);
 
   assert.equal(outputPaths.length, outputPackages.length);
   await Promise.all(outputPaths.map((outputPath) => access(outputPath)));
+  assert.deepEqual(
+    outputPaths.map((outputPath) =>
+      relative(rootDirectory, outputPath).split(sep).join("/"),
+    ),
+    outputPackages.map(
+      (packageName) =>
+        `${packagesRoot}/${packageName}/${generatedOutputDirectory}`,
+    ),
+  );
 });
