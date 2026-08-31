@@ -51,6 +51,7 @@ test("private tooling package와 지원 runtime을 고정한다", async () => {
   assert.equal(packageJson.engines.npm, ">=11 <12");
   assert.deepEqual(packageJson.scripts, {
     build: "node scripts/build.mjs",
+    "check:example-consumer": "node scripts/check-example-consumer.mjs",
     "check:generated": "node scripts/check-generated.mjs",
     "check:icon-bundle": "node scripts/check-icon-bundle.mjs",
     validate: "node scripts/validate.mjs",
@@ -88,6 +89,7 @@ test("PR과 main에서 검증 종류별 CI job을 실행한다", async () => {
     "npm run build",
     "npm run check:generated",
     "npm run check:icon-bundle",
+    "npm run check:example-consumer",
   ]) {
     assert.match(workflow, new RegExp(`^            command: ${command}$`, "m"));
   }
