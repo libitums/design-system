@@ -125,14 +125,14 @@ Markdown 링크는 상대 경로의 대소문자와 대상 heading anchor까지 
 
 SVG 아이콘은 `padding`과 `no-padding`의 `category/name.svg` 2단계 상대 경로가 한 쌍이어야 합니다. `padding`의 viewBox는 `0 0 10 10`으로 고정하고, 모든 SVG의 root와 별도 fill 선언은 `currentColor`만 허용합니다. CSS 키워드인 `currentColor` 비교는 ASCII 대소문자를 구분하지 않습니다. 파일명은 변형 안에서 대소문자를 무시하고 고유해야 하며, 잘못된 XML, XML 주석·DOCTYPE, 지원하지 않는 child element는 파싱 오류로 처리합니다.
 
-`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `packages/design-tokens/dist/css/variables.css`, typography 변수 116개를 `packages/design-tokens/dist/css/typography.css`에 생성합니다. Foundation token 139개는 `packages/design-tokens/dist/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
+`npm run build`는 검증을 먼저 실행한 뒤 기본 token 111개를 `packages/design-tokens/dist/css/variables.css`, typography 변수 116개를 `packages/design-tokens/dist/css/typography.css`에 생성합니다. Foundation token 139개는 `packages/design-tokens/dist/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
 ```css
 @import "@libitums/design-tokens/css/variables.css";
 @import "@libitums/design-tokens/css/typography.css";
 ```
 
-Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. Icon metadata는 `@libitums/icons`에서 제공합니다.
+Token path는 `--libitum-{token-path}`의 kebab-case CSS 변수로 변환됩니다. Alias는 대상 변수의 `var(...)` 참조로 유지되고, shadow와 cubicBezier는 각각 CSS box-shadow 값과 `cubic-bezier(...)`로 직렬화됩니다. 아이콘 렌더 크기는 `--libitum-icon-size-xs~xl`로 제공하며 각각 대응하는 `spacing` 변수를 참조합니다. Icon 에셋과 metadata는 `@libitums/icons`에서 제공합니다.
 
 Typography는 22개 스타일마다 `font-family`, `font-weight`, `font-size`, `line-height`, `letter-spacing`을 독립된 CSS 변수로 제공합니다. 예를 들어 `typography.body.l`은 다음처럼 소비합니다.
 

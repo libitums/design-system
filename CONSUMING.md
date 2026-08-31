@@ -144,7 +144,24 @@ export const iconSources = { heartIcon, heartArtwork };
 | `@libitums/icons/no-padding/{name}` | Hero art, spot illustration, custom crop처럼 frame을 정확히 채우는 구성 | 같은 행의 일반 UI 아이콘, padding variant와 혼합 |
 
 - Import 결과는 SVG 정적 asset을 가리키는 `string`이며 framework wrapper는 포함하지 않습니다. 플랫폼 제약으로 이 형태를 직접 쓸 수 없으면 소비 저장소에서 변환하지 않고 design system이 제공하는 플랫폼 package를 사용합니다.
-- 기본 렌더 크기는 `icon.size.md`이고, 다른 크기도 `icon.size.*` token만 사용합니다.
+- 기본 렌더 크기는 `icon.size.md`이고, 다른 크기도 `icon.size.*` token만 사용합니다. CSS에서는 아래 변수를 쓰고 `spacing` 변수나 raw px로 대체하지 않습니다.
+
+  | Token | CSS 변수 | 값 |
+  |---|---|---|
+  | `icon.size.xs` | `--libitum-icon-size-xs` | 16px |
+  | `icon.size.sm` | `--libitum-icon-size-sm` | 20px |
+  | `icon.size.md` | `--libitum-icon-size-md` | 24px |
+  | `icon.size.lg` | `--libitum-icon-size-lg` | 32px |
+  | `icon.size.xl` | `--libitum-icon-size-xl` | 40px |
+
+  ```css
+  .lesson-card__icon {
+    width: var(--libitum-icon-size-md);
+    height: var(--libitum-icon-size-md);
+    color: var(--libitum-color-fg-neutral);
+  }
+  ```
+
 - SVG의 `fill="currentColor"`를 직접 고치지 않고 platform renderer나 control의 color를 semantic color token에 연결합니다.
 - 아이콘만 있는 control에는 행동 목적을 나타내는 accessible name을 붙입니다. 장식용 아이콘은 접근성 tree에서 숨깁니다.
 - 전체 목록과 variant 경로는 `@libitums/icons/manifest.json`에서 탐색할 수 있습니다.
