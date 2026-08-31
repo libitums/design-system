@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
-import { cp, mkdtemp, readFile, rm } from "node:fs/promises";
+import { cp, mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, sep } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -185,5 +185,47 @@ test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.
   const css = await readFile(exportedPath, "utf8");
   for (const step of ["xs", "sm", "md", "lg", "xl"]) {
     assert.match(css, new RegExp(`--libitum-icon-size-${step}: var\\(`));
+  }
+});
+
+test("저장소 문서에 실제 인증 token 값이 없다", async () => {
+  const secretPatterns = [
+    /gh[pousr]_[A-Za-z0-9]{16,}/,
+    /github_pat_[A-Za-z0-9_]{20,}/,
+    /npm_[A-Za-z0-9]{30,}/,
+  ];
+  const skippedDirectories = new Set([
+    ".git",
+    "node_modules",
+    "dist",
+    "coverage",
+  ]);
+  const entries = await readdir(repositoryRoot, {
+    recursive: true,
+    withFileTypes: true,
+  });
+  const documents = entries.filter(
+    (entry) =>
+      entry.isFile() &&
+      entry.name.endsWith(".md") &&
+      !entry.parentPath
+        .slice(repositoryRoot.length)
+        .split(sep)
+        .some((segment) => skippedDirectories.has(segment)),
+  );
+
+  assert.equal(documents.length > 0, true, "검사할 Markdown 문서가 없습니다");
+
+  for (const document of documents) {
+    const path = join(document.parentPath, document.name);
+    const contents = await readFile(path, "utf8");
+    for (const pattern of secretPatterns) {
+      // 실패 메시지에 문서 본문을 싣지 않도록 boolean으로 비교합니다.
+      assert.equal(
+        pattern.test(contents),
+        false,
+        `${path.slice(repositoryRoot.length)}에 ${pattern} 형태의 token 값이 있습니다`,
+      );
+    }
   }
 });
