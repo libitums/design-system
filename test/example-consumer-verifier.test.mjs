@@ -64,6 +64,30 @@ test("소스에서 design-system package 경로만 골라낸다", () => {
   ]);
 });
 
+test("주석 처리한 import는 사용으로 보지 않는다", () => {
+  const source = [
+    '// import legacy from "@libitums/icons/dist/heart.svg";',
+    '  //  import spaced from "@libitums/icons/dist/arrow-down.svg";',
+    "/*",
+    'import blocked from "@libitums/design-tokens/dist/index.js";',
+    "*/",
+    'import heart from "@libitums/icons/lynx/heart";',
+  ].join("\n");
+
+  assert.deepEqual(extractPackageSpecifiers(source), [
+    "@libitums/icons/lynx/heart",
+  ]);
+});
+
+test("문자열 안의 //를 주석으로 보고 잘라내지 않는다", () => {
+  const source =
+    'const docs = "https://lynxjs.org/api"; import heart from "@libitums/icons/lynx/heart";';
+
+  assert.deepEqual(extractPackageSpecifiers(source), [
+    "@libitums/icons/lynx/heart",
+  ]);
+});
+
 test("같은 경로를 여러 번 import해도 한 번만 센다", () => {
   const source = [
     'import heart from "@libitums/icons/lynx/heart";',

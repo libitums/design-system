@@ -43,6 +43,9 @@ export const exampleConsumerPolicy = Object.freeze({
 });
 
 const importPattern = /(?:^|[\s;(])(?:import|export)[^"']*?["']([^"']+)["']/gm;
+// 주석 처리한 import를 실제 사용으로 오인하지 않도록 먼저 지웁니다.
+// 줄 중간의 `//`는 문자열 안의 URL일 수 있으므로 줄 첫머리 주석만 지웁니다.
+const commentPatterns = Object.freeze([/\/\*[\s\S]*?\*\//g, /^[^\S\n]*\/\/.*$/gm]);
 
 export class ExampleConsumerVerificationError extends Error {
   constructor(errors) {
@@ -58,8 +61,12 @@ export class ExampleConsumerVerificationError extends Error {
 }
 
 export function extractPackageSpecifiers(source) {
+  const code = commentPatterns.reduce(
+    (text, pattern) => text.replace(pattern, ""),
+    source,
+  );
   const specifiers = new Set();
-  for (const match of source.matchAll(importPattern)) {
+  for (const match of code.matchAll(importPattern)) {
     const specifier = match[1];
     if (specifier.startsWith("@libitums/")) {
       specifiers.add(specifier);
@@ -103,10 +110,19 @@ function pathData(module) {
 }
 
 async function listFiles(directory) {
-  const entries = await readdir(directory, {
-    recursive: true,
-    withFileTypes: true,
-  });
+  let entries;
+  try {
+    entries = await readdir(directory, {
+      recursive: true,
+      withFileTypes: true,
+    });
+  } catch (error) {
+    // 산출물이 아예 없으면 raw ENOENT 대신 검증 오류로 보고합니다.
+    if (error.code === "ENOENT") {
+      return [];
+    }
+    throw error;
+  }
   return entries
     .filter((entry) => entry.isFile())
     .map((entry) => join(entry.parentPath, entry.name))
