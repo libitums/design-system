@@ -119,7 +119,7 @@ function generateLynxHelper() {
     "  if (typeof color !== \"string\" || color === \"\") {",
     "    throw new TypeError(\"Icon color must be a non-empty string\");",
     "  }",
-    "  return content.replace(currentColorPattern, color);",
+    "  return content.replace(currentColorPattern, () => color);",
     "}",
     "",
   ].join("\n");

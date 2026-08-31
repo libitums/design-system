@@ -211,6 +211,11 @@ test("withIconColor가 currentColor를 지정한 색으로 바꾼다", async (t)
   assert.match(colored, /fill="#F46B18"/);
   assert.doesNotMatch(colored, /currentColor/i);
   assert.equal(icon.default.includes("currentColor"), true);
+  assert.equal(
+    helper.withIconColor('<svg fill="currentColor" />', "$&"),
+    '<svg fill="$&" />',
+    "치환 문자열의 특수 패턴을 값 그대로 넣습니다",
+  );
   assert.throws(() => helper.withIconColor(icon.default, ""), TypeError);
   assert.throws(() => helper.withIconColor(undefined, "#000"), TypeError);
 });
