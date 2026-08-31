@@ -6,9 +6,11 @@
 foundations/   토큰과 원칙 — 모든 값의 출처
 components/    컴포넌트 스펙
 assets/icons/  아이콘 SVG 815개 × 2 변형
-src/           검증·생성 로직
+src/           검증·생성 로직 (tooling 계층)
 scripts/       build·validate CLI 진입점
 test/          파이프라인 테스트
+packages/      배포 가능한 플랫폼별 package 경계
+examples/      design-system 소유 private 소비 fixture·Host
 dist/          재생성 가능한 package 산출물 (Git 제외)
 RELEASING.md   SemVer·deprecation·release 정책
 CHANGELOG.md   두 package의 주요 변경 기록
@@ -58,6 +60,37 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 
 모든 아이콘은 `fill="currentColor"`라 부모의 `color`를 상속합니다.
 
+## Workspace 구조
+
+저장소는 원본 스펙, 생성 도구, 배포 package, 소비 fixture를 네 계층으로 나눕니다. 루트 `package.json`은 배포하지 않는 private tooling package이며 `packages/*`와 `examples/*`를 npm workspace로 선언합니다.
+
+| 계층 | 경로 | 책임 |
+|---|---|---|
+| source | `foundations/`, `components/`, `assets/` | 사람이 수정하는 원본 토큰·스펙·에셋 |
+| tooling | `src/`, `scripts/`, `test/` | 원본을 검증·생성·배포하는 도구, 루트 명령 진입점, 저장소 단위 검증 |
+| packages | `packages/` | 배포 가능한 플랫폼별 package 경계 |
+| examples | `examples/` | design-system 소유 private 소비 fixture·Host |
+
+`src/`는 목표 구조의 `tooling/` 계층이며, 경로 이동은 이 계층 계약과 별개로 다룹니다.
+
+의존은 한 방향으로만 흐릅니다.
+
+```text
+foundations / components / assets
+  → src (tooling)
+    → packages
+      → examples
+```
+
+- **역방향 의존을 허용하지 않습니다.** `packages`는 `examples`에, `src`는 `packages`에 의존할 수 없습니다.
+- **package 간 비공개 경로 import를 허용하지 않습니다.** 다른 package는 `exports`에 선언된 공개 경로로만 참조합니다. 생성 산출물의 내부 파일을 직접 가리키지 않습니다.
+- **`examples/*`는 `private: true`입니다.** 배포하지 않으며 배포 allowlist에 넣지 않습니다.
+- **배포는 workspace 전체가 아니라 명시적 allowlist만 사용합니다.** 대상은 `src/package-publish-config.mjs`에 나열한 package이며, `packages/`에 package를 추가해도 allowlist에 넣기 전에는 배포되지 않습니다.
+- **두 배포 package는 하나의 version을 공유하고 함께 배포합니다.**
+- **플랫폼별 구현은 이 저장소가 소유합니다.** ReactLynx wrapper, alias, loader, plugin과 검증용 fixture·Host를 소비 저장소에 두지 않습니다. 소비 저장소는 완성된 package를 설치하고 공개된 설정을 연결하기만 합니다.
+
+이 계약은 `src/workspace-layout.mjs`에 정의되어 있고 `npm run validate`가 검사합니다. 계층별 세부 규칙은 [`packages/README.md`](./packages/README.md)와 [`examples/README.md`](./examples/README.md)에 있습니다.
+
 ## Package pipeline
 
 최초 공식 소비 package는 `@libitums/design-tokens`와 `@libitums/icons`입니다. 이 저장소 루트의 `package.json`은 두 package를 생성하기 위한 private tooling package이며 npm에 직접 배포하지 않습니다.
@@ -66,14 +99,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 
 Frontend project의 registry 인증, 설치, CSS·TypeScript·icon 사용과 upgrade 절차는 [package consumption guide](./CONSUMING.md)를 따릅니다.
 
-| 경로 | 책임 |
-|---|---|
-| `foundations/`, `components/`, `assets/` | 사람이 수정하는 원본 source of truth |
-| `src/` | 원본을 검증하고 package 산출물로 변환하는 로직 |
-| `scripts/` | 로컬·CI에서 호출하는 CLI 진입점 |
-| `test/` | 생성·검증 파이프라인의 자동 테스트 |
-| `dist/design-tokens/` | `@libitums/design-tokens` 배포 산출물 |
-| `dist/icons/` | `@libitums/icons` 배포 산출물 |
+경로별 책임과 의존 방향은 [workspace 구조](#workspace-구조)를 따릅니다. 현재 두 package의 배포 산출물은 `dist/design-tokens/`와 `dist/icons/`에 생성됩니다.
 
 Node.js 24 LTS와 npm 11을 사용합니다.
 
@@ -142,7 +168,7 @@ import heartNoPadding from "@libitums/icons/no-padding/heart";
 const iconSources = { heart, heartNoPadding };
 ```
 
-`@libitums/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 이 package에 포함하지 않으며 FE 모노레포의 `@libitums/ui-lynx`에서 담당합니다.
+`@libitums/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 현재 이 package에 포함하지 않습니다. 필요한 플랫폼 구현은 이 저장소가 `packages/`에서 제공하며 소비 저장소가 따로 구현하지 않습니다.
 
 아이콘 bundle 검증은 고정된 `@lynx-js/rspeedy` 0.16.5 production build로 빈 entry와 `heart` 단일 import를 비교합니다. Rspeedy 기본값에 따라 2KiB 미만 SVG는 data URI로 인라인되므로, 별도 SVG 파일 개수만 세지 않고 Rspack module graph와 raw·gzip bundle 증가량을 함께 검사합니다.
 

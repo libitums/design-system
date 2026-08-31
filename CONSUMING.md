@@ -2,6 +2,17 @@
 
 프론트엔드 프로젝트에서 `@libitums/design-tokens`와 `@libitums/icons`를 설치하고 사용하는 기준입니다. 두 package는 같은 version으로 함께 release하며, 이 저장소의 문서와 token을 source of truth로 사용합니다.
 
+## 저장소 경계
+
+플랫폼별 구현과 검증은 design system 저장소가 소유합니다. 소비 저장소가 할 일은 **package 설치와 공개된 설정 연결까지**입니다.
+
+| 소유 | 내용 |
+|---|---|
+| design system 저장소 | 토큰·아이콘 생성, 플랫폼별 package, wrapper·adapter·alias·loader·plugin, 소비 fixture와 렌더링 확인 Host |
+| 소비 저장소 | package 설치, registry 인증 설정, 공개된 alias·plugin을 build 설정에 연결, 화면 구현 |
+
+소비 저장소에 아이콘 변환 코드, framework wrapper, loader나 우회 구현을 직접 만들지 않습니다. 필요한 구현이 package에 없으면 그 자체가 design system의 결함이므로 [token 요청 절차](#하드코딩과-token-요청)와 같은 방식으로 이슈를 만들고, 임시 구현으로 대체하지 않습니다.
+
 ## Registry와 접근 권한
 
 두 package는 private GitHub Packages의 `@libitums` scope로 배포됩니다. 소비 저장소의 `.npmrc`에는 registry와 환경 변수 참조만 커밋합니다.
@@ -132,7 +143,7 @@ export const iconSources = { heartIcon, heartArtwork };
 | `@libitums/icons/{name}` | Button, navigation, list, inline text처럼 grid에서 정렬하는 일반 UI | 없음 — 기본 선택 |
 | `@libitums/icons/no-padding/{name}` | Hero art, spot illustration, custom crop처럼 frame을 정확히 채우는 구성 | 같은 행의 일반 UI 아이콘, padding variant와 혼합 |
 
-- Import 결과는 SVG 정적 asset을 가리키는 `string`이며 framework wrapper는 포함하지 않습니다.
+- Import 결과는 SVG 정적 asset을 가리키는 `string`이며 framework wrapper는 포함하지 않습니다. 플랫폼 제약으로 이 형태를 직접 쓸 수 없으면 소비 저장소에서 변환하지 않고 design system이 제공하는 플랫폼 package를 사용합니다.
 - 기본 렌더 크기는 `icon.size.md`이고, 다른 크기도 `icon.size.*` token만 사용합니다.
 - SVG의 `fill="currentColor"`를 직접 고치지 않고 platform renderer나 control의 color를 semantic color token에 연결합니다.
 - 아이콘만 있는 control에는 행동 목적을 나타내는 accessible name을 붙입니다. 장식용 아이콘은 접근성 tree에서 숨깁니다.

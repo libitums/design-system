@@ -6,6 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import {
+  generatedOutputRoot,
   outputPackages,
   prepareOutputLayout,
   sourceDirectories,
@@ -30,6 +31,7 @@ async function createWorkspace(t) {
 test("source와 output package 경계를 고정한다", () => {
   assert.deepEqual(sourceDirectories, ["foundations", "components", "assets"]);
   assert.deepEqual(outputPackages, ["design-tokens", "icons"]);
+  assert.equal(generatedOutputRoot, "dist");
 });
 
 test("private tooling package와 지원 runtime을 고정한다", async () => {

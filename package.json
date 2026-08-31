@@ -9,6 +9,10 @@
     "npm": ">=11 <12"
   },
   "packageManager": "npm@11.16.0",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
   "scripts": {
     "build": "node scripts/build.mjs",
     "check:generated": "node scripts/check-generated.mjs",
