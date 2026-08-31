@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { cp, mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+
+import { writeCssVariables } from "../src/css-token-generator.mjs";
 
 import { publishedPackages } from "../src/package-publish-config.mjs";
 import {
@@ -110,7 +113,15 @@ test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한�
   assert.match(guide, /accessible name/);
 });
 
-test("배포 package의 CSS export에서 icon.size 변수를 읽을 수 있다", async () => {
+test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.size 변수를 담는다", async (t) => {
+  const rootDirectory = await mkdtemp(join(tmpdir(), "libitum-icon-size-"));
+  t.after(() => rm(rootDirectory, { recursive: true, force: true }));
+  await cp(
+    fileURLToPath(new URL("../foundations", import.meta.url)),
+    join(rootDirectory, "foundations"),
+    { recursive: true },
+  );
+
   const manifests = await readPackageManifests();
   const tokens = manifests["@libitums/design-tokens"];
   const specifier = "@libitums/design-tokens/css/variables.css";
@@ -118,13 +129,22 @@ test("배포 package의 CSS export에서 icon.size 변수를 읽을 수 있다",
 
   assert.equal(isExportedSubpath(subpath, tokens.exports), true);
 
-  const target = tokens.exports[subpath];
-  const css = await readFile(
-    join(repositoryRoot, "packages", "design-tokens", target.replace("./", "")),
-    "utf8",
+  const result = await writeCssVariables(rootDirectory);
+  const exportedPath = join(
+    rootDirectory,
+    "packages",
+    "design-tokens",
+    tokens.exports[subpath].replace("./", ""),
   );
 
+  assert.equal(
+    result.outputFile,
+    exportedPath,
+    "생성 위치와 package export 대상이 어긋납니다",
+  );
+
+  const css = await readFile(exportedPath, "utf8");
   for (const step of ["xs", "sm", "md", "lg", "xl"]) {
-    assert.match(css, new RegExp(`--libitum-icon-size-${step}:`));
+    assert.match(css, new RegExp(`--libitum-icon-size-${step}: var\\(`));
   }
 });
