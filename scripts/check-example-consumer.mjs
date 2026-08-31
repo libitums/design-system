@@ -14,11 +14,14 @@ console.log(
 for (const specifier of result.publicSpecifiers) {
   console.log(`- ${specifier}`);
 }
-console.log(
-  `Verified Rspeedy production build emits ${result.emittedFiles.length} file(s): ${result.emittedFiles
-    .map((file) => `${file.path} (${file.rawBytes}B)`)
-    .join(", ")}`,
+const bundles = result.emittedFiles.filter((file) =>
+  exampleConsumerPolicy.requiredBundles.includes(file.path),
 );
 console.log(
-  "Verified build output inlines both icon variants and token values from the packages.",
+  `Verified Rspeedy production build emits ${bundles
+    .map((file) => `${file.path} (${file.rawBytes}B)`)
+    .join(", ")}.`,
+);
+console.log(
+  "Verified each bundle inlines both icon variants and token values from the packages.",
 );

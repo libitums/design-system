@@ -26,13 +26,23 @@ npm run build
 npm run dev --workspace @libitums/example-lynx-consumer
 ```
 
+Dev server는 Lynx host용 번들과 브라우저 미리보기용 번들을 함께 제공합니다.
+
+```
+➜  Lynx       http://localhost:3000/main.lynx.bundle
+➜  Web        http://localhost:3000/main.web.bundle
+➜  ∟ Preview  http://localhost:3000/__web_preview?casename=main.web.bundle
+```
+
+**Preview URL을 브라우저에서 열면 같은 화면을 눈으로 확인할 수 있습니다.** Rspeedy가 Lynx Web Platform shell을 얹어 `<lynx-view>` 안에서 렌더링합니다. 다만 이건 web 런타임 기준이므로 iOS Lynx host의 렌더링을 대신하지 않습니다. Host 판정은 [LIB-187](https://linear.app/libitum/issue/LIB-187)에서 합니다.
+
 Production build와 산출물 검증은 루트 명령 하나로 끝납니다.
 
 ```sh
 npm run check:example-consumer
 ```
 
-이 명령은 package를 다시 생성하고, fixture가 공개 export 경로만 import하는지 확인하고, Rspeedy production build 산출물에 두 아이콘 variant의 XML과 token 값이 실제로 들어갔는지 확인합니다.
+이 명령은 package를 다시 생성하고, fixture가 공개 export 경로만 import하는지 확인하고, Rspeedy production build가 두 번들을 모두 내보내는지, **각 번들에** 두 아이콘 variant의 XML과 token 값이 실제로 들어갔는지 확인합니다. 한쪽 번들만 동작하는 상태도 실패로 잡습니다.
 
 ## FE 저장소가 할 일
 

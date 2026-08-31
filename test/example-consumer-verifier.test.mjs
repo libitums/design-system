@@ -34,7 +34,10 @@ const manifests = [
 
 function validMeasurement() {
   return {
-    emittedFiles: [{ path: "main.lynx.bundle", rawBytes: 122512 }],
+    emittedFiles: [
+      { path: "main.lynx.bundle", rawBytes: 122512 },
+      { path: "main.web.bundle", rawBytes: 135068 },
+    ],
     missingMarkers: [],
     privateSpecifiers: [],
     publicSpecifiers: ["@libitums/design-tokens", "@libitums/icons/lynx/heart"],
@@ -108,7 +111,10 @@ test("비공개 경로 사용과 marker 누락을 각각 실패 처리한다", (
   measurement.privateSpecifiers = [
     "@libitums/icons/dist/heart.svg is not an export of @libitums/icons",
   ];
-  measurement.missingMarkers = ["brand color token", "padding icon XML"];
+  measurement.missingMarkers = [
+    { bundle: "main.lynx.bundle", marker: "brand color token" },
+    { bundle: "main.web.bundle", marker: "padding icon XML" },
+  ];
 
   assert.throws(
     () => evaluateExampleConsumerMeasurement(measurement),
@@ -116,24 +122,33 @@ test("비공개 경로 사용과 marker 누락을 각각 실패 처리한다", (
       assert.equal(error instanceof ExampleConsumerVerificationError, true);
       assert.equal(error.errors.length, 3);
       assert.match(error.message, /non-public path: @libitums\/icons\/dist\/heart\.svg/);
-      assert.match(error.message, /missing the brand color token/);
-      assert.match(error.message, /missing the padding icon XML/);
+      assert.match(
+        error.message,
+        /main\.lynx\.bundle is missing the brand color token/,
+      );
+      assert.match(
+        error.message,
+        /main\.web\.bundle is missing the padding icon XML/,
+      );
       return true;
     },
   );
 });
 
-test("package를 하나도 import하지 않은 fixture를 실패 처리한다", () => {
+test("package import이 없거나 요구한 번들이 빠지면 실패 처리한다", () => {
   const measurement = validMeasurement();
   measurement.publicSpecifiers = [];
-  measurement.emittedFiles = [];
+  measurement.emittedFiles = [{ path: "main.lynx.bundle", rawBytes: 122512 }];
 
   assert.throws(
     () => evaluateExampleConsumerMeasurement(measurement),
     (error) => {
       assert.equal(error.errors.length, 2);
       assert.match(error.message, /must import at least one design-system package path/);
-      assert.match(error.message, /build emitted no files/);
+      assert.match(
+        error.message,
+        /did not emit main\.web\.bundle, received: main\.lynx\.bundle/,
+      );
       return true;
     },
   );

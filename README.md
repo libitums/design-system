@@ -187,7 +187,9 @@ Bundle 검증이 합성 entry를 쓰는 것과 달리, [`examples/lynx-consumer`
 npm run check:example-consumer
 ```
 
-이 명령은 fixture가 공개 `exports` 경로만 import하는지 확인하고, fixture의 `lynx.config.js`로 production build를 돌려 두 아이콘 variant의 SVG XML과 token 값이 산출물에 실제로 들어갔는지 확인합니다. 비공개 경로를 쓰거나 값이 산출물에서 사라지면 실패합니다.
+이 명령은 fixture가 공개 `exports` 경로만 import하는지 확인하고, fixture의 `lynx.config.js`로 production build를 돌려 `main.lynx.bundle`과 `main.web.bundle` 각각에 두 아이콘 variant의 SVG XML과 token 값이 실제로 들어갔는지 확인합니다. 비공개 경로를 쓰거나 값이 한쪽 번들에서라도 사라지면 실패합니다.
+
+`npm run dev --workspace @libitums/example-lynx-consumer`는 Lynx host용 번들과 함께 브라우저 미리보기를 제공합니다. Rspeedy가 Lynx Web Platform shell을 얹으므로 `http://localhost:3000/__web_preview?casename=main.web.bundle`에서 같은 화면을 눈으로 확인할 수 있습니다. Web 런타임 기준이므로 iOS Lynx host의 렌더링을 대신하지는 않습니다.
 
 Package exports는 다음 경로를 제공합니다.
 

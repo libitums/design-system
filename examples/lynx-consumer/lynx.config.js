@@ -5,6 +5,10 @@ import { pluginReactLynx } from "@lynx-js/react-rsbuild-plugin";
 // alias·loader·plugin을 요구하지 않으므로 ReactLynx plugin만 연결합니다.
 export default defineConfig({
   plugins: [pluginReactLynx()],
+  environments: {
+    lynx: {},
+    web: {},
+  },
   source: {
     entry: {
       main: "./src/index.jsx",

@@ -12,6 +12,9 @@ export const exampleConsumerPolicy = Object.freeze({
   directory: "examples/lynx-consumer",
   packageName: "@libitums/example-lynx-consumer",
   sourceDirectory: "src",
+  // Lynx host용 번들과 브라우저 미리보기용 번들을 함께 만듭니다.
+  // 두 번들 각각에서 아래 값들을 확인하므로 한쪽만 동작하는 상태를 잡습니다.
+  requiredBundles: Object.freeze(["main.lynx.bundle", "main.web.bundle"]),
   // fixture가 실제로 화면에 넣는 값들입니다. 하나라도 산출물에서 사라지면
   // 소비 경로가 끊어진 것이므로 실패로 봅니다.
   requiredMarkers: Object.freeze([
@@ -131,11 +134,15 @@ export function evaluateExampleConsumerMeasurement(measurement) {
   for (const reason of privateSpecifiers) {
     errors.push(`fixture uses a non-public path: ${reason}`);
   }
-  for (const marker of missingMarkers) {
-    errors.push(`build output is missing the ${marker}`);
+  for (const bundle of exampleConsumerPolicy.requiredBundles) {
+    if (!emittedFiles.some((file) => file.path === bundle)) {
+      errors.push(
+        `build did not emit ${bundle}, received: ${emittedFiles.map((file) => file.path).join(", ") || "(none)"}`,
+      );
+    }
   }
-  if (emittedFiles.length === 0) {
-    errors.push("build emitted no files");
+  for (const { bundle, marker } of missingMarkers) {
+    errors.push(`${bundle} is missing the ${marker}`);
   }
 
   if (errors.length > 0) {
@@ -203,22 +210,24 @@ export async function measureExampleConsumer(rootDirectory = process.cwd()) {
     assertSuccessfulBuildStats(build?.stats, exampleConsumerPolicy.packageName);
 
     const emittedFiles = [];
-    let outputText = "";
+    const missingMarkers = [];
+    const required = [...markers, ...exampleConsumerPolicy.requiredLiterals];
     for (const file of await listFiles(outputDirectory)) {
       const contents = await readFile(file);
-      outputText += contents.toString("utf8");
-      emittedFiles.push({
-        path: relative(outputDirectory, file),
-        rawBytes: contents.length,
-      });
-    }
+      const path = relative(outputDirectory, file);
+      emittedFiles.push({ path, rawBytes: contents.length });
 
-    const missingMarkers = [
-      ...markers,
-      ...exampleConsumerPolicy.requiredLiterals,
-    ]
-      .filter(({ value }) => !outputText.includes(value))
-      .map(({ name }) => name);
+      if (!exampleConsumerPolicy.requiredBundles.includes(path)) {
+        continue;
+      }
+
+      const text = contents.toString("utf8");
+      for (const { name, value } of required) {
+        if (!text.includes(value)) {
+          missingMarkers.push({ bundle: path, marker: name });
+        }
+      }
+    }
 
     return {
       emittedFiles,
