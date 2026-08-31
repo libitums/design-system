@@ -99,3 +99,50 @@ test("현재 package의 단일 아이콘 Rspeedy production bundle을 검증한�
   assert.equal(result.delta.rawBytes <= result.budgets.rawBytes, true);
   assert.equal(result.delta.gzipBytes <= result.budgets.gzipBytes, true);
 });
+
+test("Lynx build가 XML을 인라인하지 않거나 asset module을 끌어오면 실패한다", () => {
+  const base = {
+    baseline: { svgModules: [], containsRepresentativePayload: false, containsUnusedPayload: false, files: [{ path: "static/js/main.js" }] },
+    budgets: { gzipBytes: 1000, rawBytes: 1000 },
+    delta: { gzipBytes: 0, rawBytes: 0 },
+    singleIcon: {
+      containsRepresentativePayload: true,
+      containsUnusedPayload: false,
+      files: [{ path: "static/js/main.js" }],
+      svgModules: ["asset|/fixture/node_modules/@libitums/icons/dist/heart.svg"],
+    },
+  };
+  const lynxIcon = {
+    containsRepresentativeXml: true,
+    containsUnusedXml: false,
+    svgModules: [],
+  };
+
+  assert.doesNotThrow(() =>
+    evaluateIconBundleMeasurement({ ...base, lynxIcon }),
+  );
+  assert.throws(
+    () =>
+      evaluateIconBundleMeasurement({
+        ...base,
+        lynxIcon: { ...lynxIcon, containsRepresentativeXml: false },
+      }),
+    /does not inline the heart SVG XML/,
+  );
+  assert.throws(
+    () =>
+      evaluateIconBundleMeasurement({
+        ...base,
+        lynxIcon: { ...lynxIcon, containsUnusedXml: true },
+      }),
+    /contains unused arrow-down SVG XML/,
+  );
+  assert.throws(
+    () =>
+      evaluateIconBundleMeasurement({
+        ...base,
+        lynxIcon: { ...lynxIcon, svgModules: ["asset|heart.svg"] },
+      }),
+    /must not pull SVG asset modules/,
+  );
+});

@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { basename, extname, join, resolve } from "node:path";
 
 import { validateSvgIcons } from "./svg-icon-validator.mjs";
@@ -7,6 +7,9 @@ const copyChunkSize = 64;
 
 export const iconPackageOutputPaths = Object.freeze({
   declaration: "packages/icons/dist/svg.d.ts",
+  lynxDeclaration: "packages/icons/dist/lynx/svg-content.d.ts",
+  lynxHelper: "packages/icons/dist/lynx/index.js",
+  lynxHelperDeclaration: "packages/icons/dist/lynx/index.d.ts",
   manifest: "packages/icons/dist/manifest.json",
 });
 
@@ -95,6 +98,45 @@ function generateAssetDeclaration() {
   ].join("\n");
 }
 
+function generateLynxDeclaration() {
+  return [
+    "/* Generated for Lynx SVG XML exports. Do not edit directly. */",
+    "declare const content: string;",
+    "export default content;",
+    "",
+  ].join("\n");
+}
+
+function generateLynxHelper() {
+  return [
+    "/* Generated Lynx icon helpers. Do not edit directly. */",
+    "const currentColorPattern = /currentColor/gi;",
+    "",
+    "export function withIconColor(content, color) {",
+    "  if (typeof content !== \"string\") {",
+    "    throw new TypeError(\"Icon content must be a string\");",
+    "  }",
+    "  if (typeof color !== \"string\" || color === \"\") {",
+    "    throw new TypeError(\"Icon color must be a non-empty string\");",
+    "  }",
+    "  return content.replace(currentColorPattern, () => color);",
+    "}",
+    "",
+  ].join("\n");
+}
+
+function generateLynxHelperDeclaration() {
+  return [
+    "/* Generated Lynx icon helpers. Do not edit directly. */",
+    "export declare function withIconColor(content: string, color: string): string;",
+    "",
+  ].join("\n");
+}
+
+export function generateLynxModule(svgContent) {
+  return `export default ${JSON.stringify(svgContent)};\n`;
+}
+
 function generateManifest(icons) {
   return `${JSON.stringify(
     {
@@ -126,6 +168,9 @@ export async function generateIconPackage(rootDirectory = process.cwd()) {
   return {
     declaration: generateAssetDeclaration(),
     icons,
+    lynxDeclaration: generateLynxDeclaration(),
+    lynxHelper: generateLynxHelper(),
+    lynxHelperDeclaration: generateLynxHelperDeclaration(),
     manifest: generateManifest(icons),
     validation,
   };
@@ -136,37 +181,36 @@ export async function writeIconPackage(rootDirectory = process.cwd()) {
   const packageDirectory = resolve(rootDirectory, "packages", "icons");
   const outputDirectory = resolve(packageDirectory, "dist");
   const noPaddingOutputDirectory = join(outputDirectory, "no-padding");
+  const lynxOutputDirectory = join(outputDirectory, "lynx");
+  const lynxNoPaddingOutputDirectory = join(lynxOutputDirectory, "no-padding");
 
   await rm(outputDirectory, { recursive: true, force: true });
   await mkdir(noPaddingOutputDirectory, { recursive: true });
+  await mkdir(lynxNoPaddingOutputDirectory, { recursive: true });
 
   for (let index = 0; index < result.icons.length; index += copyChunkSize) {
     const chunk = result.icons.slice(index, index + copyChunkSize);
     await Promise.all(
-      chunk.flatMap(({ category, exportName, fileName }) => [
-        copyFile(
-          resolve(
-            rootDirectory,
-            "assets",
-            "icons",
-            "padding",
-            category,
-            fileName,
-          ),
-          join(outputDirectory, `${exportName}.svg`),
-        ),
-        copyFile(
-          resolve(
-            rootDirectory,
-            "assets",
-            "icons",
-            "no-padding",
-            category,
-            fileName,
-          ),
-          join(noPaddingOutputDirectory, `${exportName}.svg`),
-        ),
-      ]),
+      chunk.flatMap(({ category, exportName, fileName }) =>
+        [
+          ["padding", outputDirectory, lynxOutputDirectory],
+          ["no-padding", noPaddingOutputDirectory, lynxNoPaddingOutputDirectory],
+        ].map(async ([variant, assetDirectory, lynxDirectory]) => {
+          const svg = await readFile(
+            resolve(rootDirectory, "assets", "icons", variant, category, fileName),
+            "utf8",
+          );
+
+          await Promise.all([
+            writeFile(join(assetDirectory, `${exportName}.svg`), svg, "utf8"),
+            writeFile(
+              join(lynxDirectory, `${exportName}.js`),
+              generateLynxModule(svg),
+              "utf8",
+            ),
+          ]);
+        }),
+      ),
     );
   }
 
@@ -179,12 +223,20 @@ export async function writeIconPackage(rootDirectory = process.cwd()) {
   await Promise.all([
     writeFile(outputFiles.declaration, result.declaration, "utf8"),
     writeFile(outputFiles.manifest, result.manifest, "utf8"),
+    writeFile(outputFiles.lynxDeclaration, result.lynxDeclaration, "utf8"),
+    writeFile(outputFiles.lynxHelper, result.lynxHelper, "utf8"),
+    writeFile(
+      outputFiles.lynxHelperDeclaration,
+      result.lynxHelperDeclaration,
+      "utf8",
+    ),
   ]);
 
   return {
     ...result,
     outputDirectory,
     outputFiles,
+    lynxModuleCount: result.icons.length * 2,
     packageDirectory,
     svgFileCount: result.icons.length * 2,
   };

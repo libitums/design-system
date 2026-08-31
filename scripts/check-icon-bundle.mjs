@@ -20,3 +20,6 @@ console.log(
 console.log(
   `Verified unused @libitums/icons/${iconBundlePolicy.unusedIcon} is excluded.`,
 );
+console.log(
+  `Verified @libitums/icons/lynx/${iconBundlePolicy.representativeIcon} inlines SVG XML without asset modules.`,
+);

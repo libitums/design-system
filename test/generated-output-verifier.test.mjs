@@ -21,7 +21,7 @@ const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
 test("연속 build의 파일 목록과 byte hash가 동일하다", async () => {
   const result = await verifyGeneratedOutputDeterminism(repositoryRoot);
 
-  assert.equal(result.fileCount, 1638);
+  assert.equal(result.fileCount, 3271);
   assert.deepEqual(result.files.slice(0, 5), [
     "design-tokens/dist/css/typography.css",
     "design-tokens/dist/css/variables.css",
@@ -34,6 +34,13 @@ test("연속 build의 파일 목록과 byte hash가 동일하다", async () => {
   assert.equal(result.files.includes("icons/dist/manifest.json"), true);
   assert.equal(result.files.includes("icons/package.json"), true);
   assert.equal(result.files.includes("icons/dist/svg.d.ts"), true);
+  assert.equal(result.files.includes("icons/dist/lynx/heart.js"), true);
+  assert.equal(
+    result.files.includes("icons/dist/lynx/no-padding/heart.js"),
+    true,
+  );
+  assert.equal(result.files.includes("icons/dist/lynx/index.js"), true);
+  assert.equal(result.files.includes("icons/dist/lynx/svg-content.d.ts"), true);
 });
 
 test("파일 누락과 내용 변경을 결정성 오류로 보고한다", () => {
