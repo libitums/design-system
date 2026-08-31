@@ -15,7 +15,7 @@ design-system이 소유하는 ReactLynx 소비 fixture입니다. 배포 package�
 | `@libitums/icons/lynx/no-padding/{name}` | no-padding variant의 SVG XML이 인라인된다 |
 | `@libitums/icons/lynx` | `withIconColor`가 token 색을 XML에 넣는다 |
 
-`currentColor` 상속 여부가 host에서 확정되지 않았으므로 상속 경로와 `withIconColor` 경로를 함께 렌더합니다. 어느 쪽이 맞는지는 iOS Lynx host에서만 판정되며 아직 확정하지 않았습니다.
+`currentColor` 상속 여부가 host에서 확정되지 않았으므로 상속 경로와 `withIconColor` 경로를 함께 렌더합니다. 어느 쪽이 맞는지는 iOS Lynx host에서만 판정할 수 있습니다.
 
 ## 실행
 
