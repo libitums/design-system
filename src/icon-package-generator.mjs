@@ -1,23 +1,13 @@
-import {
-  copyFile,
-  mkdir,
-  readFile,
-  readdir,
-  rm,
-  writeFile,
-} from "node:fs/promises";
+import { copyFile, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import { basename, extname, join, resolve } from "node:path";
 
 import { validateSvgIcons } from "./svg-icon-validator.mjs";
-import { packagePublishMetadata } from "./package-publish-config.mjs";
 
 const copyChunkSize = 64;
-const packageName = "@libitums/icons";
 
 export const iconPackageOutputPaths = Object.freeze({
-  declaration: "dist/icons/svg.d.ts",
-  manifest: "dist/icons/manifest.json",
-  packageManifest: "dist/icons/package.json",
+  declaration: "packages/icons/dist/svg.d.ts",
+  manifest: "packages/icons/dist/manifest.json",
 });
 
 function compareStrings(left, right) {
@@ -123,45 +113,9 @@ function generateManifest(icons) {
   )}\n`;
 }
 
-function generatePackageManifest(version, icons) {
-  const exports = {
-    "./manifest.json": "./manifest.json",
-    "./package.json": "./package.json",
-  };
-
-  for (const { exportName } of icons) {
-    exports[`./${exportName}`] = {
-      types: "./svg.d.ts",
-      default: `./${exportName}.svg`,
-    };
-    exports[`./no-padding/${exportName}`] = {
-      types: "./svg.d.ts",
-      default: `./no-padding/${exportName}.svg`,
-    };
-  }
-
-  return `${JSON.stringify(
-    {
-      name: packageName,
-      version,
-      description: "libitum SVG icon assets with padding and no-padding variants",
-      type: "module",
-      sideEffects: false,
-      ...packagePublishMetadata(),
-      files: ["*.svg", "no-padding", "manifest.json", "svg.d.ts"],
-      exports,
-    },
-    null,
-    2,
-  )}\n`;
-}
-
 export async function generateIconPackage(rootDirectory = process.cwd()) {
   const validation = await validateSvgIcons(rootDirectory);
   const icons = await collectIconEntries(rootDirectory);
-  const rootPackage = JSON.parse(
-    await readFile(resolve(rootDirectory, "package.json"), "utf8"),
-  );
 
   if (icons.length !== validation.pairCount) {
     throw new Error(
@@ -173,14 +127,14 @@ export async function generateIconPackage(rootDirectory = process.cwd()) {
     declaration: generateAssetDeclaration(),
     icons,
     manifest: generateManifest(icons),
-    packageManifest: generatePackageManifest(rootPackage.version, icons),
     validation,
   };
 }
 
 export async function writeIconPackage(rootDirectory = process.cwd()) {
   const result = await generateIconPackage(rootDirectory);
-  const outputDirectory = resolve(rootDirectory, "dist", "icons");
+  const packageDirectory = resolve(rootDirectory, "packages", "icons");
+  const outputDirectory = resolve(packageDirectory, "dist");
   const noPaddingOutputDirectory = join(outputDirectory, "no-padding");
 
   await rm(outputDirectory, { recursive: true, force: true });
@@ -225,13 +179,13 @@ export async function writeIconPackage(rootDirectory = process.cwd()) {
   await Promise.all([
     writeFile(outputFiles.declaration, result.declaration, "utf8"),
     writeFile(outputFiles.manifest, result.manifest, "utf8"),
-    writeFile(outputFiles.packageManifest, result.packageManifest, "utf8"),
   ]);
 
   return {
     ...result,
     outputDirectory,
     outputFiles,
+    packageDirectory,
     svgFileCount: result.icons.length * 2,
   };
 }

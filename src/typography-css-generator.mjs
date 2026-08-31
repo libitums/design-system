@@ -4,7 +4,7 @@ import { join, resolve } from "node:path";
 import { toCssVariableName } from "./css-token-generator.mjs";
 
 export const typographyCssOutputPath =
-  "dist/design-tokens/css/typography.css";
+  "packages/design-tokens/dist/css/typography.css";
 
 export const typographyStyleProperties = Object.freeze([
   "fontFamily",
@@ -255,7 +255,7 @@ export async function writeTypographyCss(rootDirectory = process.cwd()) {
   const result = await generateTypographyCss(rootDirectory);
   const outputFile = resolve(rootDirectory, typographyCssOutputPath);
 
-  await mkdir(join(rootDirectory, "dist", "design-tokens", "css"), {
+  await mkdir(join(rootDirectory, "packages", "design-tokens", "dist", "css"), {
     recursive: true,
   });
   await writeFile(outputFile, result.css, "utf8");

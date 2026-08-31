@@ -6,6 +6,7 @@ import { join, relative, resolve, sep } from "node:path";
 import { promisify } from "node:util";
 
 import { buildPackages } from "./build-pipeline.mjs";
+import { packagesRoot as generatedPackagesRoot } from "./pipeline-layout.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -14,6 +15,8 @@ const workspaceInputs = Object.freeze([
   "components",
   "foundations",
   "package.json",
+  "packages/design-tokens/package.json",
+  "packages/icons/package.json",
 ]);
 
 async function listFiles(directory) {
@@ -111,12 +114,12 @@ export async function verifyGeneratedOutputDeterminism(
     await copyWorkspace(rootDirectory, temporaryRoot);
     await buildPackages(temporaryRoot);
     const first = await snapshotGeneratedOutput(
-      resolve(temporaryRoot, "dist"),
+      resolve(temporaryRoot, generatedPackagesRoot),
     );
 
     await buildPackages(temporaryRoot);
     const second = await snapshotGeneratedOutput(
-      resolve(temporaryRoot, "dist"),
+      resolve(temporaryRoot, generatedPackagesRoot),
     );
 
     return compareGeneratedSnapshots(first, second);

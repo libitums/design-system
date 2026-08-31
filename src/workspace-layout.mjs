@@ -2,7 +2,6 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { publishedPackages } from "./package-publish-config.mjs";
-import { generatedOutputRoot } from "./pipeline-layout.mjs";
 
 export const workspaceGlobs = Object.freeze(["packages/*", "examples/*"]);
 
@@ -290,12 +289,9 @@ export function validatePublishAllowlist(packages = publishedPackages) {
     const directory = workspaceDirectory(root);
 
     if (directory === undefined) {
-      // `dist`는 LIB-185에서 `packages/`로 옮기기 전까지 유지하는 생성 산출물 경로다.
-      if (root !== generatedOutputRoot) {
-        errors.push(
-          `Publish allowlist must not include an unrecognized directory: ${definition.directory}`,
-        );
-      }
+      errors.push(
+        `Publish allowlist must not include an unrecognized directory: ${definition.directory}`,
+      );
       continue;
     }
     if (!directory.publishable) {

@@ -1,55 +1,93 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { generateIconPackage } from "../src/icon-package-generator.mjs";
-import { generateTypeScriptTokens } from "../src/typescript-token-generator.mjs";
+import { publishedPackages } from "../src/package-publish-config.mjs";
+import {
+  isExportedSubpath,
+  subpathFromSpecifier,
+} from "../src/workspace-layout.mjs";
 
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
 
+const guideSpecifiers = Object.freeze([
+  "@libitums/design-tokens",
+  "@libitums/design-tokens/css/variables.css",
+  "@libitums/design-tokens/css/typography.css",
+  "@libitums/icons/heart",
+  "@libitums/icons/no-padding/heart",
+  "@libitums/icons/manifest.json",
+]);
+
+async function readPackageManifests() {
+  return Object.fromEntries(
+    await Promise.all(
+      publishedPackages.map(async (definition) => [
+        definition.name,
+        JSON.parse(
+          await readFile(
+            join(repositoryRoot, definition.directory, "package.json"),
+            "utf8",
+          ),
+        ),
+      ]),
+    ),
+  );
+}
+
 test("소비 가이드가 실제 package export와 인증 설정을 사용한다", async () => {
-  const [guide, tokenResult, iconResult] = await Promise.all([
+  const [guide, manifests] = await Promise.all([
     readFile(new URL("../CONSUMING.md", import.meta.url), "utf8"),
-    generateTypeScriptTokens(repositoryRoot),
-    generateIconPackage(repositoryRoot),
+    readPackageManifests(),
   ]);
-  const tokenManifest = JSON.parse(tokenResult.packageManifest);
-  const iconManifest = JSON.parse(iconResult.packageManifest);
 
   assert.match(guide, /@libitums:registry=https:\/\/npm\.pkg\.github\.com/);
   assert.match(guide, /_authToken=\$\{NODE_AUTH_TOKEN\}/);
   assert.match(guide, /--save-exact/);
 
-  for (const path of [
-    "@libitums/design-tokens",
-    "@libitums/design-tokens/css/variables.css",
-    "@libitums/design-tokens/css/typography.css",
-    "@libitums/icons/heart",
-    "@libitums/icons/no-padding/heart",
-    "@libitums/icons/manifest.json",
-  ]) {
-    assert.equal(guide.includes(path), true, `Missing guide path: ${path}`);
+  for (const specifier of guideSpecifiers) {
+    assert.equal(
+      guide.includes(specifier),
+      true,
+      `Missing guide path: ${specifier}`,
+    );
+  }
+});
+
+test("가이드가 안내한 import 경로가 배포 package의 공개 export로 해석된다", async () => {
+  const manifests = await readPackageManifests();
+
+  for (const specifier of guideSpecifiers) {
+    const owner = Object.values(manifests).find(
+      (manifest) => subpathFromSpecifier(specifier, manifest.name) !== undefined,
+    );
+    assert.notEqual(owner, undefined, `No package owns ${specifier}`);
+
+    const subpath = subpathFromSpecifier(specifier, owner.name);
+    assert.equal(
+      isExportedSubpath(subpath, owner.exports),
+      true,
+      `${specifier} is not exported by ${owner.name}`,
+    );
   }
 
-  assert.equal(tokenManifest.exports["."].import, "./index.js");
+  const tokens = manifests["@libitums/design-tokens"];
+  const icons = manifests["@libitums/icons"];
+
+  assert.equal(tokens.exports["."].import, "./dist/index.js");
+  assert.equal(tokens.exports["./css/variables.css"], "./dist/css/variables.css");
   assert.equal(
-    tokenManifest.exports["./css/variables.css"],
-    "./css/variables.css",
+    tokens.exports["./css/typography.css"],
+    "./dist/css/typography.css",
   );
+  assert.equal(icons.exports["./*"].default, "./dist/*.svg");
   assert.equal(
-    tokenManifest.exports["./css/typography.css"],
-    "./css/typography.css",
+    icons.exports["./no-padding/*"].default,
+    "./dist/no-padding/*.svg",
   );
-  assert.equal(iconManifest.exports["./heart"].default, "./heart.svg");
-  assert.equal(
-    iconManifest.exports["./no-padding/heart"].default,
-    "./no-padding/heart.svg",
-  );
-  assert.equal(
-    iconManifest.exports["./manifest.json"],
-    "./manifest.json",
-  );
+  assert.equal(icons.exports["./manifest.json"], "./dist/manifest.json");
 });
 
 test("소비 가이드가 token 요청과 lockstep upgrade 기준을 포함한다", async () => {

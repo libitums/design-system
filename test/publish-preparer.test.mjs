@@ -36,10 +36,10 @@ async function createWorkspace(t, version = "1.2.3") {
     ["design-tokens", "@libitums/design-tokens"],
     ["icons", "@libitums/icons"],
   ]) {
-    const outputDirectory = join(rootDirectory, "dist", directory);
-    await mkdir(outputDirectory, { recursive: true });
+    const packageDirectory = join(rootDirectory, "packages", directory);
+    await mkdir(packageDirectory, { recursive: true });
     await writeFile(
-      join(outputDirectory, "package.json"),
+      join(packageDirectory, "package.json"),
       `${JSON.stringify({ name, version, ...packagePublishMetadata() })}\n`,
       "utf8",
     );

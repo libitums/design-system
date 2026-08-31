@@ -9,9 +9,8 @@ assets/icons/  아이콘 SVG 815개 × 2 변형
 src/           검증·생성 로직 (tooling 계층)
 scripts/       build·validate CLI 진입점
 test/          파이프라인 테스트
-packages/      배포 가능한 플랫폼별 package 경계
+packages/      배포 package — manifest는 추적, dist/ 산출물은 Git 제외
 examples/      design-system 소유 private 소비 fixture·Host
-dist/          재생성 가능한 package 산출물 (Git 제외)
 RELEASING.md   SemVer·deprecation·release 정책
 CHANGELOG.md   두 package의 주요 변경 기록
 CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
@@ -85,6 +84,7 @@ foundations / components / assets
 - **역방향 의존을 허용하지 않습니다.** `packages`는 `examples`에, `src`는 `packages`에 의존할 수 없습니다.
 - **package 간 비공개 경로 import를 허용하지 않습니다.** 다른 package는 `exports`에 선언된 공개 경로로만 참조합니다. 생성 산출물의 내부 파일을 직접 가리키지 않습니다.
 - **`examples/*`는 `private: true`입니다.** 배포하지 않으며 배포 allowlist에 넣지 않습니다.
+- **package manifest는 추적하고 생성 산출물은 추적하지 않습니다.** `packages/<name>/package.json`이 공개 API와 version을 정의하고, `packages/<name>/dist/`는 build가 만들며 Git에 넣지 않습니다.
 - **배포는 workspace 전체가 아니라 명시적 allowlist만 사용합니다.** 대상은 `src/package-publish-config.mjs`에 나열한 package이며, `packages/`에 package를 추가해도 allowlist에 넣기 전에는 배포되지 않습니다.
 - **두 배포 package는 하나의 version을 공유하고 함께 배포합니다.**
 - **플랫폼별 구현은 이 저장소가 소유합니다.** ReactLynx wrapper, alias, loader, plugin과 검증용 fixture·Host를 소비 저장소에 두지 않습니다. 소비 저장소는 완성된 package를 설치하고 공개된 설정을 연결하기만 합니다.
@@ -99,7 +99,7 @@ foundations / components / assets
 
 Frontend project의 registry 인증, 설치, CSS·TypeScript·icon 사용과 upgrade 절차는 [package consumption guide](./CONSUMING.md)를 따릅니다.
 
-경로별 책임과 의존 방향은 [workspace 구조](#workspace-구조)를 따릅니다. 현재 두 package의 배포 산출물은 `dist/design-tokens/`와 `dist/icons/`에 생성됩니다.
+경로별 책임과 의존 방향은 [workspace 구조](#workspace-구조)를 따릅니다. 두 package는 `packages/design-tokens/`와 `packages/icons/`에 있고, 배포 산출물은 각 package의 `dist/`에 생성됩니다.
 
 Node.js 24 LTS와 npm 11을 사용합니다.
 
@@ -115,7 +115,7 @@ Pull Request와 `main` push에서는 GitHub Actions가 위 검증을 자동 실�
 
 검증된 package는 GitHub Actions의 `Publish packages` workflow에서 GitHub Packages로 배포합니다. `stable`은 현재 `main` HEAD만 `latest`로 배포하고, `canary`는 선택한 ref를 고유한 prerelease version과 별도 dist-tag로 배포합니다. 인증·중복 version·결과 기록 기준은 [release policy](./RELEASING.md)를 따릅니다.
 
-`dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일, 개별 아이콘 package를 생성합니다.
+`packages/*/dist/`는 원본에서 언제든 재생성할 수 있으므로 Git에 커밋하지 않습니다. 반면 각 package의 `package.json`은 공개 API와 version을 정의하는 원본이므로 추적하며, 두 manifest의 version은 루트 `package.json`과 같아야 합니다. 산출물을 직접 수정하지 말고 원본이나 생성 로직을 고친 뒤 다시 build합니다. 현재 build 진입점은 source와 output 경계를 검증·준비하고 기본 토큰 CSS, typography CSS, TypeScript ESM과 선언 파일, 개별 아이콘 package를 생성합니다.
 
 `npm run validate`는 source 경계, 모든 `foundations/*.json`의 token 구조·alias 참조, `components/**/*.md`의 token 참조, 저장소 Markdown 링크, SVG 아이콘 규칙을 검사합니다. Token은 `$value`와 직접 또는 상위 group에서 상속한 `$type`이 있어야 합니다. Alias는 다른 파일의 token도 참조할 수 있지만 target이 존재해야 하고 순환해서는 안 됩니다. 오류는 파일과 token path 또는 Markdown 줄·열 위치를 함께 출력합니다. Type별 value 형식은 별도 검증 단계에서 다룹니다.
 
@@ -125,7 +125,7 @@ Markdown 링크는 상대 경로의 대소문자와 대상 heading anchor까지 
 
 SVG 아이콘은 `padding`과 `no-padding`의 `category/name.svg` 2단계 상대 경로가 한 쌍이어야 합니다. `padding`의 viewBox는 `0 0 10 10`으로 고정하고, 모든 SVG의 root와 별도 fill 선언은 `currentColor`만 허용합니다. CSS 키워드인 `currentColor` 비교는 ASCII 대소문자를 구분하지 않습니다. 파일명은 변형 안에서 대소문자를 무시하고 고유해야 하며, 잘못된 XML, XML 주석·DOCTYPE, 지원하지 않는 child element는 파싱 오류로 처리합니다.
 
-`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `dist/design-tokens/css/variables.css`, typography 변수 116개를 `dist/design-tokens/css/typography.css`에 생성합니다. Foundation token 139개는 `dist/design-tokens/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
+`npm run build`는 검증을 먼저 실행한 뒤 기본 token 106개를 `packages/design-tokens/dist/css/variables.css`, typography 변수 116개를 `packages/design-tokens/dist/css/typography.css`에 생성합니다. Foundation token 139개는 `packages/design-tokens/dist/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
 ```css
 @import "@libitums/design-tokens/css/variables.css";

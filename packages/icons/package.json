@@ -1,0 +1,30 @@
+{
+  "name": "@libitums/icons",
+  "version": "0.0.0",
+  "description": "libitum SVG icon assets with padding and no-padding variants",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/libitums/design-system.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./manifest.json": "./dist/manifest.json",
+    "./package.json": "./package.json",
+    "./no-padding/*": {
+      "types": "./dist/svg.d.ts",
+      "default": "./dist/no-padding/*.svg"
+    },
+    "./*": {
+      "types": "./dist/svg.d.ts",
+      "default": "./dist/*.svg"
+    }
+  }
+}

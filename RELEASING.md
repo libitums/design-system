@@ -9,7 +9,7 @@
 - `@libitums/design-tokens`
 - `@libitums/icons`
 
-두 package는 **하나의 버전을 공유하고 항상 함께 release**합니다. 한 package만 변경되어도 두 package의 버전을 같이 올립니다. 버전의 source of truth는 루트 `package.json`이며, build가 생성하는 각 package manifest는 이 값을 그대로 사용합니다.
+두 package는 **하나의 버전을 공유하고 항상 함께 release**합니다. 한 package만 변경되어도 두 package의 버전을 같이 올립니다. 버전의 source of truth는 루트 `package.json`이며, `packages/*/package.json`의 `version`도 같은 값으로 유지합니다. 값이 어긋나면 `npm test`와 배포 준비 단계가 모두 실패합니다.
 
 루트 private tooling package 자체는 배포하지 않습니다. `components/**/*.md`를 비롯한 저장소 문서는 package에 포함되지 않지만, 소비자가 알아야 할 변경은 changelog에 기록합니다.
 
@@ -93,7 +93,7 @@ Git commit 목록을 그대로 changelog로 사용하지 않습니다. 각 항�
 ## Release 흐름
 
 1. `Unreleased` 항목을 검토하고 가장 높은 변경 수준을 결정합니다.
-2. 루트 `package.json`과 `package-lock.json`의 버전을 같은 값으로 올립니다.
+2. 루트 `package.json`, `package-lock.json`과 `packages/*/package.json`의 버전을 같은 값으로 올립니다.
 3. Build 후 두 생성 package manifest가 같은 버전인지 확인합니다.
 4. `Unreleased` 항목을 `## [x.y.z] - YYYY-MM-DD` 아래로 이동하고 빈 `Unreleased` section을 다시 만듭니다.
 5. Release PR에서 validate, test, build, 생성물 결정성과 icon bundle 검증을 모두 통과시킵니다.
@@ -108,7 +108,7 @@ Git commit 목록을 그대로 changelog로 사용하지 않습니다. 각 항�
 GitHub Actions의 `Publish packages` workflow는 수동 실행하며 `canary`와 `stable` 중 하나를 선택합니다. 동시에 두 배포가 실행되지 않도록 직렬화하고, 모든 source·test·build·생성물·icon bundle 검증을 다시 통과한 산출물만 GitHub Packages에 올립니다.
 
 - `stable`: 현재 `main` HEAD에서만 실행합니다. 루트의 stable SemVer와 날짜가 확정된 changelog section을 요구하고 `latest` dist-tag로 배포합니다. 개발용 `0.0.0`은 stable로 배포할 수 없습니다.
-- `canary`: 선택한 branch나 commit에서 실행할 수 있습니다. 루트 version에 `-canary.<run number>.<short sha>`를 붙이고 `canary` dist-tag로 배포합니다. 생성된 `dist` manifest만 이 prerelease version으로 바꾸며 source version은 수정하지 않습니다.
+- `canary`: 선택한 branch나 commit에서 실행할 수 있습니다. 루트 version에 `-canary.<run number>.<short sha>`를 붙이고 `canary` dist-tag로 배포합니다. 배포 직전에 `packages/*/package.json`의 version만 이 prerelease version으로 바꾸며 루트 version은 수정하지 않습니다.
 
 Workflow는 먼저 registry에서 두 package의 같은 version을 모두 조회합니다. 이미 존재하는 package에는 `npm publish`를 다시 실행하지 않고, 한 package만 성공한 부분 실패도 같은 workflow를 재실행해 나머지를 복구할 수 있습니다. 인증·권한 오류는 미배포 상태로 간주하지 않고 즉시 실패합니다.
 

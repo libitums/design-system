@@ -44,9 +44,8 @@ assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 src/             원본 검증·package 생성 로직 (tooling 계층)
 scripts/         build·validate CLI 진입점
 test/            파이프라인 자동 테스트
-packages/        배포 가능한 플랫폼별 package 경계
+packages/        배포 package — manifest는 추적, dist/ 산출물은 Git 제외
 examples/        design-system 소유 private 소비 fixture·Host
-dist/            재생성 가능한 package 산출물 (Git 제외)
 ```
 
 경로별 책임과 의존 방향은 [workspace 구조](./README.md#workspace-구조)를 따릅니다.
@@ -120,6 +119,7 @@ dist/            재생성 가능한 package 산출물 (Git 제외)
 - 의존은 `foundations`·`components`·`assets` → `src` → `packages` → `examples` 한 방향으로만 흐른다. 역방향 의존을 만들지 않는다.
 - 다른 package는 `exports`에 선언된 공개 경로로만 참조한다. 비공개 경로나 생성 산출물의 내부 파일을 직접 가리키지 않는다.
 - `examples/*`는 `private: true`이며 배포하지 않는다.
+- `packages/<name>/package.json`은 추적하고 `packages/<name>/dist/`는 생성물이므로 커밋하지 않는다. manifest의 version은 루트 `package.json`과 같아야 한다.
 - 배포 대상은 workspace 전체가 아니라 `src/package-publish-config.mjs`의 명시적 allowlist다.
 - 검증에서 package 문제를 발견하면 fixture에 우회 코드를 넣지 말고 별도 이슈로 분리한다.
 

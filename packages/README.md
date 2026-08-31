@@ -8,9 +8,21 @@
 - 공개 API는 각 package의 `exports`로만 정의합니다.
 - 플랫폼별 구현·alias·loader·plugin은 이 디렉터리의 package가 소유합니다. 소비 저장소에 같은 구현을 두지 않습니다.
 
+## 구조
+
+각 package는 추적하는 manifest와 추적하지 않는 산출물로 나뉩니다.
+
+```text
+packages/<name>/
+├── package.json   공개 API·version 정의 — 추적한다
+└── dist/          build 산출물 — Git 제외, 직접 수정하지 않는다
+```
+
 ## 규칙
 
 - 이 디렉터리의 package는 `private: true`를 설정하지 않습니다.
+- `package.json`의 `version`은 루트 `package.json`과 같아야 합니다. 어긋나면 `npm test`와 배포 준비가 실패합니다.
+- 공개 경로는 `exports`로만 정의하고 산출물의 실제 위치(`./dist/...`)는 감춥니다. 소비자는 `@libitums/icons/heart`처럼 안정된 subpath만 사용합니다.
 - 배포 대상은 workspace 전체가 아니라 `src/package-publish-config.mjs`의 명시적 allowlist입니다. 이 디렉터리에 package를 추가해도 allowlist에 넣기 전에는 배포되지 않습니다.
 - 두 배포 package는 하나의 version을 공유하며 함께 배포합니다.
 - 생성 산출물은 직접 수정하지 않고 원본과 generator를 고친 뒤 다시 build합니다.

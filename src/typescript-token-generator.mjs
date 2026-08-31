@@ -1,12 +1,9 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import { packagePublishMetadata } from "./package-publish-config.mjs";
-
 export const typeScriptTokenOutputPaths = Object.freeze({
-  declarations: "dist/design-tokens/index.d.ts",
-  module: "dist/design-tokens/index.js",
-  packageManifest: "dist/design-tokens/package.json",
+  declarations: "packages/design-tokens/dist/index.d.ts",
+  module: "packages/design-tokens/dist/index.js",
 });
 
 const aliasPattern = /^\{([^{}]+)\}$/;
@@ -304,47 +301,16 @@ function generateDeclarations(tokenTree, exportNames) {
   return lines.join("\n");
 }
 
-function generatePackageManifest(version) {
-  return `${JSON.stringify(
-    {
-      name: "@libitums/design-tokens",
-      version,
-      description: "libitum design tokens for TypeScript and CSS",
-      type: "module",
-      sideEffects: false,
-      ...packagePublishMetadata(),
-      files: ["index.js", "index.d.ts", "css"],
-      exports: {
-        ".": {
-          types: "./index.d.ts",
-          import: "./index.js",
-          default: "./index.js",
-        },
-        "./css/variables.css": "./css/variables.css",
-        "./css/typography.css": "./css/typography.css",
-        "./package.json": "./package.json",
-      },
-    },
-    null,
-    2,
-  )}\n`;
-}
-
 export async function generateTypeScriptTokens(rootDirectory = process.cwd()) {
   const tokens = await readFoundationTokens(rootDirectory);
   const tokenTree = buildResolvedTokenTree(tokens);
   const exportNames = Object.keys(tokenTree).sort();
   exportNames.forEach(assertExportName);
 
-  const rootPackage = JSON.parse(
-    await readFile(resolve(rootDirectory, "package.json"), "utf8"),
-  );
-
   return {
     declarations: generateDeclarations(tokenTree, exportNames),
     exportNames,
     module: generateModule(tokenTree, exportNames),
-    packageManifest: generatePackageManifest(rootPackage.version),
     tokenCount: tokens.size,
     tokens: tokenTree,
   };
@@ -352,7 +318,12 @@ export async function generateTypeScriptTokens(rootDirectory = process.cwd()) {
 
 export async function writeTypeScriptTokens(rootDirectory = process.cwd()) {
   const result = await generateTypeScriptTokens(rootDirectory);
-  const outputDirectory = resolve(rootDirectory, "dist", "design-tokens");
+  const outputDirectory = resolve(
+    rootDirectory,
+    "packages",
+    "design-tokens",
+    "dist",
+  );
   const outputFiles = Object.fromEntries(
     Object.entries(typeScriptTokenOutputPaths).map(([name, path]) => [
       name,
@@ -364,7 +335,6 @@ export async function writeTypeScriptTokens(rootDirectory = process.cwd()) {
   await Promise.all([
     writeFile(outputFiles.declarations, result.declarations, "utf8"),
     writeFile(outputFiles.module, result.module, "utf8"),
-    writeFile(outputFiles.packageManifest, result.packageManifest, "utf8"),
   ]);
 
   return {

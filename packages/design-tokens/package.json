@@ -1,0 +1,28 @@
+{
+  "name": "@libitums/design-tokens",
+  "version": "0.0.0",
+  "description": "libitum design tokens for TypeScript and CSS",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/libitums/design-system.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./css/variables.css": "./dist/css/variables.css",
+    "./css/typography.css": "./dist/css/typography.css",
+    "./package.json": "./package.json"
+  }
+}

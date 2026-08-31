@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, sep } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import test from "node:test";
 
@@ -25,6 +25,11 @@ async function createWorkspace(t) {
   await cp(
     fileURLToPath(new URL("../package.json", import.meta.url)),
     join(rootDirectory, "package.json"),
+  );
+  await cp(
+    fileURLToPath(new URL("../packages/design-tokens", import.meta.url)),
+    join(rootDirectory, "packages", "design-tokens"),
+    { filter: (source) => !source.endsWith(`${sep}dist`), recursive: true },
   );
 
   return rootDirectory;
@@ -69,38 +74,14 @@ test("단일 값과 복합 값 내부의 alias를 최종 값으로 해석한다"
   assert.doesNotMatch(result.module, /"\{[^{}]+\}"/);
 });
 
-test("literal readonly 선언과 package exports를 생성한다", async () => {
+test("literal readonly 선언을 생성한다", async () => {
   const result = await generateTypeScriptTokens(repositoryRoot);
-  const packageManifest = JSON.parse(result.packageManifest);
 
   assert.match(result.declarations, /export declare const color:/);
   assert.match(result.declarations, /readonly primary: "#F46B18";/);
   assert.match(result.declarations, /readonly "6": "6px";/);
   assert.match(result.declarations, /export declare const tokens:/);
   assert.doesNotMatch(result.declarations, /\bany\b|\bunknown\b/);
-
-  assert.equal(packageManifest.name, "@libitums/design-tokens");
-  assert.deepEqual(packageManifest.repository, {
-    type: "git",
-    url: "https://github.com/libitums/design-system.git",
-  });
-  assert.deepEqual(packageManifest.publishConfig, {
-    access: "restricted",
-    registry: "https://npm.pkg.github.com",
-  });
-  assert.deepEqual(packageManifest.exports["."], {
-    types: "./index.d.ts",
-    import: "./index.js",
-    default: "./index.js",
-  });
-  assert.equal(
-    packageManifest.exports["./css/variables.css"],
-    "./css/variables.css",
-  );
-  assert.equal(
-    packageManifest.exports["./css/typography.css"],
-    "./css/typography.css",
-  );
 });
 
 test("생성 package를 대표 import 문법으로 소비한다", async (t) => {
@@ -112,7 +93,7 @@ test("생성 package를 대표 import 문법으로 소비한다", async (t) => {
     "@libitums",
     "design-tokens",
   );
-  await cp(join(rootDirectory, "dist", "design-tokens"), packageDirectory, {
+  await cp(join(rootDirectory, "packages", "design-tokens"), packageDirectory, {
     recursive: true,
   });
 
