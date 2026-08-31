@@ -13,6 +13,7 @@
 - Frontend package 인증·설치·token·icon 사용과 upgrade 가이드를 추가했습니다. (LIB-130)
 - 아이콘 렌더 크기를 위한 CSS 변수 `--libitum-icon-size-xs~xl` 5개를 `css/variables.css`에 추가했습니다. (LIB-182)
 - ReactLynx `<svg content>`용 아이콘 export `@libitums/icons/lynx/{name}`, `@libitums/icons/lynx/no-padding/{name}`과 `withIconColor` helper를 추가했습니다. (LIB-183)
+- ReactLynx 소비 fixture `examples/lynx-consumer`와 `npm run check:example-consumer`를 추가했습니다. 두 package의 공개 export만 사용해 토큰·아이콘 연결을 production build에서 확인합니다. (LIB-131)
 
 ### Changed
 

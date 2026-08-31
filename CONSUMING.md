@@ -267,6 +267,29 @@ withIconColor(heart, color.fg.brand);
 
 `withIconColor`는 XML의 `currentColor`만 치환하고 원본 문자열은 바꾸지 않습니다. 소비 저장소에서 SVG XML을 직접 문자열 조작하지 않습니다.
 
+#### 설정 연결
+
+소비 저장소가 할 일은 **package 설치와 ReactLynx plugin 연결까지**입니다. design system package는 alias·loader·전용 plugin을 추가로 요구하지 않습니다.
+
+```js
+// lynx.config.js
+import { defineConfig } from "@lynx-js/rspeedy";
+import { pluginReactLynx } from "@lynx-js/react-rsbuild-plugin";
+
+export default defineConfig({
+  plugins: [pluginReactLynx()],
+});
+```
+
+Token CSS는 app의 진입 module에서 한 번 불러옵니다.
+
+```jsx
+import "@libitums/design-tokens/css/variables.css";
+import "@libitums/design-tokens/css/typography.css";
+```
+
+이 연결이 실제로 동작하는 최소 구성은 design system 저장소의 [`examples/lynx-consumer`](./examples/lynx-consumer/README.md)에 있습니다. 두 아이콘 variant, `withIconColor`, token CSS 변수가 production build 산출물에 실제로 들어가는지를 `npm run check:example-consumer`가 매 PR에서 확인합니다. 소비 저장소에 같은 fixture를 만들 필요는 없습니다.
+
 ## Font
 
 `@libitums/design-tokens`에는 font binary와 `@font-face`가 포함되지 않습니다. Web은 Pretendard WOFF2를 frontend static root에서 self-host하고, iOS·Android 앱은 `PretendardVariable.ttf`를 앱 package에 포함해 첫 화면 전에 등록합니다. ReactLynx는 native host에 포함된 같은 TTF를 사용합니다.
