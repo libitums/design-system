@@ -168,13 +168,15 @@ import heartNoPadding from "@libitums/icons/no-padding/heart";
 const iconSources = { heart, heartNoPadding };
 ```
 
-`@libitums/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx wrapper와 접근성 이름은 현재 이 package에 포함하지 않습니다. 필요한 플랫폼 구현은 이 저장소가 `packages/`에서 제공하며 소비 저장소가 따로 구현하지 않습니다.
+`@libitums/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx는 `<image>`가 SVG를 지원하지 않으므로 SVG XML을 그대로 받는 `<svg>` 요소용 export를 따로 제공합니다. `@libitums/icons/lynx/{name}`과 `@libitums/icons/lynx/no-padding/{name}`은 SVG XML `string`을 내보내고, `@libitums/icons/lynx`의 `withIconColor(content, color)`로 `currentColor`를 지정한 색으로 바꿉니다. 접근성 이름은 이 package에 포함하지 않습니다. 필요한 플랫폼 구현은 이 저장소가 `packages/`에서 제공하며 소비 저장소가 따로 구현하지 않습니다.
 
 아이콘 bundle 검증은 고정된 `@lynx-js/rspeedy` 0.16.5 production build로 빈 entry와 `heart` 단일 import를 비교합니다. Rspeedy 기본값에 따라 2KiB 미만 SVG는 data URI로 인라인되므로, 별도 SVG 파일 개수만 세지 않고 Rspack module graph와 raw·gzip bundle 증가량을 함께 검사합니다.
 
 ```sh
 npm run check:icon-bundle
 ```
+
+Lynx export도 같은 명령에서 검증합니다. `@libitums/icons/lynx/heart`를 import한 build는 해당 아이콘의 SVG XML을 인라인하고, 사용하지 않은 아이콘의 XML과 SVG asset module을 포함하지 않아야 합니다.
 
 통과 기준은 `heart.svg` module만 포함되고 `arrow-down.svg`의 module과 payload가 제외되는 것입니다. 산출물은 `static/js/main.js` 하나여야 합니다. Raw 증가는 원본 SVG의 base64 크기 + 128B 이하, gzip 증가는 원본 크기 + 128B 이하로 제한합니다. 현재 310B `heart.svg` 기준 budget은 raw 544B / gzip 438B이며, 측정값은 raw 442B / gzip 332B입니다.
 
@@ -188,6 +190,9 @@ Package exports는 다음 경로를 제공합니다.
 | `@libitums/icons/{name}` | 기본 padding SVG 정적 에셋 |
 | `@libitums/icons/no-padding/{name}` | no-padding SVG 정적 에셋 |
 | `@libitums/icons/manifest.json` | 아이콘 이름·category·variant 경로 metadata |
+| `@libitums/icons/lynx/{name}` | Lynx `<svg content>`용 padding SVG XML string |
+| `@libitums/icons/lynx/no-padding/{name}` | Lynx `<svg content>`용 no-padding SVG XML string |
+| `@libitums/icons/lynx` | `withIconColor(content, color)` helper |
 
 `npm run check:generated`는 새 임시 workspace에서 연속으로 두 번 build한 뒤 생성 파일의 상대 경로와 SHA-256을 비교합니다. 또한 실제 저장소 build 전후의 Git 상태가 달라지면 실패합니다. 따라서 생성 순서나 내용이 실행마다 달라지거나 build가 새 미커밋 변경을 만들면 non-zero로 종료되며, PR 자동 검증 workflow에서 그대로 호출할 수 있습니다.
 

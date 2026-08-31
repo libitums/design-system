@@ -12,6 +12,7 @@
 - GitHub Packages stable·canary 배포 workflow와 중복 version 차단·결과 기록을 추가했습니다. (LIB-129)
 - Frontend package 인증·설치·token·icon 사용과 upgrade 가이드를 추가했습니다. (LIB-130)
 - 아이콘 렌더 크기를 위한 CSS 변수 `--libitum-icon-size-xs~xl` 5개를 `css/variables.css`에 추가했습니다. (LIB-182)
+- ReactLynx `<svg content>`용 아이콘 export `@libitums/icons/lynx/{name}`, `@libitums/icons/lynx/no-padding/{name}`과 `withIconColor` helper를 추가했습니다. (LIB-183)
 
 ### Changed
 

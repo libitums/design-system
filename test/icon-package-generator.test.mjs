@@ -12,7 +12,7 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import {
   generateIconPackage,
@@ -149,4 +149,68 @@ test("정규화 후 같은 export 이름이 되는 아이콘은 생성에 실패
     () => generateIconPackage(rootDirectory),
     /Icon export name collision: .* both map to my-icon/,
   );
+});
+
+test("Lynx export가 SVG XML 문자열을 공개 경로로 제공한다", async (t) => {
+  const rootDirectory = await createWorkspace(t, {
+    "1-game/Heart.svg": undefined,
+    "8-ui/arrow-down.svg": undefined,
+  });
+  const result = await writeIconPackage(rootDirectory);
+  const packageDirectory = join(
+    rootDirectory,
+    "node_modules",
+    "@libitums",
+    "icons",
+  );
+  await cp(result.packageDirectory, packageDirectory, { recursive: true });
+
+  const require = createRequire(join(rootDirectory, "consumer.cjs"));
+
+  assert.equal(
+    require.resolve("@libitums/icons/lynx/heart"),
+    await realpath(join(packageDirectory, "dist", "lynx", "heart.js")),
+  );
+  assert.equal(
+    require.resolve("@libitums/icons/lynx/no-padding/heart"),
+    await realpath(
+      join(packageDirectory, "dist", "lynx", "no-padding", "heart.js"),
+    ),
+  );
+
+  const padding = await import(
+    pathToFileURL(require.resolve("@libitums/icons/lynx/heart")).href
+  );
+  const noPadding = await import(
+    pathToFileURL(require.resolve("@libitums/icons/lynx/no-padding/heart")).href
+  );
+
+  assert.equal(typeof padding.default, "string");
+  assert.match(padding.default, /^<svg /);
+  assert.match(padding.default, /viewBox="0 0 10 10"/);
+  assert.match(padding.default, /fill="currentColor"/);
+  assert.match(noPadding.default, /viewBox="1 1 8 8"/);
+
+  assert.equal(result.lynxModuleCount, 4);
+});
+
+test("withIconColor가 currentColor를 지정한 색으로 바꾼다", async (t) => {
+  const rootDirectory = await createWorkspace(t, {
+    "1-game/Heart.svg": undefined,
+  });
+  const result = await writeIconPackage(rootDirectory);
+  const helper = await import(
+    pathToFileURL(result.outputFiles.lynxHelper).href
+  );
+  const icon = await import(
+    pathToFileURL(join(result.outputDirectory, "lynx", "heart.js")).href
+  );
+
+  const colored = helper.withIconColor(icon.default, "#F46B18");
+
+  assert.match(colored, /fill="#F46B18"/);
+  assert.doesNotMatch(colored, /currentColor/i);
+  assert.equal(icon.default.includes("currentColor"), true);
+  assert.throws(() => helper.withIconColor(icon.default, ""), TypeError);
+  assert.throws(() => helper.withIconColor(undefined, "#000"), TypeError);
 });

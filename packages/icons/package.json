@@ -18,6 +18,19 @@
   "exports": {
     "./manifest.json": "./dist/manifest.json",
     "./package.json": "./package.json",
+    "./lynx": {
+      "types": "./dist/lynx/index.d.ts",
+      "import": "./dist/lynx/index.js",
+      "default": "./dist/lynx/index.js"
+    },
+    "./lynx/no-padding/*": {
+      "types": "./dist/lynx/svg-content.d.ts",
+      "default": "./dist/lynx/no-padding/*.js"
+    },
+    "./lynx/*": {
+      "types": "./dist/lynx/svg-content.d.ts",
+      "default": "./dist/lynx/*.js"
+    },
     "./no-padding/*": {
       "types": "./dist/svg.d.ts",
       "default": "./dist/no-padding/*.svg"

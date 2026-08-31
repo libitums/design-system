@@ -168,6 +168,54 @@ export const iconSources = { heartIcon, heartArtwork };
 
 원본 이름·variant·크기 기준은 [Iconography](./foundations/iconography.json)를 따릅니다.
 
+### ReactLynx
+
+Lynx의 `<image>`는 SVG 형식을 지원하지 않습니다. SVG URL을 `<image>`에 넘기면 렌더링되지 않으므로, Lynx에서는 **SVG XML을 그대로 받는 `<svg>` 요소**와 전용 export를 사용합니다.
+
+```jsx
+import heart from "@libitums/icons/lynx/heart";
+import heartArtwork from "@libitums/icons/lynx/no-padding/heart";
+
+<svg
+  content={heart}
+  style={{
+    width: "var(--libitum-icon-size-md)",
+    height: "var(--libitum-icon-size-md)",
+  }}
+/>;
+```
+
+| 경로 | 결과 | 사용 |
+|---|---|---|
+| `@libitums/icons/lynx/{name}` | padding variant의 SVG XML `string` | 기본 선택 |
+| `@libitums/icons/lynx/no-padding/{name}` | no-padding variant의 SVG XML `string` | frame을 정확히 채우는 구성 |
+| `@libitums/icons/lynx` | `withIconColor` helper | 색 지정 |
+
+variant 선택 기준은 Web과 같습니다. 이름도 같은 export 이름을 쓰므로 `@libitums/icons/heart`와 `@libitums/icons/lynx/heart`는 같은 아이콘입니다.
+
+아이콘이 사용하는 `path`, `rect`, `ellipse`는 Lynx `<svg>`의 지원 태그에 포함됩니다. Lynx `<svg>`는 Lynx 3.7에서 추가되었으므로 host app의 engine 버전이 그보다 낮으면 이 경로를 사용할 수 없습니다.
+
+#### 색 지정
+
+SVG 원본은 `fill="currentColor"`를 유지하지만, **Lynx `<svg>`의 지원 속성 목록에 `currentColor` 해석은 명시되어 있지 않습니다.** 색이 상속되지 않는 경우 `withIconColor`로 값을 직접 넣습니다.
+
+```jsx
+import { withIconColor } from "@libitums/icons/lynx";
+import heart from "@libitums/icons/lynx/heart";
+
+<svg content={withIconColor(heart, "#F46B18")} />;
+```
+
+색 값은 raw hex가 아니라 design token에서 가져옵니다.
+
+```jsx
+import { color } from "@libitums/design-tokens";
+
+withIconColor(heart, color.fg.brand);
+```
+
+`withIconColor`는 XML의 `currentColor`만 치환하고 원본 문자열은 바꾸지 않습니다. 소비 저장소에서 SVG XML을 직접 문자열 조작하지 않습니다.
+
 ## Font
 
 `@libitums/design-tokens`에는 font binary와 `@font-face`가 포함되지 않습니다. Web은 Pretendard WOFF2를 frontend static root에서 self-host하고, iOS·Android 앱은 `PretendardVariable.ttf`를 앱 package에 포함해 첫 화면 전에 등록합니다. ReactLynx는 native host에 포함된 같은 TTF를 사용합니다.

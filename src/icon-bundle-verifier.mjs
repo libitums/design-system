@@ -22,6 +22,14 @@ export const iconBundlePolicy = Object.freeze({
   unusedIcon: "arrow-down",
 });
 
+function pathData(svg) {
+  const match = /\sd="([^"]+)"/.exec(svg);
+  if (match === null) {
+    throw new Error("Icon SVG has no path data to use as a bundle marker");
+  }
+  return match[1];
+}
+
 function compareStrings(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
 }
@@ -84,6 +92,7 @@ async function buildFixture(
   source,
   iconPackageDirectory,
   assetPayloads,
+  xmlMarkers = { representative: undefined, unused: undefined },
 ) {
   const rootDirectory = join(temporaryRoot, name);
   const sourceDirectory = join(rootDirectory, "src");
@@ -141,7 +150,12 @@ async function buildFixture(
       containsRepresentativePayload: outputText.includes(
         assetPayloads.representative,
       ),
+      containsRepresentativeXml:
+        xmlMarkers.representative !== undefined &&
+        outputText.includes(xmlMarkers.representative),
       containsUnusedPayload: outputText.includes(assetPayloads.unused),
+      containsUnusedXml:
+        xmlMarkers.unused !== undefined && outputText.includes(xmlMarkers.unused),
       files,
       gzipBytes: files.reduce((sum, file) => sum + file.gzipBytes, 0),
       rawBytes: files.reduce((sum, file) => sum + file.rawBytes, 0),
@@ -175,7 +189,7 @@ export class IconBundleVerificationError extends Error {
 }
 
 export function evaluateIconBundleMeasurement(measurement) {
-  const { baseline, budgets, delta, singleIcon } = measurement;
+  const { baseline, budgets, delta, lynxIcon, singleIcon } = measurement;
   const errors = [];
   const expectedModuleSuffix = `/@libitums/icons/dist/${iconBundlePolicy.representativeIcon}.svg`;
 
@@ -222,6 +236,24 @@ export function evaluateIconBundleMeasurement(measurement) {
     );
   }
 
+  if (lynxIcon !== undefined) {
+    if (!lynxIcon.containsRepresentativeXml) {
+      errors.push(
+        `Lynx build does not inline the ${iconBundlePolicy.representativeIcon} SVG XML`,
+      );
+    }
+    if (lynxIcon.containsUnusedXml) {
+      errors.push(
+        `Lynx build contains unused ${iconBundlePolicy.unusedIcon} SVG XML`,
+      );
+    }
+    if (lynxIcon.svgModules.length !== 0) {
+      errors.push(
+        `Lynx build must not pull SVG asset modules, received ${lynxIcon.svgModules.length}`,
+      );
+    }
+  }
+
   if (errors.length > 0) {
     throw new IconBundleVerificationError(errors);
   }
@@ -250,6 +282,10 @@ export async function measureIconBundle(rootDirectory = process.cwd()) {
       representative: representativeSource.toString("base64"),
       unused: unusedSource.toString("base64"),
     };
+    const xmlMarkers = {
+      representative: pathData(representativeSource.toString("utf8")),
+      unused: pathData(unusedSource.toString("utf8")),
+    };
     const baseline = await buildFixture(
       temporaryRoot,
       "baseline",
@@ -264,10 +300,19 @@ export async function measureIconBundle(rootDirectory = process.cwd()) {
       iconPackage.packageDirectory,
       assetPayloads,
     );
+    const lynxIcon = await buildFixture(
+      temporaryRoot,
+      "lynx-icon",
+      `import content from "@libitums/icons/lynx/${iconBundlePolicy.representativeIcon}";\nglobalThis.__libitumIcon = content;\n`,
+      iconPackage.packageDirectory,
+      assetPayloads,
+      xmlMarkers,
+    );
     const sourceBytes = representativeSource.length;
 
     return {
       baseline,
+      lynxIcon,
       budgets: calculateIconBundleBudgets(sourceBytes),
       delta: {
         gzipBytes: singleIcon.gzipBytes - baseline.gzipBytes,
