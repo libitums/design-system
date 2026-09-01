@@ -90,11 +90,8 @@ function resolveAliasValue(value, context) {
   const visited = [];
   let current = value;
 
-  for (
-    let target = aliasTarget(current);
-    target !== undefined;
-    target = aliasTarget(current)
-  ) {
+  let target;
+  while ((target = aliasTarget(current)) !== undefined) {
     if (visited.includes(target)) {
       throw new Error(
         `Circular token alias in the CSS export: ${[...visited, target].join(" -> ")}`,
