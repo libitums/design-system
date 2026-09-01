@@ -44,13 +44,14 @@ test("22개 typography 스타일을 116개 CSS 변수로 생성한다", async ()
   );
   assert.match(variables.get("font.family.accent").value, /^"Futura",/);
   assert.equal(variables.get("font.weight.extraBold").value, "800");
+  // alias는 primitive의 리터럴로 평탄화됩니다. Lynx가 중첩 var()를 풀지 못합니다.
   assert.equal(
     variables.get("typography.accent.display.fontFamily").value,
-    "var(--libitum-font-family-accent)",
+    variables.get("font.family.accent").value,
   );
   assert.equal(
     variables.get("typography.accent.display.fontWeight").value,
-    "var(--libitum-font-weight-bold)",
+    variables.get("font.weight.bold").value,
   );
   assert.equal(
     variables.get("typography.accent.display.fontSize").value,
