@@ -1,6 +1,6 @@
 {
   "name": "@libitums/icons",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "libitum SVG icon assets with padding and no-padding variants",
   "type": "module",
   "sideEffects": false,

@@ -1,6 +1,6 @@
 {
   "name": "@libitums/design-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "libitum design tokens for TypeScript and CSS",
   "type": "module",
   "sideEffects": false,
