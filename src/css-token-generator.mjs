@@ -83,19 +83,42 @@ function aliasTarget(value) {
   return aliasPattern.exec(value)?.[1];
 }
 
-function serializeReferenceOrRaw(value, context) {
-  const target = aliasTarget(value);
-  if (target !== undefined) {
-    if (!context.exportedTokenPaths.has(target)) {
+// alias를 `var()` 참조로 내보내지 않고 리터럴까지 따라가 평탄화합니다.
+// Lynx는 var() 치환을 한 번만 하고 그 결과를 다시 파싱하므로, 값이 또 var()이면
+// 선언을 통째로 버립니다. 참조를 남기면 semantic token이 host에서 조용히 죽습니다.
+function resolveAliasValue(value, context) {
+  const visited = [];
+  let current = value;
+
+  for (
+    let target = aliasTarget(current);
+    target !== undefined;
+    target = aliasTarget(current)
+  ) {
+    if (visited.includes(target)) {
+      throw new Error(
+        `Circular token alias in the CSS export: ${[...visited, target].join(" -> ")}`,
+      );
+    }
+    visited.push(target);
+
+    const token = context.tokensByPath.get(target);
+    if (token === undefined) {
       throw new Error(
         `${context.tokenPath} references a token outside the CSS export: ${target}`,
       );
     }
-    return `var(${toCssVariableName(target)})`;
+    current = token.value;
   }
 
-  if (typeof value === "string" || typeof value === "number") {
-    return String(value);
+  return current;
+}
+
+function serializeReferenceOrRaw(value, context) {
+  const resolved = resolveAliasValue(value, context);
+
+  if (typeof resolved === "string" || typeof resolved === "number") {
+    return String(resolved);
   }
 
   throw new Error(`${context.tokenPath} has a non-serializable CSS value`);
@@ -135,27 +158,24 @@ function serializeCubicBezier(value, context) {
   return `cubic-bezier(${value.join(", ")})`;
 }
 
-export function serializeCssTokenValue(token, exportedTokenPaths) {
+export function serializeCssTokenValue(token, tokensByPath) {
   const context = {
-    exportedTokenPaths,
+    tokensByPath,
     tokenPath: token.path,
   };
-  const target = aliasTarget(token.value);
-
-  if (target !== undefined) {
-    return serializeReferenceOrRaw(token.value, context);
-  }
+  // alias는 먼저 풀어 둡니다. shadow를 가리키는 alias도 shadow로 직렬화해야 합니다.
+  const value = resolveAliasValue(token.value, context);
 
   switch (token.type) {
     case "color":
     case "dimension":
     case "duration":
     case "number":
-      return serializeReferenceOrRaw(token.value, context);
+      return serializeReferenceOrRaw(value, context);
     case "shadow":
-      return serializeShadow(token.value, context);
+      return serializeShadow(value, context);
     case "cubicBezier":
-      return serializeCubicBezier(token.value, context);
+      return serializeCubicBezier(value, context);
     default:
       throw new Error(
         `${token.path} uses an unsupported CSS token type: ${token.type}`,
@@ -176,7 +196,7 @@ export async function generateCssVariables(rootDirectory = process.cwd()) {
     });
   }
 
-  const exportedTokenPaths = new Set(tokens.map((token) => token.path));
+  const tokensByPath = new Map(tokens.map((token) => [token.path, token]));
   const variableNames = new Map();
   const variables = tokens.map((token) => {
     const name = toCssVariableName(token.path);
@@ -192,7 +212,7 @@ export async function generateCssVariables(rootDirectory = process.cwd()) {
       name,
       path: token.path,
       type: token.type,
-      value: serializeCssTokenValue(token, exportedTokenPaths),
+      value: serializeCssTokenValue(token, tokensByPath),
     };
   });
 

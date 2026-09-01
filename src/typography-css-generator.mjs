@@ -148,15 +148,21 @@ function aliasTarget(value) {
   return aliasPattern.exec(value)?.[1];
 }
 
-function serializeAlias(value, tokenPath, exportedPrimitivePaths) {
+// alias를 `var()` 참조로 내보내지 않고 primitive의 리터럴로 평탄화합니다.
+// Lynx는 var() 치환을 한 번만 하므로 값이 또 var()이면 선언을 버립니다.
+// primitive는 alias를 가질 수 없으므로 한 번의 조회로 끝납니다.
+function serializeAlias(value, tokenPath, primitivesByPath) {
   const target = aliasTarget(value);
   if (target === undefined) {
     return undefined;
   }
-  if (!exportedPrimitivePaths.has(target)) {
+
+  const primitive = primitivesByPath.get(target);
+  if (primitive === undefined) {
     throw new Error(`${tokenPath} references an unexported token: ${target}`);
   }
-  return `var(${toCssVariableName(target)})`;
+
+  return serializePrimitive(primitive);
 }
 
 function serializePrimitive(token) {
@@ -169,13 +175,8 @@ function serializePrimitive(token) {
   throw new Error(`${token.path} has an unsupported ${token.type} value`);
 }
 
-function serializeStyleProperty(
-  property,
-  value,
-  tokenPath,
-  exportedPrimitivePaths,
-) {
-  const alias = serializeAlias(value, tokenPath, exportedPrimitivePaths);
+function serializeStyleProperty(property, value, tokenPath, primitivesByPath) {
+  const alias = serializeAlias(value, tokenPath, primitivesByPath);
   if (alias !== undefined) {
     return alias;
   }
@@ -201,8 +202,8 @@ export async function generateTypographyCss(rootDirectory = process.cwd()) {
   const document = JSON.parse(await readFile(inputFile, "utf8"));
   const primitives = collectPrimitiveTokens(document);
   const styles = collectTypographyStyles(document.typography);
-  const exportedPrimitivePaths = new Set(
-    primitives.map((primitive) => primitive.path),
+  const primitivesByPath = new Map(
+    primitives.map((primitive) => [primitive.path, primitive]),
   );
 
   const variables = primitives.map((primitive) => ({
@@ -221,7 +222,7 @@ export async function generateTypographyCss(rootDirectory = process.cwd()) {
           property,
           style.value[property],
           path,
-          exportedPrimitivePaths,
+          primitivesByPath,
         ),
       });
     }

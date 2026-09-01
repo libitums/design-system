@@ -184,7 +184,7 @@ test("배포 package의 CSS export 경로가 생성 위치와 일치하고 icon.
 
   const css = await readFile(exportedPath, "utf8");
   for (const step of ["xs", "sm", "md", "lg", "xl"]) {
-    assert.match(css, new RegExp(`--libitum-icon-size-${step}: var\\(`));
+    assert.match(css, new RegExp(`--libitum-icon-size-${step}: \\d+px;`));
   }
 });
 
