@@ -240,7 +240,7 @@ import heartArtwork from "@libitums/icons/lynx/no-padding/heart";
 |---|---|---|
 | `@libitums/icons/lynx/{name}` | padding variant의 SVG XML `string` | 기본 선택 |
 | `@libitums/icons/lynx/no-padding/{name}` | no-padding variant의 SVG XML `string` | frame을 정확히 채우는 구성 |
-| `@libitums/icons/lynx` | `withIconColor` helper | 색 지정 |
+| `@libitums/icons/lynx` | `withIconColor` helper | XML에 색을 직접 넣을 때 |
 
 variant 선택 기준은 Web과 같습니다. 이름도 같은 export 이름을 쓰므로 `@libitums/icons/heart`와 `@libitums/icons/lynx/heart`는 같은 아이콘입니다.
 
@@ -248,21 +248,40 @@ variant 선택 기준은 Web과 같습니다. 이름도 같은 export 이름을 
 
 #### 색 지정
 
-SVG 원본은 `fill="currentColor"`를 유지하지만, **Lynx `<svg>`의 지원 속성 목록에 `currentColor` 해석은 명시되어 있지 않습니다.** 색이 상속되지 않는 경우 `withIconColor`로 값을 직접 넣습니다.
+**CSS `color`로는 아이콘 색을 지정할 수 없습니다.** Lynx `<svg>`는 `color` 프로퍼티를 읽지 않습니다. 받는 prop은 셋뿐입니다.
 
-```jsx
-import { withIconColor } from "@libitums/icons/lynx";
-import heart from "@libitums/icons/lynx/heart";
+| prop | 값 |
+|---|---|
+| `content` | SVG XML `string` |
+| `src` | SVG 리소스 URL |
+| `current-color` | SVG 원본의 `currentColor`를 채울 색 |
 
-<svg content={withIconColor(heart, "#F46B18")} />;
-```
-
-색 값은 raw hex가 아니라 design token에서 가져옵니다.
+SVG 원본은 `fill="currentColor"`를 유지하고, 색은 `current-color`로 넘깁니다.
 
 ```jsx
 import { color } from "@libitums/design-tokens";
+import heart from "@libitums/icons/lynx/heart";
 
-withIconColor(heart, color.fg.brand);
+<svg content={heart} current-color={color.fg.brand} />;
+```
+
+`current-color`는 CSS 선언이 아니라 **속성**이므로 `var(--libitum-*)`가 풀리지 않습니다. 색 값은 반드시 TypeScript token 상수에서 가져옵니다. 아이콘 색은 CSS 커스텀 프로퍼티만으로 지정할 수 없는 유일한 항목입니다.
+
+```jsx
+// 동작하지 않습니다. 속성에서는 var()가 해석되지 않습니다.
+<svg content={heart} current-color="var(--libitum-color-fg-brand)" />;
+// 동작하지 않습니다. `<svg>`는 CSS color를 읽지 않습니다.
+<svg content={heart} style={{ color: "#F46B18" }} />;
+```
+
+색을 XML에 직접 박아야 하면 `withIconColor`를 씁니다. 결과는 같으므로 `current-color`를 기본으로 쓰고, XML 문자열 자체를 넘겨야 하는 경우에만 선택합니다.
+
+```jsx
+import { color } from "@libitums/design-tokens";
+import { withIconColor } from "@libitums/icons/lynx";
+import heart from "@libitums/icons/lynx/heart";
+
+<svg content={withIconColor(heart, color.fg.brand)} />;
 ```
 
 `withIconColor`는 XML의 `currentColor`만 치환하고 원본 문자열은 바꾸지 않습니다. 소비 저장소에서 SVG XML을 직접 문자열 조작하지 않습니다.
