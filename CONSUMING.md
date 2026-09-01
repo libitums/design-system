@@ -277,7 +277,9 @@ import heart from "@libitums/icons/lynx/heart";
 색을 XML에 직접 박아야 하면 `withIconColor`를 씁니다. 결과는 같으므로 `current-color`를 기본으로 쓰고, XML 문자열 자체를 넘겨야 하는 경우에만 선택합니다.
 
 ```jsx
+import { color } from "@libitums/design-tokens";
 import { withIconColor } from "@libitums/icons/lynx";
+import heart from "@libitums/icons/lynx/heart";
 
 <svg content={withIconColor(heart, color.fg.brand)} />;
 ```
