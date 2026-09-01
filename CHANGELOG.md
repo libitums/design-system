@@ -6,6 +6,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-01
+
 ### Fixed
 
 - BREAKING: `css/variables.css`와 `css/typography.css`의 alias token을 `var()` 참조 대신 리터럴 값으로 내보냅니다. Lynx는 `var()` 치환을 한 번만 하고 그 결과를 다시 파싱하므로, 값이 또 `var()`이면 선언을 통째로 버립니다. 227개 변수 중 73개가 alias여서 `color.fg.*`, `layout.*`, `icon.size.*`와 typography의 `font-family`·`font-weight`가 host에서 적용되지 않았습니다. 변수 이름과 최종 값은 그대로이고 CSS만 소비하면 영향이 없지만, 생성된 CSS의 `var()` 참조에 의존해 값을 덮어쓰던 곳은 동작이 달라집니다. (LIB-214)

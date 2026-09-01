@@ -1,6 +1,6 @@
 {
   "name": "@libitums/design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "libitum design system source specifications and package build tooling",
   "type": "module",
