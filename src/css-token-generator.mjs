@@ -84,8 +84,14 @@ function aliasTarget(value) {
 }
 
 // alias를 `var()` 참조로 내보내지 않고 리터럴까지 따라가 평탄화합니다.
-// Lynx는 var() 치환을 한 번만 하고 그 결과를 다시 파싱하므로, 값이 또 var()이면
-// 선언을 통째로 버립니다. 참조를 남기면 semantic token이 host에서 조용히 죽습니다.
+//
+// ReactLynx 툴체인이 만든 번들에서는 값이 또 var()인 커스텀 프로퍼티가 해석되지
+// 않아 선언이 통째로 버려집니다. iOS Lynx 4.0.1 host에서 확인했습니다 — 1단계는
+// 되고 2단계부터 안 됩니다. 원인은 아직 규명하지 못했습니다. **엔진은 중첩을
+// 지원합니다**(`CSSValue::SubstituteAll`이 CycleDetector와 max_depth 10으로 재귀
+// 해석). engineVersion을 기본값 3.2에서 3.9로 올려도 결과가 같았으므로 빌드
+// 산출물 쪽 문제로 보입니다. 참조를 남기면 semantic token이 host에서 조용히
+// 죽으므로, 원인이 밝혀질 때까지 평탄화가 안전한 형태입니다.
 function resolveAliasValue(value, context) {
   const visited = [];
   let current = value;

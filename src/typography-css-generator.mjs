@@ -149,7 +149,8 @@ function aliasTarget(value) {
 }
 
 // alias를 `var()` 참조로 내보내지 않고 primitive의 리터럴로 평탄화합니다.
-// Lynx는 var() 치환을 한 번만 하므로 값이 또 var()이면 선언을 버립니다.
+// 이유는 `css-token-generator.mjs`의 `resolveAliasValue` 주석에 있습니다 —
+// 값이 또 var()이면 ReactLynx 번들에서 선언이 버려집니다.
 // primitive는 alias를 가질 수 없으므로 한 번의 조회로 끝납니다.
 function serializeAlias(value, tokenPath, primitivesByPath) {
   const target = aliasTarget(value);

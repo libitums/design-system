@@ -14,7 +14,9 @@
 
 ### Fixed
 
-- BREAKING: `css/variables.css`와 `css/typography.css`의 alias token을 `var()` 참조 대신 리터럴 값으로 내보냅니다. Lynx는 `var()` 치환을 한 번만 하고 그 결과를 다시 파싱하므로, 값이 또 `var()`이면 선언을 통째로 버립니다. 227개 변수 중 73개가 alias여서 `color.fg.*`, `layout.*`, `icon.size.*`와 typography의 `font-family`·`font-weight`가 host에서 적용되지 않았습니다. 변수 이름과 최종 값은 그대로이고 CSS만 소비하면 영향이 없지만, 생성된 CSS의 `var()` 참조에 의존해 값을 덮어쓰던 곳은 동작이 달라집니다. (LIB-214)
+- BREAKING: `css/variables.css`와 `css/typography.css`의 alias token을 `var()` 참조 대신 리터럴 값으로 내보냅니다. 값이 또 `var()`인 커스텀 프로퍼티는 ReactLynx 번들에서 해석되지 않아 선언이 통째로 버려집니다. 227개 변수 중 73개가 alias여서 `color.fg.*`, `layout.*`, `icon.size.*`와 typography의 `font-family`·`font-weight`가 host에서 적용되지 않았습니다. 변수 이름과 최종 값은 그대로이고 CSS만 소비하면 영향이 없지만, 생성된 CSS의 `var()` 참조에 의존해 값을 덮어쓰던 곳은 동작이 달라집니다. (LIB-214)
+
+  > **정정 (2026-09-01)**: 이 항목은 원인을 *"Lynx가 `var()` 치환을 한 번만 하고 그 결과를 다시 파싱한다"* 고 적었습니다. **사실이 아닙니다.** 근거로 든 `CSSVariableHandler::ResolveCSSVariables`의 단일 치환은 use-site 치환이고, 커스텀 프로퍼티 map은 그 전에 `CSSValue::SubstituteAll`이 `CycleDetector`와 `max_depth` 10으로 **재귀 해석**합니다. 즉 엔진은 중첩을 지원합니다. 관측(1단계는 되고 2단계부터 안 됨)은 재확인했고 `engineVersion`을 3.2에서 3.9로 올려도 같았으므로 빌드 산출물 쪽 문제로 보이지만, **정확한 원인은 규명하지 못했습니다.** 평탄화라는 조치 자체는 유효합니다.
 
 ## [0.1.0] - 2026-08-31
 

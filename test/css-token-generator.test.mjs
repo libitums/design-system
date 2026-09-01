@@ -54,8 +54,8 @@ test("기본 foundation에서 CSS 변수 111개를 생성한다", async () => {
   assert.equal(variables.has("typography.heading.s"), false);
 });
 
-// Lynx는 var() 치환을 한 번만 하고 그 결과를 다시 파싱합니다. 값이 또 var()이면
-// 파싱에 실패해 선언을 통째로 버리므로, 내보내는 CSS에는 참조가 남으면 안 됩니다.
+// 값이 또 var()인 커스텀 프로퍼티는 ReactLynx 번들에서 해석되지 않아 선언이
+// 통째로 버려집니다(host 확인). 내보내는 CSS에는 참조가 남으면 안 됩니다.
 test("CSS 값에 var() 참조를 남기지 않는다", async () => {
   const result = await generateCssVariables(repositoryRoot);
 
