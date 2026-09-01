@@ -34,6 +34,10 @@ export const exampleConsumerPolicy = Object.freeze({
   ]),
   requiredLiterals: Object.freeze([
     Object.freeze({ name: "brand color token", value: "#F46B18" }),
+    // `<svg>`는 CSS color를 읽지 않으므로 색은 이 속성으로만 연결됩니다.
+    // 속성이라 var()가 풀리지 않아 값은 TypeScript token 상수여야 합니다.
+    Object.freeze({ name: "icon color attribute", value: "current-color" }),
+    Object.freeze({ name: "icon color token value", value: "#B94208" }),
     Object.freeze({ name: "icon size CSS variable", value: "--libitum-icon-size-md" }),
     Object.freeze({
       name: "typography CSS variable",
