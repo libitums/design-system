@@ -221,7 +221,7 @@ export const iconSources = { heartIcon, heartArtwork };
 
 ### ReactLynx
 
-Lynx의 `<image>`는 SVG 형식을 지원하지 않습니다. SVG URL을 `<image>`에 넘기면 렌더링되지 않으므로, Lynx에서는 **SVG XML을 그대로 받는 `<svg>` 요소**와 전용 export를 사용합니다.
+Lynx에서는 **SVG XML을 그대로 받는 `<svg>` 요소**와 전용 export를 사용합니다. SVG URL을 `<image>`에 그대로 넘기면 렌더링되지 않습니다 — `<image>`로 SVG를 쓰려면 bundler loader가 필요한데, 이 package는 **소비 저장소에 빌드 설정을 요구하지 않는 것**을 계약으로 삼습니다. `<svg content>`는 loader 없이 동작합니다.
 
 ```jsx
 import heart from "@libitums/icons/lynx/heart";
