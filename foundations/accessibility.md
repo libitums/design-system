@@ -62,6 +62,15 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 - 밝은 표면의 브랜드 텍스트·아이콘은 `fg.brand`, 강한 브랜드 표면·그래픽은 `brand.strong`을 사용합니다.
 - Loading·Pressed처럼 정보를 전달하는 상태에 opacity를 적용한 경우 합성 결과가 기준을 충족해야 합니다. 미달하면 opacity를 제거하고 통과하는 semantic token을 사용합니다.
 
+### Brand Button 예외
+
+Brand Button의 Default·Pressed·Loading 상태에 한해 배경 `brand.primary` #F46B18과 라벨·아이콘·Spinner `white` #FFFFFF 조합을 승인된 예외로 사용합니다. 이 조합의 대비는 WCAG 계산 기준 3.016:1입니다.
+
+- 예외는 [Button](../components/button.md)의 Brand 변형에서 라벨·아이콘·Spinner에만 적용합니다. 다른 컴포넌트나 상태로 확장하지 않습니다.
+- Disabled 상태는 Button 스펙의 기존 Disabled 색과 semantics를 사용하며 이 예외에 포함하지 않습니다.
+- 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
+- 그 밖의 일반 텍스트가 4.5:1 미만이면 실패입니다. 이 예외는 위의 공통 대비 기준이나 다른 접근성 기준을 변경하지 않습니다.
+
 ---
 
 ## Color와 상태
@@ -164,6 +173,7 @@ ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 �
 
 - hit area overlay로 모든 custom control의 48 × 48과 비중첩 확인
 - 모든 텍스트·control 경계·상태·의미 있는 아이콘의 contrast 계산
+- Brand Button의 `brand.primary`/`white` 조합은 Default·Pressed·Loading에만 쓰였는지 확인하고 `approved-exception`으로 별도 기록
 - Pointer 없이 keyboard만으로 전체 흐름 완료
 - focus 순서, `:focus-visible`, 두 색 ring, Disabled 제외, modal 진입·복귀 확인
 - iOS VoiceOver와 Android TalkBack에서 name·role·state·value 확인

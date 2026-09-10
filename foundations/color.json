@@ -84,11 +84,7 @@
       "$type": "color",
       "primary": { "$value": "#FFFDFC" },
       "secondary": { "$value": "#FAF7F4" },
-      "elevated": { "$value": "#FFF3EA" },
-      "accent": {
-        "$description": "white 또는 neutral-inverted 전경을 올리는 고대비 강조 표면색",
-        "$value": "{color.brand.strong}"
-      }
+      "elevated": { "$value": "#FFF3EA" }
     },
 
     "border": {

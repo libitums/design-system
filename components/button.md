@@ -91,10 +91,12 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 
 | 상태 | 배경 | 라벨 | Spinner |
 |---|---|---|---|
-| Default | `background.accent` #B94208 | `fg.neutral-inverted` #FFFFFF | — |
-| Pressed | `background.accent` #B94208 | `fg.neutral-inverted` #FFFFFF | — |
+| Default | `brand.primary` #F46B18 | `white` #FFFFFF | — |
+| Pressed | `brand.primary` #F46B18 | `white` #FFFFFF | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
-| Loading | `background.accent` #B94208 | `fg.neutral-inverted` #FFFFFF | `fg.neutral-inverted` #FFFFFF |
+| Loading | `brand.primary` #F46B18 | `white` #FFFFFF | `white` #FFFFFF |
+
+이 조합은 3.016:1로 일반 텍스트 4.5:1 기준에 미달하는 승인된 제품 예외입니다. 적용 범위와 검증 기록 방식은 [Accessibility의 Brand Button 예외](../foundations/accessibility.md#brand-button-예외)를 따릅니다.
 
 ### Outline
 

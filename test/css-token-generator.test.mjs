@@ -19,30 +19,6 @@ function variablesByPath(result) {
   return new Map(result.variables.map((variable) => [variable.path, variable]));
 }
 
-function relativeLuminance(hex) {
-  const channels = hex
-    .slice(1)
-    .match(/.{2}/g)
-    .map((channel) => Number.parseInt(channel, 16) / 255)
-    .map((channel) =>
-      channel <= 0.04045
-        ? channel / 12.92
-        : ((channel + 0.055) / 1.055) ** 2.4,
-    );
-
-  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
-}
-
-function contrastRatio(first, second) {
-  const firstLuminance = relativeLuminance(first);
-  const secondLuminance = relativeLuminance(second);
-
-  return (
-    (Math.max(firstLuminance, secondLuminance) + 0.05) /
-    (Math.min(firstLuminance, secondLuminance) + 0.05)
-  );
-}
-
 test("token path를 --libitum-* kebab-case 이름으로 변환한다", () => {
   assert.equal(
     toCssVariableName("color.brand.primary-pressed"),
@@ -54,21 +30,12 @@ test("token path를 --libitum-* kebab-case 이름으로 변환한다", () => {
   );
 });
 
-test("기본 foundation에서 CSS 변수 112개를 생성한다", async () => {
+test("기본 foundation에서 CSS 변수 111개를 생성한다", async () => {
   const result = await generateCssVariables(repositoryRoot);
   const variables = variablesByPath(result);
 
-  assert.equal(result.variables.length, 112);
+  assert.equal(result.variables.length, 111);
   assert.equal(variables.get("color.brand.primary").value, "#F46B18");
-  assert.equal(variables.get("color.background.accent").value, "#B94208");
-  assert.equal(
-    variables.get("color.background.accent").value,
-    variables.get("color.brand.strong").value,
-  );
-  assert.ok(
-    contrastRatio(variables.get("color.background.accent").value, "#FFFFFF") >= 4.5,
-    "color.background.accent must support white normal text at WCAG AA contrast",
-  );
   // color.fg.brand -> color.brand.strong -> color.brand.primary-pressed.
   // 2단계 alias도 끝까지 따라가 리터럴로 내려앉습니다.
   assert.equal(variables.get("color.fg.brand").value, "#B94208");
