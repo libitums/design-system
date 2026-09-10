@@ -24,10 +24,16 @@ test("Brand Button의 primary/white 대비 예외 범위를 문서 계약으로 
 
 test("Brand Button 스펙은 새 accent 토큰 없이 primary와 white를 사용한다", () => {
   assert.doesNotMatch(button, /background\.accent/);
-  assert.match(button, /\| Default \| `brand\.primary` #F46B18 \| `white` #FFFFFF \| — \|/);
-  assert.match(button, /\| Pressed \| `brand\.primary` #F46B18 \| `white` #FFFFFF \| — \|/);
   assert.match(
     button,
-    /\| Loading \| `brand\.primary` #F46B18 \| `white` #FFFFFF \| `white` #FFFFFF \|/,
+    /\|\s*Default\s*\|\s*`brand\.primary`\s+#F46B18\s*\|\s*`white`\s+#FFFFFF\s*\|\s*—\s*\|/,
+  );
+  assert.match(
+    button,
+    /\|\s*Pressed\s*\|\s*`brand\.primary`\s+#F46B18\s*\|\s*`white`\s+#FFFFFF\s*\|\s*—\s*\|/,
+  );
+  assert.match(
+    button,
+    /\|\s*Loading\s*\|\s*`brand\.primary`\s+#F46B18\s*\|\s*`white`\s+#FFFFFF\s*\|\s*`white`\s+#FFFFFF\s*\|/,
   );
 });
