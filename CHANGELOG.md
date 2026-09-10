@@ -8,6 +8,7 @@
 
 ### Changed
 
+- Brand Button의 Default·Pressed·Loading 배경을 `brand.primary` #F46B18, label·icon·Spinner를 `white` #FFFFFF로 정하고, 이 3.016:1 조합을 해당 상태에만 적용되는 명시적인 접근성 예외로 문서화했습니다. 검증에서는 WCAG AA 통과가 아닌 `approved-exception`으로 기록합니다.
 - ReactLynx 아이콘 색 지정의 공식 경로를 `<svg current-color={...}>`로 정하고 소비 가이드와 `examples/lynx-consumer` fixture를 그 경로로 고쳤습니다. Lynx `<svg>`는 CSS `color`를 읽지 않고 `src`·`content`·`current-color` 세 prop만 받습니다. `current-color`는 CSS 선언이 아니라 속성이라 `var()`가 풀리지 않으므로, 색 값은 TypeScript token 상수에서 가져와야 합니다. 아이콘 색은 CSS 커스텀 프로퍼티만으로 지정할 수 없는 유일한 항목입니다. `withIconColor`는 XML에 색을 직접 넣어야 할 때의 경로로 남습니다. (LIB-215)
 
 ## [0.2.0] - 2026-09-01
