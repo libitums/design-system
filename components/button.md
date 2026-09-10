@@ -91,10 +91,10 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 
 | 상태 | 배경 | 라벨 | Spinner |
 |---|---|---|---|
-| Default | `brand.primary` #F46B18 | `fg.neutral` #1A1C20 | — |
-| Pressed | `brand.primary` #F46B18 | `fg.neutral` #1A1C20 | — |
+| Default | `background.accent` #B94208 | `fg.neutral-inverted` #FFFFFF | — |
+| Pressed | `background.accent` #B94208 | `fg.neutral-inverted` #FFFFFF | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
-| Loading | `brand.primary` #F46B18 | `fg.neutral` #1A1C20 | `fg.neutral` #1A1C20 |
+| Loading | `background.accent` #B94208 | `fg.neutral-inverted` #FFFFFF | `fg.neutral-inverted` #FFFFFF |
 
 ### Outline
 

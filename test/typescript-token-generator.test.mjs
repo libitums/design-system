@@ -38,7 +38,7 @@ async function createWorkspace(t) {
 test("모든 foundation token을 10개 최상위 export로 생성한다", async () => {
   const result = await generateTypeScriptTokens(repositoryRoot);
 
-  assert.equal(result.tokenCount, 139);
+  assert.equal(result.tokenCount, 140);
   assert.deepEqual(result.exportNames, [
     "color",
     "elevation",
@@ -52,6 +52,7 @@ test("모든 foundation token을 10개 최상위 export로 생성한다", async 
     "typography",
   ]);
   assert.equal(result.tokens.color.brand.primary, "#F46B18");
+  assert.equal(result.tokens.color.background.accent, "#B94208");
   assert.equal(result.tokens.spacing[6], "6px");
   assert.equal(result.tokens.stroke.width.regular, "1.5px");
   assert.equal(result.tokens.icon.size.md, "24px");
@@ -79,6 +80,7 @@ test("literal readonly 선언을 생성한다", async () => {
 
   assert.match(result.declarations, /export declare const color:/);
   assert.match(result.declarations, /readonly primary: "#F46B18";/);
+  assert.match(result.declarations, /readonly accent: "#B94208";/);
   assert.match(result.declarations, /readonly "6": "6px";/);
   assert.match(result.declarations, /export declare const tokens:/);
   assert.doesNotMatch(result.declarations, /\bany\b|\bunknown\b/);
@@ -104,6 +106,7 @@ test("생성 package를 대표 import 문법으로 소비한다", async (t) => {
       'import { color, spacing, tokens, typography } from "@libitums/design-tokens";',
       "export const values = {",
       "  brand: color.brand.primary,",
+      "  accent: color.background.accent,",
       "  gap: spacing[16],",
       "  heading: typography.heading.s,",
       "  sameColorGroup: tokens.color === color,",
@@ -117,6 +120,7 @@ test("생성 package를 대표 import 문법으로 소비한다", async (t) => {
   const consumer = await import(pathToFileURL(consumerFile).href);
   assert.deepEqual(consumer.values, {
     brand: "#F46B18",
+    accent: "#B94208",
     gap: "16px",
     heading: result.tokens.typography.heading.s,
     sameColorGroup: true,
