@@ -125,7 +125,7 @@ Figma의 Default는 `Empty + Unfocused + None + Enabled`, Filled는 `Filled + Un
 | ReadOnly | `gray.100` #F7F8F9 | Value `fg.neutral` #1A1C20 | `border.default` #848184 | Helper가 있으면 유지 |
 | Disabled | `gray.50` #F9F9FA | Value 또는 Placeholder `fg.disabled` #DCDEE3 | `border.disabled` #B7B4B8 | — |
 
-시각 상태 우선순위는 Disabled → ReadOnly → Error → Focused → Content 순서입니다. Error가 focus를 받으면 Error의 배경·Value·테두리·문구를 유지하고 공통 focus ring을 더합니다. Empty와 Filled도 Focused와 조합할 수 있습니다. Prefix·Suffix는 각 상태의 Value 색을 따릅니다. 비interactive Icon은 기본 `fg.neutral-subtle`, Error에서 `feedback.incorrect-text`, Disabled에서 `fg.disabled`를 사용합니다.
+시각 상태 우선순위는 Disabled → ReadOnly → Error → Focused → Content 순서입니다. Error가 focus를 받으면 Error의 배경·Value·테두리·문구를 유지하고 공통 focus ring을 더합니다. Empty와 Filled도 Focused와 조합할 수 있습니다. Prefix·Suffix는 각 상태의 Value 색을 따릅니다. 상호작용하지 않는 Icon은 기본 `fg.neutral-subtle`, Error에서 `feedback.incorrect-text`, Disabled에서 `fg.disabled`를 사용합니다.
 
 Placeholder는 입력 형식의 짧은 예시로만 씁니다. `예: 김말랑`처럼 실제 값과 구분하고 현재 값으로 제출하거나 보조 기술의 value로 알리지 않습니다.
 
@@ -181,7 +181,7 @@ Field의 색 전환은 `motion.duration.color` 150ms와 `motion.easing.easing`�
 - **Label에 입력 목적을 씁니다.** Placeholder가 사라져도 무엇을 입력해야 하는지 알 수 있어야 합니다.
 - **Placeholder는 짧은 형식 예시로만 사용합니다.** 지시문·도움말·필수 조건은 외부 Label이나 설명으로 제공합니다.
 - **Leading과 Trailing은 입력을 이해하거나 조작하는 데 필요할 때만 사용합니다.** 장식만을 위한 아이콘을 추가하지 않습니다.
-- **Clear Action은 값이 있을 때만 표시합니다.** 실행하면 input focus를 유지하고 빈 값을 보조 기술에 알립니다.
+- **값 지우기 Action은 값이 있을 때만 표시합니다.** 실행하면 input focus를 유지하고 빈 값을 보조 기술에 알립니다.
 - **비밀번호 Action의 이름은 현재 결과를 말합니다.** 가려진 상태에서는 `비밀번호 보기`, 보이는 상태에서는 `비밀번호 숨기기`를 사용합니다.
 - **Counter만으로 제한 초과를 알리지 않습니다.** 초과 입력을 허용한다면 Error message와 invalid state를 함께 제공합니다.
 - **Disabled만으로 이유를 설명하지 않습니다.** 입력할 수 없는 이유를 가까운 문구로 안내합니다.
