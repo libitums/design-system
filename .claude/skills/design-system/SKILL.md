@@ -39,6 +39,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 버튼 (Neutral / Brand / Outline / Subtle / Text) | `components/button.md` |
 | 라운드 버튼 (Neutral / Brand) | `components/round-button.md` |
 | Compact Numeric Input | `components/compact-numeric-input.md` |
+| Text Field | `components/text-field.md` |
 | 하단 탭 바 | `components/bottom-navigator.md` |
 | 바텀 시트 | `components/bottom-sheet.md` |
 | 다이얼로그 | `components/dialog.md` |
