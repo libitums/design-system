@@ -44,7 +44,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 |---|---|
 | `button.md` | Neutral / Brand / Outline / Subtle / Text 5종 |
 | `round-button.md` | 아이콘 전용 Neutral / Brand 원형 버튼 |
-| `compact-numeric-input.md` | 짧은 숫자 값을 직접 입력하는 고정 크기 control |
+| `compact-numeric-input.md` | 숫자 1자를 직접 입력하는 고정 크기 control |
 | `bottom-navigator.md` | 하단 탭 바 |
 | `bottom-sheet.md` | 바텀 시트 |
 | `dialog.md` | 다이얼로그 |
