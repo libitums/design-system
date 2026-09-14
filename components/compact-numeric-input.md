@@ -27,23 +27,23 @@ Compact Numeric Input
 
 너비와 높이는 고정값이며 Focused·Error의 테두리를 포함합니다.
 
-| 사이즈 | 너비 × 높이 | Value font-size / line-height / letter-spacing | 모서리 | 타이포 토큰 |
-|---|---:|---|---|---|
-| S | 48 × 56px | 18px / 24px / 0px | 12px | `radius.md`, `typography.heading.s` |
-| M | 64 × 72px | 22px / 28px / -0.4px | 16px | `radius.lg`, `typography.heading.m` |
-| L | 72 × 80px | 28px / 34px / -0.8px | 16px | `radius.lg`, `typography.heading.l` |
+| 사이즈 | 너비 × 높이 | Value typography | 모서리 |
+|---|---:|---|---|
+| S | 48 × 56px | `typography.heading.s` (18px / 24px / 0px) | `radius.md` (12px) |
+| M | 64 × 72px | `typography.heading.m` (22px / 28px / -0.4px) | `radius.lg` (16px) |
+| L | 72 × 80px | `typography.heading.l` (28px / 34px / -0.8px) | `radius.lg` (16px) |
 
 ## 상태
 
 | 상태 | 배경 | Value 또는 Placeholder | 테두리 |
 |---|---|---|---|
-| Empty | `gray.100` #F7F8F9 | Placeholder `fg.neutral-subtle` #868B94 | 없음 |
+| Empty | `gray.100` #F7F8F9 | Placeholder `fg.neutral-muted` #555D6D | 없음 |
 | Filled | `gray.100` #F7F8F9 | Value `fg.neutral` #1A1C20 | 없음 |
-| Focused | `white` #FFFFFF | Value `fg.neutral` #1A1C20 | 1px `brand.secondary` #FF8D28 |
-| Error | `feedback.incorrect-surface` #FFF0F1 | Value `feedback.incorrect-text` #A62E34 | 1px `feedback.incorrect` #DF4D54 |
+| Focused | `white` #FFFFFF | Value `fg.neutral` #1A1C20 | `stroke.width.thin` 1px, `brand.strong` #B94208 |
+| Error | `feedback.incorrect-surface` #FFF0F1 | Value `feedback.incorrect-text` #A62E34 | `stroke.width.thin` 1px, `feedback.incorrect` #DF4D54 |
 | Disabled | `gray.50` #F9F9FA | Value 또는 Placeholder `fg.disabled` #DCDEE3 | 없음 |
 
-Focused와 Error 테두리는 `stroke.width.thin`을 사용하며 고정 크기 안쪽에 포함합니다. Empty의 Placeholder 값은 입력 예시일 뿐 실제 값으로 제출하거나 보조 기술의 현재 값으로 알리지 않습니다.
+Focused와 Error 테두리는 고정 크기 안쪽에 포함합니다. Empty의 Placeholder 값은 입력 예시일 뿐 실제 값으로 제출하거나 보조 기술의 현재 값으로 알리지 않습니다.
 
 ### Focus indicator
 
