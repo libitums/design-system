@@ -47,6 +47,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `compact-numeric-input.md` | 숫자 1자를 직접 입력하는 고정 크기 control |
 | `text-field.md` | 한 줄의 일반 텍스트를 입력하는 상태 조합형 control |
 | `chat-bubble.md` | 대화 방향·크기·전송 상태를 조합하는 텍스트 메시지 |
+| `card.md` | 한 주제의 정보와 행동을 묶는 slot 조합형 표면 |
 | `bottom-navigator.md` | 하단 탭 바 |
 | `bottom-sheet.md` | 바텀 시트 |
 | `dialog.md` | 다이얼로그 |
@@ -238,4 +239,4 @@ Package exports는 다음 경로를 제공합니다.
 
 - **다크 모드** — `color.json`은 라이트 모드 단일 값입니다.
 - **Futura Webfont·App 라이선스** — 정확한 제품과 플랫폼별 라이선스가 확정되기 전에는 파일을 Web이나 앱에 배포하지 않습니다.
-- **컴포넌트** — Toast, Card.
+- **컴포넌트** — Toast.
