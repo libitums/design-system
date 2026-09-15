@@ -190,7 +190,7 @@ Deferred에서는 선택만으로 답을 제출하거나 화면을 넘기지 않
 
 Option Selector는 선택·확정 규칙을 소유하고, 표면과 콘텐츠는 다음 규칙으로 확장합니다.
 
-1. **정답·오답 표시는 Feedback 축으로 추가합니다.** 제출 뒤 판정 결과를 보여줄 때는 Selection 값을 늘리지 않고 Option Item에 Feedback 축(None / Correct / Incorrect)을 더합니다. 색은 `feedback.correct-surface`·`feedback.correct-text`, `feedback.incorrect-surface`·`feedback.incorrect-text` 토큰에서 고르고, Indicator는 `8-ui/tick`·`8-ui/cross`로 구분하며, 판정 문구를 함께 제공해 색만으로 알리지 않습니다.
+1. **정답·오답 표시는 Feedback 축으로 추가합니다.** 제출 뒤 판정 결과를 보여줄 때는 Selection 값을 늘리지 않고 Option Item에 Feedback 축(None / Correct / Incorrect)을 더합니다. 색은 `feedback.correct-surface`·`feedback.correct-text`, `feedback.incorrect-surface`·`feedback.incorrect-text` 토큰에서 고르고, Indicator는 `8-ui/tick`·`8-ui/cross`로 구분하며, 판정 문구를 함께 제공해 색만으로 알리지 않습니다. 판정의 의미와 Icon은 [Answer Label](./indicator/answer-label.md)의 Correct·Incorrect와 맞추고, 문제 단위의 판정 결과는 Answer Label로 함께 알립니다.
 2. **새 Variant는 모든 상태를 정의합니다.** Default·Pressed·Selected·Disabled·Disabled + Selected의 배경·테두리·Label 색을 정하고 Label 4.5:1, 테두리 3:1을 확인합니다. 기준을 충족하는 토큰이 없으면 임의 hex나 opacity로 만들지 않고 보고합니다.
 3. **텍스트 외 콘텐츠는 전용 선택 컴포넌트로 분리합니다.** 이미지·오디오 재생·설명이 붙은 선택지는 Option Item에 slot을 추가하지 않고 별도 컴포넌트로 정의합니다. 이때도 Selection·Commit 옵션, 상태 우선순위, 동작 표는 이 문서를 따릅니다.
 4. **새 Layout은 순서와 전환 규칙을 함께 정의합니다.** 3열 이상이나 가로 스크롤을 추가할 때는 읽기·focus 순서와 큰 글자에서 Stack으로 전환하는 조건을 함께 정합니다.

@@ -26,7 +26,7 @@ Overlay host는 Bottom Sheet·Dialog처럼 modal 표면을 여는 컴포넌트�
 ### 조합 규칙
 
 - Screen은 Bottom Sheet·Dialog 같은 modal 표면과 함께만 사용합니다. 표면 없이 화면 전체를 어둡게 하지 않습니다.
-- Area는 이미지·영상·일러스트처럼 경계가 분명한 영역에만 사용합니다.
+- Area는 [Card](./card.md)의 Media처럼 이미지·영상·일러스트로 경계가 분명한 영역에만 사용합니다.
 - Dismiss Tap은 Screen에서 닫을 수 있는 표면에만 사용합니다. [Bottom Sheet](./bottom-sheet.md)는 Tap, [Dialog](./dialog.md)는 None입니다.
 - Area는 Dismiss None만 사용합니다. Area에서 필요한 행동은 Foreground의 Button으로 제공합니다.
 - Foreground는 자체 표면이 있는 요소만 둡니다. Overlay 위에 텍스트를 직접 올리지 않습니다.
