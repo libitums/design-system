@@ -40,6 +40,7 @@ components/      컴포넌트 스펙
 ├── bottom-navigator.md
 ├── bottom-sheet.md
 ├── dialog.md
+├── overlay.md            콘텐츠를 어둡게 덮는 Scrim·영역 층
 ├── header/               progress-header · back-header
 └── indicator/            page · status · step
 

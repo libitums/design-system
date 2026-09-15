@@ -25,7 +25,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 | 범위 | 화면 전체 | — |
 | 쌓임 순서 | `elevation.z.sheet` | — |
 
-Scrim을 누르면 시트를 닫습니다.
+Scrim을 누르면 시트를 닫습니다. Scrim은 [Overlay](./overlay.md)의 Screen · Dismiss Tap 조합입니다.
 
 ---
 

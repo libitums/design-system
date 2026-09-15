@@ -26,7 +26,7 @@ Scrim (화면 전체, 반투명 어두운 막)
 | 범위 | 화면 전체 | — |
 | 쌓임 순서 | `elevation.z.dialog` | — |
 
-[Bottom Sheet](./bottom-sheet.md)와 같은 Scrim이지만 **탭해도 닫히지 않습니다.**
+[Bottom Sheet](./bottom-sheet.md)와 같은 Scrim이지만 **탭해도 닫히지 않습니다.** Scrim은 [Overlay](./overlay.md)의 Screen · Dismiss None 조합입니다.
 
 ---
 

@@ -44,6 +44,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 하단 탭 바 | `components/bottom-navigator.md` |
 | 바텀 시트 | `components/bottom-sheet.md` |
 | 다이얼로그 | `components/dialog.md` |
+| 오버레이 (Scrim · 영역) | `components/overlay.md` |
 | 학습 헤더 | `components/header/progress-header.md` |
 | 뒤로가기 헤더 | `components/header/back-header.md` |
 | 페이지 점 인디케이터 | `components/indicator/page-indicator.md` |
