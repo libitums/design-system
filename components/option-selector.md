@@ -124,7 +124,7 @@ Filled의 배경 `gray.950`과 비슷한 어두운 단색 배경에서는 선택
 | Outlined Pressed Label | 16.045:1 |
 | Outlined Selected Label·테두리 | 5.008:1 |
 
-Label은 16px SemiBold 텍스트이므로 일반 텍스트 기준 4.5:1을, 테두리는 control 경계 기준 3:1을 적용합니다. Filled Selected에 Pressed 배경 `gray.900`을 쓰면 Label 대비가 4.412:1로 떨어지므로 Selected는 Pressed 배경을 적용하지 않습니다. Disabled는 수치 대비 예외이며 선택할 수 없는 이유를 가까운 문구로 안내합니다.
+Label은 16px SemiBold 텍스트이므로 일반 텍스트 기준 4.5:1을 적용하고, 테두리는 control 경계 기준 3:1을 적용합니다. Filled Selected에 Pressed 배경 `gray.900`을 쓰면 Label 대비가 4.412:1로 떨어지므로 Selected는 Pressed 배경을 적용하지 않습니다. Disabled는 수치 대비 예외이며 선택할 수 없는 이유를 가까운 문구로 안내합니다.
 
 Selected는 색만으로 구분하지 않습니다. 테두리·Label 색과 함께 Indicator를 표시하고 선택 semantics를 제공합니다.
 
@@ -178,12 +178,13 @@ Deferred에서는 선택만으로 답을 제출하거나 화면을 넘기지 않
 ## 접근성
 
 - **그룹에 이름을 붙입니다.** Group label을 Option list의 접근성 이름으로 연결해 무엇을 고르는지 먼저 알 수 있게 합니다.
-- **Selection과 Commit에 맞는 semantics를 사용합니다.** Deferred · Single은 radio group, Deferred · Multiple은 checkbox group, Immediate는 button 목록입니다. 선택 여부는 checked state로 제공합니다.
+- **Selection과 Commit에 맞는 semantics를 사용합니다.** Deferred · Single은 radio group, Deferred · Multiple은 checkbox group, Immediate는 button 목록입니다. 선택 여부는 radio·checkbox group에서는 checked state로, button 목록에서는 pressed state(Web은 `aria-pressed`)로 제공합니다.
 - **Selected를 색만으로 알리지 않습니다.** Indicator를 함께 표시합니다. Indicator는 선택 semantics와 같은 의미를 반복하므로 접근성 트리에서 숨깁니다.
 - **Label이 접근성 이름입니다.** Label이 학습 대상 언어이면 해당 텍스트에 올바른 `lang`을 지정하고 Group label은 UI locale을 유지합니다.
 - **확정 결과를 알립니다.** Immediate로 확정하거나 제출 뒤 모든 선택지가 Disabled가 되면 focus를 잃지 않게 다음 영역으로 옮기거나, 확정한 선택을 announcement로 알립니다.
 - **최소 hit area는 48 × 48입니다.** Option Item의 최소 높이 60px이 기준을 충족하며 Option Item 전체가 hit area입니다. 12px 간격으로 이웃 선택지와 hit area가 겹치지 않습니다.
-- **확대와 번역 길이를 허용합니다.** 글자 크기 확대, 긴 Label, RTL에서 높이를 고정하거나 Label을 말줄임하지 않습니다. RTL에서는 Indicator가 논리적 끝 가장자리로 이동합니다.
+- **확대와 번역 길이를 허용합니다.** 글자 크기 확대나 긴 Label에서 높이를 고정하거나 Label을 말줄임하지 않습니다.
+- **RTL에서는 방향을 논리적으로 따릅니다.** Indicator가 논리적 끝 가장자리로 이동하고 Grid의 읽기 순서도 반전합니다.
 
 ## 확장
 
