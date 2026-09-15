@@ -42,6 +42,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | Text Field | `components/text-field.md` |
 | Chat Bubble | `components/chat-bubble.md` |
 | 카드 | `components/card.md` |
+| Option Selector | `components/option-selector.md` |
 | 하단 탭 바 | `components/bottom-navigator.md` |
 | 바텀 시트 | `components/bottom-sheet.md` |
 | 다이얼로그 | `components/dialog.md` |

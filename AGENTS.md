@@ -38,6 +38,7 @@ components/      컴포넌트 스펙
 ├── text-field.md         한 줄 일반 텍스트 입력 control
 ├── chat-bubble.md        대화 방향·크기·전송 상태를 조합하는 텍스트 메시지
 ├── card.md               한 주제의 정보와 행동을 묶는 slot 조합형 표면
+├── option-selector.md    텍스트 선택지를 고르고 확정하는 control
 ├── bottom-navigator.md
 ├── bottom-sheet.md
 ├── dialog.md
