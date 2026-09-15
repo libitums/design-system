@@ -52,6 +52,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `bottom-navigator.md` | 하단 탭 바 |
 | `bottom-sheet.md` | 바텀 시트 |
 | `dialog.md` | 다이얼로그 |
+| `overlay.md` | 콘텐츠를 어둡게 덮는 Scrim·영역 층 |
 | `header/` | progress-header · back-header |
 | `indicator/` | page · status · step · answer-label |
 
