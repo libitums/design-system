@@ -19,7 +19,7 @@ Fog는 콘텐츠와 함께 스크롤되지 않고 viewport의 가장자리에 �
 | 옵션 | 값 | 용도 |
 |---|---|---|
 | Direction | Top / Bottom / Start / End | 콘텐츠가 더 이어지는 방향 |
-| Size | S / M / L | 흐림이 차지하는 길이 |
+| Size | S / M / Full | 흐림이 차지하는 길이 |
 | Color | 놓인 표면의 배경 토큰 | Fog가 녹아드는 끝 색 |
 
 ### 조합 규칙
@@ -61,9 +61,9 @@ Start와 End는 물리적 좌우가 아니라 읽기 방향을 따릅니다. LTR
 |---|---:|---|---|
 | S | 40px | `spacing.40` | 가로 목록, 높이가 낮은 영역 |
 | M | 80px | `spacing.80` | 세로 스크롤 영역의 기본값 |
-| L | 120px | 현재 대응 토큰 없음 | 화면 대부분을 차지하는 긴 지문·대화 |
+| Full | 해당 축의 viewport 길이 전체 | — | 높이가 낮아 S도 viewport 절반을 넘는 영역 |
 
-Fog의 길이는 viewport 길이의 절반을 넘지 않게 합니다. 화면 회전이나 글자 확대로 viewport가 좁아져 절반을 넘으면 한 단계 작은 Size를 사용합니다.
+S·M의 길이는 viewport 길이의 절반을 넘지 않게 합니다. 화면 회전이나 글자 확대로 절반을 넘으면 한 단계 작은 Size를 사용하고, S도 절반을 넘으면 Full로 gradient를 viewport 전체에 펼칩니다. Full에서도 콘텐츠 쪽 끝은 불투명도 0%이므로 viewport 시작 부분의 콘텐츠는 가려지지 않습니다.
 
 ### Color
 
@@ -100,7 +100,7 @@ Hidden과 Visible은 불투명도로 전환하며 `motion.duration.color` 150ms�
 ## 접근성
 
 - **Fog는 장식 층입니다.** 접근성 트리에서 숨기고 focus를 받지 않습니다.
-- **focus를 받은 요소가 Fog에 가려지지 않게 합니다.** keyboard로 focus를 옮기면 해당 요소가 Fog 밖에 오도록 스크롤 컨테이너에 Fog 길이만큼 scroll padding을 둡니다.
+- **focus를 받은 요소가 Fog에 가려지지 않게 합니다.** keyboard로 focus를 옮기면 해당 요소가 Fog 밖에 오도록 스크롤 컨테이너에 Fog 길이만큼 scroll padding을 둡니다. Full은 viewport 길이의 절반을 scroll padding으로 둡니다.
 - **끝까지 스크롤하면 Fog를 걷습니다.** Fog 아래의 텍스트는 대비가 낮아지므로 마지막 콘텐츠까지 온전한 대비로 읽을 수 있어야 합니다.
 - **스크롤할 수 있다는 정보를 Fog에만 맡기지 않습니다.** 목록은 목록 semantics로 전체 개수와 현재 위치를 제공합니다.
 - **RTL에서는 Start·End가 반대쪽 가장자리로 이동합니다.** 물리적 Left·Right로 고정하지 않습니다.
@@ -110,7 +110,7 @@ Hidden과 Visible은 불투명도로 전환하며 `motion.duration.color` 150ms�
 Fog는 한 방향의 흐림 층 하나만 정의하고, 새 요구는 다음 규칙으로 추가합니다.
 
 1. **새 표면은 Color 표에 추가합니다.** 해당 표면의 배경 토큰을 그대로 쓰고 임의 hex를 만들지 않습니다.
-2. **새 Size는 spacing 토큰에서 고릅니다.** 필요한 길이가 토큰에 없으면 만들지 않고 보고합니다.
+2. **새 Size는 spacing 토큰에서 고릅니다.** 필요한 고정 길이가 토큰에 없으면 값을 만들지 않고, Full처럼 viewport를 기준으로 한 상대 옵션으로 표현할 수 있는지 먼저 검토합니다. 그래도 고정 길이가 필요하면 보고합니다.
 3. **이미지 위의 가독성용 gradient는 Fog가 아닙니다.** 이미지 아래쪽 텍스트를 읽히게 하는 gradient는 [Overlay](./overlay.md)의 Shape 확장으로 다룹니다.
 4. **접힌 콘텐츠의 더 보기는 Fog로 만들지 않습니다.** 스크롤 없이 콘텐츠를 접었다 펼치는 경우에는 펼치기 control을 가진 전용 컴포넌트를 정의합니다.
 5. **gradient 곡선을 바꿀 때는 모든 Direction에 함께 적용합니다.** linear 대신 여러 stop을 쓰는 곡선이 필요하면 stop 위치를 이 문서에 정의하고 방향마다 다르게 두지 않습니다.
