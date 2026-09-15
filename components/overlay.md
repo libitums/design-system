@@ -106,7 +106,7 @@ Overlay는 덮는 층 하나만 정의하고, 새 요구는 옵션으로 추가�
 
 1. **새 사용처는 Overlay를 재사용합니다.** 컴포넌트마다 별도의 어두운 막을 정의하지 않고 Scope와 Dismiss를 골라 사용합니다.
 2. **새 강도나 색은 토큰을 먼저 만듭니다.** 더 옅거나 짙은 Overlay, 밝은 Overlay가 필요하면 opacity와 overlay color 토큰을 foundations에 먼저 추가한 뒤 Tone 옵션으로 확장합니다. 토큰이 없으면 임의 값을 쓰지 않고 보고합니다.
-3. **Gradient는 Shape 옵션으로 추가합니다.** 이미지 아래쪽 텍스트를 읽히게 하는 gradient는 전체를 덮는 Overlay와 목적이 다르므로 Shape(Solid / Gradient) 옵션으로 추가하고, 가장 밝은 Target에서도 Foreground 대비를 확인합니다.
+3. **Gradient는 Shape 옵션으로 추가합니다.** 이미지 아래쪽 텍스트를 읽히게 하는 gradient는 전체를 덮는 Overlay와 목적이 다르므로 Shape(Solid / Gradient) 옵션으로 추가하고, 가장 밝은 Target에서도 Foreground 대비를 확인합니다. 스크롤이 이어진다는 것을 알리는 가장자리 흐림은 Overlay가 아니라 [Fog](./fog.md)를 사용합니다.
 4. **Blur 강도를 바꿀 때는 blur 토큰을 먼저 정의합니다.** Blur 값을 사용처마다 다르게 두지 않습니다.
 5. **새 Scope는 쌓임 순서와 입력 차단 범위를 함께 정의합니다.** 헤더 아래만 덮는 영역처럼 Scope를 추가하면 어느 층 사이에 두고 어디까지 입력을 막는지 이 문서에 적습니다.
 
