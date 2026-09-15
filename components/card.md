@@ -142,6 +142,7 @@ Interactive Card는 Default·Pressed 표현을 유지한 채 Card 바깥 윤곽�
 | 형태 | Card의 바깥 윤곽을 따름 | `radius.md` |
 
 - Web은 `:focus-visible`에 ring을 적용합니다.
+- iOS·Android·ReactLynx의 keyboard focus 표시와 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - 이웃한 Card 사이 간격 16px이 ring 범위 4px보다 넓으므로 ring이 다른 Card에 가려지지 않습니다. 상위 스크롤 영역이 ring을 자르지 않는지 확인합니다.
 
 ## 동작
