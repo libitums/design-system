@@ -41,7 +41,7 @@ components/      컴포넌트 스펙
 ├── bottom-sheet.md
 ├── dialog.md
 ├── header/               progress-header · back-header
-└── indicator/            page · status · step
+└── indicator/            page · status · step · answer-label
 
 assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
 src/             원본 검증·package 생성 로직 (tooling 계층)
