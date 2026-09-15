@@ -47,6 +47,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `compact-numeric-input.md` | 숫자 1자를 직접 입력하는 고정 크기 control |
 | `text-field.md` | 한 줄의 일반 텍스트를 입력하는 상태 조합형 control |
 | `chat-bubble.md` | 대화 방향·크기·전송 상태를 조합하는 텍스트 메시지 |
+| `option-selector.md` | 텍스트 선택지를 고르고 확정하는 control |
 | `bottom-navigator.md` | 하단 탭 바 |
 | `bottom-sheet.md` | 바텀 시트 |
 | `dialog.md` | 다이얼로그 |
