@@ -112,6 +112,8 @@ Action은 [Button](./button.md)을 **M 사이즈(36px), Fill**로 사용합니�
 | 모서리 | 상단 두 모서리만 Card와 같은 12px, 하단 0px | `radius.md` |
 | Media ↔ Content | Content padding을 그대로 적용 | — |
 
+Media 위에 잠김·재생 같은 상태나 행동을 올려야 하면 [Overlay](./overlay.md)의 Area를 사용합니다.
+
 Card는 Media의 상단 모서리를 맞추기 위해서만 clipping을 사용합니다. Content 영역은 clip하지 않아 안쪽 control의 focus ring이 잘리지 않게 합니다.
 
 ## 상태
