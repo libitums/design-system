@@ -49,6 +49,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 페이지 점 인디케이터 | `components/indicator/page-indicator.md` |
 | 상태 배지 | `components/indicator/status-indicator.md` |
 | 단계 인디케이터 | `components/indicator/step-indicator.md` |
+| 답안 판정 라벨 | `components/indicator/answer-label.md` |
 
 ## 자주 틀리는 것
 
