@@ -20,6 +20,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 화면 여백 · safe area | `foundations/layout.json` |
 | 모서리 | `foundations/radius.json` |
 | 쌓임 순서 · 표면 · 그림자 | `foundations/elevation.json` |
+| 불투명도 (scrim · disabled) | `foundations/opacity.json` |
 | duration · easing | `foundations/motion.json` |
 | 아이콘 에셋 · 크기 | `foundations/iconography.json` |
 

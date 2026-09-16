@@ -35,10 +35,10 @@ async function createWorkspace(t) {
   return rootDirectory;
 }
 
-test("모든 foundation token을 10개 최상위 export로 생성한다", async () => {
+test("모든 foundation token을 11개 최상위 export로 생성한다", async () => {
   const result = await generateTypeScriptTokens(repositoryRoot);
 
-  assert.equal(result.tokenCount, 139);
+  assert.equal(result.tokenCount, 146);
   assert.deepEqual(result.exportNames, [
     "color",
     "elevation",
@@ -46,6 +46,7 @@ test("모든 foundation token을 10개 최상위 export로 생성한다", async 
     "icon",
     "layout",
     "motion",
+    "opacity",
     "radius",
     "spacing",
     "stroke",
