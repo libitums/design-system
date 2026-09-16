@@ -10,6 +10,7 @@ export const cssTokenFiles = Object.freeze([
   "motion.json",
   "stroke.json",
   "iconography.json",
+  "opacity.json",
 ]);
 
 export const cssOutputPath =
