@@ -86,6 +86,21 @@ Thought의 테두리는 `stroke.width.thin`을 사용하며 패널 크기에 포
 
 Line은 16px 일반 텍스트이므로 4.5:1, Thought의 테두리는 control 경계가 아닌 의미 있는 그래픽이므로 3:1을 적용합니다. 서술을 흐리게 보이려고 `gray.800` #555D6D를 쓰면 같은 배경에서 2.578:1로 기준에 미달하므로 사용하지 않습니다.
 
+### Continue indicator
+
+| 항목 | 값 | 토큰 |
+|---|---|---|
+| 아이콘 | `8-ui/arrow-down`, `padding` 에셋 | `icon.$extensions.com.libitum.iconography.variants.padding` |
+| 크기 | 16 × 16px | `icon.size.xs` |
+| 색 | 해당 Variant의 Line 색 | — |
+| 위치 | 패널 안쪽 논리적 끝 가장자리, Line의 마지막 줄과 세로 중앙 정렬 | — |
+| Line ↔ Continue indicator 간격 | 8px | `spacing.8` |
+| 애니메이션 | 없음 | — |
+
+Continue indicator는 다음 대사가 남아 있다는 표시일 뿐 누를 수 있는 control이 아닙니다. 진행은 상위 화면의 탭 영역이 담당하며, Continue indicator는 접근성 트리에서 숨깁니다.
+
+깜빡이거나 움직이는 표현은 사용하지 않습니다. 읽는 중에 움직이는 요소가 있으면 글을 따라가기 어렵습니다.
+
 ## 상태
 
 | 상태 | 값 |
@@ -141,4 +156,4 @@ Visual Novel Dialog는 한 덩어리의 텍스트만 소유하고, 이야기의 
 - **대사 원문을 유지합니다.** 학습 콘텐츠이므로 UX writing 대상으로 고치거나 번역하지 않습니다.
 - **UI 문구는 대사와 구분합니다.** 다음·건너뛰기 같은 문구는 [Writing Tone](../foundations/writing-tone.md)을 따르고 패널 밖에 둡니다.
 
-색·폰트·간격·표면·동작은 [Color](../foundations/color.json), [Typography](../foundations/typography.json), [Spacing](../foundations/spacing.json), [Radius](../foundations/radius.json), [Elevation](../foundations/elevation.json), [Motion](../foundations/motion.json)을, 접근성과 언어 처리는 [Accessibility](../foundations/accessibility.md), [International Design](../foundations/international-design.md)을 참고합니다.
+색·폰트·간격·선 두께·레이아웃·표면·동작은 [Color](../foundations/color.json), [Typography](../foundations/typography.json), [Spacing](../foundations/spacing.json), [Stroke](../foundations/stroke.json), [Layout](../foundations/layout.json), [Radius](../foundations/radius.json), [Elevation](../foundations/elevation.json), [Motion](../foundations/motion.json)을, 접근성과 언어 처리는 [Accessibility](../foundations/accessibility.md), [International Design](../foundations/international-design.md)을 참고합니다.
