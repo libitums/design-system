@@ -37,7 +37,7 @@ Overlay host는 Bottom Sheet·Dialog처럼 modal 표면을 여는 컴포넌트�
 | 항목 | 값 | 토큰 |
 |---|---|---|
 | 색 | `gray.950` #1A1C20 | `color.gray.950` |
-| 불투명도 | 45%, 색과 합성한 값 `rgba(26, 28, 32, .45)` | 현재 대응 토큰 없음 |
+| 불투명도 | 45%, 색과 합성한 값 `rgba(26, 28, 32, .45)` | `opacity.scrim` |
 | Blur | Blur On에서 Target에 4px backdrop blur | 현재 대응 토큰 없음 |
 | 테두리·그림자 | 없음 | — |
 
