@@ -27,6 +27,7 @@ const referenceRoots = Object.freeze([
   "icon",
   "layout",
   "motion",
+  "opacity",
   "radius",
   "spacing",
   "stroke",
