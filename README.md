@@ -54,6 +54,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `dialog.md` | 다이얼로그 |
 | `overlay.md` | 콘텐츠를 어둡게 덮는 Scrim·영역 층 |
 | `fog.md` | 스크롤이 이어짐을 알리는 가장자리 gradient |
+| `tooltip.md` | 트리거 옆에 짧은 설명을 띄우는 말풍선 |
 | `avatar.md` | 사용자를 원형으로 나타내는 이미지·이니셜 표시 |
 | `header/` | progress-header · back-header |
 | `indicator/` | page · status · step · answer-label |
