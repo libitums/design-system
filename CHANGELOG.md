@@ -8,7 +8,7 @@
 
 ### Added
 
-- 불투명도 token `opacity`를 추가했습니다. 기본값 `opacity.8`·`opacity.35`·`opacity.45`와 의미 token `opacity.scrim`·`opacity.disabled`로 이루어지며, CSS 변수 `--libitum-opacity-*`와 TypeScript `opacity` export로 배포합니다. Overlay·Bottom Sheet·Dialog의 Scrim 45%, Round Button Disabled 아이콘의 35%, Bottom Navigator 그림자의 8%가 같은 token을 참조하도록 스펙 문서를 통일했습니다.
+- 불투명도 token `opacity`를 추가했습니다. 기본값 `opacity.8`·`opacity.35`·`opacity.45`·`opacity.90`과 의미 token `opacity.scrim`·`opacity.disabled`·`opacity.surface`로 이루어지며, CSS 변수 `--libitum-opacity-*`와 TypeScript `opacity` export로 배포합니다. Scrim 45%, Disabled 아이콘 35%, 고정 바 그림자 8%, 그림 위 표면 90%처럼 여러 컴포넌트가 반복해 쓰던 값을 한 곳에서 관리합니다.
 
 ### Changed
 
