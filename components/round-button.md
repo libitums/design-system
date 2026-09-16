@@ -46,7 +46,7 @@ Round Button
 |---|---|---|---|
 | Default | 100% | `gray.100` #F7F8F9 | 아이콘 `fg.neutral-subtle` #868B94 |
 | Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `fg.neutral-subtle` #868B94 |
-| Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `gray.500` #D1D3D8, 35% opacity |
+| Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `gray.500` #D1D3D8, `opacity.disabled` 35% |
 | Loading | 100% | `gray.100` #F7F8F9 | Spinner `fg.neutral-subtle` #868B94 |
 
 ### Brand
@@ -55,7 +55,7 @@ Round Button
 |---|---|---|---|
 | Default | 100% | `gray.100` #F7F8F9 | 아이콘 `fg.brand` #B94208 |
 | Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `fg.brand` #B94208 |
-| Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `brand.reward-disabled-surface` #FFF0E6, 35% opacity |
+| Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `brand.reward-disabled-surface` #FFF0E6, `opacity.disabled` 35% |
 | Loading | 100% | `gray.100` #F7F8F9 | Spinner `fg.brand` #B94208 |
 
 ### Spinner
