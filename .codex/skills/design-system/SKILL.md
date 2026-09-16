@@ -48,6 +48,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 다이얼로그 | `components/dialog.md` |
 | 오버레이 (Scrim · 영역) | `components/overlay.md` |
 | 스크롤 가장자리 Fog | `components/fog.md` |
+| 툴팁 | `components/tooltip.md` |
 | 학습 헤더 | `components/header/progress-header.md` |
 | 뒤로가기 헤더 | `components/header/back-header.md` |
 | 페이지 점 인디케이터 | `components/indicator/page-indicator.md` |
