@@ -6,6 +6,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- 불투명도 token `opacity`를 추가했습니다. 기본값 `opacity.8`·`opacity.35`·`opacity.45`와 의미 token `opacity.scrim`·`opacity.disabled`로 이루어지며, CSS 변수 `--libitum-opacity-*`와 TypeScript `opacity` export로 배포합니다. Overlay·Bottom Sheet·Dialog의 Scrim 45%, Round Button Disabled 아이콘의 35%, Bottom Navigator 그림자의 8%가 같은 token을 참조하도록 스펙 문서를 통일했습니다.
+
 ### Changed
 
 - Brand Button의 Default·Pressed·Loading 배경을 `brand.primary` #F46B18, label·icon·Spinner를 `white` #FFFFFF로 정하고, 이 3.016:1 조합을 해당 상태에만 적용되는 명시적인 접근성 예외로 문서화했습니다. 검증에서는 WCAG AA 통과가 아닌 `approved-exception`으로 기록합니다.

@@ -30,11 +30,12 @@ test("token path를 --libitum-* kebab-case 이름으로 변환한다", () => {
   );
 });
 
-test("기본 foundation에서 CSS 변수 111개를 생성한다", async () => {
+test("기본 foundation에서 CSS 변수 116개를 생성한다", async () => {
   const result = await generateCssVariables(repositoryRoot);
   const variables = variablesByPath(result);
 
-  assert.equal(result.variables.length, 111);
+  assert.equal(result.variables.length, 116);
+  assert.equal(variables.get("opacity.scrim").value, "0.45");
   assert.equal(variables.get("color.brand.primary").value, "#F46B18");
   // color.fg.brand -> color.brand.strong -> color.brand.primary-pressed.
   // 2단계 alias도 끝까지 따라가 리터럴로 내려앉습니다.

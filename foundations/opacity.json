@@ -1,0 +1,29 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "opacity": {
+    "$type": "number",
+    "$description": "색 토큰과 합성해 반투명한 표면·전경을 만드는 불투명도. 대비는 원본 색이 아니라 배경과 합성된 최종 색으로 계산합니다.",
+
+    "8": {
+      "$value": 0.08,
+      "$description": "배경을 아주 옅게 덮어 경계만 드러내는 층입니다."
+    },
+    "35": {
+      "$value": 0.35,
+      "$description": "비활성 아이콘과 그래픽입니다. 수치 대비 예외가 적용되는 표현에만 씁니다."
+    },
+    "45": {
+      "$value": 0.45,
+      "$description": "화면이나 영역을 덮어 뒤 콘텐츠에서 주의를 걷어내는 층입니다."
+    },
+
+    "scrim": {
+      "$value": "{opacity.45}",
+      "$description": "Overlay와 modal 표면 뒤를 덮는 Scrim의 불투명도."
+    },
+    "disabled": {
+      "$value": "{opacity.35}",
+      "$description": "Disabled 상태의 아이콘·그래픽에 사용하는 불투명도."
+    }
+  }
+}
