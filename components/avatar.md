@@ -123,7 +123,8 @@ Avatar는 원형 표면과 Content 하나만 소유하고, 애플리케이션의
 2. **여러 Avatar를 겹쳐 쌓는 배치는 전용 컴포넌트로 만듭니다.** 겹침 간격, 최대 표시 개수, `+3` 같은 나머지 표기, 겹칠 때 필요한 테두리를 Avatar Group에서 정의하고 Avatar의 값은 그대로 사용합니다.
 3. **새 Size는 `spacing` 토큰에서 고릅니다.** Initials typography와 Placeholder icon 크기를 함께 정하고, 원 안에서 Initials가 잘리지 않는지 확인합니다.
 4. **캐릭터·그룹처럼 다른 모양이 필요하면 Shape 옵션으로 추가합니다.** 정원 이외의 모양을 쓰려면 `radius` 토큰에서 값을 고르고 Image·Initials·Placeholder 세 Content에 모두 정의합니다.
-5. **이미지 출처와 캐싱은 제품이 소유합니다.** 기본 이미지 자동 생성, 색을 이름으로 정하는 규칙처럼 데이터에서 파생되는 표현이 필요하면 토큰과 규칙을 먼저 정의하고 이 문서에 추가합니다.
+5. **이미지 출처와 캐싱은 제품이 소유합니다.** 어떤 이미지를 언제 내려받고 얼마나 보관할지는 애플리케이션이 정하며 이 문서에서 다루지 않습니다.
+6. **데이터에서 파생되는 표현은 규칙을 먼저 정의합니다.** 기본 이미지 자동 생성이나 이름으로 배경색을 정하는 규칙이 필요하면 사용할 토큰과 결정 규칙을 먼저 정하고 이 문서에 추가합니다.
 
 ## 사용 가이드
 
@@ -131,6 +132,7 @@ Avatar는 원형 표면과 Content 하나만 소유하고, 애플리케이션의
 - **이름과 함께 두는 것을 기본으로 합니다.** Avatar만으로 사람을 구분하게 하지 않습니다.
 - **한 목록에서 Size를 섞지 않습니다.** 같은 의미의 행은 같은 크기로 둡니다.
 - **이미지를 강조하려고 테두리나 그림자를 더하지 않습니다.** 구분이 필요하면 주변 간격을 넓힙니다.
+- **같은 색 표면 위에 두지 않습니다.** Avatar의 배경은 `gray.100` #F7F8F9입니다. 같은 색 표면 위에서는 Placeholder와 Initials의 원 경계가 보이지 않으므로 `white` #FFFFFF나 `elevation.surface.default` #FFFDFC처럼 다른 표면 위에 둡니다. 배경을 바꿀 수 없으면 Avatar 대신 이름만 보여주는 표현을 사용합니다.
 - **Placeholder를 오류 표시로 쓰지 않습니다.** 이미지를 불러오지 못한 사실을 사용자에게 알릴 필요가 없다면 조용히 Initials나 Placeholder로 대체합니다.
 
 색·폰트·간격·아이콘은 [Color](../foundations/color.json), [Typography](../foundations/typography.json), [Spacing](../foundations/spacing.json), [Radius](../foundations/radius.json), [Iconography](../foundations/iconography.json)를, 접근성과 이름 표기는 [Accessibility](../foundations/accessibility.md), [International Design](../foundations/international-design.md)을 참고합니다.
