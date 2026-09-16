@@ -35,7 +35,6 @@ test("현재 component 문서의 모든 token reference를 검증한다", async 
   const result = await validateMarkdownTokenReferences(repositoryRoot);
 
   assert.equal(result.fileCount, 20);
-  assert.equal(result.fileCount, 20);
   assert.equal(result.tokenCount, 146);
   assert.equal(result.exceptionCount, 4);
   assert.equal(result.referenceCount > 100, true);
