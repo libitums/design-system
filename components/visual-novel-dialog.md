@@ -24,6 +24,7 @@ Story scene (상위 화면이 소유)
 | 옵션 | 값 | 용도 |
 |---|---|---|
 | Variant | Speech / Narration / Thought | 말한 것인지, 상황 서술인지, 속마음인지 |
+| Surface | Opaque / Translucent | 장면 그림을 완전히 가릴지 비치게 둘지 |
 | Avatar | On / Off | 화자의 얼굴을 함께 보여줄지 |
 | Reveal | Instant / Typewriter | 대사를 한 번에 보여줄지 한 글자씩 보여줄지 |
 | Advance | Tap / Auto | 다음 대사로 넘어가는 방식 |
@@ -33,6 +34,8 @@ Story scene (상위 화면이 소유)
 ### 조합 규칙
 
 - Narration은 Speaker row를 두지 않습니다. 서술은 화자가 없는 텍스트입니다.
+- Translucent는 `opacity.surface` 90%만 사용합니다. 더 낮추면 밝은 장면 위에서 Narration Line의 대비가 4.5:1 아래로 떨어집니다.
+- Translucent에서 Thought의 Speaker name과 테두리는 `brand.secondary`를 사용합니다. `brand.primary`는 밝은 장면과 합성했을 때 4.201:1로 기준에 미달합니다.
 - Speech와 Thought는 Speaker name을 반드시 둡니다. 이름을 모르면 `???`처럼 이야기가 정한 임시 이름을 쓰고 빈 자리로 두지 않습니다.
 - Avatar는 Speaker name이 있을 때만 켤 수 있습니다.
 - Auto는 사용자가 끌 수 있어야 합니다. 끄는 방법이 없으면 Tap만 사용합니다.
@@ -48,7 +51,7 @@ Story scene (상위 화면이 소유)
 | 가로 padding | 24px | `spacing.24` |
 | 세로 padding | 20px | `spacing.20` |
 | 모서리 | 16px | `radius.lg` |
-| 배경 | `gray.950` #1A1C20 | `color.gray.950` |
+| 배경 | Surface에 따라 `gray.950` #1A1C20 불투명 또는 90% | `color.gray.950`, `opacity.surface` |
 | 그림자 | `elevation.shadow.s3` | `elevation.shadow.s3` |
 | 쌓임 순서 | Scene art 위 | `elevation.z.floating` |
 | Avatar ↔ Speaker name 간격 | 8px | `spacing.8` |
@@ -58,11 +61,30 @@ Story scene (상위 화면이 소유)
 | Line 최소 높이 | 2줄 | — |
 | Avatar | `sm` 32px | — |
 
-배경은 장면 그림과 관계없이 불투명한 `gray.950`을 사용합니다. 반투명 표면은 밝은 그림 위에서 글자 대비를 보장하지 못합니다.
+배경은 `gray.950` 한 가지를 쓰고 Surface로 불투명도만 바꿉니다. 색을 장면마다 바꾸지 않습니다.
 
 Line의 자리는 항상 2줄 이상을 확보합니다. 대사 길이에 따라 패널 높이가 매번 달라지면 장면이 흔들리고, 다음 대사를 누를 위치도 계속 바뀝니다.
 
 Avatar는 [Avatar](./avatar.md)의 `sm`을 사용합니다. 이미지가 없으면 Avatar 스펙의 결정 순서에 따라 Initials나 Placeholder를 보여줍니다.
+
+### Surface
+
+| Surface | 배경 | 토큰 | 용도 |
+|---|---|---|---|
+| Opaque | `gray.950` #1A1C20 불투명 | `color.gray.950` | 기본값. 장면 그림과 무관하게 같은 대비를 보장 |
+| Translucent | `gray.950` #1A1C20 90% | `color.gray.950`, `opacity.surface` | 장면의 분위기를 이어가야 할 때 |
+
+Translucent는 장면 그림이 패널 뒤로 비치므로 글자 대비가 장면에 따라 달라집니다. 가장 불리한 조건인 흰 장면과 합성한 값은 다음과 같습니다.
+
+| 조합 | 흰 장면 위 대비 |
+|---|---:|
+| Speech Speaker name | 12.042:1 |
+| Speech Line | 11.013:1 |
+| Narration Line | 6.035:1 |
+| Thought Line | 11.379:1 |
+| Thought Speaker name·테두리 (`brand.secondary` #FF8D28) | 5.486:1 |
+
+90%보다 낮은 불투명도는 사용하지 않습니다. 80%로 낮추면 흰 장면 위에서 Narration Line이 4.282:1이 되어 기준에 미달합니다.
 
 ### Variant
 
@@ -70,7 +92,7 @@ Avatar는 [Avatar](./avatar.md)의 `sm`을 사용합니다. 이미지가 없으�
 |---|---|---|---|---|
 | Speech | 없음 | `gray.50` #F9F9FA | `gray.300` #EEEFF1 | 등장인물이 소리 내어 한 말 |
 | Narration | 없음 | 두지 않음 | `gray.600` #B0B3BA | 상황과 배경을 설명하는 서술 |
-| Thought | 1px, `brand.primary` #F46B18 | `brand.primary` #F46B18 | `brand.reward-disabled-surface` #FFF0E6 | 등장인물의 속마음 |
+| Thought | 1px, `brand.primary` #F46B18 (Translucent는 `brand.secondary` #FF8D28) | `brand.primary` #F46B18 (Translucent는 `brand.secondary` #FF8D28) | `brand.reward-disabled-surface` #FFF0E6 | 등장인물의 속마음 |
 
 Thought의 테두리는 `stroke.width.thin`을 사용하며 패널 크기에 포함합니다.
 
@@ -150,6 +172,7 @@ Visual Novel Dialog는 한 덩어리의 텍스트만 소유하고, 이야기의 
 ## 사용 가이드
 
 - **이야기의 한 덩어리만 보여줍니다.** 한 번에 읽을 수 있는 길이로 끊고, 긴 설명은 여러 대사로 나눕니다.
+- **기본은 Opaque입니다.** 장면 분위기를 이어가야 할 때만 Translucent를 쓰고, 글자가 많은 장면이나 밝고 복잡한 그림 위에서는 Opaque로 되돌립니다.
 - **패널 위치를 고정합니다.** 대사 길이나 Variant에 따라 패널이 오르내리면 다음을 누르기 어렵습니다.
 - **Narration에 화자를 넣지 않습니다.** 서술에 이름이 필요하면 Speech로 바꿉니다.
 - **Thought를 남용하지 않습니다.** 속마음이 이어지면 Speech와 구분이 흐려지므로 장면마다 한두 번으로 제한합니다.
