@@ -57,6 +57,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `fog.md` | 스크롤이 이어짐을 알리는 가장자리 gradient |
 | `tooltip.md` | 트리거 옆에 짧은 설명을 띄우는 말풍선 |
 | `avatar.md` | 사용자를 원형으로 나타내는 이미지·이니셜 표시 |
+| `visual-novel-dialog.md` | 장면 위에서 대사·서술을 한 덩어리씩 보여주는 패널 |
 | `header/` | progress-header · back-header |
 | `indicator/` | page · status · step · answer-label |
 
