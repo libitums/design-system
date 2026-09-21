@@ -58,7 +58,7 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 - 이미지·gradient 위 요소는 가능한 모든 배경에서 확인하거나 대비를 보장하는 별도 surface를 둡니다.
 - Disabled control은 수치 대비의 예외일 수 있지만, programmatic disabled state를 제공하고 사용할 수 없는 이유를 가까운 문구로 설명합니다.
 - 기준을 충족하는 조합이 현재 토큰에 없으면 opacity나 임의 hex로 보정하지 않고 필요한 semantic color token을 먼저 보고합니다.
-- 밝은 표면의 일반 텍스트는 `fg.neutral-muted` 이상을 사용합니다. `fg.neutral-subtle`은 의미 있는 아이콘·UI 그래픽에, `fg.neutral-subtlest`는 장식·Disabled처럼 수치 대비 예외가 적용되는 표현에만 사용합니다.
+- 밝은 표면의 일반 텍스트는 `fg.neutral-muted` 이상을 사용합니다. `fg.neutral-subtle`은 의미 있는 아이콘·UI 그래픽에, `fg.neutral-subtlest`는 장식·Disabled처럼 수치 대비 예외가 적용되는 표현에만 사용합니다. 보조 정보 caption은 [Caption 보조 정보 예외](#caption-보조-정보-예외)를 따릅니다.
 - 밝은 표면의 브랜드 텍스트·아이콘은 `fg.brand`, 강한 브랜드 표면·그래픽은 `brand.strong`을 사용합니다.
 - Loading·Pressed처럼 정보를 전달하는 상태에 opacity를 적용한 경우 합성 결과가 기준을 충족해야 합니다. 미달하면 opacity를 제거하고 통과하는 semantic token을 사용합니다.
 
@@ -70,6 +70,25 @@ Brand Button의 Default·Pressed·Loading 상태에 한해 배경 `brand.primary
 - Disabled 상태는 Button 스펙의 기존 Disabled 색과 semantics를 사용하며 이 예외에 포함하지 않습니다.
 - 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
 - 그 밖의 일반 텍스트가 4.5:1 미만이면 실패입니다. 이 예외는 위의 공통 대비 기준이나 다른 접근성 기준을 변경하지 않습니다.
+
+### Caption 보조 정보 예외
+
+`typography.caption`으로 표시하는 보조 정보는 텍스트 대비 기준을 적용하지 않는 승인된 예외입니다. 색은 수치 대비와 관계없이 `fg.*` 토큰에서 고릅니다.
+
+보조 정보는 가려져도 화면의 이해와 조작에 지장이 없는 정보입니다.
+
+| 구분 | 대상 |
+|---|---|
+| 적용 | Timestamp, 글자 수, 출처, 부가 설명, 버전 표기 |
+| 제외 | 오류·경고·성공처럼 결과를 알리는 문구 |
+| 제외 | 가격·수량·마감처럼 결정에 필요한 값 |
+| 제외 | 필수 입력·동의 조건처럼 진행에 필요한 안내 |
+| 제외 | 링크·버튼처럼 조작할 수 있는 텍스트 |
+
+- 예외는 `typography.caption` 스타일의 텍스트에만 적용합니다. 다른 스타일이나 caption 크기로 줄인 다른 텍스트로 확장하지 않습니다.
+- 제외 항목은 caption으로 표시하더라도 일반 텍스트 기준 4.5:1을 적용합니다.
+- 보조 기술에는 화면과 같은 내용을 그대로 제공합니다. 흐리게 표시했다고 접근성 트리에서 숨기지 않습니다.
+- 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
 
 ---
 
@@ -174,6 +193,7 @@ ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 �
 - hit area overlay로 모든 custom control의 48 × 48과 비중첩 확인
 - 모든 텍스트·control 경계·상태·의미 있는 아이콘의 contrast 계산
 - Brand Button의 `brand.primary`/`white` 조합은 Default·Pressed·Loading에만 쓰였는지 확인하고 `approved-exception`으로 별도 기록
+- 4.5:1 미만의 caption은 보조 정보인지 확인하고 `approved-exception`으로 별도 기록
 - Pointer 없이 keyboard만으로 전체 흐름 완료
 - focus 순서, `:focus-visible`, 두 색 ring, Disabled 제외, modal 진입·복귀 확인
 - iOS VoiceOver와 Android TalkBack에서 name·role·state·value 확인
