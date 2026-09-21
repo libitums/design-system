@@ -24,9 +24,10 @@
         ]
       },
       "accent": {
-        "$description": "Web은 설치된 Futura를 우선하고, 앱은 App 라이선스로 등록된 Futura만 사용하며, 그 외에는 Default로 이어지는 Accent family",
+        "$description": "Web은 Jost Variable부터 CSS fallback 순서로 사용하고, 앱 adapter는 등록된 Jost 또는 Default family로 연결하는 Accent family",
         "$value": [
-          "Futura",
+          "Jost Variable",
+          "Jost",
           "Pretendard Variable",
           "Pretendard",
           "-apple-system",

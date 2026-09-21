@@ -12,6 +12,7 @@
 
 ### Changed
 
+- Accent family `font.family.accent`의 첫 항목을 `Futura`에서 `Jost Variable`·`Jost`로 바꿨습니다. Futura는 Web·App 라이선스가 없어 플랫폼마다 Accent가 다르게 보였습니다. Jost는 SIL Open Font License 1.1로 Web·앱에 포함해 배포할 수 있으며, 버전 `3.710`과 배포처·checksum을 [Font Delivery](./foundations/font-delivery.md)에 고정했습니다. `--libitum-font-family-accent`와 `typography.accent.*`의 font-family 값이 바뀌므로 소비 프로젝트는 Jost 폰트 파일을 함께 제공해야 합니다.
 - Brand Button의 Default·Pressed·Loading 배경을 `brand.primary` #F46B18, label·icon·Spinner를 `white` #FFFFFF로 정하고, 이 3.016:1 조합을 해당 상태에만 적용되는 명시적인 접근성 예외로 문서화했습니다. 검증에서는 WCAG AA 통과가 아닌 `approved-exception`으로 기록합니다.
 - ReactLynx 아이콘 색 지정의 공식 경로를 `<svg current-color={...}>`로 정하고 소비 가이드와 `examples/lynx-consumer` fixture를 그 경로로 고쳤습니다. Lynx `<svg>`는 CSS `color`를 읽지 않고 `src`·`content`·`current-color` 세 prop만 받습니다. `current-color`는 CSS 선언이 아니라 속성이라 `var()`가 풀리지 않으므로, 색 값은 TypeScript token 상수에서 가져와야 합니다. 아이콘 색은 CSS 커스텀 프로퍼티만으로 지정할 수 없는 유일한 항목입니다. `withIconColor`는 XML에 색을 직접 넣어야 할 때의 경로로 남습니다. (LIB-215)
 

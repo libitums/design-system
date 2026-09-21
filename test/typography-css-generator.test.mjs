@@ -42,7 +42,7 @@ test("22개 typography 스타일을 116개 CSS 변수로 생성한다", async ()
     variables.get("font.family.default").value,
     '"Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
   );
-  assert.match(variables.get("font.family.accent").value, /^"Futura",/);
+  assert.match(variables.get("font.family.accent").value, /^"Jost Variable", "Jost", "Pretendard Variable",/);
   assert.equal(variables.get("font.weight.extraBold").value, "800");
   // alias는 primitive의 리터럴로 평탄화됩니다. Lynx가 중첩 var()를 풀지 못합니다.
   assert.equal(
