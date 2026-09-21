@@ -19,7 +19,7 @@ Fog는 콘텐츠와 함께 스크롤되지 않고 viewport의 가장자리에 �
 | 옵션 | 값 | 용도 |
 |---|---|---|
 | Direction | Top / Bottom / Start / End | 콘텐츠가 더 이어지는 방향 |
-| Size | S / M / Full | 흐림이 차지하는 길이 |
+| Size | S / M / Ratio / Full | 흐림이 차지하는 길이 |
 | Color | 놓인 표면의 배경 토큰 | Fog가 녹아드는 끝 색 |
 
 ### 조합 규칙
@@ -61,7 +61,10 @@ Start와 End는 물리적 좌우가 아니라 읽기 방향을 따릅니다. LTR
 |---|---:|---|---|
 | S | 40px | `spacing.40` | 가로 목록, 높이가 낮은 영역 |
 | M | 80px | `spacing.80` | 세로 스크롤 영역의 기본값 |
+| Ratio | 해당 축 viewport 길이의 비율 | — | 장면 위 대사·고지처럼 넓은 영역을 흐려야 하는 화면 |
 | Full | 해당 축의 viewport 길이 전체 | — | 높이가 낮아 S도 viewport 절반을 넘는 영역 |
+
+Ratio의 비율은 화면 스펙에서 정하며, 화면 크기가 바뀌어도 같은 비율을 유지합니다. 예를 들어 여정 입장 화면은 35%와 55%를 사용합니다. Ratio는 S·M의 절반 규칙을 적용하지 않습니다.
 
 S·M의 길이는 viewport 길이의 절반을 넘지 않게 합니다. 화면 회전이나 글자 확대로 절반을 넘으면 한 단계 작은 Size를 사용하고, S도 절반을 넘으면 Full로 gradient를 viewport 전체에 펼칩니다. Full에서도 콘텐츠 쪽 끝은 불투명도 0%이므로 viewport 시작 부분의 콘텐츠는 가려지지 않습니다.
 
@@ -69,10 +72,10 @@ S·M의 길이는 viewport 길이의 절반을 넘지 않게 합니다. 화면 �
 
 | 놓인 표면 | Color |
 |---|---|
-| 흰 표면 | `white` #FFFFFF |
+| 흰 표면, 바텀 시트 | `white` #FFFFFF |
 | 기본 콘텐츠 표면 | `elevation.surface.default` #FFFDFC |
 | 화면 배경 | `elevation.surface.basement` #FAF7F4 |
-| 바텀 시트·다이얼로그 같은 떠 있는 표면 | `elevation.surface.floating` #FFF3EA |
+| 다이얼로그 같은 떠 있는 표면 | `elevation.surface.floating` #FFF3EA |
 | 어두운 장면 | `gray.950` #1A1C20 |
 
 이미지·gradient처럼 단색이 아닌 배경 위에서는 끝 색을 하나로 정할 수 없으므로 Fog를 쓰지 않습니다.
@@ -100,7 +103,7 @@ Hidden과 Visible은 불투명도로 전환하며 `motion.duration.color` 150ms�
 ## 접근성
 
 - **Fog는 장식 층입니다.** 접근성 트리에서 숨기고 focus를 받지 않습니다.
-- **focus를 받은 요소가 Fog에 가려지지 않게 합니다.** keyboard로 focus를 옮기면 해당 요소가 Fog 밖에 오도록 스크롤 컨테이너에 Fog 길이만큼 scroll padding을 둡니다. Full은 viewport 길이의 절반을 scroll padding으로 둡니다.
+- **focus를 받은 요소가 Fog에 가려지지 않게 합니다.** keyboard로 focus를 옮기면 해당 요소가 Fog 밖에 오도록 스크롤 컨테이너에 Fog 길이만큼 scroll padding을 둡니다. Ratio는 Ratio 길이, Full은 viewport 길이의 절반을 scroll padding으로 둡니다.
 - **끝까지 스크롤하면 Fog를 걷습니다.** Fog 아래의 텍스트는 대비가 낮아지므로 마지막 콘텐츠까지 온전한 대비로 읽을 수 있어야 합니다.
 - **스크롤할 수 있다는 정보를 Fog에만 맡기지 않습니다.** 목록은 목록 semantics로 전체 개수와 현재 위치를 제공합니다.
 - **RTL에서는 Start·End가 반대쪽 가장자리로 이동합니다.** 물리적 Left·Right로 고정하지 않습니다.
@@ -119,7 +122,7 @@ Fog는 한 방향의 흐림 층 하나만 정의하고, 새 요구는 다음 규
 
 - **콘텐츠가 더 있다는 것을 알려야 할 때만 사용합니다.** 스크롤 영역마다 기본으로 붙이지 않습니다.
 - **마지막 콘텐츠를 가리지 않습니다.** 끝까지 스크롤하면 해당 방향의 Fog를 반드시 숨깁니다.
-- **Fog 위에 다른 요소를 올리지 않습니다.** Button이나 라벨이 필요하면 Fog 밖에 둡니다.
+- **Fog 위에 control을 올리지 않습니다.** Button은 Fog 밖에 둡니다. AI 생성 고지처럼 짧은 텍스트는 Fog가 불투명해진 가장자리 쪽에만 둘 수 있으며, 대비는 Fog의 Color를 배경으로 계산합니다 — [Accessibility의 시각 예외](../foundations/accessibility.md#시각-예외) 참고.
 - **표면 색이 바뀌는 곳에서는 Color도 함께 바꿉니다.** 흰 표면에 화면 배경색 Fog를 쓰면 경계가 보입니다.
 
 색·간격·표면·동작은 [Color](../foundations/color.json), [Spacing](../foundations/spacing.json), [Elevation](../foundations/elevation.json), [Motion](../foundations/motion.json)을, 접근성과 방향 처리는 [Accessibility](../foundations/accessibility.md), [International Design](../foundations/international-design.md)을 참고합니다.

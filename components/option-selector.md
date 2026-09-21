@@ -9,6 +9,7 @@ Option Selector
 ├── Group label (필수, 문제 영역에 둘 수 있음)
 └── Option list
     └── Option Item × 2개 이상
+        ├── Leading icon (선택)
         ├── Label
         └── Indicator (Selected에서 표시)
 ```
@@ -26,6 +27,8 @@ Group label은 무엇을 고르는지 알리는 질문이나 지시문입니다.
 | Selection | Single / Multiple | 고를 수 있는 선택지 수 |
 | Commit | Deferred / Immediate | 선택을 확정하는 시점 |
 | Layout | Stack / Grid | 선택지 배치 |
+| Leading icon | None / Icon | Label의 뜻을 돕는 아이콘 |
+| Alignment | Center / Start | Label 정렬 |
 | Content language | UI language / Learning language | Label의 언어 semantics |
 
 ### 조합 규칙
@@ -33,7 +36,9 @@ Group label은 무엇을 고르는지 알리는 질문이나 지시문입니다.
 - Multiple은 Deferred만 사용합니다. 여러 개를 고른 뒤 제출 Button으로 확정합니다.
 - Immediate는 Single에만 사용합니다. 선택하는 순간 답을 제출하거나 다음 대화로 넘어갑니다.
 - 한 Option Selector 안에서 Variant와 Size를 섞지 않습니다.
-- Option Item에는 텍스트 Label만 둡니다. 이미지·오디오 재생·설명이 필요한 선택지는 Option Item에 slot을 더하지 않고 전용 선택 컴포넌트로 분리합니다.
+- Option Item에는 텍스트 Label과 선택적인 Leading icon만 둡니다. 이미지·오디오 재생·설명이 필요한 선택지는 Option Item에 slot을 더하지 않고 전용 선택 컴포넌트로 분리합니다.
+- 한 Option Selector 안에서 Leading icon과 Alignment를 섞지 않습니다. 아이콘을 쓰면 모든 Option Item에 둡니다.
+- Leading icon을 쓰면 Alignment는 Start를 기본으로 합니다. 아이콘과 Label이 세로로 맞아 목록을 훑기 쉽기 때문입니다.
 - Grid는 모든 Label이 2열 너비에서 두 줄 이하일 때만 사용합니다. 번역·학습 콘텐츠 길이를 미리 알 수 없으면 Stack을 사용합니다.
 
 ## 공통 스펙
@@ -44,9 +49,10 @@ Group label은 무엇을 고르는지 알리는 질문이나 지시문입니다.
 | 최소 높이 | Size별 값, 콘텐츠에 맞게 늘어남 | — |
 | 가로·세로 padding | Size별 값 | — |
 | 테두리 영역 | 2px, 모든 상태에서 레이아웃 크기에 포함 | `stroke.width.strong` |
-| Indicator 자리 | 좌우 양쪽에 Indicator 크기와 간격 8px을 대칭으로 확보 | `spacing.8` |
+| Indicator 자리 | Center는 좌우 양쪽, Start는 끝 쪽에만 Indicator 크기와 간격 8px을 확보 | `spacing.8` |
 | Indicator | `8-ui/tick`, `padding` 에셋, 끝 가장자리, 크기는 Size별 값 | `icon.$extensions.com.libitum.iconography.variants.padding` |
-| Label 정렬 | 가로·세로 중앙 | — |
+| Label 정렬 | Center는 가로·세로 중앙, Start는 시작 가장자리·세로 중앙 | — |
+| Leading icon | `padding` 에셋, 크기는 Indicator와 같음, Label 앞 간격 8px, 색은 Label 색 | `spacing.8` |
 | Label 폰트 | Size별 값 | — |
 | Label 줄 수 | 제한 없음, 단어 경계에서 줄바꿈 | — |
 | 모서리 | Size별 값 | — |
@@ -56,8 +62,12 @@ Group label은 무엇을 고르는지 알리는 질문이나 지시문입니다.
 
 ```text
 높이 = Label 높이 + (세로 padding × 2) + (stroke.width.strong × 2)
-Label 최대 너비 = Option Item 너비 − (stroke.width.strong + 가로 padding + Indicator 크기 + spacing.8) × 2
+Label 최대 너비 (Center) = Option Item 너비 − (stroke.width.strong + 가로 padding + Indicator 크기 + spacing.8) × 2
+Label 최대 너비 (Start) = Option Item 너비 − (stroke.width.strong + 가로 padding) × 2 − (Indicator 크기 + spacing.8)
+Leading icon 사용 = 위 값 − (Leading icon 크기 + spacing.8)
 ```
+
+Center에서 Leading icon을 쓰면 아이콘과 Label을 한 묶음으로 가운데 정렬합니다.
 
 Label이 한 줄이면 높이는 Size 표의 최소 높이와 같습니다. Indicator 자리는 선택 여부와 관계없이 양쪽에 확보하므로 Selected가 되어도 Label 위치가 변하지 않습니다.
 
@@ -120,11 +130,11 @@ Filled의 배경 `gray.950`과 비슷한 어두운 단색 배경에서는 선택
 
 | 상태 | 배경 | 테두리 | Label·Indicator |
 |---|---|---|---|
-| Default | `white` #FFFFFF | 1px, `border.strong` #141115 | `fg.neutral` #1A1C20, Indicator 없음 |
-| Pressed | `gray.100` #F7F8F9 | 1px, `border.strong` #141115 | `fg.neutral` #1A1C20, Indicator 없음 |
-| Selected | `background.elevated` #FFF3EA | 2px, `brand.strong` #B94208 | `fg.brand` #B94208, Indicator 표시 |
+| Default | `white` #FFFFFF | 1px, `gray.400` #DCDEE3 | `fg.neutral` #1A1C20, Indicator 없음 |
+| Pressed | `gray.100` #F7F8F9 | 1px, `gray.400` #DCDEE3 | `fg.neutral` #1A1C20, Indicator 없음 |
+| Selected | `white` #FFFFFF | 1px, `brand.primary` #F46B18 | `fg.neutral` #1A1C20, Indicator 표시 |
 | Disabled | `gray.50` #F9F9FA | 1px, `border.disabled` #B7B4B8 | `fg.disabled` #DCDEE3, Indicator 없음 |
-| Disabled + Selected | `gray.50` #F9F9FA | 2px, `border.disabled` #B7B4B8 | `fg.disabled` #DCDEE3, Indicator 표시 |
+| Disabled + Selected | `gray.50` #F9F9FA | 1px, `border.disabled` #B7B4B8 | `fg.disabled` #DCDEE3, Indicator 표시 |
 
 ### 대비
 
@@ -134,13 +144,14 @@ Filled의 배경 `gray.950`과 비슷한 어두운 단색 배경에서는 선택
 | Filled Pressed Label | 12.645:1 |
 | Filled Selected Label·테두리 | 5.657:1 |
 | Outlined Default Label | 17.061:1 |
-| Outlined Default 테두리 | 18.737:1 |
+| Outlined Default 테두리 | 1.346:1 (승인된 예외) |
 | Outlined Pressed Label | 16.045:1 |
-| Outlined Selected Label·테두리 | 5.008:1 |
+| Outlined Selected Label | 17.061:1 |
+| Outlined Selected 테두리 | 3.016:1 |
 
-Label은 모든 Size에서 18.67px 미만이므로 일반 텍스트 기준 4.5:1을 적용하고, 테두리는 control 경계 기준 3:1을 적용합니다. Filled Selected에 Pressed 배경 `gray.900`을 쓰면 Label 대비가 4.412:1로 떨어지므로 Selected는 Pressed 배경을 적용하지 않습니다. Disabled는 수치 대비 예외이며 선택할 수 없는 이유를 가까운 문구로 안내합니다.
+Label은 모든 Size에서 18.67px 미만이므로 일반 텍스트 기준 4.5:1을 적용하고, 테두리는 control 경계 기준 3:1을 적용합니다. Outlined의 `gray.400` 테두리는 3:1에 미달하지만, Option Item은 4.5:1 이상의 Label과 hit area 전체로 식별되므로 승인된 예외로 둡니다 — [Accessibility의 시각 예외](../foundations/accessibility.md#시각-예외) 참고. Filled Selected에 Pressed 배경 `gray.900`을 쓰면 Label 대비가 4.412:1로 떨어지므로 Selected는 Pressed 배경을 적용하지 않습니다. Disabled는 수치 대비 예외이며 선택할 수 없는 이유를 가까운 문구로 안내합니다.
 
-Selected는 색만으로 구분하지 않습니다. 테두리·Label 색과 함께 Indicator를 표시하고 선택 semantics를 제공합니다.
+Selected는 색만으로 구분하지 않습니다. 테두리 색과 함께 Indicator를 표시하고 선택 semantics를 제공합니다.
 
 ### Focus indicator
 
@@ -195,6 +206,9 @@ Deferred에서는 선택만으로 답을 제출하거나 화면을 넘기지 않
 - **Selection과 Commit에 맞는 semantics를 사용합니다.** Deferred · Single은 radio group, Deferred · Multiple은 checkbox group, Immediate는 button 목록입니다. 선택 여부는 radio·checkbox group에서는 checked state로, button 목록에서는 pressed state(Web은 `aria-pressed`)로 제공합니다.
 - **Selected를 색만으로 알리지 않습니다.** Indicator를 함께 표시합니다. Indicator는 선택 semantics와 같은 의미를 반복하므로 접근성 트리에서 숨깁니다.
 - **Label이 접근성 이름입니다.** Label이 학습 대상 언어이면 해당 텍스트에 올바른 `lang`을 지정하고 Group label은 UI locale을 유지합니다.
+- **화면 Label과 다른 접근성 이름은 Label을 포함할 때만 씁니다.** 약어·기호처럼 Label만으로 뜻이 모호할 때 이름을 따로 줄 수 있습니다. 이때도 화면 Label의 글자를 같은 순서로 앞에 두어 음성 조작으로 부를 수 있게 합니다.
+- **Leading icon은 접근성 트리에서 숨깁니다.** 뜻은 Label이 전달합니다.
+- **상태 문구는 UI 언어로 읽습니다.** 선택 여부는 플랫폼의 checked·pressed state로 제공하는 것이 우선입니다. 이를 쓸 수 없어 이름에 `선택됨` 같은 상태 문구를 붙이면 UI 언어로 쓰고(영어 UI는 `selected`), 학습 대상 언어의 `lang` 범위 밖에 둡니다 — [International Design](../foundations/international-design.md) 참고.
 - **확정 결과를 알립니다.** Immediate로 확정하거나 제출 뒤 모든 선택지가 Disabled가 되면 focus를 잃지 않게 다음 영역으로 옮기거나, 확정한 선택을 announcement로 알립니다.
 - **최소 hit area는 48 × 48입니다.** 가장 작은 S의 최소 높이 48px도 기준을 충족하며 Option Item 전체가 hit area입니다. 8px 이상의 목록 간격으로 이웃 선택지와 hit area가 겹치지 않습니다.
 - **확대와 번역 길이를 허용합니다.** 글자 크기 확대나 긴 Label에서 높이를 고정하거나 Label을 말줄임하지 않습니다.
@@ -206,7 +220,7 @@ Option Selector는 선택·확정 규칙을 소유하고, 표면과 콘텐츠는
 
 1. **정답·오답 표시는 Feedback 축으로 추가합니다.** 제출 뒤 판정 결과를 보여줄 때는 Selection 값을 늘리지 않고 Option Item에 Feedback 축(None / Correct / Incorrect)을 더합니다. 색은 `feedback.correct-surface`·`feedback.correct-text`, `feedback.incorrect-surface`·`feedback.incorrect-text` 토큰에서 고르고, Indicator는 `8-ui/tick`·`8-ui/cross`로 구분하며, 판정 문구를 함께 제공해 색만으로 알리지 않습니다. 판정의 의미와 Icon은 [Answer Label](./indicator/answer-label.md)의 Correct·Incorrect와 맞추고, 문제 단위의 판정 결과는 Answer Label로 함께 알립니다.
 2. **새 Variant는 모든 상태를 정의합니다.** Default·Pressed·Selected·Disabled·Disabled + Selected의 배경·테두리·Label 색을 정하고 Label 4.5:1, 테두리 3:1을 확인합니다. 기준을 충족하는 토큰이 없으면 임의 hex나 opacity로 만들지 않고 보고합니다.
-3. **텍스트 외 콘텐츠는 전용 선택 컴포넌트로 분리합니다.** 이미지·오디오 재생·설명이 붙은 선택지는 Option Item에 slot을 추가하지 않고 별도 컴포넌트로 정의합니다. 이때도 Selection·Commit 옵션, 상태 우선순위, 동작 표는 이 문서를 따릅니다.
+3. **아이콘 외의 텍스트 외 콘텐츠는 전용 선택 컴포넌트로 분리합니다.** 이미지·오디오 재생·설명이 붙은 선택지는 Option Item에 slot을 추가하지 않고 별도 컴포넌트로 정의합니다. 이때도 Selection·Commit 옵션, 상태 우선순위, 동작 표는 이 문서를 따릅니다.
 4. **새 Layout은 순서와 전환 규칙을 함께 정의합니다.** 3열 이상이나 가로 스크롤을 추가할 때는 읽기·focus 순서와 큰 글자에서 Stack으로 전환하는 조건을 함께 정합니다.
 5. **Indicator 모양은 Selection 의미와 함께 바꿉니다.** Single과 Multiple을 원형·사각형처럼 구분해야 하면 두 Selection 값에 모두 정의하고, Unselected에서도 표시할지 함께 정합니다.
 6. **새 Size는 토큰 값으로만 정의합니다.** padding·Label·Indicator·모서리·목록 간격을 모두 토큰에서 고르고, Indicator는 Label line-height를 넘지 않는 `icon.size.*` 토큰을 씁니다. 높이 산식의 결과는 48px 이상이어야 합니다.

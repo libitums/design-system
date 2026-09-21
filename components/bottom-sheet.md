@@ -33,7 +33,7 @@ Scrim을 누르면 시트를 닫습니다. Scrim은 [Overlay](./overlay.md)의 S
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
-| 배경 | #FFF3EA | `background.elevated` |
+| 배경 | `white` #FFFFFF | `color.white` |
 | 모서리 | **상단 두 모서리만 16px** (하단 0) | `radius.lg` |
 | 가로 패딩 | 16px | `spacing.16` |
 | 상단 패딩 | 12px | `spacing.12` |

@@ -120,7 +120,7 @@ Figma의 Default는 `Empty + Unfocused + None + Enabled`, Filled는 `Filled + Un
 |---|---|---|---|---|
 | Empty | `white` #FFFFFF | Placeholder `fg.neutral-muted` #555D6D | `border.default` #848184 | — |
 | Filled | `white` #FFFFFF | Value `fg.neutral` #1A1C20 | `gray.900` #2A3038 | — |
-| Focused | `white` #FFFFFF | Placeholder `fg.neutral-muted` #555D6D 또는 Value `fg.neutral` #1A1C20 | `brand.strong` #B94208 | — |
+| Focused | `white` #FFFFFF | Placeholder `fg.neutral-muted` #555D6D 또는 Value `fg.neutral` #1A1C20 | `brand.primary` #F46B18 | — |
 | Error | `feedback.incorrect-surface` #FFF0F1 | Value `feedback.incorrect-text` #A62E34 | `feedback.incorrect` #DF4D54 | `feedback.incorrect-text` #A62E34 |
 | ReadOnly | `gray.100` #F7F8F9 | Value `fg.neutral` #1A1C20 | `border.default` #848184 | Helper가 있으면 유지 |
 | Disabled | `gray.50` #F9F9FA | Value 또는 Placeholder `fg.disabled` #DCDEE3 | `border.disabled` #B7B4B8 | — |
@@ -141,7 +141,9 @@ Focused의 브랜드 테두리와 별개로 keyboard focus가 보일 때 focusab
 | 전체 외곽 범위 | 4px | `spacing.4` |
 | 형태 | Field의 바깥 윤곽을 따름 | `radius.lg` |
 
-- Web은 `:focus-visible`에 ring을 적용합니다. Pointer로 Field를 눌러 편집할 때는 브랜드 테두리만 표시할 수 있습니다.
+- 탭·클릭으로 Field를 눌러 편집할 때는 ring 없이 브랜드 테두리만 표시합니다. ring은 keyboard로 focus를 옮겼을 때만 더합니다.
+- Web은 `:focus-visible`에 ring을 적용합니다. ReactLynx는 `:focus-visible`이 없으므로 [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고)를 따릅니다.
+- `brand.primary` 테두리와 `white` 배경의 대비는 3.016:1로 control 경계 기준 3:1을 충족합니다.
 - Error가 keyboard focus를 받아도 Error 시각 상태를 유지하고 ring을 더합니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 

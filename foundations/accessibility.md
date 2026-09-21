@@ -64,7 +64,7 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 
 ### Brand Button 예외
 
-Brand Button의 Default·Pressed·Loading 상태에 한해 배경 `brand.primary` #F46B18과 라벨·아이콘·Spinner `white` #FFFFFF 조합을 승인된 예외로 사용합니다. 이 조합의 대비는 WCAG 계산 기준 3.016:1입니다.
+Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18과 라벨·아이콘·Spinner `white` #FFFFFF 조합을 승인된 예외로 사용합니다. 이 조합의 대비는 WCAG 계산 기준 3.016:1입니다. Pressed는 `brand.primary-pressed` #B94208과 `white`로 5.461:1이라 예외에 포함하지 않습니다.
 
 - 예외는 [Button](../components/button.md)의 Brand 변형에서 라벨·아이콘·Spinner에만 적용합니다. 다른 컴포넌트나 상태로 확장하지 않습니다.
 - Disabled 상태는 Button 스펙의 기존 Disabled 색과 semantics를 사용하며 이 예외에 포함하지 않습니다.
@@ -73,13 +73,13 @@ Brand Button의 Default·Pressed·Loading 상태에 한해 배경 `brand.primary
 
 ### Caption 보조 정보 예외
 
-`typography.caption`으로 표시하는 보조 정보는 텍스트 대비 기준을 적용하지 않는 승인된 예외입니다. 색은 수치 대비와 관계없이 `fg.*` 토큰에서 고릅니다.
+`typography.caption`으로 표시하는 보조 정보는 텍스트 대비 기준을 적용하지 않는 승인된 예외입니다. 색은 수치 대비와 관계없이 `fg.*` 토큰이나 `gray.*` 토큰에서 고릅니다.
 
 보조 정보는 가려져도 화면의 이해와 조작에 지장이 없는 정보입니다.
 
 | 구분 | 대상 |
 |---|---|
-| 적용 | Timestamp, 글자 수, 출처, 부가 설명, 버전 표기 |
+| 적용 | Timestamp, 글자 수, 출처, 부가 설명, 버전 표기, 온보딩 화면의 설명 문구 |
 | 제외 | 오류·경고·성공처럼 결과를 알리는 문구 |
 | 제외 | 가격·수량·마감처럼 결정에 필요한 값 |
 | 제외 | 필수 입력·동의 조건처럼 진행에 필요한 안내 |
@@ -88,6 +88,24 @@ Brand Button의 Default·Pressed·Loading 상태에 한해 배경 `brand.primary
 - 예외는 `typography.caption` 스타일의 텍스트에만 적용합니다. 다른 스타일이나 caption 크기로 줄인 다른 텍스트로 확장하지 않습니다.
 - 제외 항목은 caption으로 표시하더라도 일반 텍스트 기준 4.5:1을 적용합니다.
 - 보조 기술에는 화면과 같은 내용을 그대로 제공합니다. 흐리게 표시했다고 접근성 트리에서 숨기지 않습니다.
+- 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
+
+### 시각 예외
+
+다음 조합은 기준에 미달하지만 시각 디자인을 위해 승인된 예외입니다. 표에 적힌 컴포넌트·위치에만 적용하고 다른 곳으로 확장하지 않습니다.
+
+| 대상 | 색 | 배경 | 대비 | 기준 | 보완 수단 |
+|---|---|---|---:|---:|---|
+| [Round Button](../components/round-button.md) Brand 아이콘 | `brand.primary` #F46B18 | `gray.100` #F7F8F9 | 2.836:1 | 3:1 | 접근성 이름 |
+| [Page Indicator](../components/indicator/page-indicator.md) Active | `brand.primary` #F46B18 | `background.elevated` #FFF3EA | 2.766:1 | 3:1 | 알약 모양, 줄 전체의 위치 announcement |
+| Page Indicator Inactive | `gray.400` #DCDEE3 | `white` #FFFFFF | 1.346:1 | 3:1 | 줄 전체의 위치 announcement |
+| [Option Selector](../components/option-selector.md) Outlined 테두리 | `gray.400` #DCDEE3 | `white` #FFFFFF | 1.346:1 | 3:1 | 4.5:1 이상의 Label, Selected의 `brand.primary` 테두리와 Indicator |
+| 선택지 사이 `or` 구분 문구 | `gray.400` #DCDEE3 | `white` #FFFFFF | 1.346:1 | 4.5:1 | 선택지마다 독립된 Label·semantics |
+| 어두운 [Fog](../components/fog.md) 위 AI 생성 고지 | `gray.800` #555D6D | `gray.950` #1A1C20 | 2.578:1 | 4.5:1 | 보조 기술에 같은 고지 제공 |
+
+- `or` 구분 문구는 장식으로 보고 접근성 트리에서 숨깁니다. 선택지의 관계는 group semantics로 전달합니다.
+- AI 생성 고지는 흐리게 보여도 숨기지 않습니다. 보조 기술에는 고지 전체를 그대로 제공합니다.
+- 흰 배경의 `brand.primary`는 3.016:1로 그래픽 기준을 충족합니다. 흰 배경이 아닌 곳에서 `brand.primary`를 그래픽에 쓰려면 이 표에 먼저 추가합니다.
 - 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
 
 ---
@@ -129,7 +147,7 @@ Focused는 Default·Pressed·Loading의 색과 크기를 대체하지 않고, fo
 - ring은 레이아웃 크기와 hit area를 바꾸지 않습니다. 잘리거나 이웃 control에 가려지지 않도록 주변 공간과 clipping을 확인합니다.
 - Web은 keyboard focus에 `:focus-visible`을 사용합니다. pointer 입력만으로 이동한 focus에는 custom ring을 강제하지 않습니다.
 - iOS·Android의 keyboard·D-pad focus는 이 시각 스펙을 사용하되, 플랫폼이 더 강한 system indicator를 제공하면 이를 유지합니다.
-- ReactLynx는 host별 keyboard focus 표시 지원을 확인합니다. screen reader의 accessibility focus와 keyboard focus를 같은 상태로 간주하지 않습니다.
+- ReactLynx는 host별 keyboard focus 표시 지원을 확인합니다. screen reader의 accessibility focus와 keyboard focus를 같은 상태로 간주하지 않습니다. Lynx는 `:focus-visible`과 input의 `:focus` 스타일을 적용하지 않으므로 focus 상태를 class로 표시합니다 — [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고).
 - Default·Pressed·Loading은 Focused와 결합할 수 있습니다. Disabled는 focus 순서에서 제외하며 ring을 표시하지 않습니다.
 - 이미지·gradient 위에서는 두 색 기법만으로 통과를 가정하지 않고 실제 인접 픽셀과 대비를 확인합니다.
 
@@ -192,8 +210,9 @@ ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 �
 
 - hit area overlay로 모든 custom control의 48 × 48과 비중첩 확인
 - 모든 텍스트·control 경계·상태·의미 있는 아이콘의 contrast 계산
-- Brand Button의 `brand.primary`/`white` 조합은 Default·Pressed·Loading에만 쓰였는지 확인하고 `approved-exception`으로 별도 기록
+- Brand Button의 `brand.primary`/`white` 조합은 Default·Loading에만 쓰였는지 확인하고 `approved-exception`으로 별도 기록
 - 4.5:1 미만의 caption은 보조 정보인지 확인하고 `approved-exception`으로 별도 기록
+- 시각 예외 표의 조합이 표에 적힌 위치에만 쓰였는지 확인하고 `approved-exception`으로 별도 기록
 - Pointer 없이 keyboard만으로 전체 흐름 완료
 - focus 순서, `:focus-visible`, 두 색 ring, Disabled 제외, modal 진입·복귀 확인
 - iOS VoiceOver와 Android TalkBack에서 name·role·state·value 확인

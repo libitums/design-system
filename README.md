@@ -31,7 +31,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `layout.json` | 화면 여백 · 간격 3단계 · safe area |
 | `radius.json` | sm 6 / md 12 / lg 16 / xl 24 / full |
 | `elevation.json` | 쌓임 순서 · 표면 색 · 그림자 s1~s3 |
-| `opacity.json` | 불투명도 8 / 35 / 45 / 90 · scrim · disabled · surface |
+| `opacity.json` | 불투명도 8 / 16 / 35 / 45 / 90 · scrim · disabled · pressed-overlay · surface |
 | `motion.json` | duration d1~d6 · easing 6종 · reduced motion |
 | `iconography.json` | 아이콘 에셋 메타 · 크기 스케일 |
 | `writing-tone.md` | UX 문구 13원칙 |

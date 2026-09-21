@@ -12,11 +12,12 @@
 
 | 상태 | 크기 | 배경 | 모서리 |
 |---|---|---|---|
-| Inactive | 8 × 8 (원) | `fg.neutral-subtle` #868B94 | `radius.full` |
-| Active | **28 × 8** (알약) | `brand.strong` #B94208 | `radius.full` |
+| Inactive | 8 × 8 (원) | `gray.400` #DCDEE3 | `radius.full` |
+| Active | **28 × 8** (알약) | `brand.primary` #F46B18 | `radius.full` |
 
 - 활성 항목만 가로로 늘어나 알약이 됩니다. **높이는 두 상태가 8px로 같습니다.**
 - 한 번에 **하나만 Active**입니다.
+- Active는 색과 함께 **알약 모양**으로 구분합니다. 색 대비는 흰 배경에서 Active 3.016:1, Inactive 1.346:1이며, Inactive와 `background.elevated` 위의 Active는 승인된 예외입니다 — [Accessibility의 시각 예외](../../foundations/accessibility.md#시각-예외) 참고.
 - 항목이 늘거나 줄면 줄 전체가 가운데 정렬을 유지하며 좌우로 재배치됩니다.
 
 ### 전환
