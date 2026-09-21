@@ -100,7 +100,7 @@ Jost Variable
 
 - 위 배포물에서 파일을 가져오고 글리프·메트릭을 변환·재생성하지 않습니다. 앱 파일은 플랫폼 규칙에 맞춰 파일명만 바꿉니다.
 - Italic 파일은 typography 토큰이 사용하지 않으므로 포함하지 않습니다.
-- Pretendard와 같은 방식으로 파일 출처, 버전, checksum을 남기고 `OFL.txt`를 폰트 디렉터리와 third-party notice에 포함합니다.
+- Pretendard와 같은 방식으로 파일 출처, 버전, checksum을 남기고 라이선스 파일(Web `OFL.txt`, 앱 `Jost-OFL.txt`)을 폰트 디렉터리와 third-party notice에 포함합니다.
 - Web과 앱은 같은 `3.710` 기반 파일을 사용합니다. 버전을 바꿀 때는 Web과 앱을 함께 올리고 Accent 문구의 너비를 다시 확인합니다.
 
 ---
