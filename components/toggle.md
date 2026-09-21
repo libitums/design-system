@@ -45,10 +45,11 @@ Track의 크기는 Knob에서 계산합니다.
 ```text
 Track 높이 = Knob 크기 + (spacing.4 × 2)
 Track 너비 = (Knob 크기 × 2) + (spacing.4 × 2)
-Knob 이동 거리 = Track 너비 − Knob 크기 − (spacing.4 × 2)
 ```
 
 Knob은 Off에서 시작 가장자리, On에서 끝 가장자리에 붙습니다. 이동 거리는 Knob 크기와 같습니다.
+
+Knob은 Track 위에 떠서 움직이는 표면이므로 표면 깊이를 나타내는 `elevation.shadow.s1`을 씁니다. Track에는 그림자를 쓰지 않습니다.
 
 ### Size
 
@@ -76,7 +77,7 @@ Knob은 Off에서 시작 가장자리, On에서 끝 가장자리에 붙습니다
 | Disabled + Off | `gray.700` #868B94, `opacity.disabled` 35% | `white` #FFFFFF, `opacity.disabled` 35% | 시작 가장자리 |
 | Disabled + On | `brand.primary` #F46B18, `opacity.disabled` 35% | `white` #FFFFFF, `opacity.disabled` 35% | 끝 가장자리 |
 
-Disabled는 Track과 Knob에 같은 불투명도를 적용해 Toggle 전체를 흐리게 만듭니다. 색을 따로 바꾸지 않아 켜짐·꺼짐을 그대로 읽을 수 있습니다.
+Disabled는 Track과 Knob에 같은 불투명도를 적용해 Toggle 전체를 흐리게 만듭니다. 흐려진 뒤에는 Track과 Knob의 대비가 낮아지므로 켜짐·꺼짐은 Knob의 위치와 보조 기술의 state로 구분합니다.
 
 ### 대비
 
@@ -99,8 +100,9 @@ Focused는 Off·On의 색과 크기를 유지한 채 hit area 바깥에 공통 f
 | Outer ring | 2px solid, `border.strong` #141115 | `stroke.width.strong`, `color.border.strong` |
 | Ring 사이 간격 | 0px | `spacing.0` |
 | 전체 외곽 범위 | 4px | `spacing.4` |
-| 형태 | Track의 바깥 윤곽을 따름 | `radius.full` |
+| 형태 | focusable hit area의 바깥 윤곽을 따름 | `radius.full`, 설정 행이면 행의 radius |
 
+- 설정 행 전체가 hit area이면 행이 focus를 받고 ring은 행의 바깥 윤곽을 따릅니다. 이때 Toggle에는 ring을 따로 표시하지 않습니다.
 - Web은 `:focus-visible`에 ring을 적용합니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 
@@ -116,7 +118,7 @@ Focused는 Off·On의 색과 크기를 유지한 채 hit area 바깥에 공통 f
 
 Toggle은 누르는 즉시 적용합니다. 확인 단계를 두거나 저장 버튼을 기다리지 않습니다. 서버 반영에 시간이 걸리면 Toggle을 먼저 바꾸고, 실패하면 원래 상태로 되돌린 뒤 이유를 알립니다.
 
-Knob의 이동과 Track의 색 전환은 `motion.duration.pressed` 150ms와 `motion.easing.easing`을 사용합니다. 동작 줄이기가 켜져 있으면 이동 animation을 없애고 위치와 색을 즉시 바꿉니다.
+Knob의 이동은 `motion.duration.d3` 150ms, Track의 색 전환은 `motion.duration.color` 150ms를 사용하고 둘 다 `motion.easing.easing`으로 함께 움직입니다. 동작 줄이기가 켜져 있으면 이동 animation을 없애고 위치와 색을 즉시 바꿉니다.
 
 ## 접근성
 
