@@ -311,9 +311,9 @@ import "@libitums/design-tokens/css/typography.css";
 
 ## Font
 
-`@libitums/design-tokens`에는 font binary와 `@font-face`가 포함되지 않습니다. Web은 Pretendard WOFF2를 frontend static root에서 self-host하고, iOS·Android 앱은 `PretendardVariable.ttf`를 앱 package에 포함해 첫 화면 전에 등록합니다. ReactLynx는 native host에 포함된 같은 TTF를 사용합니다.
+`@libitums/design-tokens`에는 font binary와 `@font-face`가 포함되지 않습니다. Web은 Pretendard·Jost WOFF2를 frontend static root에서 self-host하고, iOS·Android 앱은 `PretendardVariable.ttf`와 `JostVariable.ttf`를 앱 package에 포함해 첫 화면 전에 등록합니다. ReactLynx는 native host에 포함된 같은 TTF를 사용합니다.
 
-Futura는 Webfont·App 라이선스와 파일 출처가 확정되기 전까지 새 파일이나 registration을 추가하지 않습니다. 전체 플랫폼 제공·fallback·라이선스 기준은 [Font Delivery](./foundations/font-delivery.md)를 따릅니다.
+전체 플랫폼 제공·fallback·라이선스 기준은 [Font Delivery](./foundations/font-delivery.md)를 따릅니다.
 
 ## 하드코딩과 token 요청
 
