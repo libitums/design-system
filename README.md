@@ -58,6 +58,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `tooltip.md` | 트리거 옆에 짧은 설명을 띄우는 말풍선 |
 | `avatar.md` | 사용자를 원형으로 나타내는 이미지·이니셜 표시 |
 | `visual-novel-dialog.md` | 장면 위에서 대사·서술을 한 덩어리씩 보여주는 패널 |
+| `toggle.md` | 설정을 즉시 켜고 끄는 control |
 | `header/` | progress-header · back-header |
 | `indicator/` | page · status · step · answer-label |
 
@@ -245,5 +246,4 @@ Package exports는 다음 경로를 제공합니다.
 ## 아직 없는 것
 
 - **다크 모드** — `color.json`은 라이트 모드 단일 값입니다.
-- **Futura Webfont·App 라이선스** — 정확한 제품과 플랫폼별 라이선스가 확정되기 전에는 파일을 Web이나 앱에 배포하지 않습니다.
 - **컴포넌트** — Toast.

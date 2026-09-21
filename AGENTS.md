@@ -19,7 +19,7 @@ Codex는 `.codex/skills/`, Claude Code는 `.claude/skills/`를 읽습니다. 두
 foundations/     토큰과 원칙 — 모든 값의 출처
 ├── color.json            35색 (gray scale 12: gray 11 + white, brand 7, feedback 10, background 3, border 3)
 ├── typography.json       22 스타일 (accent / display / heading / body / caption / label / button / dialogue)
-├── font-delivery.md      Web·앱 폰트 제공 · Futura 라이선스 · fallback 정책
+├── font-delivery.md      Web·앱 폰트 제공 · 라이선스 · fallback 정책
 ├── accessibility.md      hit area · 대비 · 키보드 · focus · accessible semantics
 ├── spacing.json          Progressive primitive scale (0~96) · 컴팩트 내부 간격 2 / 6
 ├── stroke.json           선 두께 thin 1 / regular 1.5 / strong 2
@@ -48,6 +48,7 @@ components/      컴포넌트 스펙
 ├── tooltip.md            트리거 옆에 짧은 설명을 띄우는 말풍선
 ├── avatar.md             사용자를 원형으로 나타내는 이미지·이니셜 표시
 ├── visual-novel-dialog.md  장면 위에서 대사·서술을 한 덩어리씩 보여주는 패널
+├── toggle.md             설정을 즉시 켜고 끄는 control
 ├── header/               progress-header · back-header
 └── indicator/            page · status · step · answer-label
 
@@ -161,5 +162,4 @@ examples/        design-system 소유 private 소비 fixture·Host
 작업 중 필요해지면 만들지 말고 먼저 보고할 것.
 
 - **dark mode** — `color.json`은 라이트 모드 단일 값이다.
-- **Futura Webfont·App 라이선스** — 정확한 foundry·제품·weight·플랫폼별 사용 범위가 확인되기 전에는 파일, `@font-face`, native registration, preload를 추가할 수 없다. `foundations/font-delivery.md`를 따른다.
 - **지원 로케일 확정** — `international-design.md`의 로케일 표는 참고용 기준값이다.
