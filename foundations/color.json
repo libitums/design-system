@@ -32,7 +32,7 @@
         "$value": "{color.gray.700}"
       },
       "neutral-subtlest": {
-        "$description": "장식 요소와 Disabled처럼 수치 대비 예외가 적용되는 가장 낮은 강조의 전경색",
+        "$description": "장식 요소, Disabled, 보조 정보 caption처럼 수치 대비 예외가 적용되는 가장 낮은 강조의 전경색",
         "$value": "{color.gray.600}"
       },
       "neutral-inverted": {
