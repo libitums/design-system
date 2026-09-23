@@ -37,7 +37,7 @@ Group label은 무엇을 고르는지 알리는 질문이나 지시문입니다.
 - Immediate는 Single에만 사용합니다. 선택하는 순간 답을 제출하거나 다음 대화로 넘어갑니다.
 - 한 Option Selector 안에서 Variant와 Size를 섞지 않습니다.
 - Option Item에는 텍스트 Label과 선택적인 Leading icon만 둡니다. 이미지·오디오 재생·설명이 필요한 선택지는 Option Item에 slot을 더하지 않고 전용 선택 컴포넌트로 분리합니다.
-- 한 Option Selector 안에서 Leading icon과 Alignment를 섞지 않습니다. 아이콘을 쓰면 모든 Option Item에 둡니다.
+- 한 Option Selector 안에서 Option Item마다 Leading icon 유무나 Alignment를 다르게 섞지 않습니다. 아이콘을 쓰면 모든 Option Item에 둡니다.
 - Leading icon을 쓰면 Alignment는 Start를 기본으로 합니다. 아이콘과 Label이 세로로 맞아 목록을 훑기 쉽기 때문입니다.
 - Grid는 모든 Label이 2열 너비에서 두 줄 이하일 때만 사용합니다. 번역·학습 콘텐츠 길이를 미리 알 수 없으면 Stack을 사용합니다.
 
@@ -64,7 +64,7 @@ Group label은 무엇을 고르는지 알리는 질문이나 지시문입니다.
 높이 = Label 높이 + (세로 padding × 2) + (stroke.width.strong × 2)
 Label 최대 너비 (Center) = Option Item 너비 − (stroke.width.strong + 가로 padding + Indicator 크기 + spacing.8) × 2
 Label 최대 너비 (Start) = Option Item 너비 − (stroke.width.strong + 가로 padding) × 2 − (Indicator 크기 + spacing.8)
-Leading icon 사용 = 위 값 − (Leading icon 크기 + spacing.8)
+Label 최대 너비 (Leading icon 사용) = 위 값 − (Leading icon 크기 + spacing.8)
 ```
 
 Center에서 Leading icon을 쓰면 아이콘과 Label을 한 묶음으로 가운데 정렬합니다.
