@@ -34,8 +34,8 @@ async function createWorkspace(t, markdown) {
 test("현재 component 문서의 모든 token reference를 검증한다", async () => {
   const result = await validateMarkdownTokenReferences(repositoryRoot);
 
-  assert.equal(result.fileCount, 23);
-  assert.equal(result.tokenCount, 148);
+  assert.equal(result.fileCount, 24);
+  assert.equal(result.tokenCount, 150);
   assert.equal(result.exceptionCount, 10);
   assert.equal(result.referenceCount > 100, true);
 });

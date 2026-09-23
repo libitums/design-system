@@ -108,6 +108,10 @@ Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18
 | Learning Unit Available Surface | `brand.reward-disabled-surface` #FFF0E6 | `white` #FFFFFF | 1.114:1 | 3:1 | 단위 제목·진행 문구, 상태 state |
 | Learning Unit Available 아이콘 | `brand.primary` #F46B18 | `brand.reward-disabled-surface` #FFF0E6 | 2.708:1 | 3:1 | 학습 유형은 접근성 이름으로 전달 |
 | Learning Unit Narrative 배지 테두리 | `gray.400` #DCDEE3 | `white` #FFFFFF | 1.346:1 | 3:1 | 17.061:1의 배지 아이콘, 접근성 이름의 `이야기 연결` |
+| [Stat Button](../components/stat-button.md) Streak 아이콘 | `brand.secondary` #FF8D28 | `white` #FFFFFF | 2.310:1 | 3:1 | 4.5:1 이상의 Count, 접근성 이름 |
+| Stat Button Trophy 아이콘 | `feedback.warning` #FFC500 | `white` #FFFFFF | 1.586:1 | 3:1 | 4.5:1 이상의 Count, 접근성 이름 |
+| Stat Button Gem 아이콘 | `brand.gem` #00C3FF | `white` #FFFFFF | 2.049:1 | 3:1 | 4.5:1 이상의 Count, 접근성 이름 |
+| Stat Button 테두리 | `gray.50` #F9F9FA | `white` #FFFFFF | 1.052:1 | 3:1 | 버튼은 Count와 아이콘으로 식별 |
 
 - `or` 구분 문구는 장식으로 보고 접근성 트리에서 숨깁니다. 선택지의 관계는 group semantics로 전달합니다.
 - AI 생성 고지는 흐리게 보여도 숨기지 않습니다. 보조 기술에는 고지 전체를 그대로 제공합니다.
