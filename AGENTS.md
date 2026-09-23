@@ -49,6 +49,7 @@ components/      컴포넌트 스펙
 ├── avatar.md             사용자를 원형으로 나타내는 이미지·이니셜 표시
 ├── visual-novel-dialog.md  장면 위에서 대사·서술을 한 덩어리씩 보여주는 패널
 ├── toggle.md             설정을 즉시 켜고 끄는 control
+├── learning-unit.md      학습 단위의 진행 상태를 알리는 원형 control
 ├── header/               progress-header · back-header
 └── indicator/            page · status · step · answer-label
 

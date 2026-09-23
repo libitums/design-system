@@ -53,6 +53,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 아바타 | `components/avatar.md` |
 | 비주얼 노벨 대사 패널 | `components/visual-novel-dialog.md` |
 | 토글 | `components/toggle.md` |
+| 학습 단위 | `components/learning-unit.md` |
 | 학습 헤더 | `components/header/progress-header.md` |
 | 뒤로가기 헤더 | `components/header/back-header.md` |
 | 페이지 점 인디케이터 | `components/indicator/page-indicator.md` |
