@@ -1,6 +1,6 @@
 # Button
 
-텍스트 라벨로 사용자의 행동을 실행하는 버튼입니다. Neutral, Brand, Outline, Subtle, Text 5종을 사용합니다.
+텍스트 라벨로 사용자의 행동을 실행하는 버튼입니다. Neutral, Brand, Inverse, Outline, Subtle, Text 6종을 사용합니다.
 
 ## 구조
 
@@ -17,6 +17,7 @@ Button
 |---|---|---|
 | Neutral | 일반 화면의 주 액션 | 중립색 고강조 표면 |
 | Brand | 브랜드가 중요한 주 액션 | 브랜드색 고강조 표면 |
+| Inverse | 어두운 장면 위의 주 액션 | 흰 고강조 표면 |
 | Outline | 보조 액션 | 흰 배경과 1px (`stroke.width.thin`) 테두리 |
 | Subtle | 낮은 강조의 보조 액션 | 연한 중립색 표면 |
 | Text | 건너뛰기·취소 등 최소 강조 액션 | 배경과 테두리 없음 |
@@ -83,7 +84,7 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 | 상태 | 배경 | 라벨 | Spinner |
 |---|---|---|---|
 | Default | `gray.800` #555D6D | `gray.50` #F9F9FA | — |
-| Pressed | `gray.800` #555D6D | `gray.50` #F9F9FA | — |
+| Pressed | `gray.900` #2A3038 | `gray.50` #F9F9FA | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
 | Loading | `gray.800` #555D6D | `gray.50` #F9F9FA | `gray.50` #F9F9FA |
 
@@ -92,11 +93,29 @@ Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
 | 상태 | 배경 | 라벨 | Spinner |
 |---|---|---|---|
 | Default | `brand.primary` #F46B18 | `white` #FFFFFF | — |
-| Pressed | `brand.primary` #F46B18 | `white` #FFFFFF | — |
+| Pressed | `brand.primary-pressed` #B94208 | `white` #FFFFFF | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
 | Loading | `brand.primary` #F46B18 | `white` #FFFFFF | `white` #FFFFFF |
 
-이 조합은 3.016:1로 일반 텍스트 4.5:1 기준에 미달하는 승인된 제품 예외입니다. 적용 범위와 검증 기록 방식은 [Accessibility의 Brand Button 예외](../foundations/accessibility.md#brand-button-예외)를 따릅니다.
+이 조합은 3.016:1로 일반 텍스트 4.5:1 기준에 미달하는 승인된 제품 예외입니다. 적용 범위와 검증 기록 방식은 [Accessibility의 Brand Button 예외](../foundations/accessibility.md#brand-button-예외)를 따릅니다. Pressed의 `brand.primary-pressed`와 `white`는 5.461:1로 기준을 충족합니다.
+
+Neutral과 Brand의 Pressed는 배경을 한 단계 어둡게 바꿔 누른 순간을 알립니다. 크기는 바꾸지 않습니다.
+
+### Inverse
+
+`gray.950` #1A1C20처럼 어두운 장면이나 Scrim 위에서 쓰는 주 액션입니다. 밝은 표면에서는 Neutral 또는 Brand를 씁니다.
+
+| 상태 | 배경 | 라벨 | Spinner |
+|---|---|---|---|
+| Default | `white` #FFFFFF | `fg.neutral` #1A1C20 | — |
+| Pressed | `gray.300` #EEEFF1 | `fg.neutral` #1A1C20 | — |
+| Disabled | `white` #FFFFFF, `opacity.disabled` 35% | `fg.neutral` #1A1C20, `opacity.disabled` 35% | — |
+| Loading | `white` #FFFFFF | `fg.neutral` #1A1C20 | `fg.neutral` #1A1C20 |
+
+- 라벨 대비는 Default 17.061:1, Pressed 14.829:1입니다.
+- 버튼 표면과 `gray.950` 배경의 대비는 17.061:1입니다. 배경이 이미지라면 버튼 뒤에 [Overlay](./overlay.md)를 두어 단색에 가까운 배경을 만듭니다.
+- Disabled는 버튼 전체에 같은 불투명도를 적용합니다. 어두운 배경에서 `gray.50`처럼 밝은 Disabled 표면을 쓰면 활성 버튼과 구분되지 않기 때문입니다.
+- 다른 변형의 색을 덮어써서 흰 버튼을 만들지 않고 Inverse를 사용합니다.
 
 ### Outline
 
@@ -144,7 +163,7 @@ Focused는 위 상태의 색·크기·Spinner를 유지한 채 focusable hit are
 
 ## 사용 가이드
 
-- **한 화면의 최상위 버튼은 Neutral 또는 Brand 중 하나만** 둡니다.
+- **한 화면의 최상위 버튼은 Neutral·Brand·Inverse 중 하나만** 둡니다. 어두운 장면에서는 Inverse를 씁니다.
 - **모든 사이즈의 hit area는 최소 48 × 48입니다.** S·M·L의 시각 높이는 유지하고 부모 control이나 투명 padding으로 `spacing.48`을 확보합니다 — [Accessibility](../foundations/accessibility.md) 참고.
 - **버튼 너비는 라벨을 실제 폰트로 측정해 계산합니다.** 텍스트를 바꾸면서 이전 고정 너비를 유지하지 않습니다.
 - **Fill 버튼에서도 좌우 padding을 보장합니다.** 번역으로 라벨이 길어지면 줄바꿈하지 말고 상위 레이아웃을 조정합니다.

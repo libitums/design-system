@@ -1,6 +1,6 @@
 # Round Button
 
-아이콘 하나로 자주 쓰는 명확한 행동을 실행하는 원형 버튼입니다. Neutral과 Brand 2종을 사용합니다.
+아이콘 하나로 자주 쓰는 명확한 행동을 실행하는 원형 버튼입니다. Neutral, Brand, Overlay 3종을 사용합니다.
 
 ## 구조
 
@@ -16,13 +16,14 @@ Round Button
 |---|---|---|
 | Neutral | 일반적인 아이콘 액션 | 중립색 아이콘 |
 | Brand | 브랜드 강조가 필요한 아이콘 액션 | 브랜드색 아이콘 |
+| Overlay | 어두운 장면·이미지 위의 아이콘 액션 | 배경 없음, 흰 아이콘 |
 
 ## 공통 스펙
 
 | 항목 | 값 | 토큰 |
 |---|---|---|
 | 형태 | 정사각 프레임의 완전한 원 | `radius.full` |
-| 배경 | `gray.100` #F7F8F9 | `color.gray.100` |
+| 배경 | Neutral·Brand `gray.100` #F7F8F9, Overlay 없음 | `color.gray.100` |
 | 아이콘 정렬 | 수평·수직 중앙 | — |
 | 아이콘 에셋 | `padding` 변형 | `icon.$extensions.com.libitum.iconography.variants.padding` |
 | 테두리·그림자 | 없음 | — |
@@ -53,10 +54,25 @@ Round Button
 
 | 상태 | 버튼 크기 | 배경 | 아이콘·Spinner |
 |---|---|---|---|
-| Default | 100% | `gray.100` #F7F8F9 | 아이콘 `fg.brand` #B94208 |
-| Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `fg.brand` #B94208 |
+| Default | 100% | `gray.100` #F7F8F9 | 아이콘 `brand.primary` #F46B18 |
+| Pressed | 95% | `gray.100` #F7F8F9 | 아이콘 `brand.primary` #F46B18 |
 | Disabled | 100% | `gray.50` #F9F9FA | 아이콘 `brand.reward-disabled-surface` #FFF0E6, `opacity.disabled` 35% |
-| Loading | 100% | `gray.100` #F7F8F9 | Spinner `fg.brand` #B94208 |
+| Loading | 100% | `gray.100` #F7F8F9 | Spinner `brand.primary` #F46B18 |
+
+Brand 아이콘은 `gray.100` 배경과 2.836:1로 그래픽 기준 3:1에 미달하는 승인된 예외입니다 — [Accessibility의 시각 예외](../foundations/accessibility.md#시각-예외) 참고.
+
+### Overlay
+
+| 상태 | 버튼 크기 | 배경 | 아이콘·Spinner |
+|---|---|---|---|
+| Default | 100% | 없음 | 아이콘 `white` #FFFFFF |
+| Pressed | 95% | `white` #FFFFFF, `opacity.pressed-overlay` 16% | 아이콘 `white` #FFFFFF |
+| Disabled | 100% | 없음 | 아이콘 `white` #FFFFFF, `opacity.disabled` 35% |
+| Loading | 100% | 없음 | Spinner `white` #FFFFFF |
+
+- `gray.950` #1A1C20처럼 어두운 단색 장면 위에서만 사용합니다. 흰 아이콘과 `gray.950`의 대비는 17.061:1입니다.
+- 이미지 위에 둘 때는 아이콘 주변 모든 픽셀에서 3:1을 확인하거나 [Overlay](./overlay.md)로 배경을 어둡게 만듭니다.
+- 비활성 아이콘의 불투명도는 `opacity.disabled`를 사용합니다. 다른 값으로 바꾸지 않습니다.
 
 ### Spinner
 

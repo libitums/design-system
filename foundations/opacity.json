@@ -8,6 +8,10 @@
       "$value": 0.08,
       "$description": "배경을 아주 옅게 덮어 경계만 드러내는 층입니다."
     },
+    "16": {
+      "$value": 0.16,
+      "$description": "어두운 장면 위에서 흰색을 얕게 덮어 눌림을 드러내는 층입니다."
+    },
     "35": {
       "$value": 0.35,
       "$description": "비활성 아이콘과 그래픽입니다. 수치 대비 예외가 적용되는 표현에만 씁니다."
@@ -28,6 +32,10 @@
     "disabled": {
       "$value": "{opacity.35}",
       "$description": "Disabled 상태의 아이콘·그래픽에 사용하는 불투명도."
+    },
+    "pressed-overlay": {
+      "$value": "{opacity.16}",
+      "$description": "어두운 장면 위 Overlay 변형의 Pressed 배경에 쓰는 `white`의 불투명도."
     },
     "surface": {
       "$value": "{opacity.90}",

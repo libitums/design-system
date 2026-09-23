@@ -315,6 +315,19 @@ import "@libitums/design-tokens/css/typography.css";
 
 전체 플랫폼 제공·fallback·라이선스 기준은 [Font Delivery](./foundations/font-delivery.md)를 따릅니다.
 
+## ReactLynx 구현 참고
+
+ReactLynx에서 스펙을 구현할 때 Web CSS와 다르게 동작하는 부분입니다.
+
+| 항목 | 동작 | 구현 방법 |
+|---|---|---|
+| input의 `:focus` | 스타일을 적용하지 않음 | focus·blur 이벤트로 `is-focused` 같은 class를 붙여 Focused 시각 상태를 표시 |
+| `:focus-visible` | 지원하지 않음 | focus ring은 host가 keyboard focus를 알려줄 때만 class로 더함. 알 수 없으면 브랜드 테두리 같은 Focused 시각 상태만 표시 |
+| 값이 또 `var()`인 CSS 변수 | 번들에서 선언이 버려짐 | `@libitums/design-tokens`의 CSS는 이미 리터럴로 평탄화되어 있음. 앱 CSS에서도 `--a: var(--b)` 형태의 변수를 새로 만들지 않고 token 변수를 직접 사용 |
+| `<input>`의 `input-filter` | 허용할 문자를 적는 속성 | 막을 문자가 아니라 입력을 허용할 문자 집합을 적음. 예: 숫자만 받으면 `[0-9]` |
+
+- 이 동작은 소비 저장소에서 우회 코드를 만들 근거가 아닙니다. package로 해결할 문제가 보이면 design system 저장소에 이슈로 올립니다.
+
 ## 하드코딩과 token 요청
 
 색·간격·타이포·선 두께·모서리·그림자·motion·icon 크기를 app code에 직접 쓰지 않습니다. 시각 값이 같아도 의미가 다른 token을 대신 사용하지 않습니다.

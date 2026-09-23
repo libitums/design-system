@@ -39,7 +39,7 @@ Compact Numeric Input
 |---|---|---|---|
 | Empty | `gray.100` #F7F8F9 | Placeholder `fg.neutral-muted` #555D6D | 없음 |
 | Filled | `gray.100` #F7F8F9 | Value `fg.neutral` #1A1C20 | 없음 |
-| Focused | `white` #FFFFFF | Value `fg.neutral` #1A1C20 | `stroke.width.thin` 1px, `brand.strong` #B94208 |
+| Focused | `white` #FFFFFF | Value `fg.neutral` #1A1C20 | `stroke.width.thin` 1px, `brand.primary` #F46B18 |
 | Error | `feedback.incorrect-surface` #FFF0F1 | Value `feedback.incorrect-text` #A62E34 | `stroke.width.thin` 1px, `feedback.incorrect` #DF4D54 |
 | Disabled | `gray.50` #F9F9FA | Value 또는 Placeholder `fg.disabled` #DCDEE3 | 없음 |
 
