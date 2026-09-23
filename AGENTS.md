@@ -119,7 +119,7 @@ examples/        design-system 소유 private 소비 fixture·Host
 - 공통 기준은 `foundations/accessibility.md`를 따른다.
 - custom interactive element의 hit area는 최소 48 × 48이며 `spacing.48`을 사용한다.
 - Focused는 `white` 2px inner ring과 `border.strong` 2px outer ring을 함께 쓰고, Disabled에는 표시하지 않는다.
-- 밝은 표면의 일반 텍스트는 `fg.neutral-muted` 이상, 의미 있는 아이콘·UI 그래픽은 `fg.neutral-subtle` 이상을 사용한다.
+- 밝은 표면의 일반 텍스트는 `fg.neutral-muted` 이상, 의미 있는 아이콘·UI 그래픽은 `fg.neutral-subtle` 이상을 사용한다. 보조 정보 caption은 대비 기준의 예외다 — `foundations/accessibility.md`의 Caption 보조 정보 예외를 따른다.
 - 아이콘만 있는 버튼에는 접근성 이름을 붙인다.
 - 상태를 **색만으로** 나타내지 않는다. 점·아이콘·라벨을 함께 둔다.
 - 인디케이터는 개별 요소가 아니라 줄 전체를 하나의 상태로 알린다.

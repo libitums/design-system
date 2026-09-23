@@ -153,7 +153,7 @@ Token path는 `--libitum-{token-path}` 형식의 CSS custom property로 제공�
 }
 ```
 
-밝은 표면의 일반 텍스트는 `color.fg.neutral-muted` 이상을 사용합니다. `color.fg.neutral-subtle`은 의미 있는 아이콘·UI 그래픽에, `color.fg.neutral-subtlest`는 장식·Disabled 표현에만 사용합니다. 상태는 색만으로 전달하지 않으며 전체 접근성 기준은 [Accessibility](./foundations/accessibility.md)를 따릅니다.
+밝은 표면의 일반 텍스트는 `color.fg.neutral-muted` 이상을 사용합니다. `color.fg.neutral-subtle`은 의미 있는 아이콘·UI 그래픽에, `color.fg.neutral-subtlest`는 장식·Disabled 표현이나 보조 정보 caption에만 사용합니다. Timestamp·글자 수 같은 보조 정보 caption은 대비 기준의 예외입니다. 상태는 색만으로 전달하지 않으며 전체 접근성 기준은 [Accessibility](./foundations/accessibility.md)를 따릅니다.
 
 ## TypeScript token
 
