@@ -61,6 +61,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `toggle.md` | 설정을 즉시 켜고 끄는 control |
 | `learning-unit.md` | 학습 단위 하나를 원형으로 보여주고 진행 상태를 알리는 control |
 | `stat-button.md` | 학습 지표를 아이콘과 수로 요약하고 상세를 여는 버튼 |
+| `settings-cell.md` | 설정 하나를 한 줄로 보여주고 바꾸거나 이동하는 행 |
 | `header/` | progress-header · back-header |
 | `indicator/` | page · status · step · answer-label |
 
