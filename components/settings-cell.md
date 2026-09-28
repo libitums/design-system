@@ -59,7 +59,8 @@ Settings Cell은 한 설정의 이름, 설명, 현재 값을 소유합니다. �
 
 ```text
 높이 = max(72px, 콘텐츠 높이 + (세로 padding × 2))
-콘텐츠 높이 = Title 높이 + spacing.4 + Description 높이
+콘텐츠 높이 (Description 있음) = Title 높이 + spacing.4 + Description 높이
+콘텐츠 높이 (Description 없음) = Title 높이
 ```
 
 Title과 Description은 가로로 남는 공간을 모두 차지하고, Trailing은 콘텐츠 너비를 유지합니다. 글자 크기를 키우거나 번역으로 길어지면 Title과 Description이 줄바꿈하고 행의 높이가 늘어납니다. 말줄임하지 않습니다.
@@ -123,7 +124,7 @@ Focused는 상태의 색과 크기를 유지한 채 행의 바깥 윤곽에 공�
 | Outer ring | 2px solid, `border.strong` #141115 | `stroke.width.strong`, `color.border.strong` |
 | Ring 사이 간격 | 0px | `spacing.0` |
 | 전체 외곽 범위 | 4px | `spacing.4` |
-| 형태 | 행의 바깥 윤곽을 따름 | 첫 행과 마지막 행은 group의 `radius.md` |
+| 형태 | 행의 바깥 윤곽을 따름, 첫 행과 마지막 행은 group의 모서리를 따름 | `radius.md` |
 
 - Web은 `:focus-visible`에 ring을 적용합니다. ReactLynx는 [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고)를 따릅니다.
 - 행 전체가 하나의 focus 대상입니다. Toggle에 별도 focus를 두지 않습니다.
@@ -171,4 +172,4 @@ Settings Cell은 설정 한 줄의 표시와 실행만 소유하고, 설정 화�
 - **즉시 적용되는 설정은 Toggle, 고를 것이 여럿인 설정은 Navigation을 씁니다.**
 - **Value에는 현재 값만 적습니다.** `English`, `15분`처럼 지금 값을 보여주고 안내 문구를 넣지 않습니다.
 
-색·간격·모서리·선 두께·동작은 [Color](../foundations/color.json), [Spacing](../foundations/spacing.json), [Radius](../foundations/radius.json), [Stroke](../foundations/stroke.json), [Motion](../foundations/motion.json), 아이콘은 [Iconography](../foundations/iconography.json), 접근성은 [Accessibility](../foundations/accessibility.md), 문구는 [Writing Tone](../foundations/writing-tone.md)을 참고합니다.
+색·간격·모서리·선 두께·동작은 [Color](../foundations/color.json), [Spacing](../foundations/spacing.json), [Radius](../foundations/radius.json), [Stroke](../foundations/stroke.json), [Motion](../foundations/motion.json), 타이포그래피는 [Typography](../foundations/typography.json), 아이콘은 [Iconography](../foundations/iconography.json), 접근성은 [Accessibility](../foundations/accessibility.md), 문구는 [Writing Tone](../foundations/writing-tone.md)을 참고합니다.
