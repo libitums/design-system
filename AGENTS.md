@@ -51,6 +51,7 @@ components/      컴포넌트 스펙
 ├── toggle.md             설정을 즉시 켜고 끄는 control
 ├── learning-unit.md      학습 단위의 진행 상태를 알리는 원형 control
 ├── stat-button.md        학습 지표를 요약하고 상세를 여는 버튼
+├── settings-cell.md      설정 한 줄을 보여주고 바꾸거나 이동하는 행
 ├── header/               progress-header · back-header
 └── indicator/            page · status · step · answer-label
 

@@ -112,6 +112,7 @@ Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18
 | Stat Button Trophy 아이콘 | `feedback.warning` #FFC500 | `white` #FFFFFF | 1.586:1 | 3:1 | 4.5:1 이상의 Count, 접근성 이름 |
 | Stat Button Gem 아이콘 | `brand.gem` #00C3FF | `white` #FFFFFF | 2.049:1 | 3:1 | 4.5:1 이상의 Count, 접근성 이름 |
 | Stat Button 테두리 | `gray.50` #F9F9FA | `white` #FFFFFF | 1.052:1 | 3:1 | 버튼은 Count와 아이콘으로 식별 |
+| [Settings Cell](../components/settings-cell.md) 구분선·group 테두리 | `gray.300` #EEEFF1 | `white` #FFFFFF | 1.151:1 | 3:1 | 각 행은 Title로 식별, 목록 semantics |
 
 - `or` 구분 문구는 장식으로 보고 접근성 트리에서 숨깁니다. 선택지의 관계는 group semantics로 전달합니다.
 - AI 생성 고지는 흐리게 보여도 숨기지 않습니다. 보조 기술에는 고지 전체를 그대로 제공합니다.

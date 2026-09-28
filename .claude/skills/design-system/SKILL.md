@@ -55,6 +55,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 토글 | `components/toggle.md` |
 | 학습 단위 | `components/learning-unit.md` |
 | 학습 지표 버튼 | `components/stat-button.md` |
+| 설정 행 | `components/settings-cell.md` |
 | 학습 헤더 | `components/header/progress-header.md` |
 | 뒤로가기 헤더 | `components/header/back-header.md` |
 | 페이지 점 인디케이터 | `components/indicator/page-indicator.md` |
