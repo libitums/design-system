@@ -58,6 +58,14 @@
         "$value": "{color.brand.primary-pressed}"
       },
       "secondary": { "$value": "#FF8D28" },
+      "gem": {
+        "$description": "보석·재화 지표의 아이콘에 사용하는 색. 수치 대비 예외가 적용되는 표현에만 씁니다.",
+        "$value": "#00C3FF"
+      },
+      "gem-text": {
+        "$description": "보석·재화 지표의 수를 읽을 수 있는 대비로 표시하는 텍스트색",
+        "$value": "{color.gray.900}"
+      },
       "reward-border": { "$value": "#C94B09" },
       "reward-disabled-surface": { "$value": "#FFF0E6" },
       "reward-disabled-text": { "$value": "#D89A70" }
