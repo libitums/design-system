@@ -6,6 +6,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-29
+
 ### Added
 
 - 원색 token `color.black` #000000을 추가했습니다. CSS 변수 `--libitum-color-black`과 TypeScript `color.black`으로 배포합니다. 제3자 브랜드 규정이 순수 검정을 요구할 때만 씁니다 — Apple Human Interface Guidelines의 Sign in with Apple 버튼 검정 스타일이 첫 사용처입니다. 제품 UI의 짙은 면과 전경색은 계속 `gray.900`·`gray.950`을 씁니다.
