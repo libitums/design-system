@@ -16,6 +16,11 @@
       "50": { "$value": "#F9F9FA" }
     },
     "white": { "$type": "color", "$value": "#FFFFFF" },
+    "black": {
+      "$type": "color",
+      "$description": "제3자 브랜드 규정이 순수 검정을 요구할 때만 쓰는 원색. 예: Sign in with Apple 버튼의 검정 스타일",
+      "$value": "#000000"
+    },
 
     "fg": {
       "$type": "color",
