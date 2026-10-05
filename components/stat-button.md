@@ -59,7 +59,7 @@ Stat Button은 Icon과 Count만 포함합니다. 지표의 이름과 설명은 �
 |---|---|---|---|
 | Streak | `4-nature/fire` | `brand.secondary` #FF8D28 | `brand.strong` #B94208 |
 | Trophy | `1-game/trophy` | `feedback.warning` #FFC500 | `feedback.warning-text` #2A3038 |
-| Gem | `2-items/diamond` | `brand.gem` #00C3FF | `brand.gem-text` #2A3038 |
+| Gem | `2-items/diamond` | `brand.gem` #00C3FF | `gray.900` #2A3038 |
 
 Icon은 지표의 성격을 색으로 전하고, Count는 읽을 수 있는 대비를 가진 색을 씁니다. 두 색을 서로 바꾸지 않습니다.
 
