@@ -17,7 +17,7 @@ Codex는 `.codex/skills/`, Claude Code는 `.claude/skills/`를 읽습니다. 두
 
 ```
 foundations/     토큰과 원칙 — 모든 값의 출처
-├── color.json            40색 (gray scale 12: gray 11 + white, brand 12, feedback 10, background 3, border 3)
+├── color.json            41색 (gray scale 13: gray 11 + white + black, brand 12, feedback 10, background 3, border 3)
 ├── typography.json       22 스타일 (accent / display / heading / body / caption / label / button / dialogue)
 ├── font-delivery.md      Web·앱 폰트 제공 · 라이선스 · fallback 정책
 ├── accessibility.md      hit area · 대비 · 키보드 · focus · accessible semantics

@@ -8,9 +8,20 @@
 
 ### Added
 
+- Gem 계열 색 token 3개를 추가했습니다. `brand.gem-surface` #E8FAFF는 배경 표면, `brand.gem-border` #AFEFFF는 테두리·구분선, `brand.gem-strong` #008FBD는 밝은 표면의 고대비 그래픽에 씁니다. CSS 변수 `--libitum-color-brand-gem-surface`·`-gem-border`·`-gem-strong`으로 배포합니다. `brand.gem-surface`와 `brand.gem-border`는 그래픽 기준 3:1에 미달하므로 승인된 시각 예외가 적용되는 표현에만 사용합니다.
+
+### Changed
+
+- BREAKING: `brand.gem-text`의 값을 `gray.900` alias(#2A3038)에서 #4B8B9E로 바꾸고, 역할을 Gem 지표의 수 텍스트에서 Gem 계열의 보조 텍스트·그래픽으로 바꿨습니다. 흰 배경과 3.828:1이므로 24px 미만의 일반 텍스트와 18.67px 미만의 Bold 텍스트에는 쓸 수 없습니다. `--libitum-color-brand-gem-text`를 작은 텍스트에 쓰던 곳은 `gray.900`으로 바꿔야 합니다. Stat Button의 Gem 수는 `gray.900`을 직접 사용합니다.
+
+## [0.3.0] - 2026-09-29
+
+### Added
+
+- 원색 token `color.black` #000000을 추가했습니다. CSS 변수 `--libitum-color-black`과 TypeScript `color.black`으로 배포합니다. 제3자 브랜드 규정이 순수 검정을 요구할 때만 씁니다 — Apple Human Interface Guidelines의 Sign in with Apple 버튼 검정 스타일이 첫 사용처입니다. 제품 UI의 짙은 면과 전경색은 계속 `gray.900`·`gray.950`을 씁니다.
 - 불투명도 token `opacity`를 추가했습니다. 기본값 `opacity.8`·`opacity.35`·`opacity.45`·`opacity.90`과 의미 token `opacity.scrim`·`opacity.disabled`·`opacity.surface`로 이루어지며, CSS 변수 `--libitum-opacity-*`와 TypeScript `opacity` export로 배포합니다. Scrim 45%, Disabled 아이콘 35%, 고정 바 그림자 8%, 그림 위 표면 90%처럼 여러 컴포넌트가 반복해 쓰던 값을 한 곳에서 관리합니다.
 - 불투명도 token `opacity.16`과 의미 token `opacity.pressed-overlay`를 추가했습니다. 어두운 장면 위 Round Button Overlay 변형의 Pressed 배경(`white` 16%)에 씁니다.
-- 보석·재화 지표 색 token `brand.gem` #00C3FF와 `brand.gem-text`를 추가하고, 표면·테두리·고대비 색을 더해 Gem 계열을 5색으로 채웠습니다. `brand.gem-surface` #E8FAFF, `brand.gem-border` #AFEFFF, `brand.gem-strong` #008FBD, `brand.gem-text` #4B8B9E입니다. `brand.gem-text`는 처음 추가할 때 `gray.900` alias였으나 Gem 계열의 보조 텍스트색으로 값을 바꿨습니다. 흰 배경과 3.828:1이므로 18.67px 미만의 일반 텍스트에는 쓰지 않습니다. Stat Button의 Gem 수는 `gray.900`을 직접 사용합니다.
+- 보석·재화 지표 색 token `brand.gem` #00C3FF와 `brand.gem-text`(`gray.900` alias)를 추가했습니다. Stat Button의 Gem 아이콘과 수에 씁니다. 아이콘 색은 흰 배경과 2.049:1이므로 승인된 시각 예외로만 사용합니다.
 
 ### Changed
 

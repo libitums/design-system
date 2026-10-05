@@ -16,6 +16,11 @@
       "50": { "$value": "#F9F9FA" }
     },
     "white": { "$type": "color", "$value": "#FFFFFF" },
+    "black": {
+      "$type": "color",
+      "$description": "제3자 브랜드 규정이 순수 검정을 요구할 때만 쓰는 원색. 예: Sign in with Apple 버튼의 검정 스타일",
+      "$value": "#000000"
+    },
 
     "fg": {
       "$type": "color",
@@ -75,7 +80,7 @@
         "$value": "#008FBD"
       },
       "gem-text": {
-        "$description": "보석·재화 계열의 보조 텍스트와 그래픽에 사용하는 색. 18.67px 미만의 일반 텍스트에는 사용하지 않습니다.",
+        "$description": "보석·재화 계열의 보조 텍스트와 그래픽에 사용하는 색. 흰 배경과 3.828:1이므로 24px 미만의 일반 텍스트와 18.67px 미만의 Bold 텍스트에는 사용하지 않습니다.",
         "$value": "#4B8B9E"
       },
       "reward-border": { "$value": "#C94B09" },
