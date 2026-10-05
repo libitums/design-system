@@ -126,7 +126,7 @@ Focused는 상태의 색과 크기를 유지한 채 행의 바깥 윤곽에 공�
 | 전체 외곽 범위 | 4px | `spacing.4` |
 | 형태 | 행의 바깥 윤곽을 따름, 첫 행과 마지막 행은 group의 모서리를 따름 | `radius.md` |
 
-- Web은 `:focus-visible`에 ring을 적용합니다. ReactLynx는 [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고)를 따릅니다.
+- ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - 행 전체가 하나의 focus 대상입니다. Toggle에 별도 focus를 두지 않습니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 - group이 콘텐츠를 clip하므로 첫 행과 마지막 행의 ring이 잘리지 않도록 group 바깥에 4px 여백을 둡니다.

@@ -101,7 +101,7 @@ Focused는 상태의 색과 크기를 유지한 채 focusable hit area 바깥에
 | 전체 외곽 범위 | 4px | `spacing.4` |
 | 형태 | focusable hit area의 바깥 윤곽을 따름 | `radius.sm` |
 
-- Web은 `:focus-visible`에 ring을 적용합니다. ReactLynx는 [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고)를 따릅니다.
+- ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 
 ## 동작

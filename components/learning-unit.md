@@ -119,7 +119,7 @@ Focused는 Status의 색과 크기를 유지한 채 바깥 원 밖에 공통 foc
 | 전체 외곽 범위 | 4px | `spacing.4` |
 | 형태 | 바깥 원의 윤곽을 따름 | `radius.full` |
 
-- Web은 `:focus-visible`에 ring을 적용합니다. ReactLynx는 [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고)를 따릅니다.
+- ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - Default는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 - 목록에서 Learning Unit 사이 간격이 ring 범위 4px보다 좁지 않게 배치합니다.
 
@@ -137,7 +137,7 @@ Focused는 Status의 색과 크기를 유지한 채 바깥 원 밖에 공통 foc
 ## 접근성
 
 - **접근성 이름은 단위의 이름입니다.** `1단원`이 아니라 `1단원 쇼핑 표현 듣기`처럼 무엇을 배우는 단위인지 알립니다. 화면에 제목이 있으면 그 텍스트를 이름의 앞에 그대로 둡니다.
-- **상태는 이름이 아니라 state로 전달합니다.** Default는 disabled, Active는 현재 항목(Web은 `aria-current`), Clear는 완료 여부를 함께 제공합니다.
+- **상태는 이름이 아니라 state로 전달합니다.** Default는 disabled, Active는 현재 항목, Clear는 완료 여부를 함께 제공합니다.
 - **상태를 색만으로 알리지 않습니다.** Default는 잠금 글리프, Clear는 tick 글리프로 구분하고, Available과 Active는 단위 제목·진행 문구와 state로 구분합니다.
 - **학습 유형 아이콘과 배지는 접근성 트리에서 숨깁니다.** 학습 유형과 이야기 연결 여부는 이름이 전달합니다.
 - **Narrative는 접근성 이름에 덧붙입니다.** `1단원 쇼핑 표현 듣기, 이야기 연결`처럼 단위 이름 뒤에 둡니다. 문구는 UI 언어로 씁니다 — [International Design](../foundations/international-design.md) 참고.
