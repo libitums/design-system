@@ -30,11 +30,11 @@ test("token path를 --libitum-* kebab-case 이름으로 변환한다", () => {
   );
 });
 
-test("기본 foundation에서 CSS 변수 123개를 생성한다", async () => {
+test("기본 foundation에서 CSS 변수 126개를 생성한다", async () => {
   const result = await generateCssVariables(repositoryRoot);
   const variables = variablesByPath(result);
 
-  assert.equal(result.variables.length, 123);
+  assert.equal(result.variables.length, 126);
   assert.equal(variables.get("opacity.scrim").value, "0.45");
   assert.equal(variables.get("color.black").value, "#000000");
   assert.equal(variables.get("color.brand.primary").value, "#F46B18");

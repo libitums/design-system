@@ -6,6 +6,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- Gem 계열 색 token 3개를 추가했습니다. `brand.gem-surface` #E8FAFF는 배경 표면, `brand.gem-border` #AFEFFF는 테두리·구분선, `brand.gem-strong` #008FBD는 밝은 표면의 고대비 그래픽에 씁니다. CSS 변수 `--libitum-color-brand-gem-surface`·`-gem-border`·`-gem-strong`으로 배포합니다. `brand.gem-surface`와 `brand.gem-border`는 그래픽 기준 3:1에 미달하므로 승인된 시각 예외가 적용되는 표현에만 사용합니다.
+
+### Changed
+
+- BREAKING: `brand.gem-text`의 값을 `gray.900` alias(#2A3038)에서 #4B8B9E로 바꾸고, 역할을 Gem 지표의 수 텍스트에서 Gem 계열의 보조 텍스트·그래픽으로 바꿨습니다. 흰 배경과 3.828:1이므로 24px 미만의 일반 텍스트와 18.67px 미만의 Bold 텍스트에는 쓸 수 없습니다. `--libitum-color-brand-gem-text`를 작은 텍스트에 쓰던 곳은 `gray.900`으로 바꿔야 합니다. Stat Button의 Gem 수는 `gray.900`을 직접 사용합니다.
+
 ## [0.3.0] - 2026-09-29
 
 ### Added
