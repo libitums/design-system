@@ -159,7 +159,7 @@ Focused는 위 상태의 색·크기·Spinner를 유지한 채 focusable hit are
 - Default·Pressed·Loading은 Focused와 결합할 수 있습니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 - Text도 라벨 글자만 두르지 않고 최소 48 × 48 focusable hit area를 두릅니다.
-- Web은 `:focus-visible`에 적용합니다 — [Accessibility](../foundations/accessibility.md) 참고.
+- ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 
 ## 사용 가이드
 

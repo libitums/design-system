@@ -68,7 +68,7 @@ Focused는 Default·Pressed·Active·Active Pressed의 표현을 유지하고 �
 | 전체 외곽 범위 | 4px | `spacing.4` |
 | 형태 | Cell focusable hit area의 바깥 윤곽을 따르는 알약 | `radius.full` |
 
-Disabled Cell은 focus 순서에서 제외하고 ring을 표시하지 않습니다. Web은 `:focus-visible`에 적용합니다 — [Accessibility](../foundations/accessibility.md) 참고.
+Disabled Cell은 focus 순서에서 제외하고 ring을 표시하지 않습니다. ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 
 ---
 

@@ -163,7 +163,7 @@ Selected는 색만으로 구분하지 않습니다. 테두리 색과 함께 Indi
 | 전체 외곽 범위 | 4px | `spacing.4` |
 | 형태 | Option Item의 바깥 윤곽을 따름 | Size별 모서리 |
 
-- Web은 `:focus-visible`에 ring을 적용합니다.
+- ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - 가장 좁은 목록 간격 8px도 ring 범위 4px보다 넓으므로 ring이 이웃 선택지에 가려지지 않습니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 
@@ -203,7 +203,7 @@ Deferred에서는 선택만으로 답을 제출하거나 화면을 넘기지 않
 ## 접근성
 
 - **그룹에 이름을 붙입니다.** Group label을 Option list의 접근성 이름으로 연결해 무엇을 고르는지 먼저 알 수 있게 합니다.
-- **Selection과 Commit에 맞는 semantics를 사용합니다.** Deferred · Single은 radio group, Deferred · Multiple은 checkbox group, Immediate는 button 목록입니다. 선택 여부는 radio·checkbox group에서는 checked state로, button 목록에서는 pressed state(Web은 `aria-pressed`)로 제공합니다.
+- **Selection과 Commit에 맞는 semantics를 사용합니다.** Deferred · Single은 radio group, Deferred · Multiple은 checkbox group, Immediate는 button 목록입니다. 선택 여부는 radio·checkbox group에서는 checked state로, button 목록에서는 pressed state로 제공합니다.
 - **Selected를 색만으로 알리지 않습니다.** Indicator를 함께 표시합니다. Indicator는 선택 semantics와 같은 의미를 반복하므로 접근성 트리에서 숨깁니다.
 - **Label이 접근성 이름입니다.** Label이 학습 대상 언어이면 해당 텍스트에 올바른 `lang`을 지정하고 Group label은 UI locale을 유지합니다.
 - **화면 Label과 다른 접근성 이름은 Label을 포함할 때만 씁니다.** 약어·기호처럼 Label만으로 뜻이 모호할 때 이름을 따로 줄 수 있습니다. 이때도 화면 Label의 글자를 같은 순서로 앞에 두어 음성 조작으로 부를 수 있게 합니다.

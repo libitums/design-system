@@ -98,7 +98,7 @@ Dismiss Tap은 유일한 닫기 방법이 아닙니다. 같은 결과를 닫기 
 - **Area의 가려진 control도 제외합니다.** Overlay 아래에 있어 조작할 수 없는 control은 focus 순서에서 제외합니다.
 - **어둡게 덮는 것만으로 상태를 알리지 않습니다.** 잠김·일시정지처럼 Overlay가 뜻하는 상태는 Foreground의 라벨이나 아이콘으로 함께 알립니다.
 - **Foreground의 대비는 자체 표면에서 계산합니다.** Overlay 위에 텍스트를 직접 올리면 가능한 모든 Target에서 대비를 보장할 수 없으므로 표면이 있는 요소를 사용합니다 — [Accessibility](../foundations/accessibility.md) 참고.
-- **투명도 줄이기 설정을 따릅니다.** iOS의 투명도 줄이기처럼 플랫폼 설정이 켜져 있으면 Blur를 끕니다.
+- **투명도 줄이기 설정을 따릅니다.** 플랫폼의 투명도 줄이기 설정이 켜져 있으면 Blur를 끕니다.
 
 ## 확장
 

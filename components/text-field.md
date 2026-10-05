@@ -83,7 +83,7 @@ Label row와 Supporting row는 선택이지만 사용하면 Text Field의 한 �
 | Supporting row 내부 간격 | 8px | `spacing.8` |
 | 그림자 | 없음 | — |
 
-Field는 56px을 최소 높이로 사용합니다. Web 200% 확대와 앱의 접근성 글자 크기에서는 높이를 고정하지 않고 텍스트와 padding이 잘리지 않도록 늘립니다.
+Field는 56px을 최소 높이로 사용합니다. 화면 확대나 접근성 글자 크기 설정에서는 높이를 고정하지 않고 텍스트와 padding이 잘리지 않도록 늘립니다.
 
 ### Trailing Action
 
@@ -142,7 +142,7 @@ Focused의 브랜드 테두리와 별개로 keyboard focus가 보일 때 focusab
 | 형태 | Field의 바깥 윤곽을 따름 | `radius.lg` |
 
 - 탭·클릭으로 Field를 눌러 편집할 때는 ring 없이 브랜드 테두리만 표시합니다. ring은 keyboard로 focus를 옮겼을 때만 더합니다.
-- Web은 `:focus-visible`에 ring을 적용합니다. ReactLynx는 `:focus-visible`이 없으므로 [Consuming의 ReactLynx 구현 참고](../CONSUMING.md#reactlynx-구현-참고)를 따릅니다.
+- 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - `brand.primary` 테두리와 `white` 배경의 대비는 3.016:1로 control 경계 기준 3:1을 충족합니다.
 - Error가 keyboard focus를 받아도 Error 시각 상태를 유지하고 ring을 더합니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
@@ -166,7 +166,7 @@ Field의 색 전환은 `motion.duration.color` 150ms와 `motion.easing.easing`�
 
 ## 접근성
 
-- **플랫폼의 native text input을 우선합니다.** Web은 용도에 맞는 `input` type·`autocomplete`·`inputmode`를 사용하고, 앱은 대응하는 native control과 keyboard 설정을 사용합니다.
+- **플랫폼의 native text input을 우선합니다.** 용도에 맞는 입력 유형·자동 완성·keyboard 설정을 플랫폼의 native control로 제공합니다.
 - **접근성 이름을 반드시 제공합니다.** 화면에 보이는 외부 Label을 연결하는 방식을 우선하고 Placeholder를 Label로 사용하지 않습니다.
 - **Error를 색만으로 알리지 않습니다.** Error message를 Field와 programmatically 연결하고 invalid state를 제공합니다. 제출 뒤 새 오류가 생기면 오류 요약이나 적절한 announcement로 알립니다.
 - **오류 문구에는 해결 방법을 담습니다.** `올바른 형식으로 입력해 주세요.`보다 `이메일 주소를 name@example.com 형식으로 입력해 주세요.`처럼 필요한 형식을 구체적으로 알립니다.

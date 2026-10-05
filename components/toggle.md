@@ -103,7 +103,7 @@ Focused는 Off·On의 색과 크기를 유지한 채 hit area 바깥에 공통 f
 | 형태 | focusable hit area의 바깥 윤곽을 따름 | `radius.full`, 설정 행이면 행의 radius |
 
 - 설정 행 전체가 hit area이면 행이 focus를 받고 ring은 행의 바깥 윤곽을 따릅니다. 이때 Toggle에는 ring을 따로 표시하지 않습니다.
-- Web은 `:focus-visible`에 ring을 적용합니다.
+- ring은 keyboard focus에만 표시합니다. 플랫폼별 적용은 [Accessibility의 Focus indicator](../foundations/accessibility.md#focus-indicator)를 따릅니다.
 - Disabled는 focus 순서에서 제외하고 ring을 표시하지 않습니다.
 
 ## 동작
@@ -122,7 +122,7 @@ Knob의 이동은 `motion.duration.d3` 150ms, Track의 색 전환은 `motion.dur
 
 ## 접근성
 
-- **플랫폼의 switch를 사용합니다.** Web은 `role="switch"`와 checked state를, 앱은 대응하는 native switch와 접근성 trait을 사용합니다. 정적인 요소에 탭 동작만 붙이지 않습니다.
+- **플랫폼의 switch를 사용합니다.** 플랫폼의 native switch나 대응하는 접근성 API로 switch role과 checked state를 제공합니다. 정적인 요소에 탭 동작만 붙이지 않습니다.
 - **접근성 이름은 설정의 이름입니다.** `켜기`가 아니라 `소리 알림`처럼 무엇을 켜고 끄는지 알리고, 현재 상태는 이름이 아니라 state로 전달합니다.
 - **상태를 색만으로 알리지 않습니다.** Knob의 위치가 상태를 함께 나타내며, 보조 기술에는 켜짐·꺼짐 state를 제공합니다.
 - **최소 hit area는 48 × 48입니다.** 보이는 Track은 그대로 두고 주변 투명 영역이나 설정 행 전체로 확보합니다 — [Accessibility](../foundations/accessibility.md) 참고.
