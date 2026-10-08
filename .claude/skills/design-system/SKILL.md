@@ -21,7 +21,8 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 모서리 | `foundations/radius.json` |
 | 쌓임 순서 · 표면 · 그림자 | `foundations/elevation.json` |
 | 불투명도 (scrim · disabled) | `foundations/opacity.json` |
-| duration · easing | `foundations/motion.json` |
+| duration · easing · scale | `foundations/motion.json` |
+| 모션 원칙 · 컴포넌트 매핑 · reduced motion | `foundations/motion.md` |
 | 아이콘 에셋 · 크기 | `foundations/iconography.json` |
 
 ```
@@ -68,6 +69,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 - **Button과 Round Button에는 그림자를 쓰지 않습니다.** 표면 깊이가 필요한 다른 컴포넌트만 `elevation.shadow.s1~s3`를 씁니다.
 - **Outline 테두리 `stroke.width.thin` 1px는 실제 크기에 포함됩니다.** Hug 너비와 높이는 `components/button.md`의 산식으로 계산합니다.
 - **Loading은 변형별 색을 따릅니다.** Button은 라벨을 유지하고, Round Button은 아이콘을 Spinner로 교체합니다.
+- **텍스트 라벨이 있는 Button은 눌러도 크기를 바꾸지 않습니다.** `motion.scale.pressed` 95% 축소는 Round Button·Learning Unit 같은 둥근 아이콘 control에만 씁니다. expressive motion은 학습 단위 완료·재화 획득에만, 한 화면에 한 번만 씁니다 — `foundations/motion.md` 참고.
 - **Disabled 색은 변형별로 다릅니다.** 공통값으로 치환하지 말고 각 상태 표를 확인합니다.
 - **밝은 표면의 일반 텍스트는 `fg.neutral-muted` 이상**을 씁니다. `fg.neutral-subtle`은 의미 있는 아이콘·UI 그래픽에, `fg.neutral-subtlest`는 장식·Disabled 표현이나 보조 정보 caption에만 사용합니다. 보조 정보 caption은 대비 기준의 예외이며, 오류·가격·필수 안내·조작 텍스트는 caption이어도 4.5:1을 지킵니다.
 - **브랜드 대비:** 밝은 표면의 브랜드 전경은 `fg.brand`, 강한 브랜드 표면·그래픽은 `brand.strong`을 사용합니다.

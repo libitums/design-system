@@ -8,6 +8,7 @@
 
 ### Added
 
+- Motion token을 libitum 학습 흐름에 맞춰 확장했습니다. duration scale에 `d7` 400ms·`d8` 600ms·`d9` 1000ms를 더하고, 의미 token `motion.duration.reveal`(Typewriter 글자 간격)·`page`(화면 전환)·`reward`(학습 단위 완료·재화 획득)·`spinner`(Spinner 한 바퀴)와 크기 비율 token `motion.scale.pressed` 0.95·`enter` 0.96·`reward` 0.8을 추가했습니다. CSS 변수 `--libitum-motion-duration-*`·`--libitum-motion-scale-*`와 TypeScript `motion` export로 배포합니다. 원칙·분류·속성 규칙·컴포넌트 매핑·reduced motion 정책은 [Motion](./foundations/motion.md)에 정리했습니다.
 - Gem 계열 색 token 3개를 추가했습니다. `brand.gem-surface` #E8FAFF는 배경 표면, `brand.gem-border` #AFEFFF는 테두리·구분선, `brand.gem-strong` #008FBD는 밝은 표면의 고대비 그래픽에 씁니다. CSS 변수 `--libitum-color-brand-gem-surface`·`-gem-border`·`-gem-strong`으로 배포합니다. `brand.gem-surface`와 `brand.gem-border`는 그래픽 기준 3:1에 미달하므로 승인된 시각 예외가 적용되는 표현에만 사용합니다.
 
 ### Changed

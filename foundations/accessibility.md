@@ -211,7 +211,7 @@ ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 �
 - Web은 텍스트를 200% 확대해도 내용과 기능을 잃지 않아야 합니다.
 - 앱은 운영체제의 접근성 글자 크기를 적용합니다. 긴 문구는 잘라내기 전에 reflow·scroll·container 확장을 우선합니다.
 - 글자 크기가 바뀌면 고정 높이보다 콘텐츠가 온전히 보이는 것을 우선합니다. 예외가 필요한 compact control은 대체 accessible name으로 전체 내용을 제공합니다.
-- 동작 줄이기 설정에서는 [Motion](./motion.json)의 reduced motion 정책을 적용합니다.
+- 동작 줄이기 설정에서는 [Motion](./motion.md)의 Reduced motion 정책을 적용합니다.
 
 ---
 

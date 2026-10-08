@@ -110,10 +110,10 @@ Scrim (화면 전체, 반투명 어두운 막)
 | 대상 | 나타남 | 사라짐 |
 |---|---|---|
 | Scrim | 불투명도 0 → 1 | 1 → 0 |
-| Container | 불투명도 0 → 1, 크기 0.96 → 1 | 역방향 |
+| Container | 불투명도 0 → 1, 크기 `motion.scale.enter` 0.96 → 1 | 역방향 |
 | 시간 · 가속도 | `motion.duration.dialog`(250ms) · `motion.easing.enter` | 같은 시간 · `motion.easing.exit` |
 
-동작 줄이기가 켜져 있으면 크기 변화를 없애고 불투명도만 전환합니다 — `foundations/motion.json` 참고.
+동작 줄이기가 켜져 있으면 크기 변화를 없애고 불투명도만 전환합니다 — [Motion](../foundations/motion.md) 참고.
 
 ---
 
