@@ -32,7 +32,8 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 | `radius.json` | sm 6 / md 12 / lg 16 / xl 24 / full |
 | `elevation.json` | 쌓임 순서 · 표면 색 · 그림자 s1~s3 |
 | `opacity.json` | 불투명도 8 / 16 / 35 / 45 / 90 · scrim · disabled · pressed-overlay · surface |
-| `motion.json` | duration d1~d6 · easing 6종 · reduced motion |
+| `motion.json` | duration d1~d9 · easing 6종 · scale 3종 · reduced motion |
+| `motion.md` | 모션 원칙 · 분류 · 움직일 수 있는 속성 · 학습 흐름 · 컴포넌트 매핑 · reduced motion |
 | `iconography.json` | 아이콘 에셋 메타 · 크기 스케일 |
 | `writing-tone.md` | UX 문구 13원칙 |
 | `international-design.md` | 로케일 표기 · 번역 길이 대응 |
@@ -141,7 +142,7 @@ Markdown 링크는 상대 경로의 대소문자와 대상 heading anchor까지 
 
 SVG 아이콘은 `padding`과 `no-padding`의 `category/name.svg` 2단계 상대 경로가 한 쌍이어야 합니다. `padding`의 viewBox는 `0 0 10 10`으로 고정하고, 모든 SVG의 root와 별도 fill 선언은 `currentColor`만 허용합니다. CSS 키워드인 `currentColor` 비교는 ASCII 대소문자를 구분하지 않습니다. 파일명은 변형 안에서 대소문자를 무시하고 고유해야 하며, 잘못된 XML, XML 주석·DOCTYPE, 지원하지 않는 child element는 파싱 오류로 처리합니다.
 
-`npm run build`는 검증을 먼저 실행한 뒤 기본 token 118개를 `packages/design-tokens/dist/css/variables.css`, typography 변수 116개를 `packages/design-tokens/dist/css/typography.css`에 생성합니다. Foundation token 146개는 `packages/design-tokens/dist/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
+`npm run build`는 검증을 먼저 실행한 뒤 기본 token 136개를 `packages/design-tokens/dist/css/variables.css`, typography 변수 116개를 `packages/design-tokens/dist/css/typography.css`에 생성합니다. Foundation token 164개는 `packages/design-tokens/dist/index.js`와 `index.d.ts`로 생성합니다. 배포된 package에서는 다음 경로로 불러옵니다.
 
 ```css
 @import "@libitums/design-tokens/css/variables.css";

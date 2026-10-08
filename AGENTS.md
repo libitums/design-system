@@ -27,7 +27,8 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 ├── radius.json           sm 6 / md 12 / lg 16 / xl 24 / full
 ├── elevation.json        쌓임 순서 · 표면 색 · 그림자 s1~s3
 ├── opacity.json          불투명도 8 / 16 / 35 / 45 / 90 · scrim · disabled · pressed-overlay · surface
-├── motion.json           duration d1~d6 · easing 6종 · reduced motion
+├── motion.json           duration d1~d9 · easing 6종 · scale 3종 · reduced motion
+├── motion.md             모션 원칙 · 분류 · 속성 규칙 · 학습 흐름 · 컴포넌트 매핑
 ├── iconography.json      아이콘 에셋 참조 메타 · 크기 스케일
 ├── writing-tone.md       UX 문구 13원칙
 └── international-design.md   로케일 표기 · 번역 길이 대응
@@ -74,6 +75,7 @@ examples/        design-system 소유 private 소비 fixture·Host
 | 컴포넌트 구현 | 해당 `components/**/*.md` → 거기 참조된 `foundations/*.json` |
 | Web·앱 폰트 제공·fallback | `foundations/font-delivery.md` → `foundations/typography.json` |
 | 접근성 동작·검증 | `foundations/accessibility.md` → 관련 컴포넌트 문서 |
+| 전환·애니메이션 정의 | `foundations/motion.md` → `foundations/motion.json` |
 | 사용자에게 보이는 한국어 문구 작성 | `foundations/writing-tone.md` (**필수**) |
 | 날짜·숫자·통화 표기, 다국어 레이아웃 | `foundations/international-design.md` |
 | 아이콘 선택·배치 | `foundations/iconography.json` |

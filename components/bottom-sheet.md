@@ -120,6 +120,22 @@ Action의 Focused는 [Button](./button.md)의 공통 Focused 스펙을 그대로
 
 ---
 
+## 전환
+
+| 대상 | 나타남 | 사라짐 |
+|---|---|---|
+| Scrim | 불투명도 0 → 1 | 1 → 0 |
+| Sheet | 화면 아래 바깥에서 최종 위치까지 올라옴 | 역방향 |
+| 시간 · 가속도 | `motion.duration.sheet`(300ms) · `motion.easing.enter` | 같은 시간 · `motion.easing.exit` |
+
+- Sheet와 Scrim은 같은 시간에 움직입니다. Scrim이 먼저 사라지거나 늦게 남지 않습니다.
+- 아래로 끌 때는 손가락을 따라가고, 놓으면 남은 거리를 `motion.duration.sheet` 안에 `motion.easing.exit`로 닫거나 `motion.easing.enter`로 되돌립니다.
+- 전환 중에도 닫기 버튼과 Scrim 탭을 받습니다. 닫히는 중에 다시 열면 현재 위치에서 이어서 올라옵니다.
+
+동작 줄이기가 켜져 있으면 이동을 없애고 Sheet도 불투명도만 전환합니다 — [Motion](../foundations/motion.md) 참고.
+
+---
+
 ## 사용 가이드
 
 - **현재 흐름을 떠나지 않아야 할 때만** 씁니다. 화면을 완전히 바꿔야 하는 작업은 새 화면으로 보내세요.

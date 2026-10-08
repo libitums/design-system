@@ -148,6 +148,8 @@ Continue indicator는 Ready에서만 표시합니다. Revealing 중에는 다음
 
 Variant가 바뀌어도 패널은 같은 자리에 머무릅니다. 색 전환은 `motion.duration.color` 150ms와 `motion.easing.easing`을 사용하고, 위치·크기 animation은 사용하지 않습니다.
 
+Typewriter는 글자 하나를 `motion.duration.reveal` 50ms 간격으로 `motion.easing.linear`에 맞춰 드러냅니다. 한 Page의 Revealing 시간은 글자 수 × 50ms이며, 탭하면 남은 글자를 즉시 표시합니다. 동작 줄이기가 켜져 있으면 Reveal을 Instant로 처리합니다 — [Motion](../foundations/motion.md) 참고.
+
 ## 동작
 
 | 입력·조건 | 결과 |

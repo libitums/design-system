@@ -74,6 +74,10 @@ Brand 아이콘은 `gray.100` 배경과 2.836:1로 그래픽 기준 3:1에 미�
 - 이미지 위에 둘 때는 아이콘 주변 모든 픽셀에서 3:1을 확인하거나 [Overlay](./overlay.md)로 배경을 어둡게 만듭니다.
 - 비활성 아이콘의 불투명도는 `opacity.disabled`를 사용합니다. 다른 값으로 바꾸지 않습니다.
 
+### 전환
+
+Pressed의 95%는 `motion.scale.pressed`이며 중심점을 고정한 채 `motion.duration.pressed` 150ms · `motion.easing.easing`으로 줄어들고 같은 시간으로 돌아옵니다. 색 전환은 `motion.duration.color` 150ms · `motion.easing.easing`입니다. Loading과 Disabled는 축소하지 않습니다. 동작 줄이기가 켜져 있으면 크기를 바꾸지 않고 색·불투명도만 전환합니다 — [Motion](../foundations/motion.md) 참고.
+
 ### Spinner
 
 | 항목 | 값 | 토큰 |
