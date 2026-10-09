@@ -62,7 +62,7 @@ Button
 기본 너비 = 라벨 실측 너비 + (가로 padding × 2)
 아이콘 포함 = 기본 너비 + 아이콘 실측 너비 + spacing.8
 Outline = 위 계산값 + (stroke.width.thin × 2)
-Loading = 기본 너비 + Spinner 12px + spacing.6
+Loading = Default와 같은 너비 (라벨 자리를 Spinner가 차지하고 폭은 바뀌지 않음)
 ```
 
 Pretendard Variable을 기준으로 검증한 예시입니다.
@@ -77,7 +77,9 @@ Pretendard Variable을 기준으로 검증한 예시입니다.
 
 ## 상태
 
-Loading은 라벨을 유지하고 앞에 12px Spinner를 둡니다.
+Loading은 라벨을 숨기고 그 자리에 12px Spinner만 둡니다. 버튼의 너비·높이는 Default 그대로라 주변 레이아웃이 움직이지 않습니다. 접근성 이름은 라벨을 유지하고 처리 중 상태를 함께 알립니다.
+
+Spinner는 `motion.duration.spinner` 1000ms · `motion.easing.linear`로 끝없이 회전합니다. 동작 줄이기에서도 회전을 유지합니다 — 진행 중임을 알리는 유일한 수단이기 때문입니다. 배경·라벨 색 전환은 `motion.duration.color` 150ms · `motion.easing.easing`입니다 — [Motion](../foundations/motion.md) 참고.
 
 ### Neutral
 
@@ -167,7 +169,7 @@ Focused는 위 상태의 색·크기·Spinner를 유지한 채 focusable hit are
 - **모든 사이즈의 hit area는 최소 48 × 48입니다.** S·M·L의 시각 높이는 유지하고 부모 control이나 투명 padding으로 `spacing.48`을 확보합니다 — [Accessibility](../foundations/accessibility.md) 참고.
 - **버튼 너비는 라벨을 실제 폰트로 측정해 계산합니다.** 텍스트를 바꾸면서 이전 고정 너비를 유지하지 않습니다.
 - **Fill 버튼에서도 좌우 padding을 보장합니다.** 번역으로 라벨이 길어지면 줄바꿈하지 말고 상위 레이아웃을 조정합니다.
-- **Loading 중에도 라벨을 유지합니다.** 무엇을 기다리는지 알 수 있어야 합니다.
+- **Loading에서는 라벨을 숨기고 Spinner만 돌립니다.** 무엇을 기다리는지는 접근성 이름과 버튼을 누르기 전 문맥이 알리고, 너비는 바뀌지 않습니다.
 - **Disabled만으로 이유를 설명하지 않습니다.** 누를 수 없는 이유를 가까운 문구로 함께 안내합니다.
 - **라벨은 `foundations/writing-tone.md`를 따릅니다.** 기능 이름보다 목적을 말하고 마침표를 붙이지 않습니다.
 

@@ -76,7 +76,7 @@ Brand 아이콘은 `gray.100` 배경과 2.836:1로 그래픽 기준 3:1에 미�
 
 ### 전환
 
-Pressed의 95%는 `motion.scale.pressed`이며 중심점을 고정한 채 `motion.duration.pressed` 150ms · `motion.easing.easing`으로 줄어들고 같은 시간으로 돌아옵니다. 색 전환은 `motion.duration.color` 150ms · `motion.easing.easing`입니다. Loading과 Disabled는 축소하지 않습니다. 동작 줄이기가 켜져 있으면 크기를 바꾸지 않고 색·불투명도만 전환합니다 — [Motion](../foundations/motion.md) 참고.
+Pressed의 95%는 `motion.scale.pressed`이며 중심점을 고정한 채 `motion.duration.pressed` 150ms · `motion.easing.easing`으로 줄어들고 같은 시간으로 돌아옵니다. 색 전환은 `motion.duration.color` 150ms · `motion.easing.easing`입니다. Loading과 Disabled는 축소하지 않습니다. 동작 줄이기가 켜져 있으면 축소 대신 Surface 위에 `color.black`을 `opacity.pressed-shade` 8%로 덮어 눌림을 알립니다(Overlay 변형은 기존 `opacity.pressed-overlay` 그대로). Spinner 회전은 동작 줄이기에서도 유지합니다 — [Motion](../foundations/motion.md) 참고.
 
 ### Spinner
 
@@ -85,6 +85,7 @@ Pressed의 95%는 `motion.scale.pressed`이며 중심점을 고정한 채 `motio
 | 크기 | 12 × 12px | 현재 대응 토큰 없음 |
 | 선 두께 | 1.5px | `stroke.width.regular` |
 | 배치 | 아이콘을 대체하고 중앙 정렬 | — |
+| 회전 | 한 바퀴 1000ms, 등속, 끝없이 반복 | `motion.duration.spinner`, `motion.easing.linear` |
 
 ### Focused
 

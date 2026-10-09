@@ -87,7 +87,7 @@ Surface와 Icon은 바깥 원과 같은 중심에 둡니다. Status가 바뀌어
 - Default는 입력과 focus를 받지 않습니다. 잠긴 이유는 가까운 문구로 알립니다.
 - Available과 Active는 Surface 색만 다릅니다. 둘의 구분은 상위 목록의 단위 제목·진행 문구와 보조 기술의 state로 전달합니다.
 - Pressed는 [Round Button](./round-button.md)과 같이 중심점을 유지한 채 `motion.scale.pressed` 95%로 축소합니다. 색은 바꾸지 않습니다.
-- 색 전환은 `motion.duration.color` 150ms, Pressed는 `motion.duration.pressed` 150ms와 `motion.easing.easing`을 사용합니다. 동작 줄이기가 켜져 있으면 축소를 없애고 색 변화만 유지합니다.
+- 색 전환은 `motion.duration.color` 150ms, Pressed는 `motion.duration.pressed` 150ms와 `motion.easing.easing`을 사용합니다. 동작 줄이기가 켜져 있으면 축소 대신 Surface 위에 `color.black`을 `opacity.pressed-shade` 8%로 덮어 눌림을 알립니다.
 
 ### 대비
 
