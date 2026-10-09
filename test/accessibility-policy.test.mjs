@@ -34,6 +34,6 @@ test("Brand Button 스펙은 새 accent 토큰 없이 primary·primary-pressed�
   );
   assert.match(
     button,
-    /\|\s*Loading\s*\|\s*`brand\.primary`\s+#F46B18\s*\|\s*`white`\s+#FFFFFF\s*\|\s*`white`\s+#FFFFFF\s*\|/,
+    /\|\s*Loading\s*\|\s*`brand\.primary`\s+#F46B18\s*\|\s*숨김\s*\|\s*`white`\s+#FFFFFF\s*\|/,
   );
 });

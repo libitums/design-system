@@ -26,8 +26,8 @@ foundations/     토큰과 원칙 — 모든 값의 출처
 ├── layout.json           화면 여백 · 간격 3단계 · safe area
 ├── radius.json           sm 6 / md 12 / lg 16 / xl 24 / full
 ├── elevation.json        쌓임 순서 · 표면 색 · 그림자 s1~s3
-├── opacity.json          불투명도 8 / 16 / 35 / 45 / 90 · scrim · disabled · pressed-overlay · surface
-├── motion.json           duration d1~d9 · easing 6종 · scale 3종 · reduced motion
+├── opacity.json          불투명도 8 / 16 / 35 / 45 / 90 · scrim · disabled · pressed-overlay · pressed-shade · surface
+├── motion.json           duration d0~d9 · easing 6종 · scale 3종 · reduced motion
 ├── motion.md             모션 원칙 · 분류 · 속성 규칙 · 학습 흐름 · 컴포넌트 매핑
 ├── iconography.json      아이콘 에셋 참조 메타 · 크기 스케일
 ├── writing-tone.md       UX 문구 13원칙

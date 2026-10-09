@@ -8,11 +8,14 @@
 
 ### Added
 
+- duration scale에 `motion.duration.d0` 35ms(content 영역)를 더하고, 불투명도 의미 token `opacity.pressed-shade`(`opacity.8`)를 추가했습니다. 동작 줄이기에서 Round Button·Learning Unit이 축소 대신 Surface 위에 `black`을 이 불투명도로 덮어 눌림을 알립니다. CSS 변수 `--libitum-motion-duration-d0`·`--libitum-opacity-pressed-shade`와 TypeScript export로 배포합니다.
 - Motion token을 libitum 학습 흐름에 맞춰 확장했습니다. duration scale에 `d7` 400ms·`d8` 600ms·`d9` 1000ms를 더하고, 의미 token `motion.duration.reveal`(Typewriter 글자 간격)·`page`(화면 전환)·`reward`(학습 단위 완료·재화 획득)·`spinner`(Spinner 한 바퀴)와 크기 비율 token `motion.scale.pressed` 0.95·`enter` 0.96·`reward` 0.8을 추가했습니다. CSS 변수 `--libitum-motion-duration-*`·`--libitum-motion-scale-*`와 TypeScript `motion` export로 배포합니다. 원칙·분류·속성 규칙·컴포넌트 매핑·reduced motion 정책은 [Motion](./foundations/motion.md)에 정리했습니다.
 - Gem 계열 색 token 3개를 추가했습니다. `brand.gem-surface` #E8FAFF는 배경 표면, `brand.gem-border` #AFEFFF는 테두리·구분선, `brand.gem-strong` #008FBD는 밝은 표면의 고대비 그래픽에 씁니다. CSS 변수 `--libitum-color-brand-gem-surface`·`-gem-border`·`-gem-strong`으로 배포합니다. `brand.gem-surface`와 `brand.gem-border`는 그래픽 기준 3:1에 미달하므로 승인된 시각 예외가 적용되는 표현에만 사용합니다.
 
 ### Changed
 
+- `motion.duration.reveal`의 값을 `d1` 50ms에서 `d0` 35ms로 바꿨습니다. 이름과 역할(Typewriter 글자 간격)은 같고 시간만 제품에서 쓰던 값에 맞췄습니다.
+- Button의 Loading을 「라벨 유지 + 앞에 Spinner」에서 「라벨을 숨기고 Spinner만」으로 바꾸고 너비는 Default와 같게 했습니다. Button·Round Button의 Spinner는 `motion.duration.spinner`·`motion.easing.linear`로 회전하며 동작 줄이기에서도 회전을 유지합니다. 동작 줄이기의 Round Button·Learning Unit Pressed 처리를 「색만 유지」에서 `opacity.pressed-shade` 막으로 바꿨습니다([Motion](./foundations/motion.md)).
 - BREAKING: `brand.gem-text`의 값을 `gray.900` alias(#2A3038)에서 #4B8B9E로 바꾸고, 역할을 Gem 지표의 수 텍스트에서 Gem 계열의 보조 텍스트·그래픽으로 바꿨습니다. 흰 배경과 3.828:1이므로 24px 미만의 일반 텍스트와 18.67px 미만의 Bold 텍스트에는 쓸 수 없습니다. `--libitum-color-brand-gem-text`를 작은 텍스트에 쓰던 곳은 `gray.900`으로 바꿔야 합니다. Stat Button의 Gem 수는 `gray.900`을 직접 사용합니다.
 
 ## [0.3.0] - 2026-09-29

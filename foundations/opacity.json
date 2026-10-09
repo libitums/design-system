@@ -37,6 +37,10 @@
       "$value": "{opacity.16}",
       "$description": "어두운 장면 위 Overlay 변형의 Pressed 배경에 쓰는 `white`의 불투명도."
     },
+    "pressed-shade": {
+      "$value": "{opacity.8}",
+      "$description": "동작 줄이기에서 축소 대신 Pressed를 알리려고 밝은 Surface 위에 덮는 `black`의 불투명도. Round Button과 Learning Unit이 씁니다."
+    },
     "surface": {
       "$value": "{opacity.90}",
       "$description": "그림이나 영상 위에 얹는 표면의 불투명도. 배경이 비치되 그 위의 글자는 읽을 수 있는 수준입니다."

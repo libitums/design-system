@@ -27,7 +27,7 @@
 | Micro | 200ms 이하 (`d1`~`d4`) | 눌림, 색 변화, 값 갱신, Tooltip, Toggle Knob | `motion.easing.easing` |
 | Macro | 250~300ms (`d5`~`d6`) | 시트, 다이얼로그, 화면 전환, 진행 바 | `motion.easing.enter` / `exit` |
 | Expressive | 400~600ms (`d7`~`d8`) | 학습 단위 완료, 재화 획득 | `motion.easing.enter-expressive` / `exit-expressive` |
-| Content | 내용이 길이를 정함 | Typewriter 대사, Spinner, 오디오 파형 | `motion.easing.linear` |
+| Content | 내용이 길이를 정함 (`d0`는 글자 간격) | Typewriter 대사, Spinner, 오디오 파형 | `motion.easing.linear` |
 
 - Micro는 사용자의 입력에 대한 응답이므로 입력보다 늦게 느껴지면 안 됩니다. 200ms를 넘기지 않습니다.
 - Macro는 공간 관계를 설명합니다. 이동 거리가 길수록 긴 시간을 씁니다 — 시트 300ms, 다이얼로그 250ms.
@@ -42,6 +42,7 @@
 
 | 토큰 | 값 | 영역 |
 |---|---:|---|
+| `motion.duration.d0` | 35ms | Content |
 | `motion.duration.d1` | 50ms | Micro |
 | `motion.duration.d2` | 100ms | Micro |
 | `motion.duration.d3` | 150ms | Micro |
@@ -60,7 +61,7 @@
 |---|---:|---|---|
 | `motion.duration.color` | 150ms | `d3` | 배경·테두리·글자 색 전환. 그림자 변화도 같은 시간 |
 | `motion.duration.pressed` | 150ms | `d3` | 눌림 피드백. 색 변화와 `scale.pressed` 축소 모두 |
-| `motion.duration.reveal` | 50ms | `d1` | Typewriter가 글자 하나를 드러내는 간격 |
+| `motion.duration.reveal` | 35ms | `d0` | Typewriter가 글자 하나를 드러내는 간격 |
 | `motion.duration.progress` | 250ms | `d5` | 진행 바 채움, Page Indicator 알약 변형 |
 | `motion.duration.dialog` | 250ms | `d5` | Dialog와 그 Scrim의 등장·퇴장 |
 | `motion.duration.sheet` | 300ms | `d6` | Bottom Sheet와 그 Scrim의 등장·퇴장 |
@@ -154,9 +155,9 @@
 
 | 컴포넌트 | 대상 | duration | easing | 동작 줄이기 |
 |---|---|---|---|---|
-| [Button](../components/button.md) | 배경·라벨 색 | `color` / `pressed` | `easing` | 유지 |
-| [Round Button](../components/round-button.md) | 색, Pressed `scale.pressed` | `pressed` | `easing` | 색만 유지 |
-| [Learning Unit](../components/learning-unit.md) | 색, Pressed `scale.pressed` | `color` / `pressed` | `easing` | 색만 유지 |
+| [Button](../components/button.md) | 배경·라벨 색, Loading Spinner 회전 | `color` / `pressed`, `spinner` | `easing`, `linear` | 유지. Spinner 회전도 유지 |
+| [Round Button](../components/round-button.md) | 색, Pressed `scale.pressed`, Loading Spinner 회전 | `pressed`, `spinner` | `easing`, `linear` | 축소 대신 Surface 위 `opacity.pressed-shade` 막. 회전 유지 |
+| [Learning Unit](../components/learning-unit.md) | 색, Pressed `scale.pressed` | `color` / `pressed` | `easing` | 축소 대신 Surface 위 `opacity.pressed-shade` 막 |
 | [Card](../components/card.md) | Pressed 배경 | `pressed` | `easing` | 유지 |
 | [Option Selector](../components/option-selector.md) | 색 | `color` / `pressed` | `easing` | 유지 |
 | [Stat Button](../components/stat-button.md) | 색 | `color` / `pressed` | `easing` | 유지 |
@@ -186,11 +187,12 @@
 |---|---|
 | 색·불투명도 전환 | 원래 토큰 그대로 유지 |
 | 이동·확대·회전 | 제거하고 불투명도 전환으로 대체. `motion.duration.d2` 100ms · `motion.easing.linear` |
+| Round Button·Learning Unit Pressed | `scale.pressed` 축소를 없애고 Surface 위에 `color.black`을 `opacity.pressed-shade` 8%로 덮어 눌림을 알림. `motion.duration.pressed` · `motion.easing.easing` |
 | 진행 바·Page Indicator 너비 | 즉시 반영. 색 전환은 유지 |
 | Toggle Knob | 위치 즉시 반영. Track 색 전환은 유지 |
 | Typewriter | Instant로 처리. 글자를 한 번에 표시 |
 | Expressive | `scale.reward`를 없애고 불투명도만 `d2` · `linear` |
-| Spinner | 회전 유지. 진행 중임을 알리는 유일한 수단이므로 멈추지 않음 |
+| Spinner(Button·Round Button) | 회전 유지. 진행 중임을 알리는 유일한 수단이므로 멈추지 않음 |
 | 화면 전환 | 플랫폼 기본 reduce motion 전환(crossfade)을 따름 |
 
 | 플랫폼 | 감지 |

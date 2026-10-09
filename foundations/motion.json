@@ -5,7 +5,8 @@
 
     "duration": {
       "$type": "duration",
-      "$description": "d1~d4는 micro(200ms 이하), d5~d6은 macro, d7~d8은 expressive, d9는 loop 영역입니다. 의미 토큰은 반드시 이 scale을 참조하고, 컴포넌트는 의미 토큰을 우선 사용합니다.",
+      "$description": "d0는 content(Typewriter 글자 간격), d1~d4는 micro(200ms 이하), d5~d6은 macro, d7~d8은 expressive, d9는 loop 영역입니다. 의미 토큰은 반드시 이 scale을 참조하고, 컴포넌트는 의미 토큰을 우선 사용합니다.",
+      "d0": { "$value": "35ms" },
       "d1": { "$value": "50ms" },
       "d2": { "$value": "100ms" },
       "d3": { "$value": "150ms" },
@@ -25,7 +26,7 @@
         "$description": "눌림 피드백. 색 변화와 scale.pressed 축소 모두. 손을 뗄 때도 같은 시간으로 돌아옵니다."
       },
       "reveal": {
-        "$value": "{motion.duration.d1}",
+        "$value": "{motion.duration.d0}",
         "$description": "Typewriter 대사가 글자 하나를 드러내는 간격. 한 Page의 Revealing 시간은 글자 수 × reveal이며, 탭하면 남은 글자를 즉시 표시합니다."
       },
       "progress": {
