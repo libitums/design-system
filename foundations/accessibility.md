@@ -64,7 +64,7 @@ Web·iOS·Android·ReactLynx의 UI가 공통으로 따라야 할 접근성 최�
 
 ### Brand Button 예외
 
-Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18과 라벨·아이콘·Spinner `white` #FFFFFF 조합을 승인된 예외로 사용합니다. 이 조합의 대비는 WCAG 계산 기준 3.016:1입니다. Pressed는 `brand.primary-pressed` #B94208과 `white`로 5.461:1이라 예외에 포함하지 않습니다.
+Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18과 라벨·아이콘·Spinner `white` #FFFFFF 조합을 승인된 예외로 사용합니다(Loading에서는 라벨을 숨기므로 Spinner만 해당합니다). 이 조합의 대비는 WCAG 계산 기준 3.016:1입니다. Pressed는 `brand.primary-pressed` #B94208과 `white`로 5.461:1이라 예외에 포함하지 않습니다.
 
 - 예외는 [Button](../components/button.md)의 Brand 변형에서 라벨·아이콘·Spinner에만 적용합니다. 다른 컴포넌트나 상태로 확장하지 않습니다.
 - Disabled 상태는 Button 스펙의 기존 Disabled 색과 semantics를 사용하며 이 예외에 포함하지 않습니다.

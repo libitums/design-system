@@ -62,7 +62,7 @@ Button
 기본 너비 = 라벨 실측 너비 + (가로 padding × 2)
 아이콘 포함 = 기본 너비 + 아이콘 실측 너비 + spacing.8
 Outline = 위 계산값 + (stroke.width.thin × 2)
-Loading = Default와 같은 너비 (라벨 자리를 Spinner가 차지하고 폭은 바뀌지 않음)
+Loading = 같은 버튼의 Default 상태 너비 그대로 (아이콘 포함이면 「아이콘 포함」 값, 아니면 「기본 너비」. 라벨·아이콘 자리를 Spinner가 차지하고 폭은 바뀌지 않음)
 ```
 
 Pretendard Variable을 기준으로 검증한 예시입니다.
@@ -88,7 +88,7 @@ Spinner는 `motion.duration.spinner` 1000ms · `motion.easing.linear`로 끝없�
 | Default | `gray.800` #555D6D | `gray.50` #F9F9FA | — |
 | Pressed | `gray.900` #2A3038 | `gray.50` #F9F9FA | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
-| Loading | `gray.800` #555D6D | `gray.50` #F9F9FA | `gray.50` #F9F9FA |
+| Loading | `gray.800` #555D6D | 숨김 | `gray.50` #F9F9FA |
 
 ### Brand
 
@@ -97,7 +97,7 @@ Spinner는 `motion.duration.spinner` 1000ms · `motion.easing.linear`로 끝없�
 | Default | `brand.primary` #F46B18 | `white` #FFFFFF | — |
 | Pressed | `brand.primary-pressed` #B94208 | `white` #FFFFFF | — |
 | Disabled | `gray.50` #F9F9FA | `fg.disabled` #DCDEE3 | — |
-| Loading | `brand.primary` #F46B18 | `white` #FFFFFF | `white` #FFFFFF |
+| Loading | `brand.primary` #F46B18 | 숨김 | `white` #FFFFFF |
 
 이 조합은 3.016:1로 일반 텍스트 4.5:1 기준에 미달하는 승인된 제품 예외입니다. 적용 범위와 검증 기록 방식은 [Accessibility의 Brand Button 예외](../foundations/accessibility.md#brand-button-예외)를 따릅니다. Pressed의 `brand.primary-pressed`와 `white`는 5.461:1로 기준을 충족합니다.
 
@@ -112,7 +112,7 @@ Neutral과 Brand의 Pressed는 배경을 한 단계 어둡게 바꿔 누른 순�
 | Default | `white` #FFFFFF | `fg.neutral` #1A1C20 | — |
 | Pressed | `gray.300` #EEEFF1 | `fg.neutral` #1A1C20 | — |
 | Disabled | `white` #FFFFFF, `opacity.disabled` 35% | `fg.neutral` #1A1C20, `opacity.disabled` 35% | — |
-| Loading | `white` #FFFFFF | `fg.neutral` #1A1C20 | `fg.neutral` #1A1C20 |
+| Loading | `white` #FFFFFF | 숨김 | `fg.neutral` #1A1C20 |
 
 - 라벨 대비는 Default 17.061:1, Pressed 14.829:1입니다.
 - 버튼 표면과 `gray.950` 배경의 대비는 17.061:1입니다. 배경이 이미지라면 버튼 뒤에 [Overlay](./overlay.md)를 두어 단색에 가까운 배경을 만듭니다.
@@ -126,7 +126,7 @@ Neutral과 Brand의 Pressed는 배경을 한 단계 어둡게 바꿔 누른 순�
 | Default | `white` #FFFFFF | `border.default` #848184 | `fg.neutral-muted` #555D6D | — |
 | Pressed | `gray.100` #F7F8F9 | `border.default` #848184 | `fg.neutral-muted` #555D6D | — |
 | Disabled | `gray.50` #F9F9FA | `border.disabled` #B7B4B8 | `fg.disabled` #DCDEE3 | — |
-| Loading | `white` #FFFFFF | `border.default` #848184 | `fg.neutral-muted` #555D6D | `border.default` #848184 |
+| Loading | `white` #FFFFFF | `border.default` #848184 | 숨김 | `border.default` #848184 |
 
 ### Subtle
 
@@ -135,7 +135,7 @@ Neutral과 Brand의 Pressed는 배경을 한 단계 어둡게 바꿔 누른 순�
 | Default | `gray.100` #F7F8F9 | `fg.neutral-muted` #555D6D | — |
 | Pressed | `gray.300` #EEEFF1 | `gray.900` #2A3038 | — |
 | Disabled | `gray.50` #F9F9FA | `gray.300` #EEEFF1 | — |
-| Loading | `gray.100` #F7F8F9 | `fg.neutral-muted` #555D6D | `fg.neutral-muted` #555D6D |
+| Loading | `gray.100` #F7F8F9 | 숨김 | `fg.neutral-muted` #555D6D |
 
 ### Text
 
@@ -144,7 +144,7 @@ Neutral과 Brand의 Pressed는 배경을 한 단계 어둡게 바꿔 누른 순�
 | Default | `fg.brand` #B94208 | — |
 | Pressed | `fg.neutral` #1A1C20 | — |
 | Disabled | `gray.300` #EEEFF1 | — |
-| Loading | `fg.brand` #B94208 | `fg.brand` #B94208 |
+| Loading | 숨김 | `fg.brand` #B94208 |
 
 ### Focused
 
