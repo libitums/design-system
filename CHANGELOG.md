@@ -6,6 +6,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- 문서만: 접근성 시각 예외 표에 동작 줄이기 Pressed 막 위 아이콘 세 행(Round Button Neutral 2.693:1 · Brand 2.373:1, Learning Unit Available 2.267:1)을 더하고, Visual Novel Dialog의 Typewriter 간격(35ms)과 Button의 Spinner↔라벨 간격 행(Loading 라벨 숨김으로 무의미)을 0.4.0 결정에 맞췄습니다. package 산출물 변경 없음.
+
 ## [0.4.0] - 2026-10-09
 
 ### Added

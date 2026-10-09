@@ -113,9 +113,13 @@ Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18
 | Stat Button Gem 아이콘 | `brand.gem` #00C3FF | `white` #FFFFFF | 2.049:1 | 3:1 | 4.5:1 이상의 Count, 접근성 이름 |
 | Stat Button 테두리 | `gray.50` #F9F9FA | `white` #FFFFFF | 1.052:1 | 3:1 | 버튼은 Count와 아이콘으로 식별 |
 | [Settings Cell](../components/settings-cell.md) 구분선·group 테두리 | `gray.300` #EEEFF1 | `white` #FFFFFF | 1.151:1 | 3:1 | 각 행은 Title로 식별, 목록 semantics |
+| Round Button Neutral 동작 줄이기 Pressed 아이콘 | `fg.neutral-subtle` #868B94 | `gray.100` 위 `black` `opacity.pressed-shade` 합성 #E3E4E5 | 2.693:1 | 3:1 | `motion.duration.pressed` 150ms의 일시 상태, 식별은 Default(3.220:1)에서 끝남, 접근성 이름 |
+| Round Button Brand 동작 줄이기 Pressed 아이콘 | `brand.primary` #F46B18 | `gray.100` 위 `black` `opacity.pressed-shade` 합성 #E3E4E5 | 2.373:1 | 3:1 | 위 Brand 아이콘 예외의 일시 상태 연장, 접근성 이름 |
+| Learning Unit Available 동작 줄이기 Pressed 아이콘 | `brand.primary` #F46B18 | `brand.reward-disabled-surface` 위 `black` `opacity.pressed-shade` 합성 #EBDDD4 | 2.267:1 | 3:1 | 위 Available 아이콘 예외의 일시 상태 연장, 학습 유형은 접근성 이름으로 전달 |
 
 - `or` 구분 문구는 장식으로 보고 접근성 트리에서 숨깁니다. 선택지의 관계는 group semantics로 전달합니다.
 - AI 생성 고지는 흐리게 보여도 숨기지 않습니다. 보조 기술에는 고지 전체를 그대로 제공합니다.
+- 동작 줄이기의 Pressed 막(`opacity.pressed-shade`)은 Round Button·Learning Unit의 Surface만 어둡게 하고 아이콘 색은 바꾸지 않습니다. 위 세 행은 그 150ms 동안의 합성 배경 기준이며, Active·Clear Surface 위의 아이콘은 막 위에서도 3:1을 충족합니다(3.523:1 · 3.584:1).
 - 흰 배경의 `brand.primary`는 3.016:1로 그래픽 기준을 충족합니다. 흰 배경이 아닌 곳에서 `brand.primary`를 그래픽에 쓰려면 이 표에 먼저 추가합니다.
 - 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
 
