@@ -30,11 +30,10 @@ Button
 | 라벨 폰트 | Pretendard Variable SemiBold 600 | `typography.button.*` |
 | 아이콘 위치 | 라벨 앞 또는 뒤 1개 | — |
 | 아이콘 ↔ 라벨 간격 | 8px | `spacing.8` |
-| Spinner ↔ 라벨 간격 | 6px | `spacing.6` |
 | Outline 테두리 | 1px, 레이아웃 크기에 포함 | `stroke.width.thin` |
 | 그림자 | 없음 | — |
 
-`spacing.6`은 Spinner와 Label처럼 컴팩트한 요소 사이에만 사용합니다. 일반적인 아이콘과 라벨 사이에는 기본 inline 간격인 `spacing.8`을 사용합니다.
+`spacing.6`은 S 사이즈의 세로 padding처럼 컴팩트한 간격에만 사용합니다. Loading에서는 라벨을 숨기고 Spinner만 두므로 둘 사이의 간격은 없습니다. 일반적인 아이콘과 라벨 사이에는 기본 inline 간격인 `spacing.8`을 사용합니다.
 
 ### 사이즈
 
