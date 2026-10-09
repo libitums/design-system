@@ -6,6 +6,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-09
+
 ### Added
 
 - duration scale에 `motion.duration.d0` 35ms(content 영역)를 더하고, 불투명도 의미 token `opacity.pressed-shade`(`opacity.8`)를 추가했습니다. 동작 줄이기에서 Round Button·Learning Unit이 축소 대신 Surface 위에 `black`을 이 불투명도로 덮어 눌림을 알립니다. CSS 변수 `--libitum-motion-duration-d0`·`--libitum-opacity-pressed-shade`와 TypeScript export로 배포합니다.
