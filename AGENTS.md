@@ -51,6 +51,7 @@ components/      컴포넌트 스펙
 ├── visual-novel-dialog.md  장면 위에서 대사·서술을 한 덩어리씩 보여주는 패널
 ├── toggle.md             설정을 즉시 켜고 끄는 control
 ├── learning-unit.md      학습 단위의 진행 상태를 알리는 원형 control
+├── special-unit.md       레슨이 아닌 학습 단위의 상태를 알리는 둥근 사각 control
 ├── stat-button.md        학습 지표를 요약하고 상세를 여는 버튼
 ├── settings-cell.md      설정 한 줄을 보여주고 바꾸거나 이동하는 행
 ├── header/               progress-header · back-header
