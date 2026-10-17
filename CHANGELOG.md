@@ -6,6 +6,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- 문서만: 레슨이 아닌 학습 단위(메신저·전화·비주얼 노벨·문화·최종 테스트)를 위한 컴포넌트 스펙 [Special Unit](./components/special-unit.md)을 추가했습니다. Halo·Face·Icon으로 이루어진 둥근 사각 블록이며, 모든 단위에 `4-nature/star` 하나만 쓰고 Status를 Face 색과 보조 기술 state로 알립니다. 이 상태 색 표시와 Default·Checking·Halo의 대비 미달을 [Accessibility](./foundations/accessibility.md)에 Special Unit 한정 승인된 예외로 기록했습니다. 블록 모양의 Shade(x 5px · y 6px · blur 0)는 `elevation.shadow`와 성격이 달라 토큰을 만들지 않고 컴포넌트 고유 값으로 두었습니다. package 산출물 변경 없음.
+
 ### Changed
 
 - 문서만: 접근성 시각 예외 표에 동작 줄이기 Pressed 막 위 아이콘 세 행(Round Button Neutral 2.693:1 · Brand 2.373:1, Learning Unit Available 2.267:1)을 더하고, Visual Novel Dialog의 Typewriter 간격(35ms)과 Button의 Spinner↔라벨 간격 행(Loading 라벨 숨김으로 무의미)을 0.4.0 결정에 맞췄습니다. package 산출물 변경 없음.

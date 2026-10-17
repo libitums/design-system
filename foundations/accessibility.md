@@ -116,10 +116,17 @@ Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18
 | Round Button Neutral 동작 줄이기 Pressed 아이콘 | `fg.neutral-subtle` #868B94 | `gray.100` 위 `black` `opacity.pressed-shade` 합성 #E3E4E5 | 2.693:1 | 3:1 | `motion.duration.pressed` 150ms의 일시 상태, 식별은 Default(3.220:1)에서 끝남, 접근성 이름 |
 | Round Button Brand 동작 줄이기 Pressed 아이콘 | `brand.primary` #F46B18 | `gray.100` 위 `black` `opacity.pressed-shade` 합성 #E3E4E5 | 2.373:1 | 3:1 | 위 Brand 아이콘 예외의 일시 상태 연장, 접근성 이름 |
 | Learning Unit Available 동작 줄이기 Pressed 아이콘 | `brand.primary` #F46B18 | `brand.reward-disabled-surface` 위 `black` `opacity.pressed-shade` 합성 #EBDDD4 | 2.267:1 | 3:1 | 위 Available 아이콘 예외의 일시 상태 연장, 학습 유형은 접근성 이름으로 전달 |
+| [Special Unit](../components/special-unit.md) Default Face | `gray.500` #D1D3D8 | `white` #FFFFFF | 1.498:1 | 3:1 | disabled state, 가까운 잠김 이유 문구 |
+| Special Unit Default Shade | `gray.600` #B0B3BA | `white` #FFFFFF | 2.099:1 | 3:1 | 형태 표현, disabled state |
+| Special Unit Default 아이콘 | `white` #FFFFFF | `gray.500` #D1D3D8 | 1.498:1 | 3:1 | 모든 Special Unit에 같은 장식 아이콘, disabled state |
+| Special Unit Checking Face | `gray.300` #EEEFF1 | `white` #FFFFFF | 1.151:1 | 3:1 | 일시 상태, disabled·busy state |
+| Special Unit Checking 아이콘 | `gray.400` #DCDEE3 | `gray.300` #EEEFF1 | 1.170:1 | 3:1 | 자리만 표시하는 장식, disabled·busy state |
+| Special Unit Active Halo | `brand.reward-disabled-surface` #FFF0E6 | `white` #FFFFFF | 1.114:1 | 3:1 | current state, Start 말풍선 |
+| Special Unit Active Face와 Halo 경계 | `brand.primary` #F46B18 | `brand.reward-disabled-surface` #FFF0E6 | 2.708:1 | 3:1 | 5.461:1의 Shade 윤곽, current state |
 
 - `or` 구분 문구는 장식으로 보고 접근성 트리에서 숨깁니다. 선택지의 관계는 group semantics로 전달합니다.
 - AI 생성 고지는 흐리게 보여도 숨기지 않습니다. 보조 기술에는 고지 전체를 그대로 제공합니다.
-- 동작 줄이기의 Pressed 막(`opacity.pressed-shade`)은 Round Button·Learning Unit의 Surface만 어둡게 하고 아이콘 색은 바꾸지 않습니다. 위 세 행은 그 150ms 동안의 합성 배경 기준이며, Active·Clear Surface 위의 아이콘은 막 위에서도 3:1을 충족합니다(3.523:1 · 3.584:1).
+- 동작 줄이기의 Pressed 막(`opacity.pressed-shade`)은 Round Button·Learning Unit의 Surface와 Special Unit의 Face만 어둡게 하고 아이콘 색은 바꾸지 않습니다. 위 Pressed 세 행은 그 150ms 동안의 합성 배경 기준이며, Learning Unit Active·Clear Surface와 Special Unit Available·Active·Clear Face 위의 아이콘은 막 위에서도 3:1을 충족합니다(`brand.primary` 위 3.523:1 · `feedback.correct` 위 3.584:1).
 - 흰 배경의 `brand.primary`는 3.016:1로 그래픽 기준을 충족합니다. 흰 배경이 아닌 곳에서 `brand.primary`를 그래픽에 쓰려면 이 표에 먼저 추가합니다.
 - 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
 
@@ -132,6 +139,15 @@ Brand Button의 Default·Loading 상태에 한해 배경 `brand.primary` #F46B18
 - 상태를 보조하는 점·아이콘이 라벨과 같은 의미를 반복하면 장식 요소로 처리하고 접근성 트리에서 숨깁니다.
 - 현재 위치·선택·확장·완료 같은 상태는 보조 기술이 programmatically 확인할 수 있어야 합니다.
 - 색각 시뮬레이션만으로 검증을 끝내지 않고, 색을 제거해도 상태를 구분할 수 있는지 확인합니다.
+
+### Special Unit 상태 색 예외
+
+[Special Unit](../components/special-unit.md)에 한해 Default·Clear 상태를 글리프 없이 Face 색으로만 보이는 것을 승인된 예외로 사용합니다. 모든 Special Unit이 같은 별 아이콘을 쓰고 모서리 배지를 두지 않기 때문입니다.
+
+- 상태는 보조 기술 state로 반드시 전달합니다. Default는 disabled, Checking은 disabled와 busy, Active는 current, Clear는 completed입니다.
+- Available(`brand.primary` #F46B18)과 Clear(`feedback.correct` #35A66F)는 밝기가 비슷해 색각 이상 사용자가 화면만으로 구분하기 어렵습니다. 이 한계를 알고 쓰는 예외이며, Active는 Halo와 Start 말풍선으로 구분합니다.
+- 예외는 Special Unit에만 적용합니다. [Learning Unit](../components/learning-unit.md)을 비롯한 다른 컴포넌트로 확장하지 않습니다.
+- 검증 결과는 `approved-exception`으로 기록하고, WCAG 2.2 Level AA를 충족한 것으로 기록하지 않습니다.
 
 ---
 
@@ -233,7 +249,7 @@ ReactLynx는 iOS와 Android의 접근성 동작이 다를 수 있으므로 한 �
 - iOS VoiceOver와 Android TalkBack에서 name·role·state·value 확인
 - ReactLynx를 iOS·Android에서 각각 확인
 - Web 200% 확대와 앱 최대 접근성 글자 크기에서 잘림·겹침 확인
-- 색을 제거해도 상태·선택·오류를 구분할 수 있는지 확인
+- 색을 제거해도 상태·선택·오류를 구분할 수 있는지 확인. Special Unit은 상태 색 예외에 따라 보조 기술 state로 확인
 - Loading·Disabled·오류·빈 상태의 announcement 확인
 
 관련 값은 [Spacing](./spacing.json), [Color](./color.json), [Typography](./typography.json), [Motion](./motion.json)을 참고합니다.

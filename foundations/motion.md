@@ -116,7 +116,7 @@
 | 색 | ○ | 배경·테두리·글자·아이콘. `motion.duration.color` |
 | 그림자 | ○ | 상태 색 변화와 같은 시간에 함께 바꿈. 단독 animation 없음 |
 | 크기 | ○ | `motion.scale.*`의 세 경우만. 중심 고정 |
-| 위치 | ○ | 시트 올라옴, Toggle Knob, 화면 전환. 같은 층의 이웃 요소를 밀어내지 않음 |
+| 위치 | ○ | 시트 올라옴, Toggle Knob, 화면 전환, Special Unit Pressed의 Face 내려앉음. 같은 층의 이웃 요소를 밀어내지 않음 |
 | 너비 | ○ | 진행 바 채움, Page Indicator 알약만. 그 밖의 레이아웃 크기는 즉시 반영 |
 | 회전 | △ | Spinner만. `motion.duration.spinner` · `motion.easing.linear` |
 | Blur 반경 | × | Overlay의 blur는 불투명도로만 나타나고 사라짐 |
@@ -158,6 +158,7 @@
 | [Button](../components/button.md) | 배경·라벨 색, Loading Spinner 회전 | `color` / `pressed`, `spinner` | `easing`, `linear` | 유지. Spinner 회전도 유지 |
 | [Round Button](../components/round-button.md) | 색, Pressed `scale.pressed`, Loading Spinner 회전 | `pressed`, `spinner` | `easing`, `linear` | 축소 대신 Surface 위 `opacity.pressed-shade` 막. 회전 유지 |
 | [Learning Unit](../components/learning-unit.md) | 색, Pressed `scale.pressed` | `color` / `pressed` | `easing` | 축소 대신 Surface 위 `opacity.pressed-shade` 막 |
+| [Special Unit](../components/special-unit.md) | 색, Pressed Face 이동·Shade 오프셋 | `color` / `pressed` | `easing` | 이동 대신 Face 위 `opacity.pressed-shade` 막 |
 | [Card](../components/card.md) | Pressed 배경 | `pressed` | `easing` | 유지 |
 | [Option Selector](../components/option-selector.md) | 색 | `color` / `pressed` | `easing` | 유지 |
 | [Stat Button](../components/stat-button.md) | 색 | `color` / `pressed` | `easing` | 유지 |
@@ -188,6 +189,7 @@
 | 색·불투명도 전환 | 원래 토큰 그대로 유지 |
 | 이동·확대·회전 | 제거하고 불투명도 전환으로 대체. `motion.duration.d2` 100ms · `motion.easing.linear` |
 | Round Button·Learning Unit Pressed | `scale.pressed` 축소를 없애고 Surface 위에 `color.black`을 `opacity.pressed-shade` 8%로 덮어 눌림을 알림. `motion.duration.pressed` · `motion.easing.easing` |
+| Special Unit Pressed | Face 이동과 Shade 오프셋 변화를 없애고 Face 위에 `color.black`을 `opacity.pressed-shade` 8%로 덮어 눌림을 알림. `motion.duration.pressed` · `motion.easing.easing` |
 | 진행 바·Page Indicator 너비 | 즉시 반영. 색 전환은 유지 |
 | Toggle Knob | 위치 즉시 반영. Track 색 전환은 유지 |
 | Typewriter | Instant로 처리. 글자를 한 번에 표시 |

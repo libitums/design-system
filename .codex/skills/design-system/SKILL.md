@@ -55,6 +55,7 @@ description: libitum 디자인 시스템의 토큰과 컴포넌트 스펙으로 
 | 비주얼 노벨 대사 패널 | `components/visual-novel-dialog.md` |
 | 토글 | `components/toggle.md` |
 | 학습 단위 | `components/learning-unit.md` |
+| 레슨이 아닌 학습 단위 | `components/special-unit.md` |
 | 학습 지표 버튼 | `components/stat-button.md` |
 | 설정 행 | `components/settings-cell.md` |
 | 학습 헤더 | `components/header/progress-header.md` |
