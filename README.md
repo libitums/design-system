@@ -5,7 +5,7 @@
 ```
 foundations/   토큰과 원칙 — 모든 값의 출처
 components/    컴포넌트 스펙
-assets/icons/  아이콘 SVG 815개 × 2 변형
+assets/icons/  아이콘 SVG 817개 × 2 변형
 src/           검증·생성 로직 (tooling 계층)
 scripts/       build·validate CLI 진입점
 test/          파이프라인 테스트
@@ -69,7 +69,7 @@ CONSUMING.md   Frontend package 설치·사용·upgrade 가이드
 
 ## Assets
 
-`assets/icons/`에 SVG 815개가 12개 카테고리로 나뉘어 있고, 각각 두 변형이 있습니다.
+`assets/icons/`에 SVG 817개가 12개 카테고리로 나뉘어 있고, 각각 두 변형이 있습니다.
 
 - **`padding/`** — 고정 viewBox(`0 0 10 10`). 광학 크기가 일정해 UI에 쓰는 기본값입니다.
 - **`no-padding/`** — 아이콘별로 잘라낸 viewBox. 프레임을 꽉 채워야 할 때만 씁니다.
@@ -186,7 +186,7 @@ import heartNoPadding from "@libitums/icons/no-padding/heart";
 const iconSources = { heart, heartNoPadding };
 ```
 
-`@libitums/icons/manifest.json`에는 815개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx는 `<image>`가 SVG를 지원하지 않으므로 SVG XML을 그대로 받는 `<svg>` 요소용 export를 따로 제공합니다. `@libitums/icons/lynx/{name}`과 `@libitums/icons/lynx/no-padding/{name}`은 SVG XML `string`을 내보내고, `@libitums/icons/lynx`의 `withIconColor(content, color)`로 `currentColor`를 지정한 색으로 바꿉니다. 접근성 이름은 이 package에 포함하지 않습니다. 필요한 플랫폼 구현은 이 저장소가 `packages/`에서 제공하며 소비 저장소가 따로 구현하지 않습니다.
+`@libitums/icons/manifest.json`에는 817개 아이콘의 export 이름, 원본 이름, category, 두 variant 경로가 들어 있습니다. ReactLynx는 `<image>`가 SVG를 지원하지 않으므로 SVG XML을 그대로 받는 `<svg>` 요소용 export를 따로 제공합니다. `@libitums/icons/lynx/{name}`과 `@libitums/icons/lynx/no-padding/{name}`은 SVG XML `string`을 내보내고, `@libitums/icons/lynx`의 `withIconColor(content, color)`로 `currentColor`를 지정한 색으로 바꿉니다. 접근성 이름은 이 package에 포함하지 않습니다. 필요한 플랫폼 구현은 이 저장소가 `packages/`에서 제공하며 소비 저장소가 따로 구현하지 않습니다.
 
 아이콘 bundle 검증은 고정된 `@lynx-js/rspeedy` 0.16.5 production build로 빈 entry와 `heart` 단일 import를 비교합니다. Rspeedy 기본값에 따라 2KiB 미만 SVG는 data URI로 인라인되므로, 별도 SVG 파일 개수만 세지 않고 Rspack module graph와 raw·gzip bundle 증가량을 함께 검사합니다.
 

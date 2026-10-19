@@ -8,6 +8,7 @@
 
 ### Added
 
+- `9-media`에 알림 아이콘 2개를 추가했습니다. `notification-02`는 채움 종, `notification-03`은 같은 실루엣의 선형 종입니다. 상단 알림 버튼에서 새 알림이 없으면 `notification-03`, 있으면 `notification-02`로 모양을 바꿔 색에만 기대지 않고 알립니다. 선형도 stroke 없이 선을 채운 외곽선 도형(solid)이라 세트의 `fill="currentColor"` 규칙을 그대로 따르며, 선 두께는 24px 렌더 기준 1.75px입니다. 광학 크기는 기존 `notification`에 맞췄고, 기존 `notification`은 바뀌지 않습니다. `@libitums/icons/notification-02`·`notification-03`, `no-padding/*`, `lynx/*` 경로로 배포합니다.
 - 문서만: 레슨이 아닌 학습 단위(메신저·전화·비주얼 노벨·문화·최종 테스트)를 위한 컴포넌트 스펙 [Special Unit](./components/special-unit.md)을 추가했습니다. Halo·Face·Icon으로 이루어진 둥근 사각 블록이며, 모든 단위에 `4-nature/star` 하나만 쓰고 Status를 Face 색과 보조 기술 state로 알립니다. 이 상태 색 표시와 Default·Checking·Halo의 대비 미달을 [Accessibility](./foundations/accessibility.md)에 Special Unit 한정 승인된 예외로 기록했습니다. 블록 모양의 Shade(x 5px · y 6px · blur 0)는 `elevation.shadow`와 성격이 달라 토큰을 만들지 않고 컴포넌트 고유 값으로 두었습니다. package 산출물 변경 없음.
 
 ### Changed

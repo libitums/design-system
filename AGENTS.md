@@ -57,7 +57,7 @@ components/      컴포넌트 스펙
 ├── header/               progress-header · back-header
 └── indicator/            page · status · step · answer-label
 
-assets/icons/    SVG 815개 × 2 변형 (padding / no-padding), 12 카테고리
+assets/icons/    SVG 817개 × 2 변형 (padding / no-padding), 12 카테고리
 src/             원본 검증·package 생성 로직 (tooling 계층)
 scripts/         build·validate CLI 진입점
 test/            파이프라인 자동 테스트
