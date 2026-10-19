@@ -6,6 +6,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-19
+
 ### Added
 
 - `9-media`에 알림 아이콘 2개를 추가했습니다. `notification-02`는 채움 종, `notification-03`은 같은 실루엣의 선형 종입니다. 상단 알림 버튼에서 새 알림이 없으면 `notification-03`, 있으면 `notification-02`로 모양을 바꿔 색에만 기대지 않고 알립니다. 선형도 stroke 없이 선을 채운 외곽선 도형(solid)이라 세트의 `fill="currentColor"` 규칙을 그대로 따르며, 선 두께는 24px 렌더 기준 1.75px입니다. 광학 크기는 기존 `notification`에 맞췄고, 기존 `notification`은 바뀌지 않습니다. `@libitums/icons/notification-02`·`notification-03`, `no-padding/*`, `lynx/*` 경로로 배포합니다.
