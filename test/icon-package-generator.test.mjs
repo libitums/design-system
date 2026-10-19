@@ -76,13 +76,13 @@ test("아이콘 파일명을 안전한 lowercase kebab-case export 이름으로 
   );
 });
 
-test("현재 815개 아이콘을 충돌 없는 개별 export로 생성한다", async () => {
+test("현재 817개 아이콘을 충돌 없는 개별 export로 생성한다", async () => {
   const result = await generateIconPackage(repositoryRoot);
   const manifest = JSON.parse(result.manifest);
 
-  assert.equal(result.icons.length, 815);
-  assert.equal(new Set(result.icons.map((icon) => icon.exportName)).size, 815);
-  assert.equal(manifest.icons.length, 815);
+  assert.equal(result.icons.length, 817);
+  assert.equal(new Set(result.icons.map((icon) => icon.exportName)).size, 817);
+  assert.equal(manifest.icons.length, 817);
   assert.deepEqual(
     result.icons
       .filter((icon) => /[A-Z]/.test(icon.sourceName))

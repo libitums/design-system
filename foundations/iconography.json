@@ -8,13 +8,13 @@
         "source": {
           "path": "assets/icons",
           "format": "svg",
-          "count": 815,
+          "count": 817,
           "variants": ["no-padding", "padding"],
           "layout": "assets/icons/{variant}/{category}/{name}.svg"
         },
 
         "intrinsic": {
-          "$description": "Attributes shared by all 1630 SVG files (815 icons x 2 variants). Verified across the full set.",
+          "$description": "Attributes shared by all 1634 SVG files (817 icons x 2 variants). Verified across the full set.",
           "width": 24,
           "height": 24,
           "fill": "currentColor",
@@ -48,7 +48,7 @@
           { "id": "6-buildings", "count": 53 },
           { "id": "7-vehicles", "count": 57 },
           { "id": "8-ui", "count": 100 },
-          { "id": "9-media", "count": 89 },
+          { "id": "9-media", "count": 91 },
           { "id": "10-editing", "count": 59 },
           { "id": "11-symbols", "count": 93 },
           { "id": "12-misc", "count": 63 }

@@ -21,7 +21,7 @@ const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
 test("연속 build의 파일 목록과 byte hash가 동일하다", async () => {
   const result = await verifyGeneratedOutputDeterminism(repositoryRoot);
 
-  assert.equal(result.fileCount, 3271);
+  assert.equal(result.fileCount, 3279);
   assert.deepEqual(result.files.slice(0, 5), [
     "design-tokens/dist/css/typography.css",
     "design-tokens/dist/css/variables.css",
